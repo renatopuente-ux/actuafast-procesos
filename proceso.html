@@ -14,7 +14,6 @@
     --navy: #0f1f3d; --orange: #DE5E2D; --indigo: #4c64d9;
     --border: #e2e8f0; --bg: #f1f4f9; --text: #1e293b; --muted: #64748b;
     --green: #16a34a; --yellow: #d97706; --red: #dc2626;
-    --sidebar-w: 220px;
   }
   body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
 
@@ -29,7 +28,7 @@
   .app-body { display: flex; flex: 1; overflow: hidden; }
 
   /* ── SIDEBAR ── */
-  .sidebar { width: var(--sidebar-w); background: #fff; border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; }
+  .sidebar { width: 220px; background: #fff; border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; }
   .nav-section-label { font-size: 10px; font-weight: 700; color: #94a3b8; letter-spacing: 1px; text-transform: uppercase; padding: 14px 16px 4px; }
   .nav-item { display: flex; align-items: center; gap: 10px; padding: 8px 16px; font-size: 13px; color: var(--muted); cursor: pointer; text-decoration: none; position: relative; }
   .nav-item:hover { background: #f8fafc; color: var(--text); }
@@ -49,164 +48,163 @@
   .breadcrumb a:hover { text-decoration: underline; }
 
   /* ── RECORD HEADER ── */
-  .record-header { background: #fff; border-bottom: 1px solid var(--border); padding: 16px 24px; }
-  .rh-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+  .record-header { background: #fff; border-bottom: 1px solid var(--border); }
+  .rh-top { padding: 16px 24px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
   .rh-left { display: flex; align-items: center; gap: 12px; }
   .rh-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--orange); display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; flex-shrink: 0; }
-  .rh-title { font-size: 22px; font-weight: 900; color: var(--text); }
-  .rh-subtitle { font-size: 13px; color: var(--muted); margin-top: 2px; display: flex; align-items: center; gap: 8px; }
-  .normativa-tag { padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
-  .urgente-tag { padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; background: #fee2e2; color: #b91c1c; display: flex; align-items: center; gap: 4px; }
+  .rh-title { font-size: 22px; font-weight: 900; }
+  .rh-subtitle { font-size: 13px; color: var(--muted); margin-top: 3px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .tag { padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+  .tag-niif { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+  .tag-tipo { background: #f1f5f9; color: #475569; }
   .rh-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
-  .btn-action { padding: 7px 14px; border-radius: 7px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; border: 1px solid var(--border); background: #fff; color: var(--text); }
-  .btn-action:hover { background: #f8fafc; }
-  .btn-action.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
-  .btn-action.primary:hover { background: #1a3160; }
-  .btn-action.danger { color: var(--red); border-color: #fca5a5; }
-  .btn-action.danger:hover { background: #fef2f2; }
+  .btn-act { padding: 7px 14px; border-radius: 7px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; border: 1px solid var(--border); background: #fff; color: var(--text); }
+  .btn-act:hover { background: #f8fafc; }
+  .btn-act.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .btn-act.primary:hover { background: #1a3160; }
+  .btn-act.danger { color: var(--red); border-color: #fca5a5; }
 
   /* ── PIPELINE ── */
-  .pipeline { display: flex; align-items: center; gap: 0; overflow-x: auto; padding: 0; }
-  .pipeline-stage { display: flex; align-items: center; }
-  .stage-pill {
-    padding: 7px 16px; font-size: 11px; font-weight: 700; white-space: nowrap;
-    display: flex; align-items: center; gap: 6px; position: relative;
-    background: #f1f5f9; color: #94a3b8; cursor: pointer;
-    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%, 10px 50%);
-    padding-left: 20px; padding-right: 20px; min-width: 120px; justify-content: center;
-    transition: all 0.15s;
+  .pipeline-wrap { padding: 12px 24px; border-bottom: 1px solid var(--border); overflow-x: auto; }
+  .pipeline { display: flex; align-items: stretch; gap: 0; min-width: max-content; }
+  .stage {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 18px 8px 24px; font-size: 11px; font-weight: 700; white-space: nowrap;
+    cursor: pointer; transition: all 0.15s; position: relative; user-select: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%, 12px 50%);
+    background: #f1f5f9; color: #94a3b8;
   }
-  .stage-pill:first-child { clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%); padding-left: 16px; }
-  .stage-pill.done { background: #d1fae5; color: #065f46; }
-  .stage-pill.active { background: var(--orange); color: #fff; }
-  .stage-pill.pending { background: #f1f5f9; color: #94a3b8; }
+  .stage:first-child { clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%); padding-left: 16px; }
+  .stage.done { background: #d1fae5; color: #065f46; }
+  .stage.active { background: var(--orange); color: #fff; }
+  .stage.active-completado { background: #1e293b; color: #fff; }
+  .stage:hover:not(.active):not(.active-completado) { background: #e2e8f0; color: #475569; }
+  .stage-icon { font-size: 10px; }
 
-  /* ── QUICK METRICS ── */
-  .metrics-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border-top: 1px solid var(--border); }
-  .metric-cell { background: #fff; padding: 14px 20px; }
-  .metric-label { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-  .metric-value { font-size: 18px; font-weight: 800; color: var(--text); }
-  .metric-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .metric-value.warning { color: var(--yellow); }
-  .metric-value.danger { color: var(--red); }
-  .metric-value.success { color: var(--green); }
+  /* ── CAMPOS CLAVE (contextual per stage) ── */
+  .campos-clave { padding: 14px 24px; background: #fafbff; border-bottom: 1px solid var(--border); }
+  .ck-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .ck-title { font-size: 12px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .ck-edit { font-size: 12px; color: var(--indigo); font-weight: 700; cursor: pointer; background: none; border: none; }
+  .ck-grid { display: flex; gap: 32px; flex-wrap: wrap; }
+  .ck-field { display: flex; flex-direction: column; gap: 3px; }
+  .ck-label { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .ck-value { font-size: 13px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 6px; }
+  .ck-value.link { color: var(--indigo); cursor: pointer; }
+  .ck-value.empty { color: #cbd5e1; font-weight: 400; }
+  .semaforo { width: 18px; height: 18px; border-radius: 50%; display: inline-block; }
+  .semaforo.verde { background: #16a34a; }
+  .semaforo.amarillo { background: #d97706; }
+  .semaforo.rojo { background: #dc2626; }
+
+  /* ── ORIENTACIÓN HACIA EL ÉXITO ── */
+  .orientacion { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px 16px; margin: 14px 24px; display: flex; gap: 12px; }
+  .orientacion-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .orientacion-title { font-size: 13px; font-weight: 800; color: #92400e; margin-bottom: 4px; }
+  .orientacion-text { font-size: 12px; color: #78350f; line-height: 1.5; }
+  .orientacion.info { background: #eff6ff; border-color: #bfdbfe; }
+  .orientacion.info .orientacion-title { color: #1e40af; }
+  .orientacion.info .orientacion-text { color: #1d4ed8; }
 
   /* ── TABS ── */
-  .tabs-bar { background: #fff; border-bottom: 2px solid var(--border); padding: 0 24px; display: flex; gap: 0; flex-shrink: 0; }
-  .tab { padding: 12px 18px; font-size: 12px; font-weight: 700; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; letter-spacing: 0.3px; display: flex; align-items: center; gap: 6px; transition: all 0.15s; text-transform: uppercase; }
+  .tabs-bar { background: #fff; border-bottom: 2px solid var(--border); padding: 0 24px; display: flex; flex-shrink: 0; }
+  .tab { padding: 12px 18px; font-size: 12px; font-weight: 700; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; transition: all 0.15s; }
   .tab:hover { color: var(--text); }
   .tab.active { color: var(--navy); border-bottom-color: var(--navy); }
   .tab-count { background: #e2e8f0; color: #64748b; font-size: 10px; font-weight: 800; padding: 1px 6px; border-radius: 99px; }
   .tab.active .tab-count { background: var(--navy); color: #fff; }
 
-  /* ── CONTENT AREA ── */
+  /* ── CONTENT ── */
   .content-area { flex: 1; overflow-y: auto; padding: 24px; }
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
 
-  /* ── CARDS GRID ── */
+  /* ── CARDS ── */
   .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .card-full { grid-column: 1 / -1; }
   .card { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
   .card-header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-  .card-header-icon { width: 32px; height: 32px; border-radius: 8px; background: #eff6ff; display: flex; align-items: center; justify-content: center; font-size: 15px; color: var(--navy); flex-shrink: 0; }
-  .card-title { font-size: 13px; font-weight: 800; color: var(--text); }
+  .card-hicon { width: 32px; height: 32px; border-radius: 8px; background: #eff6ff; display: flex; align-items: center; justify-content: center; font-size: 15px; color: var(--navy); flex-shrink: 0; }
+  .card-title { font-size: 13px; font-weight: 800; }
   .card-action { margin-left: auto; font-size: 12px; color: var(--indigo); font-weight: 700; cursor: pointer; background: none; border: none; }
   .card-body { padding: 16px 20px; }
 
-  /* ── FIELD ROWS ── */
+  /* ── FIELDS ── */
   .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
   .field { display: flex; flex-direction: column; gap: 3px; }
-  .field-label { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-  .field-value { font-size: 13px; font-weight: 600; color: var(--text); }
-  .field-value.link { color: var(--indigo); cursor: pointer; }
-  .field-value.link:hover { text-decoration: underline; }
-  .field-value.empty { color: #cbd5e1; font-weight: 400; }
+  .fl { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .fv { font-size: 13px; font-weight: 600; }
+  .fv.link { color: var(--indigo); cursor: pointer; }
+  .fv.empty { color: #cbd5e1; font-weight: 400; }
+  .fv.ok { color: var(--green); }
 
-  /* ── CHECKBOXES EVALUACION ── */
-  .eval-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  /* ── EVAL ── */
+  .eval-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
   .eval-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 12px; font-weight: 600; }
-  .eval-item.checked { background: #f0fdf4; border-color: #86efac; color: #166534; }
-  .eval-item.unchecked { color: #94a3b8; }
-  .eval-check { width: 16px; height: 16px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
-  .eval-check.yes { background: #16a34a; color: #fff; }
-  .eval-check.no { background: #e2e8f0; color: #94a3b8; }
+  .eval-item.on { background: #f0fdf4; border-color: #86efac; color: #166534; }
+  .eval-item.off { color: #94a3b8; }
+  .eval-chk { width: 16px; height: 16px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 9px; flex-shrink: 0; }
+  .eval-chk.yes { background: #16a34a; color: #fff; }
+  .eval-chk.no { background: #e2e8f0; color: #94a3b8; }
 
-  /* ── SCORING ── */
+  /* ── SCORE ── */
   .score-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
   .score-card { border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; text-align: center; }
-  .score-dimension { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
+  .score-dim { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
   .score-pts { font-size: 20px; font-weight: 900; color: var(--navy); }
   .score-max { font-size: 10px; color: var(--muted); }
-  .semaforo-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; }
-  .semaforo-row.verde { background: #f0fdf4; border: 1px solid #86efac; }
-  .semaforo-row.amarillo { background: #fefce8; border: 1px solid #fde047; }
-  .semaforo-row.rojo { background: #fef2f2; border: 1px solid #fca5a5; }
-  .semaforo-dot { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; }
-  .semaforo-dot.verde { background: #16a34a; }
-  .semaforo-dot.amarillo { background: #d97706; }
-  .semaforo-dot.rojo { background: #dc2626; }
-  .semaforo-text { font-size: 13px; font-weight: 700; }
+  .semaforo-bar { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; background: #f0fdf4; border: 1px solid #86efac; }
 
-  /* ── ITEMS VENDIDOS ── */
+  /* ── ITEMS TABLE ── */
   .items-table { width: 100%; border-collapse: collapse; }
   .items-table th { padding: 10px 14px; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; background: #f8fafc; border-bottom: 1px solid var(--border); text-align: left; }
   .items-table td { padding: 12px 14px; font-size: 13px; border-bottom: 1px solid var(--border); }
   .items-table tr:last-child td { border-bottom: none; }
   .items-table tr:hover td { background: #f8fafc; }
+  .item-code { font-family: monospace; font-size: 11px; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #475569; }
   .ejecutable-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 700; background: rgba(76,100,217,0.1); color: var(--indigo); border: 1px solid rgba(76,100,217,0.2); }
-  .btn-ejecutar { padding: 5px 12px; border-radius: 6px; background: var(--navy); color: #fff; border: none; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 5px; }
-  .btn-ejecutar:hover { background: #1a3160; }
-  .item-codigo { font-family: monospace; font-size: 11px; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #475569; }
+  .btn-exec { padding: 5px 12px; border-radius: 6px; background: var(--navy); color: #fff; border: none; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 5px; }
   .total-row td { font-weight: 800; background: #f8fafc; border-top: 2px solid var(--border); }
 
-  /* ── DOCUMENTOS ── */
-  .docs-section { margin-bottom: 20px; }
-  .docs-section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-  .docs-section-title { font-size: 13px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
-  .btn-new-doc { padding: 6px 14px; border-radius: 7px; border: 1px solid var(--border); background: #fff; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; color: var(--text); }
-  .btn-new-doc:hover { background: #f8fafc; }
+  /* ── DOCS ── */
   .upload-zone { border: 2px dashed #cbd5e1; border-radius: 12px; padding: 32px; text-align: center; color: var(--muted); background: #f8fafc; cursor: pointer; transition: all 0.15s; }
   .upload-zone:hover { border-color: var(--indigo); background: #eff6ff; color: var(--indigo); }
-  .upload-icon { font-size: 28px; margin-bottom: 10px; opacity: 0.4; }
-  .upload-text { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-  .upload-hint { font-size: 11px; opacity: 0.6; }
+  .docs-hrow { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .docs-htitle { font-size: 13px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+  .btn-new-doc { padding: 6px 14px; border-radius: 7px; border: 1px solid var(--border); background: #fff; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
 
-  /* ── HISTORIAL ── */
-  .timeline { display: flex; flex-direction: column; gap: 0; }
+  /* ── TIMELINE ── */
   .timeline-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
   .timeline-item:last-child { border-bottom: none; }
-  .timeline-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--indigo); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .timeline-avatar.admin { background: var(--navy); }
-  .timeline-content { flex: 1; }
-  .timeline-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-  .timeline-user { font-size: 13px; font-weight: 700; }
-  .timeline-date { font-size: 11px; color: var(--muted); }
-  .timeline-field { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #f1f5f9; color: #475569; }
-  .timeline-change { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 12px; }
-  .timeline-from { color: var(--muted); text-decoration: line-through; }
-  .timeline-arrow { color: #94a3b8; }
-  .timeline-to { color: var(--green); font-weight: 700; }
+  .t-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--indigo); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .t-avatar.navy { background: var(--navy); }
+  .t-avatar.orange { background: var(--orange); }
+  .t-user { font-size: 13px; font-weight: 700; }
+  .t-date { font-size: 11px; color: var(--muted); }
+  .t-field { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #f1f5f9; color: #475569; }
+  .t-change { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 12px; }
+  .t-from { color: var(--muted); text-decoration: line-through; }
+  .t-to { color: var(--green); font-weight: 700; }
 
-  /* ── MODAL DOCUMENTO ── */
+  /* ── MODAL ── */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; display: none; align-items: center; justify-content: center; }
   .modal-overlay.open { display: flex; }
   .modal { background: #fff; border-radius: 16px; width: 440px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
-  .modal-title { font-size: 16px; font-weight: 800; margin-bottom: 20px; }
-  .modal-radio-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-  .modal-radio { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.15s; }
+  .modal-title { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+  .modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+  .modal-radio { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; margin-bottom: 10px; transition: all 0.15s; }
   .modal-radio.selected { border-color: var(--navy); background: #eff6ff; }
-  .modal-radio input { accent-color: var(--navy); }
+  .modal-radio input { accent-color: var(--navy); margin-top: 3px; }
   .modal-radio-label { font-size: 14px; font-weight: 700; }
   .modal-radio-sub { font-size: 12px; color: var(--muted); }
-  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
   .btn-cancel { padding: 9px 20px; border-radius: 8px; border: 1px solid var(--border); background: #fff; font-size: 13px; font-weight: 700; cursor: pointer; }
-  .btn-next { padding: 9px 20px; border-radius: 8px; background: var(--navy); color: #fff; border: none; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .btn-next { padding: 9px 20px; border-radius: 8px; background: var(--navy); color: #fff; border: none; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- ══ HEADER ══ -->
 <div class="top-header">
   <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
   <svg xmlns="http://www.w3.org/2000/svg" width="140" height="18" viewBox="0 0 312 40" fill="none" style="flex-shrink:0;">
@@ -228,7 +226,7 @@
 </div>
 
 <div class="app-body">
-  <!-- SIDEBAR -->
+  <!-- ══ SIDEBAR ══ -->
   <aside class="sidebar">
     <nav>
       <a class="nav-item" href="index.html"><span class="nav-icon"><i class="fa-solid fa-house"></i></span> Inicio</a>
@@ -248,7 +246,7 @@
     </div>
   </aside>
 
-  <!-- MAIN -->
+  <!-- ══ MAIN ══ -->
   <div class="main">
 
     <!-- BREADCRUMB -->
@@ -268,403 +266,228 @@
           <div>
             <div style="display:flex;align-items:center;gap:10px;">
               <div class="rh-title">VE-00152954</div>
-              <span style="padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:#dcfce7;color:#15803d;display:inline-flex;align-items:center;gap:5px;">
+              <span id="status-badge" style="padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:#dcfce7;color:#15803d;display:inline-flex;align-items:center;gap:5px;">
                 <i class="fa-solid fa-circle-check"></i> Completado
               </span>
             </div>
             <div class="rh-subtitle">
               <i class="fa-solid fa-building" style="font-size:11px;"></i>
-              ACCIONA AGUA, S.A.
-              <span style="color:#cbd5e1;">·</span>
-              Proceso #126517
-              <span class="normativa-tag">NIIF (US$)</span>
-              <span style="background:#f1f5f9;color:#475569;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;">Pasivos Laborales</span>
-              <span style="background:#f1f5f9;color:#475569;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;">50 trabajadores</span>
+              ACCIONA AGUA, S.A. &nbsp;·&nbsp; Proceso #126517
+              <span class="tag tag-niif">NIIF (US$)</span>
+              <span class="tag tag-tipo">Pasivos Laborales</span>
+              <span class="tag tag-tipo">50 trabajadores</span>
             </div>
           </div>
         </div>
         <div class="rh-actions">
-          <button class="btn-action"><i class="fa-regular fa-star"></i> Seguir</button>
-          <button class="btn-action danger"><i class="fa-solid fa-triangle-exclamation"></i> No conformidad</button>
-          <button class="btn-action"><i class="fa-solid fa-pen"></i> Modificar</button>
-          <button class="btn-action"><i class="fa-solid fa-print"></i></button>
-          <button class="btn-action"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+          <button class="btn-act"><i class="fa-regular fa-star"></i> Seguir</button>
+          <button class="btn-act danger"><i class="fa-solid fa-triangle-exclamation"></i> No conformidad</button>
+          <button class="btn-act"><i class="fa-solid fa-pen"></i> Modificar</button>
+          <button class="btn-act"><i class="fa-solid fa-print"></i></button>
+          <button id="btn-marcar" class="btn-act primary" style="display:none;" onclick="nextStage()">
+            <i class="fa-solid fa-arrow-right"></i> <span id="btn-marcar-label">Marcar como actual</span>
+          </button>
         </div>
       </div>
 
-      <!-- PIPELINE -->
-      <div class="pipeline">
-        <div class="stage-pill done"><i class="fa-solid fa-check"></i> Planificado</div>
-        <div class="stage-pill done"><i class="fa-solid fa-check"></i> Datos validados</div>
-        <div class="stage-pill done"><i class="fa-solid fa-check"></i> En ejecución</div>
-        <div class="stage-pill done"><i class="fa-solid fa-check"></i> Revisión técnica</div>
-        <div class="stage-pill done"><i class="fa-solid fa-check"></i> Aprobado</div>
-        <div class="stage-pill active"><i class="fa-solid fa-circle-check"></i> Completado</div>
+      <!-- PIPELINE (9 etapas reales) -->
+      <div class="pipeline-wrap">
+        <div class="pipeline" id="pipeline">
+          <div class="stage done" data-stage="0" onclick="setStage(0)"><i class="fa-solid fa-check stage-icon"></i> Planificado</div>
+          <div class="stage done" data-stage="1" onclick="setStage(1)"><i class="fa-solid fa-check stage-icon"></i> Datos validados</div>
+          <div class="stage done" data-stage="2" onclick="setStage(2)"><i class="fa-solid fa-check stage-icon"></i> En curso</div>
+          <div class="stage done" data-stage="3" onclick="setStage(3)"><i class="fa-solid fa-check stage-icon"></i> Solicita revisión</div>
+          <div class="stage done" data-stage="4" onclick="setStage(4)"><i class="fa-solid fa-check stage-icon"></i> Revisión coordinación</div>
+          <div class="stage done" data-stage="5" onclick="setStage(5)"><i class="fa-solid fa-check stage-icon"></i> Revisión dirección</div>
+          <div class="stage done" data-stage="6" onclick="setStage(6)"><i class="fa-solid fa-check stage-icon"></i> Para entregar</div>
+          <div class="stage done" data-stage="7" onclick="setStage(7)"><i class="fa-solid fa-check stage-icon"></i> Revisión cliente</div>
+          <div class="stage active-completado" data-stage="8" onclick="setStage(8)"><i class="fa-solid fa-circle-check stage-icon"></i> Completado</div>
+        </div>
       </div>
 
-      <!-- METRICS -->
-      <div class="metrics-bar">
-        <div class="metric-cell">
-          <div class="metric-label"><i class="fa-regular fa-calendar"></i> Fecha de entrega</div>
-          <div class="metric-value success">19/11/2025</div>
-          <div class="metric-sub">Calculada: 23/06/2025</div>
-        </div>
-        <div class="metric-cell">
-          <div class="metric-label"><i class="fa-solid fa-clock"></i> Días de demora</div>
-          <div class="metric-value warning">115 días</div>
-          <div class="metric-sub">vs. fecha calculada</div>
-        </div>
-        <div class="metric-cell">
-          <div class="metric-label"><i class="fa-solid fa-dollar-sign"></i> Total factura</div>
-          <div class="metric-value">$362,25</div>
-          <div class="metric-sub">IVA incluido (15%)</div>
-        </div>
-        <div class="metric-cell">
-          <div class="metric-label"><i class="fa-solid fa-users"></i> Trabajadores</div>
-          <div class="metric-value">50</div>
-          <div class="metric-sub">Segmento Mediana</div>
-        </div>
-      </div>
-    </div>
+      <!-- CAMPOS CLAVE (contextual) -->
+      <div class="campos-clave" id="campos-clave"></div>
+
+      <!-- ORIENTACIÓN (aparece en etapas específicas) -->
+      <div id="orientacion-wrap"></div>
+
+    </div><!-- /record-header -->
 
     <!-- TABS -->
     <div class="tabs-bar">
-      <div class="tab active" onclick="showTab('detalles', this)">
-        <i class="fa-solid fa-list-ul"></i> Detalles
-      </div>
-      <div class="tab" onclick="showTab('items', this)">
-        <i class="fa-solid fa-cart-shopping"></i> Items Vendidos
-        <span class="tab-count">2</span>
-      </div>
-      <div class="tab" onclick="showTab('documentos', this)">
-        <i class="fa-solid fa-folder-open"></i> Documentos
-        <span class="tab-count">0</span>
-      </div>
-      <div class="tab" onclick="showTab('historial', this)">
-        <i class="fa-solid fa-clock-rotate-left"></i> Historial
-        <span class="tab-count">6</span>
-      </div>
+      <div class="tab active" onclick="showTab('detalles',this)"><i class="fa-solid fa-list-ul"></i> Detalles</div>
+      <div class="tab" onclick="showTab('items',this)"><i class="fa-solid fa-cart-shopping"></i> Items Vendidos <span class="tab-count">2</span></div>
+      <div class="tab" onclick="showTab('documentos',this)"><i class="fa-solid fa-folder-open"></i> Documentos <span class="tab-count">0</span></div>
+      <div class="tab" onclick="showTab('historial',this)"><i class="fa-solid fa-clock-rotate-left"></i> Historial <span class="tab-count">6</span></div>
     </div>
 
-    <!-- ═══════════════════════════════
-         TAB: DETALLES
-    ═══════════════════════════════ -->
+    <!-- CONTENT -->
     <div class="content-area">
-    <div id="tab-detalles" class="tab-content active">
-      <div class="cards-grid">
 
-        <!-- Información del proceso -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-header-icon"><i class="fa-solid fa-file-contract"></i></div>
-            <div class="card-title">Información del proceso</div>
-            <button class="card-action"><i class="fa-solid fa-pen"></i> Editar</button>
-          </div>
-          <div class="card-body">
-            <div class="field-grid">
-              <div class="field"><div class="field-label">Nombre VE</div><div class="field-value">VE-00152954</div></div>
-              <div class="field"><div class="field-label">Número de proceso</div><div class="field-value">126517</div></div>
-              <div class="field"><div class="field-label">Tipo de tarifa</div><div class="field-value">NIIF (US$)</div></div>
-              <div class="field"><div class="field-label">Tipo de servicio</div><div class="field-value">Tradicional</div></div>
-              <div class="field"><div class="field-label">Fecha de valoración</div><div class="field-value">31/12/2025</div></div>
-              <div class="field"><div class="field-label">Forma de pago</div><div class="field-value">De contado</div></div>
-            </div>
-          </div>
-        </div>
+      <!-- TAB: DETALLES -->
+      <div id="tab-detalles" class="tab-panel active">
+        <div class="cards-grid">
 
-        <!-- Cliente -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-header-icon"><i class="fa-solid fa-building"></i></div>
-            <div class="card-title">Cliente</div>
-          </div>
-          <div class="card-body">
-            <div class="field-grid">
-              <div class="field"><div class="field-label">Cuenta</div><div class="field-value link">ACCIONA AGUA, S.A.</div></div>
-              <div class="field"><div class="field-label">Ciudad</div><div class="field-value">Quito</div></div>
-              <div class="field"><div class="field-label">Segmento</div><div class="field-value">Mediana</div></div>
-              <div class="field"><div class="field-label">Cliente VIP</div><div class="field-value" style="color:#94a3b8;">No</div></div>
-              <div class="field"><div class="field-label">Trabajadores activos</div><div class="field-value">50</div></div>
-              <div class="field"><div class="field-label">Trab. Jubl. y pendientes</div><div class="field-value">50</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Asignación -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-header-icon"><i class="fa-solid fa-user-check"></i></div>
-            <div class="card-title">Asignación y equipo</div>
-          </div>
-          <div class="card-body">
-            <div class="field-grid">
-              <div class="field"><div class="field-label">Propietario</div><div class="field-value link">Samantha Chavez</div></div>
-              <div class="field"><div class="field-label">Nombre analista</div><div class="field-value">Samantha Chavez</div></div>
-              <div class="field"><div class="field-label">Equipo de operaciones</div><div class="field-value link">Equipo 3 - Pamela Beltrán</div></div>
-              <div class="field"><div class="field-label">Nivel de aprobación</div><div class="field-value" style="color:var(--green);">Aprobado</div></div>
-              <div class="field"><div class="field-label">Vendedor</div><div class="field-value link">Samantha Chavez</div></div>
-              <div class="field"><div class="field-label">Contacto solicitante</div><div class="field-value link">Samantha Flores</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Gestión -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-header-icon"><i class="fa-solid fa-gears"></i></div>
-            <div class="card-title">Gestión</div>
-          </div>
-          <div class="card-body">
-            <div class="field-grid">
-              <div class="field"><div class="field-label">Fecha solicitud</div><div class="field-value">12/06/2025</div></div>
-              <div class="field"><div class="field-label">Fecha asignación</div><div class="field-value">12/06/2025</div></div>
-              <div class="field"><div class="field-label">Fecha entrega calculada</div><div class="field-value">23/06/2025</div></div>
-              <div class="field"><div class="field-label">Fecha entrega real</div><div class="field-value">19/11/2025</div></div>
-              <div class="field"><div class="field-label">Datos incompletos</div><div class="field-value" style="color:#94a3b8;">No</div></div>
-              <div class="field"><div class="field-label">Pedido urgente</div><div class="field-value" style="color:#94a3b8;">No</div></div>
-            </div>
-            <div style="margin-top:14px;padding:10px 14px;background:#f8fafc;border-radius:8px;border:1px solid var(--border);">
-              <div class="field-label" style="margin-bottom:5px;">Instrucciones del pedido</div>
-              <div style="font-size:13px;color:var(--muted);">—</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Evaluación de Requerimiento -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-header-icon"><i class="fa-solid fa-clipboard-check"></i></div>
-            <div class="card-title">Evaluación de requerimiento</div>
-          </div>
-          <div class="card-body">
-            <div class="eval-grid" style="margin-bottom:14px;">
-              <div class="eval-item checked"><div class="eval-check yes"><i class="fa-solid fa-check" style="font-size:8px;"></i></div> Req. NIIF</div>
-              <div class="eval-item unchecked"><div class="eval-check no"></div> Req. NEC</div>
-              <div class="eval-item unchecked"><div class="eval-check no"></div> Req. Normas Internacionales</div>
-              <div class="eval-item unchecked"><div class="eval-check no"></div> Req. NIC 12</div>
-              <div class="eval-item unchecked"><div class="eval-check no"></div> Req. USGAAP</div>
-              <div class="eval-item unchecked"><div class="eval-check no"></div> Req. Bases históricas</div>
-            </div>
-            <div class="field-grid">
-              <div class="field"><div class="field-label">Nivel de segmento</div><div class="field-value">21.00%</div></div>
-              <div class="field"><div class="field-label">% Sc. Requerimiento</div><div class="field-value">4%</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Scoring -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-header-icon"><i class="fa-solid fa-star-half-stroke"></i></div>
-            <div class="card-title">Scoring del informe</div>
-          </div>
-          <div class="card-body">
-            <div class="score-grid">
-              <div class="score-card">
-                <div class="score-dimension">Segmento</div>
-                <div class="score-pts">20</div>
-                <div class="score-max">/ 20 pts</div>
-              </div>
-              <div class="score-card">
-                <div class="score-dimension">Antigüedad</div>
-                <div class="score-pts">20</div>
-                <div class="score-max">/ 20 pts</div>
-              </div>
-              <div class="score-card">
-                <div class="score-dimension">Var. Jubilación</div>
-                <div class="score-pts">15</div>
-                <div class="score-max">/ 15 pts</div>
-              </div>
-              <div class="score-card">
-                <div class="score-dimension">Var. Desahucio</div>
-                <div class="score-pts">15</div>
-                <div class="score-max">/ 15 pts</div>
-              </div>
-            </div>
-            <div class="semaforo-row verde">
-              <div class="semaforo-dot verde"></div>
-              <div>
-                <div class="semaforo-text" style="color:#166534;">Revisión aprobada</div>
-                <div style="font-size:11px;color:#16a34a;">Score total: 70/70 puntos</div>
+          <div class="card">
+            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-file-contract"></i></div><div class="card-title">Información del proceso</div><button class="card-action"><i class="fa-solid fa-pen"></i> Editar</button></div>
+            <div class="card-body">
+              <div class="field-grid">
+                <div class="field"><div class="fl">Nombre VE</div><div class="fv">VE-00152954</div></div>
+                <div class="field"><div class="fl">N° de proceso</div><div class="fv">126517</div></div>
+                <div class="field"><div class="fl">Tipo de tarifa</div><div class="fv">NIIF (US$)</div></div>
+                <div class="field"><div class="fl">Tipo de servicio</div><div class="fv">Tradicional</div></div>
+                <div class="field"><div class="fl">Fecha de valoración</div><div class="fv">31/12/2025</div></div>
+                <div class="field"><div class="fl">Forma de pago</div><div class="fv">De contado</div></div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Financiero -->
-        <div class="card card-full">
-          <div class="card-header">
-            <div class="card-header-icon"><i class="fa-solid fa-dollar-sign"></i></div>
-            <div class="card-title">Resumen financiero</div>
-          </div>
-          <div class="card-body">
-            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;">
-              <div class="field"><div class="field-label">Total base</div><div class="field-value">$315,00</div></div>
-              <div class="field"><div class="field-label">Total neto</div><div class="field-value">$315,00</div></div>
-              <div class="field"><div class="field-label">IVA</div><div class="field-value">15%</div></div>
-              <div class="field"><div class="field-label">Total IVA calculado</div><div class="field-value">$47,25</div></div>
-              <div class="field"><div class="field-label">Total factura</div><div class="field-value" style="font-size:18px;font-weight:900;color:var(--navy);">$362,25</div></div>
+          <div class="card">
+            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-building"></i></div><div class="card-title">Cliente</div></div>
+            <div class="card-body">
+              <div class="field-grid">
+                <div class="field"><div class="fl">Cuenta</div><div class="fv link">ACCIONA AGUA, S.A.</div></div>
+                <div class="field"><div class="fl">Ciudad</div><div class="fv">Quito</div></div>
+                <div class="field"><div class="fl">Segmento</div><div class="fv">Mediana</div></div>
+                <div class="field"><div class="fl">Cliente VIP</div><div class="fv empty">No</div></div>
+                <div class="field"><div class="fl">Trabajadores activos</div><div class="fv">50</div></div>
+                <div class="field"><div class="fl">Trab. Jubl. pendientes</div><div class="fv">50</div></div>
+              </div>
             </div>
           </div>
-        </div>
 
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════
-         TAB: ITEMS VENDIDOS
-    ═══════════════════════════════ -->
-    <div id="tab-items" class="tab-content">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-header-icon"><i class="fa-solid fa-cart-shopping"></i></div>
-          <div class="card-title">Items vendidos <span style="color:var(--muted);font-weight:400;">(2)</span></div>
-        </div>
-        <table class="items-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Código</th>
-              <th>Producto</th>
-              <th>Familia</th>
-              <th>Cantidad</th>
-              <th>Precio unitario</th>
-              <th>Total</th>
-              <th>Días entrega</th>
-              <th>Ejecutable AF</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="color:var(--muted);">1</td>
-              <td><span class="item-codigo">I-212240</span></td>
-              <td style="font-weight:700;">Desahucio NIIF</td>
-              <td style="color:var(--muted);">Actuarial</td>
-              <td>50</td>
-              <td>$3,70</td>
-              <td style="font-weight:700;">$185,00</td>
-              <td>4</td>
-              <td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td>
-              <td><button class="btn-ejecutar"><i class="fa-solid fa-play"></i> Ejecutar</button></td>
-            </tr>
-            <tr>
-              <td style="color:var(--muted);">2</td>
-              <td><span class="item-codigo">I-212241</span></td>
-              <td style="font-weight:700;">Jubilación Patronal</td>
-              <td style="color:var(--muted);">Actuarial</td>
-              <td>50</td>
-              <td>$2,60</td>
-              <td style="font-weight:700;">$130,00</td>
-              <td>4</td>
-              <td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td>
-              <td><button class="btn-ejecutar"><i class="fa-solid fa-play"></i> Ejecutar</button></td>
-            </tr>
-            <tr class="total-row">
-              <td colspan="6" style="text-align:right;color:var(--muted);font-size:12px;">SUBTOTAL</td>
-              <td>$315,00</td>
-              <td colspan="3"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════
-         TAB: DOCUMENTOS
-    ═══════════════════════════════ -->
-    <div id="tab-documentos" class="tab-content">
-      <div class="docs-section">
-        <div class="docs-section-header">
-          <div class="docs-section-title">
-            <i class="fa-solid fa-file-lines" style="color:var(--navy);"></i>
-            Documentos Venta Efectiva
-            <span style="color:var(--muted);font-weight:400;">(0)</span>
+          <div class="card">
+            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-user-check"></i></div><div class="card-title">Asignación y equipo</div></div>
+            <div class="card-body">
+              <div class="field-grid">
+                <div class="field"><div class="fl">Propietario</div><div class="fv link">Samantha Chavez</div></div>
+                <div class="field"><div class="fl">Analista</div><div class="fv">Samantha Chavez</div></div>
+                <div class="field"><div class="fl">Equipo de operaciones</div><div class="fv link">Equipo 3 - P. Beltrán</div></div>
+                <div class="field"><div class="fl">Nivel de aprobación</div><div class="fv ok">Aprobado</div></div>
+                <div class="field"><div class="fl">Vendedor</div><div class="fv link">Samantha Chavez</div></div>
+                <div class="field"><div class="fl">Contacto solicitante</div><div class="fv link">Samantha Flores</div></div>
+              </div>
+            </div>
           </div>
-          <button class="btn-new-doc" onclick="document.getElementById('modal-doc').classList.add('open')">
-            <i class="fa-solid fa-plus"></i> Nuevo documento
-          </button>
+
+          <div class="card">
+            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-gears"></i></div><div class="card-title">Fechas de gestión</div></div>
+            <div class="card-body">
+              <div class="field-grid">
+                <div class="field"><div class="fl">Fecha solicitud</div><div class="fv">12/06/2025</div></div>
+                <div class="field"><div class="fl">Fecha asignación</div><div class="fv">12/06/2025</div></div>
+                <div class="field"><div class="fl">Entrega calculada</div><div class="fv">23/06/2025</div></div>
+                <div class="field"><div class="fl">Entrega real</div><div class="fv">19/11/2025</div></div>
+                <div class="field"><div class="fl">Días de demora</div><div class="fv" style="color:var(--yellow);">115 días</div></div>
+                <div class="field"><div class="fl">Pedido urgente</div><div class="fv empty">No</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-clipboard-check"></i></div><div class="card-title">Evaluación de requerimiento</div></div>
+            <div class="card-body">
+              <div class="eval-grid">
+                <div class="eval-item on"><div class="eval-chk yes"><i class="fa-solid fa-check" style="font-size:8px;"></i></div> Req. NIIF</div>
+                <div class="eval-item off"><div class="eval-chk no"></div> Req. NEC</div>
+                <div class="eval-item off"><div class="eval-chk no"></div> Normas Internac.</div>
+                <div class="eval-item off"><div class="eval-chk no"></div> Req. NIC 12</div>
+                <div class="eval-item off"><div class="eval-chk no"></div> Req. USGAAP</div>
+                <div class="eval-item off"><div class="eval-chk no"></div> Bases históricas</div>
+              </div>
+              <div class="field-grid">
+                <div class="field"><div class="fl">Nivel de segmento</div><div class="fv">21.00%</div></div>
+                <div class="field"><div class="fl">% Sc. Requerimiento</div><div class="fv">4%</div></div>
+                <div class="field"><div class="fl">Evaluación</div><div class="fv">25%</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-star-half-stroke"></i></div><div class="card-title">Scoring del informe</div></div>
+            <div class="card-body">
+              <div class="score-grid">
+                <div class="score-card"><div class="score-dim">Segmento</div><div class="score-pts">20</div><div class="score-max">/ 20 pts</div></div>
+                <div class="score-card"><div class="score-dim">Antigüedad</div><div class="score-pts">20</div><div class="score-max">/ 20 pts</div></div>
+                <div class="score-card"><div class="score-dim">Var. Jubilación</div><div class="score-pts">15</div><div class="score-max">/ 15 pts</div></div>
+                <div class="score-card"><div class="score-dim">Var. Desahucio</div><div class="score-pts">15</div><div class="score-max">/ 15 pts</div></div>
+              </div>
+              <div class="semaforo-bar">
+                <span class="semaforo verde"></span>
+                <div><div style="font-size:13px;font-weight:800;color:#166534;">Revisión aprobada</div><div style="font-size:11px;color:#16a34a;">Score total: 70/70 puntos</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-full">
+            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-dollar-sign"></i></div><div class="card-title">Resumen financiero</div></div>
+            <div class="card-body">
+              <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;">
+                <div class="field"><div class="fl">Total base</div><div class="fv">$315,00</div></div>
+                <div class="field"><div class="fl">Total neto</div><div class="fv">$315,00</div></div>
+                <div class="field"><div class="fl">IVA</div><div class="fv">15%</div></div>
+                <div class="field"><div class="fl">Total IVA</div><div class="fv">$47,25</div></div>
+                <div class="field"><div class="fl">Total factura</div><div class="fv" style="font-size:18px;font-weight:900;color:var(--navy);">$362,25</div></div>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <div style="color:var(--muted);font-size:13px;padding:20px 0;">No hay documentos registrados.</div>
       </div>
 
-      <div class="docs-section">
-        <div class="docs-section-header">
-          <div class="docs-section-title">
-            <i class="fa-solid fa-paperclip" style="color:var(--navy);"></i>
-            Archivos adjuntos
-            <span style="color:var(--muted);font-weight:400;">(0)</span>
-          </div>
-          <button class="btn-new-doc"><i class="fa-solid fa-upload"></i> Agregar archivos</button>
-        </div>
-        <div class="upload-zone">
-          <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-          <div class="upload-text">Arrastra archivos aquí o haz clic para seleccionar</div>
-          <div class="upload-hint">PDF, Excel, Word · Máx. 25 MB por archivo</div>
+      <!-- TAB: ITEMS VENDIDOS -->
+      <div id="tab-items" class="tab-panel">
+        <div class="card">
+          <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-cart-shopping"></i></div><div class="card-title">Items vendidos <span style="color:var(--muted);font-weight:400;">(2)</span></div></div>
+          <table class="items-table">
+            <thead>
+              <tr><th>#</th><th>Código</th><th>Producto</th><th>Familia</th><th>Cant.</th><th>P. Unitario</th><th>Total</th><th>Días</th><th>Ejecutable AF</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="color:var(--muted)">1</td><td><span class="item-code">I-212240</span></td>
+                <td style="font-weight:700">Desahucio NIIF</td><td style="color:var(--muted)">Actuarial</td>
+                <td>50</td><td>$3,70</td><td style="font-weight:700">$185,00</td><td>4</td>
+                <td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td>
+                <td><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td>
+              </tr>
+              <tr>
+                <td style="color:var(--muted)">2</td><td><span class="item-code">I-212241</span></td>
+                <td style="font-weight:700">Jubilación Patronal</td><td style="color:var(--muted)">Actuarial</td>
+                <td>50</td><td>$2,60</td><td style="font-weight:700">$130,00</td><td>4</td>
+                <td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td>
+                <td><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td>
+              </tr>
+              <tr class="total-row"><td colspan="6" style="text-align:right;color:var(--muted);font-size:12px;">SUBTOTAL</td><td>$315,00</td><td colspan="3"></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
 
-    <!-- ═══════════════════════════════
-         TAB: HISTORIAL
-    ═══════════════════════════════ -->
-    <div id="tab-historial" class="tab-content">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-header-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
-          <div class="card-title">Historial de cambios</div>
+      <!-- TAB: DOCUMENTOS -->
+      <div id="tab-documentos" class="tab-panel">
+        <div style="margin-bottom:20px;">
+          <div class="docs-hrow"><div class="docs-htitle"><i class="fa-solid fa-file-lines" style="color:var(--navy);"></i> Documentos Venta Efectiva <span style="color:var(--muted);font-weight:400;">(0)</span></div><button class="btn-new-doc" onclick="document.getElementById('modal-doc').classList.add('open')"><i class="fa-solid fa-plus"></i> Nuevo</button></div>
+          <p style="color:var(--muted);font-size:13px;">No hay documentos registrados.</p>
         </div>
-        <div class="card-body" style="padding:0 20px;">
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-avatar admin">AD</div>
-              <div class="timeline-content">
-                <div class="timeline-header">
-                  <span class="timeline-user">Admin</span>
-                  <span class="timeline-date">19/11/2025, 14:05</span>
-                </div>
-                <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Campo: <span class="timeline-field">Estado</span></div>
-                <div class="timeline-change">
-                  <span class="timeline-from">Datos validados</span>
-                  <span class="timeline-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-                  <span class="timeline-to">Completado</span>
-                </div>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-avatar admin">AD</div>
-              <div class="timeline-content">
-                <div class="timeline-header">
-                  <span class="timeline-user">Admin</span>
-                  <span class="timeline-date">19/11/2025, 14:05</span>
-                </div>
-                <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Campo: <span class="timeline-field">Aprobado</span></div>
-                <div class="timeline-change">
-                  <span class="timeline-from">No aprobado</span>
-                  <span class="timeline-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-                  <span class="timeline-to"><i class="fa-solid fa-check"></i> Aprobado</span>
-                </div>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-avatar" style="background:var(--orange);">SC</div>
-              <div class="timeline-content">
-                <div class="timeline-header">
-                  <span class="timeline-user">Samantha Chavez</span>
-                  <span class="timeline-date">12/06/2025, 09:52</span>
-                </div>
-                <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Campo: <span class="timeline-field">Estado</span></div>
-                <div class="timeline-change">
-                  <span class="timeline-from">Planificado</span>
-                  <span class="timeline-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-                  <span class="timeline-to">Datos validados</span>
-                </div>
-              </div>
-            </div>
+        <div>
+          <div class="docs-hrow"><div class="docs-htitle"><i class="fa-solid fa-paperclip" style="color:var(--navy);"></i> Archivos <span style="color:var(--muted);font-weight:400;">(0)</span></div><button class="btn-new-doc"><i class="fa-solid fa-upload"></i> Agregar</button></div>
+          <div class="upload-zone"><div style="font-size:28px;opacity:0.35;margin-bottom:10px;"><i class="fa-solid fa-cloud-arrow-up"></i></div><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Arrastra archivos o haz clic para seleccionar</div><div style="font-size:11px;opacity:0.6;">PDF, Excel, Word · Máx. 25 MB</div></div>
+        </div>
+      </div>
+
+      <!-- TAB: HISTORIAL -->
+      <div id="tab-historial" class="tab-panel">
+        <div class="card">
+          <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-clock-rotate-left"></i></div><div class="card-title">Historial de cambios</div></div>
+          <div class="card-body" style="padding:0 20px;">
+            <div class="timeline-item"><div class="t-avatar navy">AD</div><div><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><span class="t-user">Admin</span><span class="t-date">19/11/2025, 14:05</span></div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Campo: <span class="t-field">Estado</span></div><div class="t-change"><span class="t-from">Datos validados</span><span><i class="fa-solid fa-arrow-right"></i></span><span class="t-to">Completado</span></div></div></div>
+            <div class="timeline-item"><div class="t-avatar navy">AD</div><div><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><span class="t-user">Admin</span><span class="t-date">19/11/2025, 14:05</span></div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Campo: <span class="t-field">Aprobado</span></div><div class="t-change"><span class="t-from">—</span><span><i class="fa-solid fa-arrow-right"></i></span><span class="t-to"><i class="fa-solid fa-check"></i> Aprobado</span></div></div></div>
+            <div class="timeline-item"><div class="t-avatar orange">SC</div><div><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><span class="t-user">Samantha Chavez</span><span class="t-date">12/06/2025, 09:52</span></div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Campo: <span class="t-field">Estado</span></div><div class="t-change"><span class="t-from">Planificado</span><span><i class="fa-solid fa-arrow-right"></i></span><span class="t-to">Datos validados</span></div></div></div>
           </div>
         </div>
       </div>
-    </div>
+
     </div><!-- /content-area -->
   </div><!-- /main -->
 </div><!-- /app-body -->
@@ -672,24 +495,16 @@
 <!-- MODAL NUEVO DOCUMENTO -->
 <div class="modal-overlay" id="modal-doc">
   <div class="modal">
-    <div class="modal-title">Crear documento venta efectiva</div>
-    <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">Selecciona el tipo de acceso para este documento.</div>
-    <div class="modal-radio-group">
-      <label class="modal-radio selected" onclick="selectRadio(this)">
-        <input type="radio" name="doc-type" checked>
-        <div>
-          <div class="modal-radio-label"><i class="fa-solid fa-globe" style="color:var(--indigo);"></i> Público</div>
-          <div class="modal-radio-sub">Visible para todos los miembros del equipo</div>
-        </div>
-      </label>
-      <label class="modal-radio" onclick="selectRadio(this)">
-        <input type="radio" name="doc-type">
-        <div>
-          <div class="modal-radio-label"><i class="fa-solid fa-lock" style="color:var(--navy);"></i> Confidencial</div>
-          <div class="modal-radio-sub">Solo visible para propietarios y administradores</div>
-        </div>
-      </label>
-    </div>
+    <div class="modal-title">Crear documento</div>
+    <div class="modal-sub">Selecciona el tipo de acceso para este documento.</div>
+    <label class="modal-radio selected" onclick="selectRadio(this)">
+      <input type="radio" name="doc-type" checked>
+      <div><div class="modal-radio-label"><i class="fa-solid fa-globe" style="color:var(--indigo);"></i> Público</div><div class="modal-radio-sub">Visible para todos los miembros del equipo</div></div>
+    </label>
+    <label class="modal-radio" onclick="selectRadio(this)">
+      <input type="radio" name="doc-type">
+      <div><div class="modal-radio-label"><i class="fa-solid fa-lock" style="color:var(--navy);"></i> Confidencial</div><div class="modal-radio-sub">Solo visible para propietarios y administradores</div></div>
+    </label>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="document.getElementById('modal-doc').classList.remove('open')">Cancelar</button>
       <button class="btn-next">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
@@ -698,17 +513,172 @@
 </div>
 
 <script>
+// ── STAGE DATA ────────────────────────────────────────────────────
+const STAGES = [
+  {
+    name: 'Planificado',
+    campos: `
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-users"></i> Equipo de operaciones</div><div class="ck-value link">Equipo 3 - Pamela Beltrán</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-regular fa-calendar"></i> Fecha de asignación</div><div class="ck-value">12/06/2025</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-check"></i> Asignado</div><div class="ck-value ok"><i class="fa-solid fa-check-circle" style="color:var(--green)"></i> Sí</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-user"></i> Propietario</div><div class="ck-value link">Samantha Chavez</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-circle-exclamation"></i> Datos incompletos</div><div class="ck-value empty">No</div></div>`,
+    orientacion: null
+  },
+  {
+    name: 'Datos validados',
+    campos: `
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-users"></i> Total trabajadores</div><div class="ck-value">50</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-circle"></i> Semáforo asignación</div><div class="ck-value"><span class="semaforo verde"></span> Verde</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-paperclip"></i> Archivo adjunto</div><div class="ck-value empty">Sin archivo</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-circle-exclamation"></i> Datos incompletos</div><div class="ck-value empty">No</div></div>`,
+    orientacion: null
+  },
+  {
+    name: 'En curso',
+    campos: `
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-paperclip"></i> Archivo adjunto</div><div class="ck-value empty">Sin archivo</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-star"></i> Resultado Score</div><div class="ck-value empty">Pendiente</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-link"></i> URL de revisión</div><div class="ck-value empty">Sin URL</div></div>`,
+    orientacion: {
+      tipo: 'warning',
+      titulo: 'Orientación hacia el éxito',
+      texto: 'Se requiere cargar los archivos para revisión de la línea de supervisión de la Venta Efectiva. En esta etapa se obtiene en forma automática el Score — espere un minuto y refresque la ventana para verificar el resultado.'
+    }
+  },
+  {
+    name: 'Solicita revisión',
+    campos: `
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-star"></i> Score</div><div class="ck-value ok">70/70</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-circle"></i> Semáforo revisión</div><div class="ck-value"><span class="semaforo verde"></span> Verde</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-link"></i> URL de revisión</div><div class="ck-value empty">Sin URL</div></div>`,
+    orientacion: {
+      tipo: 'info',
+      titulo: 'Orientación hacia el éxito',
+      texto: 'Se han enviado las notificaciones correspondientes a los distintos filtros de revisión. Una vez que se apruebe completamente su proceso, se le notificará.'
+    }
+  },
+  {
+    name: 'Revisión coordinación',
+    campos: `
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-triangle-exclamation"></i> No conformidad por</div><div class="ck-value empty">—</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-link"></i> URL de revisión</div><div class="ck-value empty">Sin URL</div></div>`,
+    orientacion: null
+  },
+  {
+    name: 'Revisión dirección',
+    campos: `
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-link"></i> URL de revisión</div><div class="ck-value empty">Sin URL</div></div>`,
+    orientacion: null
+  },
+  {
+    name: 'Para entregar',
+    campos: `
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-check-double"></i> Aprobado</div><div class="ck-value ok"><i class="fa-solid fa-check-circle" style="color:var(--green)"></i> Sí</div></div>`,
+    orientacion: null
+  },
+  {
+    name: 'Revisión cliente',
+    campos: `
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-user-check"></i> Estado cliente</div><div class="ck-value">En revisión</div></div>`,
+    orientacion: null
+  },
+  {
+    name: 'Completado',
+    campos: `
+      <div class="ck-field"><div class="ck-label"><i class="fa-regular fa-calendar-check"></i> Fecha de entrega</div><div class="ck-value">19/11/2025</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-regular fa-calendar"></i> Fecha calculada</div><div class="ck-value">23/06/2025</div></div>
+      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-clock"></i> Días de entrega real</div><div class="ck-value" style="color:var(--yellow)">115 días</div></div>`,
+    orientacion: null
+  }
+];
+
+let currentStage = 8; // Completado
+
+function renderStage(idx) {
+  const stage = STAGES[idx];
+
+  // Campos clave
+  document.getElementById('campos-clave').innerHTML = `
+    <div class="ck-header">
+      <div class="ck-title"><i class="fa-solid fa-star" style="color:var(--orange)"></i> Campos clave — ${stage.name}</div>
+      <button class="ck-edit"><i class="fa-solid fa-pen"></i> Modificar</button>
+    </div>
+    <div class="ck-grid">${stage.campos}</div>`;
+
+  // Orientación
+  const wrap = document.getElementById('orientacion-wrap');
+  if (stage.orientacion) {
+    const o = stage.orientacion;
+    wrap.innerHTML = `
+      <div class="orientacion ${o.tipo === 'info' ? 'info' : ''}">
+        <span class="orientacion-icon">${o.tipo === 'info' ? '💡' : '⚡'}</span>
+        <div><div class="orientacion-title">${o.titulo}</div><div class="orientacion-text">${o.texto}</div></div>
+      </div>`;
+  } else {
+    wrap.innerHTML = '';
+  }
+
+  // Status badge
+  const badge = document.getElementById('status-badge');
+  if (idx === 8) {
+    badge.innerHTML = '<i class="fa-solid fa-circle-check"></i> Completado';
+    badge.style.cssText = 'padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:#dcfce7;color:#15803d;display:inline-flex;align-items:center;gap:5px;';
+  } else {
+    badge.innerHTML = `<i class="fa-solid fa-spinner"></i> ${STAGES[idx].name}`;
+    badge.style.cssText = 'padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:#dbeafe;color:#1d4ed8;display:inline-flex;align-items:center;gap:5px;';
+  }
+
+  // Btn marcar
+  const btn = document.getElementById('btn-marcar');
+  if (idx < 8) {
+    btn.style.display = 'flex';
+    document.getElementById('btn-marcar-label').textContent = `Avanzar a "${STAGES[idx+1].name}"`;
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+function setStage(idx) {
+  currentStage = idx;
+  // Update pipeline visuals
+  document.querySelectorAll('.stage').forEach((el, i) => {
+    el.className = 'stage';
+    if (i < idx) el.classList.add('done');
+    else if (i === idx) {
+      el.classList.add(idx === 8 ? 'active-completado' : 'active');
+    }
+    // Update icon
+    const icon = el.querySelector('.stage-icon');
+    if (i < idx) icon.className = 'fa-solid fa-check stage-icon';
+    else if (i === idx && idx === 8) icon.className = 'fa-solid fa-circle-check stage-icon';
+    else if (i === idx) icon.className = 'fa-solid fa-circle-dot stage-icon';
+    else icon.className = 'fa-regular fa-circle stage-icon';
+  });
+  renderStage(idx);
+}
+
+function nextStage() {
+  if (currentStage < 8) setStage(currentStage + 1);
+}
+
+// TABS
 function showTab(name, el) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   el.classList.add('active');
 }
+
+// MODAL
 function selectRadio(el) {
   document.querySelectorAll('.modal-radio').forEach(r => r.classList.remove('selected'));
   el.classList.add('selected');
   el.querySelector('input').checked = true;
 }
+
+// Init
+setStage(8);
 </script>
 </body>
 </html>
