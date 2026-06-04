@@ -49,6 +49,14 @@
   --red: #5f2120;             /* 9.14:1  ✅ AAA — MUI error alert text */
   --red-soft: #fdeded;        /* MUI error alert bg */
   --border: rgba(163,177,198,0.35);
+
+  /* ── LIQUID GLASS — flota sobre la superficie neumórfica ─────── */
+  --glass-bg:      rgba(255,255,255,0.60);
+  --glass-bg-hi:   rgba(255,255,255,0.82);
+  --glass-border:  rgba(255,255,255,0.72);
+  --glass-shine:   inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(163,177,198,0.12);
+  --glass-blur:    blur(14px);
+  --glass-shadow:  4px 4px 12px rgba(163,177,198,0.55), -3px -3px 8px rgba(255,255,255,0.92);
 }
 
 body {
@@ -152,31 +160,133 @@ body {
 .rh-title { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; color: var(--navy); }
 .rh-subtitle { font-size: 13px; color: var(--text-sub); margin-top: 5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-weight: 600; }
 
-/* Tags */
-.tag { padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 800; letter-spacing: 0.3px; }
-.tag-niif { background: var(--indigo-soft); color: var(--indigo); }
-.tag-tipo { background: rgba(163,177,198,0.2); color: var(--text-sub); }
-.tag-green { background: var(--green-soft); color: var(--green); }
-.tag-yellow { background: var(--yellow-soft); color: var(--yellow); display: flex; align-items: center; gap: 4px; }
-.tag-red { background: var(--red-soft); color: var(--red); display: flex; align-items: center; gap: 4px; }
-
-/* NEU BUTTONS */
-.rh-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
-.btn-neu {
-  padding: 8px 16px; border-radius: 10px; font-size: 12px; font-weight: 700;
-  cursor: pointer; display: flex; align-items: center; gap: 7px;
-  background: var(--bg); color: var(--text-sub); border: none;
-  box-shadow: var(--neu-out-sm); transition: all 0.15s;
+/* ── TAGS / BADGES — informativos, NO clicables ──────────────
+   Regla: cursor:default siempre. Sin hover shadow.
+   Si necesitas un tag clicable, agrega la clase .tag-link.
+─────────────────────────────────────────────────────────── */
+.tag {
+  padding: 3px 10px; border-radius: 99px;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.3px;
+  cursor: default; user-select: none;        /* ← no es botón */
+  display: inline-flex; align-items: center; gap: 4px;
 }
-.btn-neu:hover { color: var(--text); }
-.btn-neu:active { box-shadow: var(--neu-in-sm); }
-.btn-neu.primary {
+.tag-niif   { background: var(--indigo-soft); color: var(--indigo); }
+.tag-tipo   { background: rgba(163,177,198,0.2); color: var(--text-sub); }
+.tag-green  { background: var(--green-soft); color: var(--green); }
+.tag-yellow { background: var(--yellow-soft); color: var(--yellow); }
+.tag-red    { background: var(--red-soft); color: var(--red); }
+/* Tag clicable: añade affordance solo cuando corresponde */
+.tag.tag-link { cursor: pointer; transition: filter 0.15s; }
+.tag.tag-link:hover { filter: brightness(0.92); }
+
+/* ══════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — BOTONES
+   Regla: solo los elementos con cursor:pointer tienen affordance visual.
+   Tags, labels y valores de campo NO tienen hover/shadow interactivo.
+══════════════════════════════════════════════════════════════ */
+.rh-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; flex-wrap: wrap; }
+
+/* ── BASE — todo botón hereda esto ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  border-radius: 10px; font-size: 12px; font-weight: 700;
+  font-family: inherit; cursor: pointer; user-select: none;
+  border: none; text-decoration: none; white-space: nowrap;
+  transition: box-shadow 0.18s, transform 0.14s, background 0.18s;
+  position: relative;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--indigo); outline-offset: 2px; border-radius: 10px;
+}
+.btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* ── PRIMARY — acción principal (Liquid Glass + solid fill) ── */
+.btn-primary {
+  padding: 8px 18px;
   background: linear-gradient(135deg, #1d4ed8, #2563eb);
   color: #fff;
-  box-shadow: 4px 4px 12px rgba(76,100,217,0.4), -2px -2px 8px rgba(255,255,255,0.9);
+  box-shadow:
+    4px 4px 14px rgba(29,78,216,0.38),
+    -2px -2px 8px rgba(255,255,255,0.9),
+    var(--glass-shine);
 }
-.btn-neu.primary:active { box-shadow: var(--neu-in-sm); }
-.btn-neu.danger { color: var(--red); }
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1e40af, #1d4ed8);
+  box-shadow: 6px 6px 18px rgba(29,78,216,0.48), -2px -2px 8px rgba(255,255,255,0.9), var(--glass-shine);
+  transform: translateY(-1px);
+}
+.btn-primary:active { box-shadow: var(--neu-in-sm); transform: translateY(0); }
+
+/* ── SECONDARY — acción secundaria (Liquid Glass flotante) ── */
+.btn-secondary {
+  padding: 8px 16px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  color: var(--navy);
+  box-shadow: var(--glass-shadow), var(--glass-shine);
+}
+.btn-secondary:hover {
+  background: var(--glass-bg-hi);
+  border-color: rgba(255,255,255,0.88);
+  box-shadow: 5px 5px 14px rgba(163,177,198,0.6), -3px -3px 9px rgba(255,255,255,0.95), var(--glass-shine);
+  transform: translateY(-1px);
+}
+.btn-secondary:active { box-shadow: var(--neu-in-sm); transform: translateY(0); }
+
+/* ── GHOST — acción terciaria / toolbar (sin fondo, solo texto) ── */
+.btn-ghost {
+  padding: 8px 14px;
+  background: transparent; border: none;
+  color: var(--text-sub); box-shadow: none;
+}
+.btn-ghost:hover { background: rgba(163,177,198,0.14); color: var(--text); border-radius: 10px; }
+.btn-ghost:active { background: rgba(163,177,198,0.25); }
+
+/* ── DANGER — glass tintado rojo ── */
+.btn-danger {
+  padding: 8px 16px;
+  background: rgba(253,237,237,0.75);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(95,33,32,0.18);
+  color: var(--red);
+  box-shadow: 3px 3px 10px rgba(163,177,198,0.45), -2px -2px 7px rgba(255,255,255,0.92), inset 0 1px 0 rgba(255,255,255,0.85);
+}
+.btn-danger:hover {
+  background: rgba(253,237,237,0.95);
+  box-shadow: 5px 5px 14px rgba(163,177,198,0.5), -2px -2px 8px rgba(255,255,255,0.95), inset 0 1px 0 rgba(255,255,255,0.9);
+  transform: translateY(-1px);
+}
+.btn-danger:active { box-shadow: var(--neu-in-sm); transform: translateY(0); }
+
+/* ── ICON — cuadrado/redondo solo ícono ── */
+.btn-icon {
+  padding: 8px; width: 36px; height: 36px;
+  justify-content: center;
+}
+
+/* ── SM — tamaño pequeño ── */
+.btn-sm { padding: 5px 12px; font-size: 11px; border-radius: 8px; gap: 5px; }
+
+/* ── BUTTON GROUP — botones conectados como unidad ── */
+.btn-group { display: inline-flex; border-radius: 10px; overflow: hidden; box-shadow: var(--glass-shadow); }
+.btn-group .btn { border-radius: 0; box-shadow: none; border-right: 1px solid rgba(163,177,198,0.3); }
+.btn-group .btn:first-child { border-radius: 10px 0 0 10px; }
+.btn-group .btn:last-child { border-radius: 0 10px 10px 0; border-right: none; }
+.btn-group .btn:only-child { border-radius: 10px; }
+
+/* ── BACKWARD COMPAT: btn-neu como alias de btn-secondary ── */
+.btn-neu { }
+.btn-neu { display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: 10px; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer; user-select: none; border: 1px solid var(--glass-border); background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); color: var(--navy); box-shadow: var(--glass-shadow), var(--glass-shine); transition: all 0.18s; white-space: nowrap; }
+.btn-neu:hover { background: var(--glass-bg-hi); transform: translateY(-1px); box-shadow: 5px 5px 14px rgba(163,177,198,0.6), -3px -3px 9px rgba(255,255,255,0.95), var(--glass-shine); }
+.btn-neu:active { box-shadow: var(--neu-in-sm); transform: translateY(0); }
+.btn-neu:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
+.btn-neu.primary { background: linear-gradient(135deg,#1d4ed8,#2563eb); color:#fff; border-color: rgba(29,78,216,0.3); box-shadow: 4px 4px 14px rgba(29,78,216,0.38),-2px -2px 8px rgba(255,255,255,0.9),var(--glass-shine); }
+.btn-neu.primary:hover { background: linear-gradient(135deg,#1e40af,#1d4ed8); box-shadow:6px 6px 18px rgba(29,78,216,0.48),-2px -2px 8px rgba(255,255,255,0.9),var(--glass-shine); }
+.btn-neu.danger { background: rgba(253,237,237,0.75); border-color: rgba(95,33,32,0.18); color: var(--red); }
+.btn-neu.danger:hover { background: rgba(253,237,237,0.95); }
 .btn-neu.icon-only { padding: 8px 12px; }
 
 /* ══════════════════════════════
@@ -246,11 +356,13 @@ body {
 .ck-section-label { font-size: 10px; font-weight: 800; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
 .ck-row { display: flex; gap: 10px; flex-wrap: wrap; }
 .ck-pill {
-  padding: 10px 16px; border-radius: 12px;
-  background: var(--bg); box-shadow: var(--neu-out-sm);
-  transition: all 0.15s; min-width: 100px;
+  padding: 10px 16px; border-radius: 12px; min-width: 100px;
+  background: var(--bg); box-shadow: var(--neu-in-sm);  /* inset = estático, no presionable */
+  cursor: default;                                        /* ← datos, no acción */
 }
-.ck-pill:hover { box-shadow: 4px 4px 12px var(--shadow-dark), -4px -4px 12px var(--shadow-light); }
+/* Toggle pill = clicable, tiene affordance diferente */
+.ck-pill.toggle-pill { cursor: pointer; box-shadow: var(--neu-out-sm); transition: box-shadow 0.15s; }
+.ck-pill.toggle-pill:hover { box-shadow: 4px 4px 12px var(--shadow-dark), -4px -4px 12px var(--shadow-light); }
 .ck-label { font-size: 9px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
 .ck-value { font-size: 13px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
 .ck-value.ok { color: var(--green); }
@@ -300,25 +412,40 @@ body {
 .or-text { font-size: 12px; line-height: 1.55; color: var(--text-sub); }
 
 /* ══════════════════════════════
-   TABS — NEU
+   TABS — LIQUID GLASS ACTIVE
+   Inactivo: texto plano sin affordance (no confundir con botón)
+   Activo: pill glass que "flota" sobre la barra (sí es una selección)
 ══════════════════════════════ */
 .tabs-bar {
-  display: flex; padding: 8px 28px;
-  background: var(--bg); border-bottom: 1px solid var(--border);
-  gap: 6px; flex-shrink: 0;
+  display: flex; padding: 6px 28px;
+  background: rgba(232,236,244,0.8);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--border);
+  gap: 2px; flex-shrink: 0; align-items: center;
 }
 .tab {
-  padding: 8px 16px; border-radius: 10px; font-size: 12px; font-weight: 700;
-  color: var(--text-dim); cursor: pointer; display: flex; align-items: center; gap: 6px;
-  transition: all 0.2s; border: none; background: transparent;
+  padding: 8px 16px; border-radius: 9px;
+  font-size: 12px; font-weight: 700;
+  color: var(--text-dim); cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: color 0.15s, background 0.15s;
+  border: none; background: transparent;
+  user-select: none;
 }
-.tab:hover { background: rgba(163,177,198,0.1); color: var(--text-sub); }
+.tab:hover { color: var(--text-sub); background: rgba(255,255,255,0.4); }
+.tab:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; border-radius: 9px; }
 .tab.active {
-  background: var(--bg);
   color: var(--navy);
-  box-shadow: var(--neu-out-sm);
+  background: var(--glass-bg-hi);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-shine);
 }
-.tab-count { background: rgba(163,177,198,0.2); color: var(--text-sub); font-size: 10px; font-weight: 800; padding: 1px 7px; border-radius: 99px; }
+.tab-count {
+  background: rgba(163,177,198,0.25); color: var(--text-dim);
+  font-size: 10px; font-weight: 800; padding: 1px 6px; border-radius: 99px;
+  cursor: default; /* el badge no es clicable */
+}
 .tab.active .tab-count { background: var(--indigo-soft); color: var(--indigo); }
 
 /* ══════════════════════════════
@@ -350,7 +477,14 @@ body {
   font-size: 14px; color: var(--indigo);
 }
 .nc-title { font-size: 13px; font-weight: 800; color: var(--navy); }
-.nc-action { margin-left: auto; font-size: 12px; color: var(--indigo); font-weight: 700; cursor: pointer; background: none; border: none; }
+.nc-action {
+  margin-left: auto; font-size: 11px; color: var(--text-dim); font-weight: 700;
+  cursor: pointer; background: none; border: none; font-family: inherit;
+  padding: 4px 8px; border-radius: 7px; transition: all 0.15s;
+  display: flex; align-items: center; gap: 5px;
+}
+.nc-action:hover { background: rgba(163,177,198,0.15); color: var(--indigo); }
+.nc-action:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
 .nc-body { padding: 18px 20px; }
 
 /* ── FIELDS ── */
@@ -415,14 +549,18 @@ body {
 .item-code { font-family: monospace; font-size: 11px; background: var(--bg); padding: 3px 8px; border-radius: 6px; color: var(--text-dim); box-shadow: var(--neu-in-sm); }
 .ejecutable-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 700; background: var(--indigo-soft); color: var(--indigo); }
 .btn-exec {
-  padding: 6px 14px; border-radius: 8px; border: none;
-  background: var(--bg); color: var(--indigo);
-  font-size: 11px; font-weight: 700; cursor: pointer;
-  box-shadow: var(--neu-out-sm);
-  display: flex; align-items: center; gap: 5px; transition: all 0.15s;
+  padding: 5px 14px; border-radius: 8px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  color: var(--indigo); font-size: 11px; font-weight: 700; cursor: pointer;
+  box-shadow: 3px 3px 8px rgba(163,177,198,0.45), -2px -2px 6px rgba(255,255,255,0.9), inset 0 1px 0 rgba(255,255,255,0.95);
+  display: inline-flex; align-items: center; gap: 5px;
+  transition: box-shadow 0.15s, transform 0.12s; font-family: inherit;
 }
-.btn-exec:hover { box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light); }
-.btn-exec:active { box-shadow: var(--neu-in-sm); }
+.btn-exec:hover { background: var(--glass-bg-hi); transform: translateY(-1px); box-shadow: 4px 4px 10px rgba(163,177,198,0.55), -2px -2px 7px rgba(255,255,255,0.95), inset 0 1px 0 rgba(255,255,255,0.98); }
+.btn-exec:active { box-shadow: var(--neu-in-sm); transform: translateY(0); }
+.btn-exec:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
 .total-row td { font-weight: 800; color: var(--navy); background: rgba(163,177,198,0.06); border-top: 1px solid var(--border); }
 
 /* ── UPLOAD ── */
@@ -459,7 +597,7 @@ body {
 .modal-radio input { accent-color: var(--indigo); margin-top: 3px; }
 .modal-radio-label { font-size: 14px; font-weight: 700; color: var(--navy); }
 .modal-radio-sub { font-size: 12px; color: var(--text-dim); font-weight: 600; }
-.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; align-items: center; }
 </style>
 </head>
 <body>
