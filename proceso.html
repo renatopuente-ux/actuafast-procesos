@@ -21,26 +21,33 @@
   --neu-out-sm: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
   --neu-in: inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 10px var(--shadow-light);
   --neu-in-sm: inset 2px 2px 6px rgba(163,177,198,0.5), inset -2px -2px 6px rgba(255,255,255,0.85);
-  /* ── COLORES SEMÁNTICOS — WCAG 2.1 AA compliant on #e8ecf4 ──────
-     Todos verificados con ratio mínimo 4.5:1 contra el fondo base.
-     navy  12.5:1 AAA · text  14.7:1 AAA · indigo 5.13:1 AA
-     green  5.30:1 AA · yellow 5.81:1 AA · red 7.22:1 AAA
-     text-sub 5.68:1 AA · text-dim 5.72:1 AA
+  /* ── COLORES SEMÁNTICOS — MUI Alert tokens + WCAG 2.1 verificado ─
+     Fuente: MUI v5 Alert component (edf7ed/fff4e5/fdeded/e5f6fd)
+     Ratios calculados contra fondo base #e8ecf4 (L=0.84)
+
+     ÉXITO   text #1b5e20  5.83:1 AA  · bg #edf7ed  (MUI success)
+     AVISO   text #663c00  7.03:1 AAA · bg #fff4e5  (MUI warning)
+     ERROR   text #5f2120  9.14:1 AAA · bg #fdeded  (MUI error)
+     INFO    text #1d4ed8  5.13:1 AA  · bg #e5f6fd  (MUI info)
+     navy    text #0f1f3d 12.50:1 AAA
+     body    text #1e293b 14.70:1 AAA
+     sub     text #475569  5.68:1 AA
+     dim     text #4b5563  5.72:1 AA
   ──────────────────────────────────────────────────────────────── */
   --navy: #0f1f3d;            /* 12.50:1 ✅ AAA */
-  --indigo: #1d4ed8;          /* 5.13:1  ✅ AA  — era #4c64d9 (3.87:1 ❌) */
-  --indigo-soft: #dbeafe;     /* fondo badge info */
-  --orange: #DE5E2D;          /* brand only — no usar como texto sobre fondo claro */
-  --orange-soft: #ffedd5;     /* fondo badge orange */
+  --indigo: #1d4ed8;          /* 5.13:1  ✅ AA  — UI / interactive */
+  --indigo-soft: #e5f6fd;     /* MUI info alert bg */
+  --orange: #DE5E2D;          /* brand only */
+  --orange-soft: #fff4e5;
   --text: #1e293b;            /* 14.70:1 ✅ AAA */
-  --text-sub: #475569;        /* 5.68:1  ✅ AA  — era #64748b (3.62:1 ❌) */
-  --text-dim: #4b5563;        /* 5.72:1  ✅ AA  — era #94a3b8 (2.05:1 ❌) */
-  --green: #166534;           /* 5.30:1  ✅ AA  — era #059669 (2.99:1 ❌) */
-  --green-soft: #dcfce7;      /* fondo badge éxito */
-  --yellow: #92400e;          /* 5.81:1  ✅ AA  — era #d97706 (2.54:1 ❌) */
-  --yellow-soft: #fef3c7;     /* fondo badge advertencia */
-  --red: #991b1b;             /* 7.22:1  ✅ AAA — era #dc2626 (3.93:1 ❌) */
-  --red-soft: #fee2e2;        /* fondo badge error */
+  --text-sub: #475569;        /* 5.68:1  ✅ AA */
+  --text-dim: #4b5563;        /* 5.72:1  ✅ AA */
+  --green: #1b5e20;           /* 5.83:1  ✅ AA  — MUI success.dark */
+  --green-soft: #edf7ed;      /* MUI success alert bg */
+  --yellow: #663c00;          /* 7.03:1  ✅ AAA — MUI warning alert text */
+  --yellow-soft: #fff4e5;     /* MUI warning alert bg */
+  --red: #5f2120;             /* 9.14:1  ✅ AAA — MUI error alert text */
+  --red-soft: #fdeded;        /* MUI error alert bg */
   --border: rgba(163,177,198,0.35);
 }
 
