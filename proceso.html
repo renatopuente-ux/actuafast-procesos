@@ -9,197 +9,513 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-  *, button, input, select, textarea { font-family: 'Nunito', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --navy: #0f1f3d; --orange: #DE5E2D; --indigo: #4c64d9;
-    --border: #e2e8f0; --bg: #f1f4f9; --text: #1e293b; --muted: #64748b;
-    --green: #16a34a; --yellow: #d97706; --red: #dc2626;
-  }
-  body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+*, button, input, select, textarea { font-family: 'Nunito', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ── HEADER ── */
-  .top-header { background: var(--navy); height: 52px; display: flex; align-items: center; padding: 0 24px; gap: 16px; position: sticky; top: 0; z-index: 100; flex-shrink: 0; }
-  .hamburger { background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer; }
-  .header-spacer { flex: 1; }
-  .header-user { display: flex; align-items: center; gap: 8px; color: #c8d3e6; font-size: 13px; }
-  .user-avatar { width: 30px; height: 30px; border-radius: 50%; background: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; }
+:root {
+  --bg0: #080e1f;
+  --bg1: #0d1530;
+  --bg2: #111c3a;
+  --glass: rgba(255,255,255,0.04);
+  --glass-md: rgba(255,255,255,0.07);
+  --glass-hi: rgba(255,255,255,0.12);
+  --border: rgba(255,255,255,0.08);
+  --border-hi: rgba(255,255,255,0.16);
+  --indigo: #4c64d9;
+  --indigo-glow: rgba(76,100,217,0.35);
+  --orange: #DE5E2D;
+  --orange-glow: rgba(222,94,45,0.3);
+  --text: #e2e8f2;
+  --text-sub: #8892b0;
+  --text-dim: #4a5280;
+  --green: #10b981;
+  --green-glow: rgba(16,185,129,0.25);
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --neu-shadow: 4px 4px 10px rgba(0,0,0,0.5), -2px -2px 6px rgba(255,255,255,0.03);
+  --neu-inset: inset 3px 3px 8px rgba(0,0,0,0.4), inset -2px -2px 5px rgba(255,255,255,0.03);
+}
 
-  /* ── LAYOUT ── */
-  .app-body { display: flex; flex: 1; overflow: hidden; }
+body {
+  background: var(--bg0);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(76,100,217,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(222,94,45,0.08) 0%, transparent 50%);
+}
 
-  /* ── SIDEBAR ── */
-  .sidebar { width: 220px; background: #fff; border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; }
-  .nav-section-label { font-size: 10px; font-weight: 700; color: #94a3b8; letter-spacing: 1px; text-transform: uppercase; padding: 14px 16px 4px; }
-  .nav-item { display: flex; align-items: center; gap: 10px; padding: 8px 16px; font-size: 13px; color: var(--muted); cursor: pointer; text-decoration: none; position: relative; }
-  .nav-item:hover { background: #f8fafc; color: var(--text); }
-  .nav-item.active { background: #eff6ff; color: var(--navy); font-weight: 700; }
-  .nav-item.active::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 3px; background: var(--navy); border-radius: 0 2px 2px 0; }
-  .nav-icon { width: 16px; text-align: center; font-size: 14px; }
-  .sidebar-footer { margin-top: auto; padding: 16px; border-top: 1px solid var(--border); }
-  .app-version { font-size: 11px; font-weight: 700; }
-  .app-help { font-size: 11px; color: var(--indigo); text-decoration: underline; cursor: pointer; }
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
 
-  /* ── MAIN ── */
-  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+/* ════════════════════════════════
+   HEADER
+════════════════════════════════ */
+.top-header {
+  height: 56px;
+  background: rgba(8,14,31,0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; padding: 0 24px; gap: 16px;
+  position: sticky; top: 0; z-index: 100; flex-shrink: 0;
+}
+.hamburger { background: none; border: none; color: var(--text-sub); font-size: 16px; cursor: pointer; padding: 6px; border-radius: 8px; transition: all 0.15s; }
+.hamburger:hover { background: var(--glass-md); color: var(--text); }
+.header-spacer { flex: 1; }
+.header-user { display: flex; align-items: center; gap: 10px; color: var(--text-sub); font-size: 13px; }
+.user-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--indigo), #6b7ff0);
+  box-shadow: 0 0 12px var(--indigo-glow);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; color: #fff;
+}
 
-  /* ── BREADCRUMB ── */
-  .breadcrumb { background: #fff; border-bottom: 1px solid var(--border); padding: 10px 24px; font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
-  .breadcrumb a { color: var(--indigo); text-decoration: none; }
-  .breadcrumb a:hover { text-decoration: underline; }
+/* ════════════════════════════════
+   LAYOUT
+════════════════════════════════ */
+.app-body { display: flex; flex: 1; overflow: hidden; }
 
-  /* ── RECORD HEADER ── */
-  .record-header { background: #fff; border-bottom: 1px solid var(--border); }
-  .rh-top { padding: 16px 24px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
-  .rh-left { display: flex; align-items: center; gap: 12px; }
-  .rh-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--orange); display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; flex-shrink: 0; }
-  .rh-title { font-size: 22px; font-weight: 900; }
-  .rh-subtitle { font-size: 13px; color: var(--muted); margin-top: 3px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .tag { padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; }
-  .tag-niif { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
-  .tag-tipo { background: #f1f5f9; color: #475569; }
-  .rh-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
-  .btn-act { padding: 7px 14px; border-radius: 7px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; border: 1px solid var(--border); background: #fff; color: var(--text); }
-  .btn-act:hover { background: #f8fafc; }
-  .btn-act.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
-  .btn-act.primary:hover { background: #1a3160; }
-  .btn-act.danger { color: var(--red); border-color: #fca5a5; }
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 220px; flex-shrink: 0;
+  background: rgba(11,17,38,0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+}
+.nav-section-label { font-size: 9px; font-weight: 800; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; padding: 16px 16px 5px; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 16px; font-size: 13px; color: var(--text-sub);
+  cursor: pointer; text-decoration: none; position: relative;
+  transition: all 0.15s; border-radius: 0;
+}
+.nav-item:hover { background: var(--glass); color: var(--text); }
+.nav-item.active {
+  background: rgba(76,100,217,0.12);
+  color: #8fa4f8; font-weight: 700;
+}
+.nav-item.active::before {
+  content: ''; position: absolute; left: 0; top: 5px; bottom: 5px;
+  width: 3px; background: linear-gradient(180deg, #6b7ff0, #4c64d9);
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 8px var(--indigo-glow);
+}
+.nav-icon { width: 16px; text-align: center; font-size: 13px; }
+.sidebar-footer { margin-top: auto; padding: 16px; border-top: 1px solid var(--border); }
+.app-version { font-size: 11px; font-weight: 700; color: var(--text-sub); }
+.app-help { font-size: 11px; color: #6b7ff0; text-decoration: underline; cursor: pointer; }
 
-  /* ── PIPELINE ── */
-  .pipeline-wrap { padding: 12px 24px; border-bottom: 1px solid var(--border); overflow-x: auto; }
-  .pipeline { display: flex; align-items: stretch; gap: 0; min-width: max-content; }
-  .stage {
-    display: flex; align-items: center; gap: 6px;
-    padding: 8px 18px 8px 24px; font-size: 11px; font-weight: 700; white-space: nowrap;
-    cursor: pointer; transition: all 0.15s; position: relative; user-select: none;
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%, 12px 50%);
-    background: #f1f5f9; color: #94a3b8;
-  }
-  .stage:first-child { clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%); padding-left: 16px; }
-  .stage.done { background: #d1fae5; color: #065f46; }
-  .stage.active { background: var(--orange); color: #fff; }
-  .stage.active-completado { background: #1e293b; color: #fff; }
-  .stage:hover:not(.active):not(.active-completado) { background: #e2e8f0; color: #475569; }
-  .stage-icon { font-size: 10px; }
+/* ════════════════════════════════
+   MAIN
+════════════════════════════════ */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
-  /* ── CAMPOS CLAVE (contextual per stage) ── */
-  .campos-clave { padding: 14px 24px; background: #fafbff; border-bottom: 1px solid var(--border); }
-  .ck-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-  .ck-title { font-size: 12px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
-  .ck-edit { font-size: 12px; color: var(--indigo); font-weight: 700; cursor: pointer; background: none; border: none; }
-  .ck-grid { display: flex; gap: 32px; flex-wrap: wrap; }
-  .ck-field { display: flex; flex-direction: column; gap: 3px; }
-  .ck-label { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-  .ck-value { font-size: 13px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 6px; }
-  .ck-value.link { color: var(--indigo); cursor: pointer; }
-  .ck-value.empty { color: #cbd5e1; font-weight: 400; }
-  .semaforo { width: 18px; height: 18px; border-radius: 50%; display: inline-block; }
-  .semaforo.verde { background: #16a34a; }
-  .semaforo.amarillo { background: #d97706; }
-  .semaforo.rojo { background: #dc2626; }
+/* BREADCRUMB */
+.breadcrumb {
+  padding: 10px 28px; font-size: 12px; color: var(--text-dim);
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(8,14,31,0.4);
+}
+.breadcrumb a { color: #6b7ff0; text-decoration: none; }
+.breadcrumb a:hover { color: #8fa4f8; }
+.bc-sep { opacity: 0.3; }
 
-  /* ── ORIENTACIÓN HACIA EL ÉXITO ── */
-  .orientacion { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px 16px; margin: 14px 24px; display: flex; gap: 12px; }
-  .orientacion-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-  .orientacion-title { font-size: 13px; font-weight: 800; color: #92400e; margin-bottom: 4px; }
-  .orientacion-text { font-size: 12px; color: #78350f; line-height: 1.5; }
-  .orientacion.info { background: #eff6ff; border-color: #bfdbfe; }
-  .orientacion.info .orientacion-title { color: #1e40af; }
-  .orientacion.info .orientacion-text { color: #1d4ed8; }
+/* ════════════════════════════════
+   RECORD HEADER — GLASS
+════════════════════════════════ */
+.record-header {
+  background: rgba(13,21,48,0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
 
-  /* ── TABS ── */
-  .tabs-bar { background: #fff; border-bottom: 2px solid var(--border); padding: 0 24px; display: flex; flex-shrink: 0; }
-  .tab { padding: 12px 18px; font-size: 12px; font-weight: 700; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; transition: all 0.15s; }
-  .tab:hover { color: var(--text); }
-  .tab.active { color: var(--navy); border-bottom-color: var(--navy); }
-  .tab-count { background: #e2e8f0; color: #64748b; font-size: 10px; font-weight: 800; padding: 1px 6px; border-radius: 99px; }
-  .tab.active .tab-count { background: var(--navy); color: #fff; }
+.rh-top { padding: 20px 28px 16px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 
-  /* ── CONTENT ── */
-  .content-area { flex: 1; overflow-y: auto; padding: 24px; }
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
+.rh-icon-wrap {
+  width: 44px; height: 44px; border-radius: 14px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--orange), #f07244);
+  box-shadow: 0 4px 20px var(--orange-glow);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: #fff;
+}
+.rh-title { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; }
+.rh-subtitle { font-size: 13px; color: var(--text-sub); margin-top: 5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
-  /* ── CARDS ── */
-  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .card-full { grid-column: 1 / -1; }
-  .card { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  .card-header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-  .card-hicon { width: 32px; height: 32px; border-radius: 8px; background: #eff6ff; display: flex; align-items: center; justify-content: center; font-size: 15px; color: var(--navy); flex-shrink: 0; }
-  .card-title { font-size: 13px; font-weight: 800; }
-  .card-action { margin-left: auto; font-size: 12px; color: var(--indigo); font-weight: 700; cursor: pointer; background: none; border: none; }
-  .card-body { padding: 16px 20px; }
+/* Glass tags */
+.gtag {
+  padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 700;
+  background: var(--glass-md); border: 1px solid var(--border-hi);
+  color: var(--text-sub); backdrop-filter: blur(8px);
+}
+.gtag.indigo { background: rgba(76,100,217,0.15); border-color: rgba(76,100,217,0.25); color: #8fa4f8; }
+.gtag.green { background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.25); color: #34d399; }
+.gtag.orange { background: rgba(222,94,45,0.15); border-color: rgba(222,94,45,0.25); color: #f07244; }
+.gtag.yellow { background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.25); color: var(--yellow); }
 
-  /* ── FIELDS ── */
-  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
-  .field { display: flex; flex-direction: column; gap: 3px; }
-  .fl { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-  .fv { font-size: 13px; font-weight: 600; }
-  .fv.link { color: var(--indigo); cursor: pointer; }
-  .fv.empty { color: #cbd5e1; font-weight: 400; }
-  .fv.ok { color: var(--green); }
+/* Action buttons — glass */
+.rh-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+.btn-glass {
+  padding: 8px 16px; border-radius: 10px; font-size: 12px; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; gap: 7px;
+  background: var(--glass); border: 1px solid var(--border-hi);
+  color: var(--text-sub); transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+.btn-glass:hover { background: var(--glass-hi); color: var(--text); border-color: rgba(255,255,255,0.22); }
+.btn-glass.primary {
+  background: linear-gradient(135deg, rgba(76,100,217,0.8), rgba(107,127,240,0.8));
+  border-color: rgba(76,100,217,0.5); color: #fff;
+  box-shadow: 0 4px 20px var(--indigo-glow);
+}
+.btn-glass.primary:hover { box-shadow: 0 6px 28px rgba(76,100,217,0.5); }
+.btn-glass.danger { border-color: rgba(239,68,68,0.3); color: #f87171; }
+.btn-glass.danger:hover { background: rgba(239,68,68,0.1); }
+.btn-glass.icon-only { padding: 8px 12px; }
 
-  /* ── EVAL ── */
-  .eval-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
-  .eval-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 12px; font-weight: 600; }
-  .eval-item.on { background: #f0fdf4; border-color: #86efac; color: #166534; }
-  .eval-item.off { color: #94a3b8; }
-  .eval-chk { width: 16px; height: 16px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 9px; flex-shrink: 0; }
-  .eval-chk.yes { background: #16a34a; color: #fff; }
-  .eval-chk.no { background: #e2e8f0; color: #94a3b8; }
+/* ════════════════════════════════
+   PIPELINE — MODERN STEPS
+════════════════════════════════ */
+.pipeline-section { padding: 20px 28px 20px; }
+.pipeline-label { font-size: 10px; font-weight: 800; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; }
 
-  /* ── SCORE ── */
-  .score-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
-  .score-card { border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; text-align: center; }
-  .score-dim { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
-  .score-pts { font-size: 20px; font-weight: 900; color: var(--navy); }
-  .score-max { font-size: 10px; color: var(--muted); }
-  .semaforo-bar { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; background: #f0fdf4; border: 1px solid #86efac; }
+.pipeline-track { position: relative; display: flex; align-items: flex-start; justify-content: space-between; }
 
-  /* ── ITEMS TABLE ── */
-  .items-table { width: 100%; border-collapse: collapse; }
-  .items-table th { padding: 10px 14px; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; background: #f8fafc; border-bottom: 1px solid var(--border); text-align: left; }
-  .items-table td { padding: 12px 14px; font-size: 13px; border-bottom: 1px solid var(--border); }
-  .items-table tr:last-child td { border-bottom: none; }
-  .items-table tr:hover td { background: #f8fafc; }
-  .item-code { font-family: monospace; font-size: 11px; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #475569; }
-  .ejecutable-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 700; background: rgba(76,100,217,0.1); color: var(--indigo); border: 1px solid rgba(76,100,217,0.2); }
-  .btn-exec { padding: 5px 12px; border-radius: 6px; background: var(--navy); color: #fff; border: none; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 5px; }
-  .total-row td { font-weight: 800; background: #f8fafc; border-top: 2px solid var(--border); }
+/* Line behind steps */
+.pipeline-track::before {
+  content: '';
+  position: absolute;
+  top: 16px; left: 16px; right: 16px; height: 2px;
+  background: rgba(255,255,255,0.06);
+  z-index: 0;
+}
+.pipeline-progress {
+  position: absolute;
+  top: 16px; left: 16px; height: 2px;
+  background: linear-gradient(90deg, var(--green), var(--indigo));
+  z-index: 1;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 0 8px var(--indigo-glow);
+}
 
-  /* ── DOCS ── */
-  .upload-zone { border: 2px dashed #cbd5e1; border-radius: 12px; padding: 32px; text-align: center; color: var(--muted); background: #f8fafc; cursor: pointer; transition: all 0.15s; }
-  .upload-zone:hover { border-color: var(--indigo); background: #eff6ff; color: var(--indigo); }
-  .docs-hrow { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-  .docs-htitle { font-size: 13px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
-  .btn-new-doc { padding: 6px 14px; border-radius: 7px; border: 1px solid var(--border); background: #fff; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.step {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  cursor: pointer; z-index: 2; position: relative; flex: 1;
+  transition: all 0.2s;
+}
+.step:hover .step-circle { border-color: var(--indigo-glow); }
 
-  /* ── TIMELINE ── */
-  .timeline-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
-  .timeline-item:last-child { border-bottom: none; }
-  .t-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--indigo); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .t-avatar.navy { background: var(--navy); }
-  .t-avatar.orange { background: var(--orange); }
-  .t-user { font-size: 13px; font-weight: 700; }
-  .t-date { font-size: 11px; color: var(--muted); }
-  .t-field { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #f1f5f9; color: #475569; }
-  .t-change { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 12px; }
-  .t-from { color: var(--muted); text-decoration: line-through; }
-  .t-to { color: var(--green); font-weight: 700; }
+.step-circle {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800;
+  border: 2px solid rgba(255,255,255,0.1);
+  background: var(--bg1);
+  color: var(--text-dim);
+  transition: all 0.3s;
+  box-shadow: var(--neu-shadow);
+  position: relative;
+}
 
-  /* ── MODAL ── */
-  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; display: none; align-items: center; justify-content: center; }
-  .modal-overlay.open { display: flex; }
-  .modal { background: #fff; border-radius: 16px; width: 440px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
-  .modal-title { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
-  .modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
-  .modal-radio { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; margin-bottom: 10px; transition: all 0.15s; }
-  .modal-radio.selected { border-color: var(--navy); background: #eff6ff; }
-  .modal-radio input { accent-color: var(--navy); margin-top: 3px; }
-  .modal-radio-label { font-size: 14px; font-weight: 700; }
-  .modal-radio-sub { font-size: 12px; color: var(--muted); }
-  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
-  .btn-cancel { padding: 9px 20px; border-radius: 8px; border: 1px solid var(--border); background: #fff; font-size: 13px; font-weight: 700; cursor: pointer; }
-  .btn-next { padding: 9px 20px; border-radius: 8px; background: var(--navy); color: #fff; border: none; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.step.done .step-circle {
+  background: linear-gradient(135deg, rgba(16,185,129,0.3), rgba(16,185,129,0.15));
+  border-color: rgba(16,185,129,0.5);
+  color: var(--green);
+  box-shadow: 0 0 12px rgba(16,185,129,0.2), var(--neu-shadow);
+}
+
+.step.active .step-circle {
+  background: linear-gradient(135deg, var(--indigo), #6b7ff0);
+  border-color: rgba(107,127,240,0.6);
+  color: #fff;
+  box-shadow: 0 0 20px var(--indigo-glow), 0 0 40px rgba(76,100,217,0.15), var(--neu-shadow);
+  transform: scale(1.15);
+}
+
+.step.active-end .step-circle {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border-color: rgba(255,255,255,0.2);
+  color: var(--text);
+  box-shadow: 0 0 16px rgba(255,255,255,0.08), var(--neu-shadow);
+  transform: scale(1.1);
+}
+
+.step-label {
+  font-size: 10px; font-weight: 700; text-align: center;
+  color: var(--text-dim); transition: color 0.2s;
+  line-height: 1.3; max-width: 72px;
+}
+.step.done .step-label { color: rgba(16,185,129,0.7); }
+.step.active .step-label { color: #8fa4f8; font-weight: 800; }
+.step.active-end .step-label { color: var(--text-sub); }
+
+/* ════════════════════════════════
+   CAMPOS CLAVE — GLASS PILLS
+════════════════════════════════ */
+.campos-section {
+  padding: 0 28px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.ck-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.ck-pill {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border-radius: 10px;
+  background: var(--glass); border: 1px solid var(--border-hi);
+  backdrop-filter: blur(12px); transition: all 0.15s;
+}
+.ck-pill:hover { background: var(--glass-md); }
+.ck-pill-label { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+.ck-pill-value { font-size: 13px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
+.ck-pill-value.ok { color: var(--green); }
+.ck-pill-value.warn { color: var(--yellow); }
+.ck-pill-value.dim { color: var(--text-dim); }
+.ck-pill-value.link { color: #8fa4f8; cursor: pointer; }
+.sema { width: 10px; height: 10px; border-radius: 50%; }
+.sema.verde { background: var(--green); box-shadow: 0 0 6px var(--green-glow); }
+.sema.rojo { background: var(--red); }
+
+/* ORIENTACIÓN */
+.orientacion-box {
+  margin: 0 28px 16px;
+  padding: 14px 18px; border-radius: 12px;
+  display: flex; gap: 12px; align-items: flex-start;
+  backdrop-filter: blur(12px);
+}
+.orientacion-box.warn {
+  background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2);
+}
+.orientacion-box.info {
+  background: rgba(76,100,217,0.08); border: 1px solid rgba(76,100,217,0.2);
+}
+.or-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.or-title { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+.orientacion-box.warn .or-title { color: var(--yellow); }
+.orientacion-box.info .or-title { color: #8fa4f8; }
+.or-text { font-size: 12px; line-height: 1.55; }
+.orientacion-box.warn .or-text { color: rgba(245,158,11,0.8); }
+.orientacion-box.info .or-text { color: rgba(139,164,248,0.8); }
+
+/* ════════════════════════════════
+   TABS — NEUMORPHIC
+════════════════════════════════ */
+.tabs-bar {
+  display: flex; padding: 8px 28px;
+  background: rgba(8,14,31,0.6);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  gap: 4px; flex-shrink: 0;
+}
+.tab {
+  padding: 8px 16px; border-radius: 10px; font-size: 12px; font-weight: 700;
+  color: var(--text-dim); cursor: pointer; display: flex; align-items: center; gap: 6px;
+  transition: all 0.2s; border: 1px solid transparent;
+}
+.tab:hover { background: var(--glass); color: var(--text-sub); }
+.tab.active {
+  background: var(--glass-md);
+  border-color: var(--border-hi);
+  color: #8fa4f8;
+  box-shadow: var(--neu-shadow);
+}
+.tab-count {
+  background: rgba(76,100,217,0.2); color: #8fa4f8;
+  font-size: 10px; font-weight: 800; padding: 1px 7px; border-radius: 99px;
+}
+.tab.active .tab-count { background: rgba(76,100,217,0.35); }
+
+/* ════════════════════════════════
+   CONTENT
+════════════════════════════════ */
+.content-area { flex: 1; overflow-y: auto; padding: 24px 28px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ════════════════════════════════
+   GLASS CARDS
+════════════════════════════════ */
+.cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.card-full { grid-column: 1 / -1; }
+
+.glass-card {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-hi);
+  border-radius: 16px; overflow: hidden;
+  transition: all 0.2s;
+}
+.glass-card:hover { background: var(--glass-md); border-color: rgba(255,255,255,0.14); }
+
+.gc-header {
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.02);
+}
+.gc-icon {
+  width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(76,100,217,0.3), rgba(76,100,217,0.15));
+  border: 1px solid rgba(76,100,217,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: #8fa4f8;
+  box-shadow: 0 2px 8px rgba(76,100,217,0.15);
+}
+.gc-title { font-size: 13px; font-weight: 800; color: var(--text); }
+.gc-action { margin-left: auto; font-size: 12px; color: #6b7ff0; font-weight: 700; cursor: pointer; background: none; border: none; }
+.gc-body { padding: 18px 20px; }
+
+/* ── FIELD GRID — NEUMORPHIC ── */
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.fl { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+.fv { font-size: 13px; font-weight: 600; color: var(--text); }
+.fv.link { color: #8fa4f8; cursor: pointer; }
+.fv.link:hover { text-decoration: underline; }
+.fv.ok { color: var(--green); }
+.fv.warn { color: var(--yellow); }
+.fv.dim { color: var(--text-dim); font-weight: 400; }
+
+/* Neumorphic value chip */
+.neu-val {
+  padding: 6px 12px; border-radius: 8px;
+  background: var(--bg0);
+  box-shadow: var(--neu-inset);
+  font-size: 13px; font-weight: 700;
+  color: var(--text); display: inline-block;
+}
+
+/* ── EVAL CHECKBOXES ── */
+.eval-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 14px; }
+.eval-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-radius: 10px; font-size: 12px; font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  color: var(--text-dim); transition: all 0.15s;
+}
+.eval-item.on {
+  background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.25);
+  color: #34d399;
+  box-shadow: 0 0 10px rgba(16,185,129,0.1);
+}
+.eval-chk {
+  width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 9px;
+}
+.eval-chk.yes { background: linear-gradient(135deg, var(--green), #059669); color: #fff; box-shadow: 0 2px 6px var(--green-glow); }
+.eval-chk.no { background: var(--bg0); box-shadow: var(--neu-inset); color: var(--text-dim); }
+
+/* ── SCORE ── */
+.score-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 14px; }
+.score-card {
+  border-radius: 12px; padding: 14px; text-align: center;
+  background: var(--bg0); box-shadow: var(--neu-shadow);
+  border: 1px solid var(--border);
+}
+.score-dim { font-size: 9px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.score-pts { font-size: 22px; font-weight: 900; background: linear-gradient(135deg, #8fa4f8, var(--indigo)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.score-max { font-size: 10px; color: var(--text-dim); }
+.sema-bar {
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px;
+  background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2);
+  box-shadow: 0 0 16px rgba(16,185,129,0.06);
+}
+.sema-lg { width: 16px; height: 16px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green-glow); }
+
+/* ── FINANCIAL ── */
+.fin-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; }
+.fin-item { text-align: center; padding: 12px; border-radius: 10px; background: var(--bg0); box-shadow: var(--neu-shadow); border: 1px solid var(--border); }
+.fin-lbl { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.fin-val { font-size: 14px; font-weight: 800; color: var(--text); }
+.fin-val.total { font-size: 20px; background: linear-gradient(135deg, #8fa4f8, var(--indigo)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* ── ITEMS TABLE ── */
+.items-table { width: 100%; border-collapse: collapse; }
+.items-table th { padding: 10px 14px; font-size: 10px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border); text-align: left; }
+.items-table td { padding: 12px 14px; font-size: 13px; border-bottom: 1px solid var(--border); color: var(--text-sub); }
+.items-table tr:hover td { background: var(--glass); }
+.items-table tr:last-child td { border-bottom: none; }
+.item-code { font-family: monospace; font-size: 11px; background: var(--bg0); padding: 3px 8px; border-radius: 6px; color: var(--text-dim); box-shadow: var(--neu-inset); }
+.ejecutable-badge {
+  display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px;
+  border-radius: 99px; font-size: 10px; font-weight: 700;
+  background: rgba(76,100,217,0.12); color: #8fa4f8;
+  border: 1px solid rgba(76,100,217,0.2);
+  box-shadow: 0 0 8px rgba(76,100,217,0.1);
+}
+.btn-exec {
+  padding: 6px 14px; border-radius: 8px;
+  background: linear-gradient(135deg, rgba(76,100,217,0.7), rgba(107,127,240,0.7));
+  color: #fff; border: 1px solid rgba(76,100,217,0.4);
+  font-size: 11px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 2px 10px var(--indigo-glow);
+  display: flex; align-items: center; gap: 5px; transition: all 0.2s;
+}
+.btn-exec:hover { box-shadow: 0 4px 16px var(--indigo-glow); }
+.total-row td { font-weight: 800; background: rgba(76,100,217,0.05); border-top: 1px solid rgba(76,100,217,0.15); color: var(--text); }
+
+/* ── DOCS ── */
+.upload-zone {
+  border: 2px dashed rgba(255,255,255,0.1); border-radius: 14px;
+  padding: 36px; text-align: center; color: var(--text-dim);
+  background: var(--glass); cursor: pointer; transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+.upload-zone:hover { border-color: rgba(76,100,217,0.4); background: rgba(76,100,217,0.05); color: #8fa4f8; box-shadow: 0 0 20px rgba(76,100,217,0.08); }
+.docs-hrow { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.docs-htitle { font-size: 13px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
+
+/* ── TIMELINE ── */
+.timeline-item { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.timeline-item:last-child { border-bottom: none; }
+.t-avatar {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; color: #fff;
+  background: linear-gradient(135deg, var(--indigo), #6b7ff0);
+  box-shadow: 0 0 12px var(--indigo-glow);
+}
+.t-avatar.navy { background: linear-gradient(135deg, #1e293b, #0f172a); box-shadow: 0 0 8px rgba(0,0,0,0.3); }
+.t-avatar.orange { background: linear-gradient(135deg, var(--orange), #f07244); box-shadow: 0 0 10px var(--orange-glow); }
+.t-user { font-size: 13px; font-weight: 700; color: var(--text); }
+.t-date { font-size: 11px; color: var(--text-dim); }
+.t-field { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; background: var(--glass-md); border: 1px solid var(--border); color: var(--text-sub); }
+.t-from { color: var(--text-dim); text-decoration: line-through; font-size: 12px; }
+.t-to { color: var(--green); font-weight: 700; font-size: 12px; }
+
+/* ════════════════════════════════
+   MODAL — GLASS
+════════════════════════════════ */
+.modal-overlay { position: fixed; inset: 0; background: rgba(4,8,20,0.7); backdrop-filter: blur(8px); z-index: 200; display: none; align-items: center; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.glass-modal {
+  background: rgba(13,21,48,0.85);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid var(--border-hi);
+  border-radius: 20px; width: 460px; padding: 28px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+}
+.modal-title { font-size: 17px; font-weight: 900; margin-bottom: 6px; }
+.modal-sub { font-size: 13px; color: var(--text-sub); margin-bottom: 20px; }
+.modal-radio {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 16px; border: 1px solid var(--border);
+  border-radius: 12px; cursor: pointer; margin-bottom: 10px;
+  transition: all 0.2s; background: var(--glass);
+}
+.modal-radio.selected { border-color: rgba(76,100,217,0.4); background: rgba(76,100,217,0.1); box-shadow: 0 0 16px rgba(76,100,217,0.1); }
+.modal-radio input { accent-color: var(--indigo); margin-top: 3px; }
+.modal-radio-label { font-size: 14px; font-weight: 700; }
+.modal-radio-sub { font-size: 12px; color: var(--text-dim); }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
 </style>
 </head>
 <body>
@@ -226,6 +542,7 @@
 </div>
 
 <div class="app-body">
+
   <!-- ══ SIDEBAR ══ -->
   <aside class="sidebar">
     <nav>
@@ -251,64 +568,61 @@
 
     <!-- BREADCRUMB -->
     <div class="breadcrumb">
-      <a href="index.html"><i class="fa-solid fa-house" style="font-size:11px;"></i> Inicio</a>
-      <i class="fa-solid fa-chevron-right" style="font-size:9px;"></i>
+      <a href="index.html"><i class="fa-solid fa-house" style="font-size:10px;"></i></a>
+      <span class="bc-sep"><i class="fa-solid fa-chevron-right" style="font-size:9px;"></i></span>
       <a href="index.html">Procesos</a>
-      <i class="fa-solid fa-chevron-right" style="font-size:9px;"></i>
+      <span class="bc-sep"><i class="fa-solid fa-chevron-right" style="font-size:9px;"></i></span>
       <span>VE-00152954</span>
     </div>
 
     <!-- RECORD HEADER -->
     <div class="record-header">
       <div class="rh-top">
-        <div class="rh-left">
-          <div class="rh-icon"><i class="fa-solid fa-briefcase"></i></div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div class="rh-icon-wrap"><i class="fa-solid fa-briefcase"></i></div>
           <div>
-            <div style="display:flex;align-items:center;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
               <div class="rh-title">VE-00152954</div>
-              <span id="status-badge" style="padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:#dcfce7;color:#15803d;display:inline-flex;align-items:center;gap:5px;">
-                <i class="fa-solid fa-circle-check"></i> Completado
-              </span>
+              <span id="status-badge" class="gtag green"><i class="fa-solid fa-circle-check"></i> Completado</span>
             </div>
             <div class="rh-subtitle">
-              <i class="fa-solid fa-building" style="font-size:11px;"></i>
-              ACCIONA AGUA, S.A. &nbsp;·&nbsp; Proceso #126517
-              <span class="tag tag-niif">NIIF (US$)</span>
-              <span class="tag tag-tipo">Pasivos Laborales</span>
-              <span class="tag tag-tipo">50 trabajadores</span>
+              <i class="fa-solid fa-building" style="font-size:11px;color:var(--text-dim)"></i>
+              ACCIONA AGUA, S.A.
+              <span style="opacity:0.3">·</span>
+              Proceso #126517
+              <span class="gtag indigo">NIIF (US$)</span>
+              <span class="gtag">Pasivos Laborales</span>
+              <span class="gtag">50 trabajadores</span>
             </div>
           </div>
         </div>
         <div class="rh-actions">
-          <button class="btn-act"><i class="fa-regular fa-star"></i> Seguir</button>
-          <button class="btn-act danger"><i class="fa-solid fa-triangle-exclamation"></i> No conformidad</button>
-          <button class="btn-act"><i class="fa-solid fa-pen"></i> Modificar</button>
-          <button class="btn-act"><i class="fa-solid fa-print"></i></button>
-          <button id="btn-marcar" class="btn-act primary" style="display:none;" onclick="nextStage()">
-            <i class="fa-solid fa-arrow-right"></i> <span id="btn-marcar-label">Marcar como actual</span>
+          <button class="btn-glass"><i class="fa-regular fa-star"></i> Seguir</button>
+          <button class="btn-glass danger"><i class="fa-solid fa-triangle-exclamation"></i> No conformidad</button>
+          <button class="btn-glass"><i class="fa-solid fa-pen"></i> Modificar</button>
+          <button class="btn-glass icon-only"><i class="fa-solid fa-print"></i></button>
+          <button id="btn-avanzar" class="btn-glass primary" style="display:none" onclick="nextStage()">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span id="btn-avanzar-label">Avanzar</span>
           </button>
         </div>
       </div>
 
-      <!-- PIPELINE (9 etapas reales) -->
-      <div class="pipeline-wrap">
-        <div class="pipeline" id="pipeline">
-          <div class="stage done" data-stage="0" onclick="setStage(0)"><i class="fa-solid fa-check stage-icon"></i> Planificado</div>
-          <div class="stage done" data-stage="1" onclick="setStage(1)"><i class="fa-solid fa-check stage-icon"></i> Datos validados</div>
-          <div class="stage done" data-stage="2" onclick="setStage(2)"><i class="fa-solid fa-check stage-icon"></i> En curso</div>
-          <div class="stage done" data-stage="3" onclick="setStage(3)"><i class="fa-solid fa-check stage-icon"></i> Solicita revisión</div>
-          <div class="stage done" data-stage="4" onclick="setStage(4)"><i class="fa-solid fa-check stage-icon"></i> Revisión coordinación</div>
-          <div class="stage done" data-stage="5" onclick="setStage(5)"><i class="fa-solid fa-check stage-icon"></i> Revisión dirección</div>
-          <div class="stage done" data-stage="6" onclick="setStage(6)"><i class="fa-solid fa-check stage-icon"></i> Para entregar</div>
-          <div class="stage done" data-stage="7" onclick="setStage(7)"><i class="fa-solid fa-check stage-icon"></i> Revisión cliente</div>
-          <div class="stage active-completado" data-stage="8" onclick="setStage(8)"><i class="fa-solid fa-circle-check stage-icon"></i> Completado</div>
+      <!-- PIPELINE -->
+      <div class="pipeline-section">
+        <div class="pipeline-label">Progreso del proceso</div>
+        <div class="pipeline-track" id="pipeline-track">
+          <div class="pipeline-progress" id="pipeline-progress"></div>
+          <!-- Steps rendered by JS -->
         </div>
       </div>
 
-      <!-- CAMPOS CLAVE (contextual) -->
-      <div class="campos-clave" id="campos-clave"></div>
+      <!-- CAMPOS CLAVE -->
+      <div class="campos-section">
+        <div id="campos-clave"></div>
+      </div>
 
-      <!-- ORIENTACIÓN (aparece en etapas específicas) -->
+      <!-- ORIENTACIÓN -->
       <div id="orientacion-wrap"></div>
 
     </div><!-- /record-header -->
@@ -328,9 +642,9 @@
       <div id="tab-detalles" class="tab-panel active">
         <div class="cards-grid">
 
-          <div class="card">
-            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-file-contract"></i></div><div class="card-title">Información del proceso</div><button class="card-action"><i class="fa-solid fa-pen"></i> Editar</button></div>
-            <div class="card-body">
+          <div class="glass-card">
+            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-file-contract"></i></div><div class="gc-title">Información del proceso</div><button class="gc-action"><i class="fa-solid fa-pen"></i></button></div>
+            <div class="gc-body">
               <div class="field-grid">
                 <div class="field"><div class="fl">Nombre VE</div><div class="fv">VE-00152954</div></div>
                 <div class="field"><div class="fl">N° de proceso</div><div class="fv">126517</div></div>
@@ -342,92 +656,92 @@
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-building"></i></div><div class="card-title">Cliente</div></div>
-            <div class="card-body">
+          <div class="glass-card">
+            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-building"></i></div><div class="gc-title">Cliente</div></div>
+            <div class="gc-body">
               <div class="field-grid">
                 <div class="field"><div class="fl">Cuenta</div><div class="fv link">ACCIONA AGUA, S.A.</div></div>
                 <div class="field"><div class="fl">Ciudad</div><div class="fv">Quito</div></div>
                 <div class="field"><div class="fl">Segmento</div><div class="fv">Mediana</div></div>
-                <div class="field"><div class="fl">Cliente VIP</div><div class="fv empty">No</div></div>
+                <div class="field"><div class="fl">Cliente VIP</div><div class="fv dim">No</div></div>
                 <div class="field"><div class="fl">Trabajadores activos</div><div class="fv">50</div></div>
                 <div class="field"><div class="fl">Trab. Jubl. pendientes</div><div class="fv">50</div></div>
               </div>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-user-check"></i></div><div class="card-title">Asignación y equipo</div></div>
-            <div class="card-body">
+          <div class="glass-card">
+            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-user-check"></i></div><div class="gc-title">Asignación y equipo</div></div>
+            <div class="gc-body">
               <div class="field-grid">
                 <div class="field"><div class="fl">Propietario</div><div class="fv link">Samantha Chavez</div></div>
                 <div class="field"><div class="fl">Analista</div><div class="fv">Samantha Chavez</div></div>
-                <div class="field"><div class="fl">Equipo de operaciones</div><div class="fv link">Equipo 3 - P. Beltrán</div></div>
-                <div class="field"><div class="fl">Nivel de aprobación</div><div class="fv ok">Aprobado</div></div>
+                <div class="field"><div class="fl">Equipo</div><div class="fv link">Equipo 3 - P. Beltrán</div></div>
+                <div class="field"><div class="fl">Aprobación</div><div class="fv ok"><i class="fa-solid fa-check-circle"></i> Aprobado</div></div>
                 <div class="field"><div class="fl">Vendedor</div><div class="fv link">Samantha Chavez</div></div>
-                <div class="field"><div class="fl">Contacto solicitante</div><div class="fv link">Samantha Flores</div></div>
+                <div class="field"><div class="fl">Contacto</div><div class="fv link">Samantha Flores</div></div>
               </div>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-gears"></i></div><div class="card-title">Fechas de gestión</div></div>
-            <div class="card-body">
+          <div class="glass-card">
+            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-calendar-days"></i></div><div class="gc-title">Fechas de gestión</div></div>
+            <div class="gc-body">
               <div class="field-grid">
                 <div class="field"><div class="fl">Fecha solicitud</div><div class="fv">12/06/2025</div></div>
                 <div class="field"><div class="fl">Fecha asignación</div><div class="fv">12/06/2025</div></div>
                 <div class="field"><div class="fl">Entrega calculada</div><div class="fv">23/06/2025</div></div>
                 <div class="field"><div class="fl">Entrega real</div><div class="fv">19/11/2025</div></div>
-                <div class="field"><div class="fl">Días de demora</div><div class="fv" style="color:var(--yellow);">115 días</div></div>
-                <div class="field"><div class="fl">Pedido urgente</div><div class="fv empty">No</div></div>
+                <div class="field"><div class="fl">Días de demora</div><div class="fv warn"><i class="fa-solid fa-clock"></i> 115 días</div></div>
+                <div class="field"><div class="fl">Pedido urgente</div><div class="fv dim">No</div></div>
               </div>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-clipboard-check"></i></div><div class="card-title">Evaluación de requerimiento</div></div>
-            <div class="card-body">
+          <div class="glass-card">
+            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-clipboard-check"></i></div><div class="gc-title">Evaluación de requerimiento</div></div>
+            <div class="gc-body">
               <div class="eval-grid">
                 <div class="eval-item on"><div class="eval-chk yes"><i class="fa-solid fa-check" style="font-size:8px;"></i></div> Req. NIIF</div>
-                <div class="eval-item off"><div class="eval-chk no"></div> Req. NEC</div>
-                <div class="eval-item off"><div class="eval-chk no"></div> Normas Internac.</div>
-                <div class="eval-item off"><div class="eval-chk no"></div> Req. NIC 12</div>
-                <div class="eval-item off"><div class="eval-chk no"></div> Req. USGAAP</div>
-                <div class="eval-item off"><div class="eval-chk no"></div> Bases históricas</div>
+                <div class="eval-item"><div class="eval-chk no"></div> Req. NEC</div>
+                <div class="eval-item"><div class="eval-chk no"></div> Normas Internac.</div>
+                <div class="eval-item"><div class="eval-chk no"></div> Req. NIC 12</div>
+                <div class="eval-item"><div class="eval-chk no"></div> Req. USGAAP</div>
+                <div class="eval-item"><div class="eval-chk no"></div> Bases históricas</div>
               </div>
               <div class="field-grid">
-                <div class="field"><div class="fl">Nivel de segmento</div><div class="fv">21.00%</div></div>
+                <div class="field"><div class="fl">Nivel segmento</div><div class="fv">21.00%</div></div>
                 <div class="field"><div class="fl">% Sc. Requerimiento</div><div class="fv">4%</div></div>
                 <div class="field"><div class="fl">Evaluación</div><div class="fv">25%</div></div>
               </div>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-star-half-stroke"></i></div><div class="card-title">Scoring del informe</div></div>
-            <div class="card-body">
+          <div class="glass-card">
+            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-star-half-stroke"></i></div><div class="gc-title">Scoring del informe</div></div>
+            <div class="gc-body">
               <div class="score-grid">
-                <div class="score-card"><div class="score-dim">Segmento</div><div class="score-pts">20</div><div class="score-max">/ 20 pts</div></div>
-                <div class="score-card"><div class="score-dim">Antigüedad</div><div class="score-pts">20</div><div class="score-max">/ 20 pts</div></div>
-                <div class="score-card"><div class="score-dim">Var. Jubilación</div><div class="score-pts">15</div><div class="score-max">/ 15 pts</div></div>
-                <div class="score-card"><div class="score-dim">Var. Desahucio</div><div class="score-pts">15</div><div class="score-max">/ 15 pts</div></div>
+                <div class="score-card"><div class="score-dim">Segmento</div><div class="score-pts">20</div><div class="score-max">/ 20</div></div>
+                <div class="score-card"><div class="score-dim">Antigüedad</div><div class="score-pts">20</div><div class="score-max">/ 20</div></div>
+                <div class="score-card"><div class="score-dim">Var. Jub.</div><div class="score-pts">15</div><div class="score-max">/ 15</div></div>
+                <div class="score-card"><div class="score-dim">Var. Des.</div><div class="score-pts">15</div><div class="score-max">/ 15</div></div>
               </div>
-              <div class="semaforo-bar">
-                <span class="semaforo verde"></span>
-                <div><div style="font-size:13px;font-weight:800;color:#166534;">Revisión aprobada</div><div style="font-size:11px;color:#16a34a;">Score total: 70/70 puntos</div></div>
+              <div class="sema-bar">
+                <div class="sema-lg"></div>
+                <div><div style="font-size:13px;font-weight:800;color:var(--green);">Revisión aprobada</div><div style="font-size:11px;color:rgba(16,185,129,0.6);">Score total: 70/70 puntos</div></div>
               </div>
             </div>
           </div>
 
-          <div class="card card-full">
-            <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-dollar-sign"></i></div><div class="card-title">Resumen financiero</div></div>
-            <div class="card-body">
-              <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;">
-                <div class="field"><div class="fl">Total base</div><div class="fv">$315,00</div></div>
-                <div class="field"><div class="fl">Total neto</div><div class="fv">$315,00</div></div>
-                <div class="field"><div class="fl">IVA</div><div class="fv">15%</div></div>
-                <div class="field"><div class="fl">Total IVA</div><div class="fv">$47,25</div></div>
-                <div class="field"><div class="fl">Total factura</div><div class="fv" style="font-size:18px;font-weight:900;color:var(--navy);">$362,25</div></div>
+          <div class="glass-card card-full">
+            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-dollar-sign"></i></div><div class="gc-title">Resumen financiero</div></div>
+            <div class="gc-body">
+              <div class="fin-grid">
+                <div class="fin-item"><div class="fin-lbl">Total base</div><div class="fin-val">$315,00</div></div>
+                <div class="fin-item"><div class="fin-lbl">Total neto</div><div class="fin-val">$315,00</div></div>
+                <div class="fin-item"><div class="fin-lbl">IVA</div><div class="fin-val">15%</div></div>
+                <div class="fin-item"><div class="fin-lbl">Total IVA</div><div class="fin-val">$47,25</div></div>
+                <div class="fin-item"><div class="fin-lbl">Total factura</div><div class="fin-val total">$362,25</div></div>
               </div>
             </div>
           </div>
@@ -435,30 +749,18 @@
         </div>
       </div>
 
-      <!-- TAB: ITEMS VENDIDOS -->
+      <!-- TAB: ITEMS -->
       <div id="tab-items" class="tab-panel">
-        <div class="card">
-          <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-cart-shopping"></i></div><div class="card-title">Items vendidos <span style="color:var(--muted);font-weight:400;">(2)</span></div></div>
+        <div class="glass-card">
+          <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-cart-shopping"></i></div><div class="gc-title">Items vendidos <span style="color:var(--text-dim);font-weight:400;">(2)</span></div></div>
           <table class="items-table">
             <thead>
-              <tr><th>#</th><th>Código</th><th>Producto</th><th>Familia</th><th>Cant.</th><th>P. Unitario</th><th>Total</th><th>Días</th><th>Ejecutable AF</th><th></th></tr>
+              <tr><th>#</th><th>Código</th><th>Producto</th><th>Familia</th><th>Cant.</th><th>P. Unitario</th><th>Total</th><th>Días</th><th>Ejecutable</th><th></th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td style="color:var(--muted)">1</td><td><span class="item-code">I-212240</span></td>
-                <td style="font-weight:700">Desahucio NIIF</td><td style="color:var(--muted)">Actuarial</td>
-                <td>50</td><td>$3,70</td><td style="font-weight:700">$185,00</td><td>4</td>
-                <td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td>
-                <td><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td>
-              </tr>
-              <tr>
-                <td style="color:var(--muted)">2</td><td><span class="item-code">I-212241</span></td>
-                <td style="font-weight:700">Jubilación Patronal</td><td style="color:var(--muted)">Actuarial</td>
-                <td>50</td><td>$2,60</td><td style="font-weight:700">$130,00</td><td>4</td>
-                <td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td>
-                <td><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td>
-              </tr>
-              <tr class="total-row"><td colspan="6" style="text-align:right;color:var(--muted);font-size:12px;">SUBTOTAL</td><td>$315,00</td><td colspan="3"></td></tr>
+              <tr><td style="color:var(--text-dim)">1</td><td><span class="item-code">I-212240</span></td><td style="font-weight:700;color:var(--text)">Desahucio NIIF</td><td>Actuarial</td><td>50</td><td>$3,70</td><td style="font-weight:800;color:var(--text)">$185,00</td><td>4</td><td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td><td><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td></tr>
+              <tr><td style="color:var(--text-dim)">2</td><td><span class="item-code">I-212241</span></td><td style="font-weight:700;color:var(--text)">Jubilación Patronal</td><td>Actuarial</td><td>50</td><td>$2,60</td><td style="font-weight:800;color:var(--text)">$130,00</td><td>4</td><td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td><td><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td></tr>
+              <tr class="total-row"><td colspan="6" style="text-align:right;font-size:12px;">SUBTOTAL</td><td>$315,00</td><td colspan="3"></td></tr>
             </tbody>
           </table>
         </div>
@@ -467,23 +769,33 @@
       <!-- TAB: DOCUMENTOS -->
       <div id="tab-documentos" class="tab-panel">
         <div style="margin-bottom:20px;">
-          <div class="docs-hrow"><div class="docs-htitle"><i class="fa-solid fa-file-lines" style="color:var(--navy);"></i> Documentos Venta Efectiva <span style="color:var(--muted);font-weight:400;">(0)</span></div><button class="btn-new-doc" onclick="document.getElementById('modal-doc').classList.add('open')"><i class="fa-solid fa-plus"></i> Nuevo</button></div>
-          <p style="color:var(--muted);font-size:13px;">No hay documentos registrados.</p>
+          <div class="docs-hrow">
+            <div class="docs-htitle"><i class="fa-solid fa-file-lines" style="color:#8fa4f8;"></i> Documentos Venta Efectiva <span style="color:var(--text-dim);font-weight:400;">(0)</span></div>
+            <button class="btn-glass" onclick="document.getElementById('modal-doc').classList.add('open')"><i class="fa-solid fa-plus"></i> Nuevo</button>
+          </div>
+          <p style="color:var(--text-dim);font-size:13px;">No hay documentos registrados.</p>
         </div>
         <div>
-          <div class="docs-hrow"><div class="docs-htitle"><i class="fa-solid fa-paperclip" style="color:var(--navy);"></i> Archivos <span style="color:var(--muted);font-weight:400;">(0)</span></div><button class="btn-new-doc"><i class="fa-solid fa-upload"></i> Agregar</button></div>
-          <div class="upload-zone"><div style="font-size:28px;opacity:0.35;margin-bottom:10px;"><i class="fa-solid fa-cloud-arrow-up"></i></div><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Arrastra archivos o haz clic para seleccionar</div><div style="font-size:11px;opacity:0.6;">PDF, Excel, Word · Máx. 25 MB</div></div>
+          <div class="docs-hrow">
+            <div class="docs-htitle"><i class="fa-solid fa-paperclip" style="color:#8fa4f8;"></i> Archivos <span style="color:var(--text-dim);font-weight:400;">(0)</span></div>
+            <button class="btn-glass"><i class="fa-solid fa-upload"></i> Agregar</button>
+          </div>
+          <div class="upload-zone">
+            <div style="font-size:32px;opacity:0.25;margin-bottom:12px;"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+            <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Arrastra archivos aquí</div>
+            <div style="font-size:11px;opacity:0.5;">PDF, Excel, Word · Máx. 25 MB</div>
+          </div>
         </div>
       </div>
 
       <!-- TAB: HISTORIAL -->
       <div id="tab-historial" class="tab-panel">
-        <div class="card">
-          <div class="card-header"><div class="card-hicon"><i class="fa-solid fa-clock-rotate-left"></i></div><div class="card-title">Historial de cambios</div></div>
-          <div class="card-body" style="padding:0 20px;">
-            <div class="timeline-item"><div class="t-avatar navy">AD</div><div><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><span class="t-user">Admin</span><span class="t-date">19/11/2025, 14:05</span></div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Campo: <span class="t-field">Estado</span></div><div class="t-change"><span class="t-from">Datos validados</span><span><i class="fa-solid fa-arrow-right"></i></span><span class="t-to">Completado</span></div></div></div>
-            <div class="timeline-item"><div class="t-avatar navy">AD</div><div><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><span class="t-user">Admin</span><span class="t-date">19/11/2025, 14:05</span></div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Campo: <span class="t-field">Aprobado</span></div><div class="t-change"><span class="t-from">—</span><span><i class="fa-solid fa-arrow-right"></i></span><span class="t-to"><i class="fa-solid fa-check"></i> Aprobado</span></div></div></div>
-            <div class="timeline-item"><div class="t-avatar orange">SC</div><div><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><span class="t-user">Samantha Chavez</span><span class="t-date">12/06/2025, 09:52</span></div><div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Campo: <span class="t-field">Estado</span></div><div class="t-change"><span class="t-from">Planificado</span><span><i class="fa-solid fa-arrow-right"></i></span><span class="t-to">Datos validados</span></div></div></div>
+        <div class="glass-card">
+          <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-clock-rotate-left"></i></div><div class="gc-title">Historial de cambios</div></div>
+          <div class="gc-body" style="padding:0 20px;">
+            <div class="timeline-item"><div class="t-avatar navy">AD</div><div><div style="display:flex;gap:8px;margin-bottom:5px;"><span class="t-user">Admin</span><span class="t-date">19/11/2025, 14:05</span></div><div style="font-size:12px;color:var(--text-dim);margin-bottom:5px;">Campo: <span class="t-field">Estado</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="t-from">Datos validados</span><i class="fa-solid fa-arrow-right" style="font-size:10px;color:var(--text-dim)"></i><span class="t-to">Completado</span></div></div></div>
+            <div class="timeline-item"><div class="t-avatar navy">AD</div><div><div style="display:flex;gap:8px;margin-bottom:5px;"><span class="t-user">Admin</span><span class="t-date">19/11/2025, 14:05</span></div><div style="font-size:12px;color:var(--text-dim);margin-bottom:5px;">Campo: <span class="t-field">Aprobado</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="t-from">—</span><i class="fa-solid fa-arrow-right" style="font-size:10px;color:var(--text-dim)"></i><span class="t-to"><i class="fa-solid fa-check"></i> Aprobado</span></div></div></div>
+            <div class="timeline-item"><div class="t-avatar orange">SC</div><div><div style="display:flex;gap:8px;margin-bottom:5px;"><span class="t-user">Samantha Chavez</span><span class="t-date">12/06/2025, 09:52</span></div><div style="font-size:12px;color:var(--text-dim);margin-bottom:5px;">Campo: <span class="t-field">Estado</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="t-from">Planificado</span><i class="fa-solid fa-arrow-right" style="font-size:10px;color:var(--text-dim)"></i><span class="t-to">Datos validados</span></div></div></div>
           </div>
         </div>
       </div>
@@ -492,175 +804,179 @@
   </div><!-- /main -->
 </div><!-- /app-body -->
 
-<!-- MODAL NUEVO DOCUMENTO -->
+<!-- MODAL -->
 <div class="modal-overlay" id="modal-doc">
-  <div class="modal">
+  <div class="glass-modal">
     <div class="modal-title">Crear documento</div>
     <div class="modal-sub">Selecciona el tipo de acceso para este documento.</div>
-    <label class="modal-radio selected" onclick="selectRadio(this)">
+    <label class="modal-radio selected" onclick="selRadio(this)">
       <input type="radio" name="doc-type" checked>
-      <div><div class="modal-radio-label"><i class="fa-solid fa-globe" style="color:var(--indigo);"></i> Público</div><div class="modal-radio-sub">Visible para todos los miembros del equipo</div></div>
+      <div><div class="modal-radio-label"><i class="fa-solid fa-globe" style="color:#8fa4f8;"></i> Público</div><div class="modal-radio-sub">Visible para todos los miembros del equipo</div></div>
     </label>
-    <label class="modal-radio" onclick="selectRadio(this)">
+    <label class="modal-radio" onclick="selRadio(this)">
       <input type="radio" name="doc-type">
-      <div><div class="modal-radio-label"><i class="fa-solid fa-lock" style="color:var(--navy);"></i> Confidencial</div><div class="modal-radio-sub">Solo visible para propietarios y administradores</div></div>
+      <div><div class="modal-radio-label"><i class="fa-solid fa-lock" style="color:var(--text-sub);"></i> Confidencial</div><div class="modal-radio-sub">Solo visible para propietarios y administradores</div></div>
     </label>
     <div class="modal-actions">
-      <button class="btn-cancel" onclick="document.getElementById('modal-doc').classList.remove('open')">Cancelar</button>
-      <button class="btn-next">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+      <button class="btn-glass" onclick="document.getElementById('modal-doc').classList.remove('open')">Cancelar</button>
+      <button class="btn-glass primary">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
     </div>
   </div>
 </div>
 
 <script>
-// ── STAGE DATA ────────────────────────────────────────────────────
+// ── STAGE DATA ─────────────────────────────────────────────────────
 const STAGES = [
-  {
-    name: 'Planificado',
-    campos: `
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-users"></i> Equipo de operaciones</div><div class="ck-value link">Equipo 3 - Pamela Beltrán</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-regular fa-calendar"></i> Fecha de asignación</div><div class="ck-value">12/06/2025</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-check"></i> Asignado</div><div class="ck-value ok"><i class="fa-solid fa-check-circle" style="color:var(--green)"></i> Sí</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-user"></i> Propietario</div><div class="ck-value link">Samantha Chavez</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-circle-exclamation"></i> Datos incompletos</div><div class="ck-value empty">No</div></div>`,
-    orientacion: null
-  },
-  {
-    name: 'Datos validados',
-    campos: `
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-users"></i> Total trabajadores</div><div class="ck-value">50</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-circle"></i> Semáforo asignación</div><div class="ck-value"><span class="semaforo verde"></span> Verde</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-paperclip"></i> Archivo adjunto</div><div class="ck-value empty">Sin archivo</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-circle-exclamation"></i> Datos incompletos</div><div class="ck-value empty">No</div></div>`,
-    orientacion: null
-  },
-  {
-    name: 'En curso',
-    campos: `
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-paperclip"></i> Archivo adjunto</div><div class="ck-value empty">Sin archivo</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-star"></i> Resultado Score</div><div class="ck-value empty">Pendiente</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-link"></i> URL de revisión</div><div class="ck-value empty">Sin URL</div></div>`,
-    orientacion: {
-      tipo: 'warning',
-      titulo: 'Orientación hacia el éxito',
-      texto: 'Se requiere cargar los archivos para revisión de la línea de supervisión de la Venta Efectiva. En esta etapa se obtiene en forma automática el Score — espere un minuto y refresque la ventana para verificar el resultado.'
-    }
-  },
-  {
-    name: 'Solicita revisión',
-    campos: `
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-star"></i> Score</div><div class="ck-value ok">70/70</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-circle"></i> Semáforo revisión</div><div class="ck-value"><span class="semaforo verde"></span> Verde</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-link"></i> URL de revisión</div><div class="ck-value empty">Sin URL</div></div>`,
-    orientacion: {
-      tipo: 'info',
-      titulo: 'Orientación hacia el éxito',
-      texto: 'Se han enviado las notificaciones correspondientes a los distintos filtros de revisión. Una vez que se apruebe completamente su proceso, se le notificará.'
-    }
-  },
-  {
-    name: 'Revisión coordinación',
-    campos: `
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-triangle-exclamation"></i> No conformidad por</div><div class="ck-value empty">—</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-link"></i> URL de revisión</div><div class="ck-value empty">Sin URL</div></div>`,
-    orientacion: null
-  },
-  {
-    name: 'Revisión dirección',
-    campos: `
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-link"></i> URL de revisión</div><div class="ck-value empty">Sin URL</div></div>`,
-    orientacion: null
-  },
-  {
-    name: 'Para entregar',
-    campos: `
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-check-double"></i> Aprobado</div><div class="ck-value ok"><i class="fa-solid fa-check-circle" style="color:var(--green)"></i> Sí</div></div>`,
-    orientacion: null
-  },
-  {
-    name: 'Revisión cliente',
-    campos: `
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-user-check"></i> Estado cliente</div><div class="ck-value">En revisión</div></div>`,
-    orientacion: null
-  },
-  {
-    name: 'Completado',
-    campos: `
-      <div class="ck-field"><div class="ck-label"><i class="fa-regular fa-calendar-check"></i> Fecha de entrega</div><div class="ck-value">19/11/2025</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-regular fa-calendar"></i> Fecha calculada</div><div class="ck-value">23/06/2025</div></div>
-      <div class="ck-field"><div class="ck-label"><i class="fa-solid fa-clock"></i> Días de entrega real</div><div class="ck-value" style="color:var(--yellow)">115 días</div></div>`,
-    orientacion: null
-  }
+  { name:'Planificado', short:'Planificado',
+    campos:[
+      {icon:'fa-users',label:'Equipo',value:'Equipo 3 - P. Beltrán',cls:'link'},
+      {icon:'fa-calendar',label:'Fecha asignación',value:'12/06/2025',cls:''},
+      {icon:'fa-circle-check',label:'Asignado',value:'<i class="fa-solid fa-check" style="color:var(--green)"></i> Sí',cls:'ok'},
+      {icon:'fa-user',label:'Propietario',value:'Samantha Chavez',cls:'link'},
+      {icon:'fa-exclamation-circle',label:'Datos incompletos',value:'No',cls:'dim'},
+    ], orientacion:null },
+  { name:'Datos validados', short:'Datos validados',
+    campos:[
+      {icon:'fa-users',label:'Total trabajadores',value:'50',cls:''},
+      {icon:'fa-circle',label:'Semáforo asignación',value:'<span class="sema verde"></span> Verde',cls:''},
+      {icon:'fa-paperclip',label:'Archivo adjunto',value:'Sin archivo',cls:'dim'},
+      {icon:'fa-exclamation-circle',label:'Datos incompletos',value:'No',cls:'dim'},
+    ], orientacion:null },
+  { name:'En curso', short:'En curso',
+    campos:[
+      {icon:'fa-paperclip',label:'Archivo adjunto',value:'Sin archivo',cls:'dim'},
+      {icon:'fa-star',label:'Resultado Score',value:'Pendiente',cls:'dim'},
+      {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
+    ],
+    orientacion:{tipo:'warn',title:'Orientación hacia el éxito',text:'Se requiere cargar los archivos para revisión de la línea de supervisión de la Venta Efectiva. En esta etapa se obtiene en forma automática el Score — espere un minuto y refresque la ventana para verificar el resultado.'} },
+  { name:'Solicita revisión', short:'Solicita revisión',
+    campos:[
+      {icon:'fa-star',label:'Score',value:'70 / 70',cls:'ok'},
+      {icon:'fa-circle',label:'Semáforo revisión',value:'<span class="sema verde"></span> Verde',cls:''},
+      {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
+    ],
+    orientacion:{tipo:'info',title:'Orientación hacia el éxito',text:'Se han enviado las notificaciones correspondientes a los distintos filtros de revisión. Una vez que se apruebe completamente su proceso, se le notificará.'} },
+  { name:'Revisión coordinación', short:'Rev. Coordinación',
+    campos:[
+      {icon:'fa-triangle-exclamation',label:'No conformidad por',value:'—',cls:'dim'},
+      {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
+    ], orientacion:null },
+  { name:'Revisión dirección', short:'Rev. Dirección',
+    campos:[
+      {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
+    ], orientacion:null },
+  { name:'Para entregar', short:'Para entregar',
+    campos:[
+      {icon:'fa-check-double',label:'Aprobado',value:'<i class="fa-solid fa-check" style="color:var(--green)"></i> Sí',cls:'ok'},
+    ], orientacion:null },
+  { name:'Revisión cliente', short:'Rev. Cliente',
+    campos:[
+      {icon:'fa-user-check',label:'Estado cliente',value:'En revisión',cls:''},
+    ], orientacion:null },
+  { name:'Completado', short:'Completado',
+    campos:[
+      {icon:'fa-calendar-check',label:'Fecha de entrega',value:'19/11/2025',cls:'ok'},
+      {icon:'fa-calendar',label:'Fecha calculada',value:'23/06/2025',cls:''},
+      {icon:'fa-clock',label:'Días de entrega real',value:'115 días',cls:'warn'},
+    ], orientacion:null },
 ];
 
-let currentStage = 8; // Completado
+let current = 8;
 
-function renderStage(idx) {
+function buildPipeline() {
+  const track = document.getElementById('pipeline-track');
+  // Keep progress bar
+  STAGES.forEach((s,i) => {
+    const el = document.createElement('div');
+    el.className = 'step';
+    el.dataset.idx = i;
+    el.onclick = () => setStage(i);
+    el.innerHTML = `
+      <div class="step-circle" id="sc-${i}">
+        <i class="fa-solid ${i < current ? 'fa-check' : i === current && current===8 ? 'fa-circle-check' : i === current ? 'fa-circle-dot' : 'fa-circle'}" style="font-size:12px;"></i>
+      </div>
+      <div class="step-label">${s.short}</div>`;
+    track.appendChild(el);
+  });
+  updatePipelineVisuals(current);
+}
+
+function updatePipelineVisuals(idx) {
+  document.querySelectorAll('.step').forEach((el,i) => {
+    el.className = 'step';
+    const circle = el.querySelector('.step-circle');
+    const icon = circle.querySelector('i');
+    if (i < idx) {
+      el.classList.add('done');
+      icon.className = 'fa-solid fa-check';
+    } else if (i === idx) {
+      el.classList.add(idx === 8 ? 'active-end' : 'active');
+      icon.className = `fa-solid ${idx===8 ? 'fa-circle-check' : 'fa-circle-dot'}`;
+    } else {
+      icon.className = 'fa-regular fa-circle';
+      icon.style.fontSize = '10px';
+    }
+  });
+  // Progress bar width
+  const pct = idx === 0 ? 0 : (idx / (STAGES.length - 1)) * 100;
+  document.getElementById('pipeline-progress').style.width = pct + '%';
+}
+
+function renderCampos(idx) {
   const stage = STAGES[idx];
+  const ckHtml = stage.campos.map(c => `
+    <div class="ck-pill">
+      <div>
+        <div class="ck-pill-label"><i class="fa-solid ${c.icon}" style="margin-right:4px;"></i>${c.label}</div>
+        <div class="ck-pill-value ${c.cls}">${c.value}</div>
+      </div>
+    </div>`).join('');
+  document.getElementById('campos-clave').innerHTML = `<div class="ck-row">${ckHtml}</div>`;
 
-  // Campos clave
-  document.getElementById('campos-clave').innerHTML = `
-    <div class="ck-header">
-      <div class="ck-title"><i class="fa-solid fa-star" style="color:var(--orange)"></i> Campos clave — ${stage.name}</div>
-      <button class="ck-edit"><i class="fa-solid fa-pen"></i> Modificar</button>
-    </div>
-    <div class="ck-grid">${stage.campos}</div>`;
-
-  // Orientación
   const wrap = document.getElementById('orientacion-wrap');
   if (stage.orientacion) {
     const o = stage.orientacion;
+    const icon = o.tipo === 'info' ? '💡' : '⚡';
     wrap.innerHTML = `
-      <div class="orientacion ${o.tipo === 'info' ? 'info' : ''}">
-        <span class="orientacion-icon">${o.tipo === 'info' ? '💡' : '⚡'}</span>
-        <div><div class="orientacion-title">${o.titulo}</div><div class="orientacion-text">${o.texto}</div></div>
+      <div class="orientacion-box ${o.tipo}">
+        <span class="or-icon">${icon}</span>
+        <div><div class="or-title">${o.title}</div><div class="or-text">${o.text}</div></div>
       </div>`;
   } else {
     wrap.innerHTML = '';
   }
+}
 
-  // Status badge
+function renderStatusBadge(idx) {
   const badge = document.getElementById('status-badge');
   if (idx === 8) {
+    badge.className = 'gtag green';
     badge.innerHTML = '<i class="fa-solid fa-circle-check"></i> Completado';
-    badge.style.cssText = 'padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:#dcfce7;color:#15803d;display:inline-flex;align-items:center;gap:5px;';
   } else {
-    badge.innerHTML = `<i class="fa-solid fa-spinner"></i> ${STAGES[idx].name}`;
-    badge.style.cssText = 'padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:#dbeafe;color:#1d4ed8;display:inline-flex;align-items:center;gap:5px;';
+    badge.className = 'gtag indigo';
+    badge.innerHTML = `<i class="fa-solid fa-circle-dot"></i> ${STAGES[idx].name}`;
   }
+}
 
-  // Btn marcar
-  const btn = document.getElementById('btn-marcar');
+function renderAvanzarBtn(idx) {
+  const btn = document.getElementById('btn-avanzar');
   if (idx < 8) {
     btn.style.display = 'flex';
-    document.getElementById('btn-marcar-label').textContent = `Avanzar a "${STAGES[idx+1].name}"`;
+    document.getElementById('btn-avanzar-label').textContent = `Avanzar a "${STAGES[idx+1].name}"`;
   } else {
     btn.style.display = 'none';
   }
 }
 
 function setStage(idx) {
-  currentStage = idx;
-  // Update pipeline visuals
-  document.querySelectorAll('.stage').forEach((el, i) => {
-    el.className = 'stage';
-    if (i < idx) el.classList.add('done');
-    else if (i === idx) {
-      el.classList.add(idx === 8 ? 'active-completado' : 'active');
-    }
-    // Update icon
-    const icon = el.querySelector('.stage-icon');
-    if (i < idx) icon.className = 'fa-solid fa-check stage-icon';
-    else if (i === idx && idx === 8) icon.className = 'fa-solid fa-circle-check stage-icon';
-    else if (i === idx) icon.className = 'fa-solid fa-circle-dot stage-icon';
-    else icon.className = 'fa-regular fa-circle stage-icon';
-  });
-  renderStage(idx);
+  current = idx;
+  updatePipelineVisuals(idx);
+  renderCampos(idx);
+  renderStatusBadge(idx);
+  renderAvanzarBtn(idx);
 }
 
-function nextStage() {
-  if (currentStage < 8) setStage(currentStage + 1);
-}
+function nextStage() { if (current < 8) setStage(current + 1); }
 
 // TABS
 function showTab(name, el) {
@@ -670,14 +986,14 @@ function showTab(name, el) {
   el.classList.add('active');
 }
 
-// MODAL
-function selectRadio(el) {
+function selRadio(el) {
   document.querySelectorAll('.modal-radio').forEach(r => r.classList.remove('selected'));
   el.classList.add('selected');
   el.querySelector('input').checked = true;
 }
 
 // Init
+buildPipeline();
 setStage(8);
 </script>
 </body>
