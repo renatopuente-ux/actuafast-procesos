@@ -12,525 +12,457 @@
 *, button, input, select, textarea { font-family: 'Nunito', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg0: #080e1f;
-  --bg1: #0d1530;
-  --bg2: #111c3a;
-  --glass: rgba(255,255,255,0.04);
-  --glass-md: rgba(255,255,255,0.07);
-  --glass-hi: rgba(255,255,255,0.12);
-  --border: rgba(255,255,255,0.08);
-  --border-hi: rgba(255,255,255,0.16);
+  /* Neumorphic base */
+  --bg: #e8ecf4;
+  --bg-card: #e8ecf4;
+  --shadow-dark: rgba(163,177,198,0.7);
+  --shadow-light: rgba(255,255,255,0.95);
+  --neu-out: 6px 6px 16px var(--shadow-dark), -6px -6px 16px var(--shadow-light);
+  --neu-out-sm: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+  --neu-in: inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 10px var(--shadow-light);
+  --neu-in-sm: inset 2px 2px 6px rgba(163,177,198,0.5), inset -2px -2px 6px rgba(255,255,255,0.85);
+  /* Colors */
+  --navy: #0f1f3d;
   --indigo: #4c64d9;
-  --indigo-glow: rgba(76,100,217,0.35);
+  --indigo-soft: rgba(76,100,217,0.12);
   --orange: #DE5E2D;
-  --orange-glow: rgba(222,94,45,0.3);
-  --text: #e2e8f2;
-  --text-sub: #8892b0;
-  --text-dim: #4a5280;
-  --green: #10b981;
-  --green-glow: rgba(16,185,129,0.25);
-  --yellow: #f59e0b;
-  --red: #ef4444;
-  --neu-shadow: 4px 4px 10px rgba(0,0,0,0.5), -2px -2px 6px rgba(255,255,255,0.03);
-  --neu-inset: inset 3px 3px 8px rgba(0,0,0,0.4), inset -2px -2px 5px rgba(255,255,255,0.03);
+  --orange-soft: rgba(222,94,45,0.1);
+  --text: #1e293b;
+  --text-sub: #64748b;
+  --text-dim: #94a3b8;
+  --green: #059669;
+  --green-soft: rgba(5,150,105,0.1);
+  --yellow: #d97706;
+  --yellow-soft: rgba(217,119,6,0.1);
+  --red: #dc2626;
+  --red-soft: rgba(220,38,38,0.1);
+  --border: rgba(163,177,198,0.35);
 }
 
 body {
-  background: var(--bg0);
+  background: var(--bg);
   color: var(--text);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-image:
-    radial-gradient(ellipse at 20% 0%, rgba(76,100,217,0.12) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(222,94,45,0.08) 0%, transparent 50%);
+  display: flex; flex-direction: column;
 }
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(163,177,198,0.5); border-radius: 99px; }
 
-/* ════════════════════════════════
+/* ══════════════════════════════
    HEADER
-════════════════════════════════ */
+══════════════════════════════ */
 .top-header {
   height: 56px;
-  background: rgba(8,14,31,0.8);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  box-shadow: 0 2px 12px rgba(163,177,198,0.4);
   display: flex; align-items: center; padding: 0 24px; gap: 16px;
   position: sticky; top: 0; z-index: 100; flex-shrink: 0;
 }
-.hamburger { background: none; border: none; color: var(--text-sub); font-size: 16px; cursor: pointer; padding: 6px; border-radius: 8px; transition: all 0.15s; }
-.hamburger:hover { background: var(--glass-md); color: var(--text); }
-.header-spacer { flex: 1; }
-.header-user { display: flex; align-items: center; gap: 10px; color: var(--text-sub); font-size: 13px; }
-.user-avatar {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--indigo), #6b7ff0);
-  box-shadow: 0 0 12px var(--indigo-glow);
+.hamburger {
+  background: var(--bg); border: none; cursor: pointer;
+  width: 36px; height: 36px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 800; color: #fff;
+  color: var(--text-sub); font-size: 15px;
+  box-shadow: var(--neu-out-sm); transition: all 0.2s;
+}
+.hamburger:hover { color: var(--text); }
+.hamburger:active { box-shadow: var(--neu-in-sm); }
+.header-spacer { flex: 1; }
+.header-user { display: flex; align-items: center; gap: 10px; color: var(--text-sub); font-size: 13px; font-weight: 600; }
+.user-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--indigo), #6b7ff0);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; color: #fff;
+  box-shadow: var(--neu-out-sm);
 }
 
-/* ════════════════════════════════
+/* ══════════════════════════════
    LAYOUT
-════════════════════════════════ */
+══════════════════════════════ */
 .app-body { display: flex; flex: 1; overflow: hidden; }
 
-/* ── SIDEBAR ── */
+/* SIDEBAR */
 .sidebar {
   width: 220px; flex-shrink: 0;
-  background: rgba(11,17,38,0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-right: 1px solid var(--border);
-  display: flex; flex-direction: column;
+  background: var(--bg);
+  box-shadow: 4px 0 12px rgba(163,177,198,0.25);
+  display: flex; flex-direction: column; overflow-y: auto;
 }
 .nav-section-label { font-size: 9px; font-weight: 800; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; padding: 16px 16px 5px; }
 .nav-item {
   display: flex; align-items: center; gap: 10px;
   padding: 9px 16px; font-size: 13px; color: var(--text-sub);
   cursor: pointer; text-decoration: none; position: relative;
-  transition: all 0.15s; border-radius: 0;
+  transition: all 0.15s; font-weight: 600;
 }
-.nav-item:hover { background: var(--glass); color: var(--text); }
+.nav-item:hover { color: var(--text); background: rgba(163,177,198,0.15); }
 .nav-item.active {
-  background: rgba(76,100,217,0.12);
-  color: #8fa4f8; font-weight: 700;
+  color: var(--indigo); font-weight: 700;
+  background: rgba(76,100,217,0.06);
 }
 .nav-item.active::before {
-  content: ''; position: absolute; left: 0; top: 5px; bottom: 5px;
-  width: 3px; background: linear-gradient(180deg, #6b7ff0, #4c64d9);
-  border-radius: 0 2px 2px 0;
-  box-shadow: 0 0 8px var(--indigo-glow);
+  content: ''; position: absolute; left: 0; top: 6px; bottom: 6px;
+  width: 3px; background: var(--indigo); border-radius: 0 2px 2px 0;
 }
 .nav-icon { width: 16px; text-align: center; font-size: 13px; }
 .sidebar-footer { margin-top: auto; padding: 16px; border-top: 1px solid var(--border); }
 .app-version { font-size: 11px; font-weight: 700; color: var(--text-sub); }
-.app-help { font-size: 11px; color: #6b7ff0; text-decoration: underline; cursor: pointer; }
+.app-help { font-size: 11px; color: var(--indigo); text-decoration: underline; cursor: pointer; }
 
-/* ════════════════════════════════
-   MAIN
-════════════════════════════════ */
+/* MAIN */
 .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
 /* BREADCRUMB */
-.breadcrumb {
-  padding: 10px 28px; font-size: 12px; color: var(--text-dim);
-  display: flex; align-items: center; gap: 8px;
-  border-bottom: 1px solid var(--border);
-  background: rgba(8,14,31,0.4);
-}
-.breadcrumb a { color: #6b7ff0; text-decoration: none; }
-.breadcrumb a:hover { color: #8fa4f8; }
-.bc-sep { opacity: 0.3; }
+.breadcrumb { padding: 10px 28px; font-size: 12px; color: var(--text-dim); display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.breadcrumb a { color: var(--indigo); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
 
-/* ════════════════════════════════
-   RECORD HEADER — GLASS
-════════════════════════════════ */
+/* ══════════════════════════════
+   RECORD HEADER — NEUMORPHIC
+══════════════════════════════ */
 .record-header {
-  background: rgba(13,21,48,0.5);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  box-shadow: 0 4px 16px rgba(163,177,198,0.3);
+  position: relative; z-index: 5;
 }
-
 .rh-top { padding: 20px 28px 16px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 
 .rh-icon-wrap {
-  width: 44px; height: 44px; border-radius: 14px; flex-shrink: 0;
+  width: 46px; height: 46px; border-radius: 14px; flex-shrink: 0;
   background: linear-gradient(135deg, var(--orange), #f07244);
-  box-shadow: 0 4px 20px var(--orange-glow);
+  box-shadow: 4px 4px 12px rgba(222,94,45,0.35), -2px -2px 8px rgba(255,255,255,0.9);
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px; color: #fff;
+  font-size: 19px; color: #fff;
 }
-.rh-title { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; }
-.rh-subtitle { font-size: 13px; color: var(--text-sub); margin-top: 5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.rh-title { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; color: var(--navy); }
+.rh-subtitle { font-size: 13px; color: var(--text-sub); margin-top: 5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-weight: 600; }
 
-/* Glass tags */
-.gtag {
-  padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 700;
-  background: var(--glass-md); border: 1px solid var(--border-hi);
-  color: var(--text-sub); backdrop-filter: blur(8px);
-}
-.gtag.indigo { background: rgba(76,100,217,0.15); border-color: rgba(76,100,217,0.25); color: #8fa4f8; }
-.gtag.green { background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.25); color: #34d399; }
-.gtag.orange { background: rgba(222,94,45,0.15); border-color: rgba(222,94,45,0.25); color: #f07244; }
-.gtag.yellow { background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.25); color: var(--yellow); }
+/* Tags */
+.tag { padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 800; letter-spacing: 0.3px; }
+.tag-niif { background: var(--indigo-soft); color: var(--indigo); }
+.tag-tipo { background: rgba(163,177,198,0.2); color: var(--text-sub); }
+.tag-green { background: var(--green-soft); color: var(--green); }
+.tag-yellow { background: var(--yellow-soft); color: var(--yellow); display: flex; align-items: center; gap: 4px; }
+.tag-red { background: var(--red-soft); color: var(--red); display: flex; align-items: center; gap: 4px; }
 
-/* Action buttons — glass */
+/* NEU BUTTONS */
 .rh-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
-.btn-glass {
+.btn-neu {
   padding: 8px 16px; border-radius: 10px; font-size: 12px; font-weight: 700;
   cursor: pointer; display: flex; align-items: center; gap: 7px;
-  background: var(--glass); border: 1px solid var(--border-hi);
-  color: var(--text-sub); transition: all 0.2s;
-  backdrop-filter: blur(8px);
+  background: var(--bg); color: var(--text-sub); border: none;
+  box-shadow: var(--neu-out-sm); transition: all 0.15s;
 }
-.btn-glass:hover { background: var(--glass-hi); color: var(--text); border-color: rgba(255,255,255,0.22); }
-.btn-glass.primary {
-  background: linear-gradient(135deg, rgba(76,100,217,0.8), rgba(107,127,240,0.8));
-  border-color: rgba(76,100,217,0.5); color: #fff;
-  box-shadow: 0 4px 20px var(--indigo-glow);
+.btn-neu:hover { color: var(--text); }
+.btn-neu:active { box-shadow: var(--neu-in-sm); }
+.btn-neu.primary {
+  background: linear-gradient(135deg, var(--indigo), #6b7ff0);
+  color: #fff;
+  box-shadow: 4px 4px 12px rgba(76,100,217,0.4), -2px -2px 8px rgba(255,255,255,0.9);
 }
-.btn-glass.primary:hover { box-shadow: 0 6px 28px rgba(76,100,217,0.5); }
-.btn-glass.danger { border-color: rgba(239,68,68,0.3); color: #f87171; }
-.btn-glass.danger:hover { background: rgba(239,68,68,0.1); }
-.btn-glass.icon-only { padding: 8px 12px; }
+.btn-neu.primary:active { box-shadow: var(--neu-in-sm); }
+.btn-neu.danger { color: var(--red); }
+.btn-neu.icon-only { padding: 8px 12px; }
 
-/* ════════════════════════════════
+/* ══════════════════════════════
    PIPELINE — MODERN STEPS
-════════════════════════════════ */
-.pipeline-section { padding: 20px 28px 20px; }
-.pipeline-label { font-size: 10px; font-weight: 800; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; }
+══════════════════════════════ */
+.pipeline-section { padding: 16px 28px 20px; }
+
+/* Status + action row above steps */
+.pipeline-status-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.pipeline-label { font-size: 10px; font-weight: 800; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; }
+.pipeline-spacer { flex: 1; }
 
 .pipeline-track { position: relative; display: flex; align-items: flex-start; justify-content: space-between; }
-
-/* Line behind steps */
 .pipeline-track::before {
-  content: '';
-  position: absolute;
-  top: 16px; left: 16px; right: 16px; height: 2px;
-  background: rgba(255,255,255,0.06);
+  content: ''; position: absolute;
+  top: 15px; left: 15px; right: 15px; height: 2px;
+  background: rgba(163,177,198,0.35);
+  box-shadow: inset 1px 1px 2px rgba(163,177,198,0.4), inset -1px -1px 2px rgba(255,255,255,0.7);
   z-index: 0;
 }
 .pipeline-progress {
   position: absolute;
-  top: 16px; left: 16px; height: 2px;
+  top: 15px; left: 15px; height: 2px;
   background: linear-gradient(90deg, var(--green), var(--indigo));
-  z-index: 1;
-  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: 0 0 8px var(--indigo-glow);
+  box-shadow: 0 0 6px rgba(76,100,217,0.3);
+  z-index: 1; transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 
-.step {
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  cursor: pointer; z-index: 2; position: relative; flex: 1;
-  transition: all 0.2s;
-}
-.step:hover .step-circle { border-color: var(--indigo-glow); }
+.step { display: flex; flex-direction: column; align-items: center; gap: 7px; cursor: pointer; z-index: 2; position: relative; flex: 1; }
 
 .step-circle {
-  width: 32px; height: 32px; border-radius: 50%;
+  width: 30px; height: 30px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 800;
-  border: 2px solid rgba(255,255,255,0.1);
-  background: var(--bg1);
-  color: var(--text-dim);
-  transition: all 0.3s;
-  box-shadow: var(--neu-shadow);
-  position: relative;
+  font-size: 11px; font-weight: 800;
+  background: var(--bg); color: var(--text-dim);
+  box-shadow: var(--neu-out-sm);
+  transition: all 0.25s; border: none;
 }
-
 .step.done .step-circle {
-  background: linear-gradient(135deg, rgba(16,185,129,0.3), rgba(16,185,129,0.15));
-  border-color: rgba(16,185,129,0.5);
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
   color: var(--green);
-  box-shadow: 0 0 12px rgba(16,185,129,0.2), var(--neu-shadow);
+  box-shadow: 3px 3px 8px rgba(163,177,198,0.5), -3px -3px 8px rgba(255,255,255,0.9);
 }
-
 .step.active .step-circle {
   background: linear-gradient(135deg, var(--indigo), #6b7ff0);
-  border-color: rgba(107,127,240,0.6);
   color: #fff;
-  box-shadow: 0 0 20px var(--indigo-glow), 0 0 40px rgba(76,100,217,0.15), var(--neu-shadow);
-  transform: scale(1.15);
+  box-shadow: 4px 4px 12px rgba(76,100,217,0.4), -3px -3px 8px rgba(255,255,255,0.9);
+  transform: scale(1.2);
 }
-
 .step.active-end .step-circle {
-  background: linear-gradient(135deg, #1e293b, #0f172a);
-  border-color: rgba(255,255,255,0.2);
-  color: var(--text);
-  box-shadow: 0 0 16px rgba(255,255,255,0.08), var(--neu-shadow);
-  transform: scale(1.1);
+  background: linear-gradient(135deg, #f0f4ff, #e8ecf4);
+  color: var(--navy);
+  box-shadow: 4px 4px 10px rgba(163,177,198,0.5), -3px -3px 8px rgba(255,255,255,0.9);
+  transform: scale(1.12);
 }
+.step:hover:not(.active):not(.active-end) .step-circle { box-shadow: 3px 3px 8px rgba(163,177,198,0.6), -3px -3px 8px rgba(255,255,255,0.95); }
 
-.step-label {
-  font-size: 10px; font-weight: 700; text-align: center;
-  color: var(--text-dim); transition: color 0.2s;
-  line-height: 1.3; max-width: 72px;
-}
-.step.done .step-label { color: rgba(16,185,129,0.7); }
-.step.active .step-label { color: #8fa4f8; font-weight: 800; }
-.step.active-end .step-label { color: var(--text-sub); }
+.step-label { font-size: 10px; font-weight: 700; text-align: center; color: var(--text-dim); line-height: 1.3; max-width: 70px; transition: color 0.2s; }
+.step.done .step-label { color: rgba(5,150,105,0.6); }
+.step.active .step-label { color: var(--indigo); font-weight: 800; }
+.step.active-end .step-label { color: var(--navy); font-weight: 800; }
 
-/* ════════════════════════════════
-   CAMPOS CLAVE — GLASS PILLS
-════════════════════════════════ */
-.campos-section {
-  padding: 0 28px 16px;
-  border-bottom: 1px solid var(--border);
-}
+/* ══════════════════════════════
+   CAMPOS CLAVE — NEU PILLS
+══════════════════════════════ */
+.campos-section { padding: 0 28px 16px; }
+.ck-section-label { font-size: 10px; font-weight: 800; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
 .ck-row { display: flex; gap: 10px; flex-wrap: wrap; }
 .ck-pill {
-  display: flex; align-items: center; gap: 8px;
-  padding: 8px 14px; border-radius: 10px;
-  background: var(--glass); border: 1px solid var(--border-hi);
-  backdrop-filter: blur(12px); transition: all 0.15s;
+  padding: 10px 16px; border-radius: 12px;
+  background: var(--bg); box-shadow: var(--neu-out-sm);
+  transition: all 0.15s; min-width: 100px;
 }
-.ck-pill:hover { background: var(--glass-md); }
-.ck-pill-label { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
-.ck-pill-value { font-size: 13px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
-.ck-pill-value.ok { color: var(--green); }
-.ck-pill-value.warn { color: var(--yellow); }
-.ck-pill-value.dim { color: var(--text-dim); }
-.ck-pill-value.link { color: #8fa4f8; cursor: pointer; }
-.sema { width: 10px; height: 10px; border-radius: 50%; }
-.sema.verde { background: var(--green); box-shadow: 0 0 6px var(--green-glow); }
+.ck-pill:hover { box-shadow: 4px 4px 12px var(--shadow-dark), -4px -4px 12px var(--shadow-light); }
+.ck-label { font-size: 9px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.ck-value { font-size: 13px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
+.ck-value.ok { color: var(--green); }
+.ck-value.warn { color: var(--yellow); }
+.ck-value.dim { color: var(--text-dim); font-weight: 400; }
+.ck-value.link { color: var(--indigo); cursor: pointer; }
+.sema { width: 9px; height: 9px; border-radius: 50%; }
+.sema.verde { background: var(--green); box-shadow: 0 0 5px rgba(5,150,105,0.4); }
 .sema.rojo { background: var(--red); }
+.sema.amarillo { background: var(--yellow); }
 
-/* ORIENTACIÓN */
+/* Datos incompletos toggle pill */
+.ck-pill.toggle-pill {
+  display: flex; align-items: center; gap: 12px;
+  cursor: pointer; user-select: none;
+}
+.neu-toggle { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+.neu-toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-track {
+  position: absolute; inset: 0; border-radius: 99px;
+  background: var(--bg); box-shadow: var(--neu-in-sm);
+  transition: all 0.25s;
+}
+.toggle-thumb {
+  position: absolute; top: 3px; left: 3px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--bg); box-shadow: 2px 2px 5px rgba(163,177,198,0.6), -1px -1px 3px rgba(255,255,255,0.9);
+  transition: all 0.25s;
+}
+.neu-toggle.on .toggle-track { background: linear-gradient(135deg, var(--red), #ef6767); box-shadow: none; }
+.neu-toggle.on .toggle-thumb { transform: translateX(18px); background: #fff; box-shadow: 2px 2px 4px rgba(220,38,38,0.3); }
+
+/* ══════════════════════════════
+   ORIENTACIÓN
+══════════════════════════════ */
 .orientacion-box {
-  margin: 0 28px 16px;
-  padding: 14px 18px; border-radius: 12px;
+  margin: 0 28px 16px; padding: 14px 18px; border-radius: 12px;
   display: flex; gap: 12px; align-items: flex-start;
-  backdrop-filter: blur(12px);
+  box-shadow: var(--neu-out-sm);
 }
-.orientacion-box.warn {
-  background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2);
-}
-.orientacion-box.info {
-  background: rgba(76,100,217,0.08); border: 1px solid rgba(76,100,217,0.2);
-}
-.or-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-.or-title { font-size: 13px; font-weight: 800; margin-bottom: 4px; }
+.orientacion-box.warn { background: #fffbeb; border-left: 3px solid var(--yellow); }
+.orientacion-box.info { background: #eff6ff; border-left: 3px solid var(--indigo); }
+.or-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.or-title { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
 .orientacion-box.warn .or-title { color: var(--yellow); }
-.orientacion-box.info .or-title { color: #8fa4f8; }
-.or-text { font-size: 12px; line-height: 1.55; }
-.orientacion-box.warn .or-text { color: rgba(245,158,11,0.8); }
-.orientacion-box.info .or-text { color: rgba(139,164,248,0.8); }
+.orientacion-box.info .or-title { color: var(--indigo); }
+.or-text { font-size: 12px; line-height: 1.55; color: var(--text-sub); }
 
-/* ════════════════════════════════
-   TABS — NEUMORPHIC
-════════════════════════════════ */
+/* ══════════════════════════════
+   TABS — NEU
+══════════════════════════════ */
 .tabs-bar {
   display: flex; padding: 8px 28px;
-  background: rgba(8,14,31,0.6);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  gap: 4px; flex-shrink: 0;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  gap: 6px; flex-shrink: 0;
 }
 .tab {
   padding: 8px 16px; border-radius: 10px; font-size: 12px; font-weight: 700;
   color: var(--text-dim); cursor: pointer; display: flex; align-items: center; gap: 6px;
-  transition: all 0.2s; border: 1px solid transparent;
+  transition: all 0.2s; border: none; background: transparent;
 }
-.tab:hover { background: var(--glass); color: var(--text-sub); }
+.tab:hover { background: rgba(163,177,198,0.1); color: var(--text-sub); }
 .tab.active {
-  background: var(--glass-md);
-  border-color: var(--border-hi);
-  color: #8fa4f8;
-  box-shadow: var(--neu-shadow);
+  background: var(--bg);
+  color: var(--navy);
+  box-shadow: var(--neu-out-sm);
 }
-.tab-count {
-  background: rgba(76,100,217,0.2); color: #8fa4f8;
-  font-size: 10px; font-weight: 800; padding: 1px 7px; border-radius: 99px;
-}
-.tab.active .tab-count { background: rgba(76,100,217,0.35); }
+.tab-count { background: rgba(163,177,198,0.2); color: var(--text-sub); font-size: 10px; font-weight: 800; padding: 1px 7px; border-radius: 99px; }
+.tab.active .tab-count { background: var(--indigo-soft); color: var(--indigo); }
 
-/* ════════════════════════════════
-   CONTENT
-════════════════════════════════ */
+/* ══════════════════════════════
+   CONTENT AREA
+══════════════════════════════ */
 .content-area { flex: 1; overflow-y: auto; padding: 24px 28px; }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
-/* ════════════════════════════════
-   GLASS CARDS
-════════════════════════════════ */
-.cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+/* ══════════════════════════════
+   NEU CARDS
+══════════════════════════════ */
+.cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .card-full { grid-column: 1 / -1; }
 
-.glass-card {
-  background: var(--glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-hi);
-  border-radius: 16px; overflow: hidden;
-  transition: all 0.2s;
+.neu-card {
+  background: var(--bg); border-radius: 16px;
+  box-shadow: var(--neu-out); overflow: hidden;
 }
-.glass-card:hover { background: var(--glass-md); border-color: rgba(255,255,255,0.14); }
-
-.gc-header {
+.nc-header {
   padding: 14px 20px; border-bottom: 1px solid var(--border);
   display: flex; align-items: center; gap: 10px;
-  background: rgba(255,255,255,0.02);
 }
-.gc-icon {
+.nc-icon {
   width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
-  background: linear-gradient(135deg, rgba(76,100,217,0.3), rgba(76,100,217,0.15));
-  border: 1px solid rgba(76,100,217,0.2);
+  background: var(--bg);
+  box-shadow: var(--neu-out-sm);
   display: flex; align-items: center; justify-content: center;
-  font-size: 14px; color: #8fa4f8;
-  box-shadow: 0 2px 8px rgba(76,100,217,0.15);
+  font-size: 14px; color: var(--indigo);
 }
-.gc-title { font-size: 13px; font-weight: 800; color: var(--text); }
-.gc-action { margin-left: auto; font-size: 12px; color: #6b7ff0; font-weight: 700; cursor: pointer; background: none; border: none; }
-.gc-body { padding: 18px 20px; }
+.nc-title { font-size: 13px; font-weight: 800; color: var(--navy); }
+.nc-action { margin-left: auto; font-size: 12px; color: var(--indigo); font-weight: 700; cursor: pointer; background: none; border: none; }
+.nc-body { padding: 18px 20px; }
 
-/* ── FIELD GRID — NEUMORPHIC ── */
-.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* ── FIELDS ── */
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .field { display: flex; flex-direction: column; gap: 4px; }
-.fl { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
-.fv { font-size: 13px; font-weight: 600; color: var(--text); }
-.fv.link { color: #8fa4f8; cursor: pointer; }
-.fv.link:hover { text-decoration: underline; }
+.fl { font-size: 10px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+.fv { font-size: 13px; font-weight: 700; color: var(--text); }
+.fv.link { color: var(--indigo); cursor: pointer; }
 .fv.ok { color: var(--green); }
 .fv.warn { color: var(--yellow); }
 .fv.dim { color: var(--text-dim); font-weight: 400; }
 
-/* Neumorphic value chip */
+/* Neumorphic inset value */
 .neu-val {
-  padding: 6px 12px; border-radius: 8px;
-  background: var(--bg0);
-  box-shadow: var(--neu-inset);
-  font-size: 13px; font-weight: 700;
-  color: var(--text); display: inline-block;
+  padding: 6px 12px; border-radius: 8px; display: inline-block;
+  background: var(--bg); box-shadow: var(--neu-in-sm);
+  font-size: 13px; font-weight: 700; color: var(--text);
 }
 
-/* ── EVAL CHECKBOXES ── */
+/* ── EVAL ── */
 .eval-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 14px; }
 .eval-item {
   display: flex; align-items: center; gap: 8px;
   padding: 8px 12px; border-radius: 10px; font-size: 12px; font-weight: 600;
-  border: 1px solid var(--border);
-  background: var(--glass);
+  background: var(--bg); box-shadow: var(--neu-in-sm);
   color: var(--text-dim); transition: all 0.15s;
 }
 .eval-item.on {
-  background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.25);
-  color: #34d399;
-  box-shadow: 0 0 10px rgba(16,185,129,0.1);
+  background: linear-gradient(135deg, #d1fae5, #ecfdf5);
+  box-shadow: 2px 2px 6px rgba(163,177,198,0.4), -2px -2px 5px rgba(255,255,255,0.9);
+  color: var(--green);
 }
 .eval-chk {
   width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center; font-size: 9px;
 }
-.eval-chk.yes { background: linear-gradient(135deg, var(--green), #059669); color: #fff; box-shadow: 0 2px 6px var(--green-glow); }
-.eval-chk.no { background: var(--bg0); box-shadow: var(--neu-inset); color: var(--text-dim); }
+.eval-chk.yes { background: linear-gradient(135deg, var(--green), #059669); color: #fff; box-shadow: 2px 2px 5px rgba(5,150,105,0.3); }
+.eval-chk.no { background: var(--bg); box-shadow: var(--neu-in-sm); color: var(--text-dim); }
 
 /* ── SCORE ── */
 .score-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 14px; }
-.score-card {
-  border-radius: 12px; padding: 14px; text-align: center;
-  background: var(--bg0); box-shadow: var(--neu-shadow);
-  border: 1px solid var(--border);
-}
+.score-card { border-radius: 12px; padding: 14px; text-align: center; background: var(--bg); box-shadow: var(--neu-out-sm); }
 .score-dim { font-size: 9px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-.score-pts { font-size: 22px; font-weight: 900; background: linear-gradient(135deg, #8fa4f8, var(--indigo)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.score-pts { font-size: 22px; font-weight: 900; color: var(--navy); }
 .score-max { font-size: 10px; color: var(--text-dim); }
-.sema-bar {
-  display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px;
-  background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2);
-  box-shadow: 0 0 16px rgba(16,185,129,0.06);
-}
-.sema-lg { width: 16px; height: 16px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green-glow); }
+.sema-bar { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; background: linear-gradient(135deg, #d1fae5, #ecfdf5); box-shadow: var(--neu-in-sm); }
+.sema-lg { width: 14px; height: 14px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px rgba(5,150,105,0.4); }
 
-/* ── FINANCIAL ── */
+/* ── FINANCIERO ── */
 .fin-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; }
-.fin-item { text-align: center; padding: 12px; border-radius: 10px; background: var(--bg0); box-shadow: var(--neu-shadow); border: 1px solid var(--border); }
-.fin-lbl { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.fin-item { text-align: center; padding: 14px 12px; border-radius: 12px; background: var(--bg); box-shadow: var(--neu-out-sm); }
+.fin-lbl { font-size: 10px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 6px; }
 .fin-val { font-size: 14px; font-weight: 800; color: var(--text); }
-.fin-val.total { font-size: 20px; background: linear-gradient(135deg, #8fa4f8, var(--indigo)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.fin-val.total { font-size: 20px; color: var(--navy); }
 
 /* ── ITEMS TABLE ── */
 .items-table { width: 100%; border-collapse: collapse; }
-.items-table th { padding: 10px 14px; font-size: 10px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border); text-align: left; }
-.items-table td { padding: 12px 14px; font-size: 13px; border-bottom: 1px solid var(--border); color: var(--text-sub); }
-.items-table tr:hover td { background: var(--glass); }
+.items-table th { padding: 10px 14px; font-size: 10px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.4px; background: rgba(163,177,198,0.06); border-bottom: 1px solid var(--border); text-align: left; }
+.items-table td { padding: 12px 14px; font-size: 13px; border-bottom: 1px solid var(--border); color: var(--text-sub); font-weight: 600; }
+.items-table tr:hover td { background: rgba(163,177,198,0.06); }
 .items-table tr:last-child td { border-bottom: none; }
-.item-code { font-family: monospace; font-size: 11px; background: var(--bg0); padding: 3px 8px; border-radius: 6px; color: var(--text-dim); box-shadow: var(--neu-inset); }
-.ejecutable-badge {
-  display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px;
-  border-radius: 99px; font-size: 10px; font-weight: 700;
-  background: rgba(76,100,217,0.12); color: #8fa4f8;
-  border: 1px solid rgba(76,100,217,0.2);
-  box-shadow: 0 0 8px rgba(76,100,217,0.1);
-}
+.item-code { font-family: monospace; font-size: 11px; background: var(--bg); padding: 3px 8px; border-radius: 6px; color: var(--text-dim); box-shadow: var(--neu-in-sm); }
+.ejecutable-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 700; background: var(--indigo-soft); color: var(--indigo); }
 .btn-exec {
-  padding: 6px 14px; border-radius: 8px;
-  background: linear-gradient(135deg, rgba(76,100,217,0.7), rgba(107,127,240,0.7));
-  color: #fff; border: 1px solid rgba(76,100,217,0.4);
+  padding: 6px 14px; border-radius: 8px; border: none;
+  background: var(--bg); color: var(--indigo);
   font-size: 11px; font-weight: 700; cursor: pointer;
-  box-shadow: 0 2px 10px var(--indigo-glow);
-  display: flex; align-items: center; gap: 5px; transition: all 0.2s;
+  box-shadow: var(--neu-out-sm);
+  display: flex; align-items: center; gap: 5px; transition: all 0.15s;
 }
-.btn-exec:hover { box-shadow: 0 4px 16px var(--indigo-glow); }
-.total-row td { font-weight: 800; background: rgba(76,100,217,0.05); border-top: 1px solid rgba(76,100,217,0.15); color: var(--text); }
+.btn-exec:hover { box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light); }
+.btn-exec:active { box-shadow: var(--neu-in-sm); }
+.total-row td { font-weight: 800; color: var(--navy); background: rgba(163,177,198,0.06); border-top: 1px solid var(--border); }
 
-/* ── DOCS ── */
-.upload-zone {
-  border: 2px dashed rgba(255,255,255,0.1); border-radius: 14px;
-  padding: 36px; text-align: center; color: var(--text-dim);
-  background: var(--glass); cursor: pointer; transition: all 0.2s;
-  backdrop-filter: blur(8px);
-}
-.upload-zone:hover { border-color: rgba(76,100,217,0.4); background: rgba(76,100,217,0.05); color: #8fa4f8; box-shadow: 0 0 20px rgba(76,100,217,0.08); }
+/* ── UPLOAD ── */
+.upload-zone { border: 2px dashed rgba(163,177,198,0.5); border-radius: 14px; padding: 36px; text-align: center; color: var(--text-dim); background: var(--bg); cursor: pointer; transition: all 0.2s; box-shadow: var(--neu-in-sm); }
+.upload-zone:hover { border-color: var(--indigo); color: var(--indigo); }
 .docs-hrow { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.docs-htitle { font-size: 13px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.docs-htitle { font-size: 13px; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 8px; }
 
 /* ── TIMELINE ── */
 .timeline-item { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border); }
 .timeline-item:last-child { border-bottom: none; }
-.t-avatar {
-  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 800; color: #fff;
-  background: linear-gradient(135deg, var(--indigo), #6b7ff0);
-  box-shadow: 0 0 12px var(--indigo-glow);
-}
-.t-avatar.navy { background: linear-gradient(135deg, #1e293b, #0f172a); box-shadow: 0 0 8px rgba(0,0,0,0.3); }
-.t-avatar.orange { background: linear-gradient(135deg, var(--orange), #f07244); box-shadow: 0 0 10px var(--orange-glow); }
-.t-user { font-size: 13px; font-weight: 700; color: var(--text); }
-.t-date { font-size: 11px; color: var(--text-dim); }
-.t-field { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; background: var(--glass-md); border: 1px solid var(--border); color: var(--text-sub); }
-.t-from { color: var(--text-dim); text-decoration: line-through; font-size: 12px; }
-.t-to { color: var(--green); font-weight: 700; font-size: 12px; }
+.t-avatar { width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--indigo), #6b7ff0); box-shadow: var(--neu-out-sm); }
+.t-avatar.navy { background: linear-gradient(135deg, var(--navy), #1e3a6e); }
+.t-avatar.orange { background: linear-gradient(135deg, var(--orange), #f07244); }
+.t-user { font-size: 13px; font-weight: 700; color: var(--navy); }
+.t-date { font-size: 11px; color: var(--text-dim); font-weight: 600; }
+.t-field { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; background: var(--bg); box-shadow: var(--neu-in-sm); color: var(--text-sub); }
+.t-from { color: var(--text-dim); text-decoration: line-through; font-size: 12px; font-weight: 600; }
+.t-to { color: var(--green); font-weight: 800; font-size: 12px; }
 
-/* ════════════════════════════════
-   MODAL — GLASS
-════════════════════════════════ */
-.modal-overlay { position: fixed; inset: 0; background: rgba(4,8,20,0.7); backdrop-filter: blur(8px); z-index: 200; display: none; align-items: center; justify-content: center; }
+/* ══════════════════════════════
+   MODAL — NEU
+══════════════════════════════ */
+.modal-overlay { position: fixed; inset: 0; background: rgba(163,177,198,0.5); backdrop-filter: blur(4px); z-index: 200; display: none; align-items: center; justify-content: center; }
 .modal-overlay.open { display: flex; }
-.glass-modal {
-  background: rgba(13,21,48,0.85);
-  backdrop-filter: blur(32px);
-  -webkit-backdrop-filter: blur(32px);
-  border: 1px solid var(--border-hi);
-  border-radius: 20px; width: 460px; padding: 28px;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+.neu-modal {
+  background: var(--bg); border-radius: 20px; width: 460px; padding: 28px;
+  box-shadow: 12px 12px 32px var(--shadow-dark), -12px -12px 32px var(--shadow-light);
 }
-.modal-title { font-size: 17px; font-weight: 900; margin-bottom: 6px; }
-.modal-sub { font-size: 13px; color: var(--text-sub); margin-bottom: 20px; }
-.modal-radio {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 14px 16px; border: 1px solid var(--border);
-  border-radius: 12px; cursor: pointer; margin-bottom: 10px;
-  transition: all 0.2s; background: var(--glass);
-}
-.modal-radio.selected { border-color: rgba(76,100,217,0.4); background: rgba(76,100,217,0.1); box-shadow: 0 0 16px rgba(76,100,217,0.1); }
+.modal-title { font-size: 17px; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+.modal-sub { font-size: 13px; color: var(--text-sub); margin-bottom: 20px; font-weight: 600; }
+.modal-radio { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-radius: 12px; cursor: pointer; margin-bottom: 10px; transition: all 0.2s; background: var(--bg); box-shadow: var(--neu-in-sm); }
+.modal-radio.selected { box-shadow: var(--neu-out-sm); background: linear-gradient(135deg, #eff6ff, #e8ecf4); }
 .modal-radio input { accent-color: var(--indigo); margin-top: 3px; }
-.modal-radio-label { font-size: 14px; font-weight: 700; }
-.modal-radio-sub { font-size: 12px; color: var(--text-dim); }
+.modal-radio-label { font-size: 14px; font-weight: 700; color: var(--navy); }
+.modal-radio-sub { font-size: 12px; color: var(--text-dim); font-weight: 600; }
 .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
 </style>
 </head>
 <body>
 
-<!-- ══ HEADER ══ -->
+<!-- HEADER -->
 <div class="top-header">
   <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
   <svg xmlns="http://www.w3.org/2000/svg" width="140" height="18" viewBox="0 0 312 40" fill="none" style="flex-shrink:0;">
-    <path d="M0 39.1963L16.4561 0.187256L33.1085 39.1963H27.9292L24.1922 31.0012H11.9323L14.0302 26.3463H22.3565L16.4561 12.644L5.31057 39.1963H0Z" fill="#fff"/>
+    <path d="M0 39.1963L16.4561 0.187256L33.1085 39.1963H27.9292L24.1922 31.0012H11.9323L14.0302 26.3463H22.3565L16.4561 12.644L5.31057 39.1963H0Z" fill="#0f1f3d"/>
     <path fill-rule="evenodd" clip-rule="evenodd" d="M242.333 1.5437L226.283 39.673H232.871L235.815 31.963H248.712L251.796 39.673H258.454L242.333 1.5437ZM242.263 15.7721L237.918 26.6361H246.819L242.263 15.7721Z" fill="#DE5E2D"/>
     <path d="M276.281 10.5288L280.493 6.97067C272.286 -3.56318 258.655 6.15508 263.719 15.6119L276.281 28.6099C276.879 29.7011 277.249 30.1948 276.281 31.3692C273.47 35.06 270.948 34.7253 265.752 30.9336L261.116 34.3005C266.796 41.3053 275.504 42.1671 281.219 34.7095C283.723 29.8459 283.118 27.2501 279.258 22.8007L268.947 12.6347C267.238 9.3105 272.343 6.1589 276.281 10.5288Z" fill="#DE5E2D"/>
-    <path d="M75.2023 30.2859C72.9793 33.9379 69.5875 36.3059 65.6049 37.8608C61.6222 39.4156 57.2391 39.6188 53.1297 38.4391C49.0203 37.2594 45.4123 34.7621 42.8609 31.3315C40.3095 27.9008 38.956 23.7269 39.0086 19.4519C39.0611 15.1768 40.5169 11.0375 43.152 7.67063C45.787 4.30381 49.4553 1.89604 53.5925 0.817771C57.7296 -0.260502 62.1065 0.050452 66.0497 1.70279C69.9928 3.35514 73.3601 5.5266 75.4927 9.23214L71.8551 12.545C70.2588 9.77118 67.1844 7.09618 64.2327 5.85932C61.2811 4.62246 57.8298 4.45844 54.733 5.26558C51.6361 6.07272 48.7687 8.13138 46.7963 10.6516C44.8238 13.1718 43.7882 16.2518 43.7489 19.4519C43.7095 22.652 44.638 25.9805 46.5479 28.5485C48.4578 31.1165 51.6569 33.0939 54.733 33.9769C57.809 34.86 61.2515 34.6319 64.2327 33.468C67.2139 32.3041 69.8987 29.8963 71.5628 27.1626L75.2023 30.2859Z" fill="#fff"/>
-    <path d="M83.7849 6.46582L85.4902 1.5437H114.559L112.854 6.46582H101.614V39.3717H96.4977V6.46582H83.7849Z" fill="#fff"/>
-    <path d="M125.3 1.51587L130.354 0C129.964 26.5753 130.354 34.5783 140.532 34.5783C149.42 34.5783 150.026 28.278 149.412 1.51587L154.681 0C156.096 34.5783 154.032 39.3428 140.532 39.3428C123.524 39.3428 124.393 27.0497 125.3 1.51587Z" fill="#fff"/>
-    <path d="M163.569 39.2405L180.022 0.275635L196.625 39.2405H191.24L187.8 31.1633H175.385L177.704 26.2273H185.93L180.022 12.915L168.953 39.2405H163.569Z" fill="#fff"/>
+    <path d="M75.2023 30.2859C72.9793 33.9379 69.5875 36.3059 65.6049 37.8608C61.6222 39.4156 57.2391 39.6188 53.1297 38.4391C49.0203 37.2594 45.4123 34.7621 42.8609 31.3315C40.3095 27.9008 38.956 23.7269 39.0086 19.4519C39.0611 15.1768 40.5169 11.0375 43.152 7.67063C45.787 4.30381 49.4553 1.89604 53.5925 0.817771C57.7296 -0.260502 62.1065 0.050452 66.0497 1.70279C69.9928 3.35514 73.3601 5.5266 75.4927 9.23214L71.8551 12.545C70.2588 9.77118 67.1844 7.09618 64.2327 5.85932C61.2811 4.62246 57.8298 4.45844 54.733 5.26558C51.6361 6.07272 48.7687 8.13138 46.7963 10.6516C44.8238 13.1718 43.7882 16.2518 43.7489 19.4519C43.7095 22.652 44.638 25.9805 46.5479 28.5485C48.4578 31.1165 51.6569 33.0939 54.733 33.9769C57.809 34.86 61.2515 34.6319 64.2327 33.468C67.2139 32.3041 69.8987 29.8963 71.5628 27.1626L75.2023 30.2859Z" fill="#0f1f3d"/>
+    <path d="M83.7849 6.46582L85.4902 1.5437H114.559L112.854 6.46582H101.614V39.3717H96.4977V6.46582H83.7849Z" fill="#0f1f3d"/>
+    <path d="M125.3 1.51587L130.354 0C129.964 26.5753 130.354 34.5783 140.532 34.5783C149.42 34.5783 150.026 28.278 149.412 1.51587L154.681 0C156.096 34.5783 154.032 39.3428 140.532 39.3428C123.524 39.3428 124.393 27.0497 125.3 1.51587Z" fill="#0f1f3d"/>
+    <path d="M163.569 39.2405L180.022 0.275635L196.625 39.2405H191.24L187.8 31.1633H175.385L177.704 26.2273H185.93L180.022 12.915L168.953 39.2405H163.569Z" fill="#0f1f3d"/>
     <path d="M227.211 8.24744V3.06982H204.917V39.9219H210.826V23.3537H224.165V17.8107H210.826V8.24744H227.211Z" fill="#DE5E2D"/>
     <path d="M285.357 8.2251V2.90112H311.36V8.2251H301.217V39.8885H295.388V8.2251H285.357Z" fill="#DE5E2D"/>
   </svg>
@@ -542,8 +474,6 @@ body {
 </div>
 
 <div class="app-body">
-
-  <!-- ══ SIDEBAR ══ -->
   <aside class="sidebar">
     <nav>
       <a class="nav-item" href="index.html"><span class="nav-icon"><i class="fa-solid fa-house"></i></span> Inicio</a>
@@ -563,15 +493,12 @@ body {
     </div>
   </aside>
 
-  <!-- ══ MAIN ══ -->
   <div class="main">
-
-    <!-- BREADCRUMB -->
     <div class="breadcrumb">
       <a href="index.html"><i class="fa-solid fa-house" style="font-size:10px;"></i></a>
-      <span class="bc-sep"><i class="fa-solid fa-chevron-right" style="font-size:9px;"></i></span>
+      <i class="fa-solid fa-chevron-right" style="font-size:9px;opacity:0.4"></i>
       <a href="index.html">Procesos</a>
-      <span class="bc-sep"><i class="fa-solid fa-chevron-right" style="font-size:9px;"></i></span>
+      <i class="fa-solid fa-chevron-right" style="font-size:9px;opacity:0.4"></i>
       <span>VE-00152954</span>
     </div>
 
@@ -583,49 +510,51 @@ body {
           <div>
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
               <div class="rh-title">VE-00152954</div>
-              <span id="status-badge" class="gtag green"><i class="fa-solid fa-circle-check"></i> Completado</span>
+              <span id="status-badge" class="tag tag-green"><i class="fa-solid fa-circle-check"></i> Completado</span>
             </div>
             <div class="rh-subtitle">
-              <i class="fa-solid fa-building" style="font-size:11px;color:var(--text-dim)"></i>
+              <i class="fa-solid fa-building" style="font-size:11px;"></i>
               ACCIONA AGUA, S.A.
-              <span style="opacity:0.3">·</span>
-              Proceso #126517
-              <span class="gtag indigo">NIIF (US$)</span>
-              <span class="gtag">Pasivos Laborales</span>
-              <span class="gtag">50 trabajadores</span>
+              <span style="opacity:0.3">·</span> Proceso #126517
+              <span class="tag tag-niif">NIIF (US$)</span>
+              <span class="tag tag-tipo">Pasivos Laborales</span>
+              <span class="tag tag-tipo">50 trabajadores</span>
             </div>
           </div>
         </div>
         <div class="rh-actions">
-          <button class="btn-glass"><i class="fa-regular fa-star"></i> Seguir</button>
-          <button class="btn-glass danger"><i class="fa-solid fa-triangle-exclamation"></i> No conformidad</button>
-          <button class="btn-glass"><i class="fa-solid fa-pen"></i> Modificar</button>
-          <button class="btn-glass icon-only"><i class="fa-solid fa-print"></i></button>
-          <button id="btn-avanzar" class="btn-glass primary" style="display:none" onclick="nextStage()">
+          <button class="btn-neu"><i class="fa-regular fa-star"></i> Seguir</button>
+          <button class="btn-neu danger"><i class="fa-solid fa-triangle-exclamation"></i> No conformidad</button>
+          <button class="btn-neu"><i class="fa-solid fa-pen"></i> Modificar</button>
+          <button class="btn-neu icon-only"><i class="fa-solid fa-print"></i></button>
+          <!-- Acción nombrada por intención — cambia por etapa -->
+          <button id="btn-accion" class="btn-neu primary" style="display:none" onclick="nextStage()">
             <i class="fa-solid fa-arrow-right"></i>
-            <span id="btn-avanzar-label">Avanzar</span>
+            <span id="btn-accion-label">Acción</span>
           </button>
         </div>
       </div>
 
       <!-- PIPELINE -->
       <div class="pipeline-section">
-        <div class="pipeline-label">Progreso del proceso</div>
+        <div class="pipeline-status-row">
+          <span class="pipeline-label">Progreso</span>
+          <div class="pipeline-spacer"></div>
+        </div>
         <div class="pipeline-track" id="pipeline-track">
           <div class="pipeline-progress" id="pipeline-progress"></div>
-          <!-- Steps rendered by JS -->
         </div>
       </div>
 
       <!-- CAMPOS CLAVE -->
       <div class="campos-section">
+        <div class="ck-section-label">Campos clave</div>
         <div id="campos-clave"></div>
       </div>
 
       <!-- ORIENTACIÓN -->
       <div id="orientacion-wrap"></div>
-
-    </div><!-- /record-header -->
+    </div>
 
     <!-- TABS -->
     <div class="tabs-bar">
@@ -635,72 +564,63 @@ body {
       <div class="tab" onclick="showTab('historial',this)"><i class="fa-solid fa-clock-rotate-left"></i> Historial <span class="tab-count">6</span></div>
     </div>
 
-    <!-- CONTENT -->
     <div class="content-area">
 
-      <!-- TAB: DETALLES -->
+      <!-- DETALLES -->
       <div id="tab-detalles" class="tab-panel active">
         <div class="cards-grid">
 
-          <div class="glass-card">
-            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-file-contract"></i></div><div class="gc-title">Información del proceso</div><button class="gc-action"><i class="fa-solid fa-pen"></i></button></div>
-            <div class="gc-body">
-              <div class="field-grid">
-                <div class="field"><div class="fl">Nombre VE</div><div class="fv">VE-00152954</div></div>
-                <div class="field"><div class="fl">N° de proceso</div><div class="fv">126517</div></div>
-                <div class="field"><div class="fl">Tipo de tarifa</div><div class="fv">NIIF (US$)</div></div>
-                <div class="field"><div class="fl">Tipo de servicio</div><div class="fv">Tradicional</div></div>
-                <div class="field"><div class="fl">Fecha de valoración</div><div class="fv">31/12/2025</div></div>
-                <div class="field"><div class="fl">Forma de pago</div><div class="fv">De contado</div></div>
-              </div>
-            </div>
+          <div class="neu-card">
+            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-file-contract"></i></div><div class="nc-title">Información del proceso</div><button class="nc-action"><i class="fa-solid fa-pen"></i></button></div>
+            <div class="nc-body"><div class="field-grid">
+              <div class="field"><div class="fl">Nombre VE</div><div class="fv">VE-00152954</div></div>
+              <div class="field"><div class="fl">N° de proceso</div><div class="fv">126517</div></div>
+              <div class="field"><div class="fl">Tipo de tarifa</div><div class="fv">NIIF (US$)</div></div>
+              <div class="field"><div class="fl">Tipo de servicio</div><div class="fv">Tradicional</div></div>
+              <div class="field"><div class="fl">Fecha valoración</div><div class="fv">31/12/2025</div></div>
+              <div class="field"><div class="fl">Forma de pago</div><div class="fv">De contado</div></div>
+            </div></div>
           </div>
 
-          <div class="glass-card">
-            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-building"></i></div><div class="gc-title">Cliente</div></div>
-            <div class="gc-body">
-              <div class="field-grid">
-                <div class="field"><div class="fl">Cuenta</div><div class="fv link">ACCIONA AGUA, S.A.</div></div>
-                <div class="field"><div class="fl">Ciudad</div><div class="fv">Quito</div></div>
-                <div class="field"><div class="fl">Segmento</div><div class="fv">Mediana</div></div>
-                <div class="field"><div class="fl">Cliente VIP</div><div class="fv dim">No</div></div>
-                <div class="field"><div class="fl">Trabajadores activos</div><div class="fv">50</div></div>
-                <div class="field"><div class="fl">Trab. Jubl. pendientes</div><div class="fv">50</div></div>
-              </div>
-            </div>
+          <div class="neu-card">
+            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-building"></i></div><div class="nc-title">Cliente</div></div>
+            <div class="nc-body"><div class="field-grid">
+              <div class="field"><div class="fl">Cuenta</div><div class="fv link">ACCIONA AGUA, S.A.</div></div>
+              <div class="field"><div class="fl">Ciudad</div><div class="fv">Quito</div></div>
+              <div class="field"><div class="fl">Segmento</div><div class="fv">Mediana</div></div>
+              <div class="field"><div class="fl">Cliente VIP</div><div class="fv dim">No</div></div>
+              <div class="field"><div class="fl">Trabajadores</div><div class="fv">50</div></div>
+              <div class="field"><div class="fl">Trab. Jubl. pend.</div><div class="fv">50</div></div>
+            </div></div>
           </div>
 
-          <div class="glass-card">
-            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-user-check"></i></div><div class="gc-title">Asignación y equipo</div></div>
-            <div class="gc-body">
-              <div class="field-grid">
-                <div class="field"><div class="fl">Propietario</div><div class="fv link">Samantha Chavez</div></div>
-                <div class="field"><div class="fl">Analista</div><div class="fv">Samantha Chavez</div></div>
-                <div class="field"><div class="fl">Equipo</div><div class="fv link">Equipo 3 - P. Beltrán</div></div>
-                <div class="field"><div class="fl">Aprobación</div><div class="fv ok"><i class="fa-solid fa-check-circle"></i> Aprobado</div></div>
-                <div class="field"><div class="fl">Vendedor</div><div class="fv link">Samantha Chavez</div></div>
-                <div class="field"><div class="fl">Contacto</div><div class="fv link">Samantha Flores</div></div>
-              </div>
-            </div>
+          <div class="neu-card">
+            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-user-check"></i></div><div class="nc-title">Asignación y equipo</div></div>
+            <div class="nc-body"><div class="field-grid">
+              <div class="field"><div class="fl">Propietario único</div><div class="fv link">Samantha Chavez</div></div>
+              <div class="field"><div class="fl">Analista</div><div class="fv">Samantha Chavez</div></div>
+              <div class="field"><div class="fl">Equipo</div><div class="fv link">Equipo 3 - P. Beltrán</div></div>
+              <div class="field"><div class="fl">Aprobación</div><div class="fv ok"><i class="fa-solid fa-check-circle"></i> Aprobado</div></div>
+              <div class="field"><div class="fl">Vendedor</div><div class="fv link">Samantha Chavez</div></div>
+              <div class="field"><div class="fl">Contacto</div><div class="fv link">Samantha Flores</div></div>
+            </div></div>
           </div>
 
-          <div class="glass-card">
-            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-calendar-days"></i></div><div class="gc-title">Fechas de gestión</div></div>
-            <div class="gc-body">
-              <div class="field-grid">
-                <div class="field"><div class="fl">Fecha solicitud</div><div class="fv">12/06/2025</div></div>
-                <div class="field"><div class="fl">Fecha asignación</div><div class="fv">12/06/2025</div></div>
-                <div class="field"><div class="fl">Entrega calculada</div><div class="fv">23/06/2025</div></div>
-                <div class="field"><div class="fl">Entrega real</div><div class="fv">19/11/2025</div></div>
-                <div class="field"><div class="fl">Días de demora</div><div class="fv warn"><i class="fa-solid fa-clock"></i> 115 días</div></div>
-                <div class="field"><div class="fl">Pedido urgente</div><div class="fv dim">No</div></div>
-              </div>
-            </div>
+          <div class="neu-card">
+            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-calendar-days"></i></div><div class="nc-title">Fechas de gestión</div></div>
+            <div class="nc-body"><div class="field-grid">
+              <div class="field"><div class="fl">Fecha solicitud</div><div class="fv">12/06/2025</div></div>
+              <div class="field"><div class="fl">Fecha asignación</div><div class="fv">12/06/2025</div></div>
+              <div class="field"><div class="fl">Entrega calculada</div><div class="fv">23/06/2025</div></div>
+              <div class="field"><div class="fl">Entrega real</div><div class="fv">19/11/2025</div></div>
+              <div class="field"><div class="fl">Días de demora</div><div class="fv warn"><i class="fa-solid fa-clock"></i> 115 días</div></div>
+              <div class="field"><div class="fl">Pedido urgente</div><div class="fv dim">No</div></div>
+            </div></div>
           </div>
 
-          <div class="glass-card">
-            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-clipboard-check"></i></div><div class="gc-title">Evaluación de requerimiento</div></div>
-            <div class="gc-body">
+          <div class="neu-card">
+            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-clipboard-check"></i></div><div class="nc-title">Evaluación de requerimiento</div></div>
+            <div class="nc-body">
               <div class="eval-grid">
                 <div class="eval-item on"><div class="eval-chk yes"><i class="fa-solid fa-check" style="font-size:8px;"></i></div> Req. NIIF</div>
                 <div class="eval-item"><div class="eval-chk no"></div> Req. NEC</div>
@@ -717,9 +637,9 @@ body {
             </div>
           </div>
 
-          <div class="glass-card">
-            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-star-half-stroke"></i></div><div class="gc-title">Scoring del informe</div></div>
-            <div class="gc-body">
+          <div class="neu-card">
+            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-star-half-stroke"></i></div><div class="nc-title">Scoring del informe</div></div>
+            <div class="nc-body">
               <div class="score-grid">
                 <div class="score-card"><div class="score-dim">Segmento</div><div class="score-pts">20</div><div class="score-max">/ 20</div></div>
                 <div class="score-card"><div class="score-dim">Antigüedad</div><div class="score-pts">20</div><div class="score-max">/ 20</div></div>
@@ -728,14 +648,14 @@ body {
               </div>
               <div class="sema-bar">
                 <div class="sema-lg"></div>
-                <div><div style="font-size:13px;font-weight:800;color:var(--green);">Revisión aprobada</div><div style="font-size:11px;color:rgba(16,185,129,0.6);">Score total: 70/70 puntos</div></div>
+                <div><div style="font-size:13px;font-weight:800;color:var(--green);">Revisión aprobada</div><div style="font-size:11px;color:rgba(5,150,105,0.6);font-weight:600;">Score total: 70/70 puntos</div></div>
               </div>
             </div>
           </div>
 
-          <div class="glass-card card-full">
-            <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-dollar-sign"></i></div><div class="gc-title">Resumen financiero</div></div>
-            <div class="gc-body">
+          <div class="neu-card card-full">
+            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-dollar-sign"></i></div><div class="nc-title">Resumen financiero</div></div>
+            <div class="nc-body">
               <div class="fin-grid">
                 <div class="fin-item"><div class="fin-lbl">Total base</div><div class="fin-val">$315,00</div></div>
                 <div class="fin-item"><div class="fin-lbl">Total neto</div><div class="fin-val">$315,00</div></div>
@@ -749,252 +669,262 @@ body {
         </div>
       </div>
 
-      <!-- TAB: ITEMS -->
+      <!-- ITEMS -->
       <div id="tab-items" class="tab-panel">
-        <div class="glass-card">
-          <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-cart-shopping"></i></div><div class="gc-title">Items vendidos <span style="color:var(--text-dim);font-weight:400;">(2)</span></div></div>
+        <div class="neu-card">
+          <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-cart-shopping"></i></div><div class="nc-title">Items vendidos (2)</div></div>
           <table class="items-table">
-            <thead>
-              <tr><th>#</th><th>Código</th><th>Producto</th><th>Familia</th><th>Cant.</th><th>P. Unitario</th><th>Total</th><th>Días</th><th>Ejecutable</th><th></th></tr>
-            </thead>
+            <thead><tr><th>#</th><th>Código</th><th>Producto</th><th>Familia</th><th>Cant.</th><th>P. Unitario</th><th>Total</th><th>Días</th><th>Ejecutable</th><th></th></tr></thead>
             <tbody>
-              <tr><td style="color:var(--text-dim)">1</td><td><span class="item-code">I-212240</span></td><td style="font-weight:700;color:var(--text)">Desahucio NIIF</td><td>Actuarial</td><td>50</td><td>$3,70</td><td style="font-weight:800;color:var(--text)">$185,00</td><td>4</td><td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td><td><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td></tr>
-              <tr><td style="color:var(--text-dim)">2</td><td><span class="item-code">I-212241</span></td><td style="font-weight:700;color:var(--text)">Jubilación Patronal</td><td>Actuarial</td><td>50</td><td>$2,60</td><td style="font-weight:800;color:var(--text)">$130,00</td><td>4</td><td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td><td><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td></tr>
+              <tr><td style="color:var(--text-dim)">1</td><td><span class="item-code">I-212240</span></td><td style="font-weight:700;color:var(--navy)">Desahucio NIIF</td><td>Actuarial</td><td>50</td><td>$3,70</td><td style="font-weight:800;color:var(--navy)">$185,00</td><td>4</td><td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td><td><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td></tr>
+              <tr><td style="color:var(--text-dim)">2</td><td><span class="item-code">I-212241</span></td><td style="font-weight:700;color:var(--navy)">Jubilación Patronal</td><td>Actuarial</td><td>50</td><td>$2,60</td><td style="font-weight:800;color:var(--navy)">$130,00</td><td>4</td><td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td><td><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td></tr>
               <tr class="total-row"><td colspan="6" style="text-align:right;font-size:12px;">SUBTOTAL</td><td>$315,00</td><td colspan="3"></td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- TAB: DOCUMENTOS -->
+      <!-- DOCUMENTOS -->
       <div id="tab-documentos" class="tab-panel">
         <div style="margin-bottom:20px;">
-          <div class="docs-hrow">
-            <div class="docs-htitle"><i class="fa-solid fa-file-lines" style="color:#8fa4f8;"></i> Documentos Venta Efectiva <span style="color:var(--text-dim);font-weight:400;">(0)</span></div>
-            <button class="btn-glass" onclick="document.getElementById('modal-doc').classList.add('open')"><i class="fa-solid fa-plus"></i> Nuevo</button>
-          </div>
-          <p style="color:var(--text-dim);font-size:13px;">No hay documentos registrados.</p>
+          <div class="docs-hrow"><div class="docs-htitle"><i class="fa-solid fa-file-lines" style="color:var(--indigo);"></i> Documentos Venta Efectiva <span style="color:var(--text-dim);font-weight:400;">(0)</span></div><button class="btn-neu" onclick="document.getElementById('modal-doc').classList.add('open')"><i class="fa-solid fa-plus"></i> Nuevo</button></div>
+          <p style="color:var(--text-dim);font-size:13px;font-weight:600;">No hay documentos registrados.</p>
         </div>
         <div>
-          <div class="docs-hrow">
-            <div class="docs-htitle"><i class="fa-solid fa-paperclip" style="color:#8fa4f8;"></i> Archivos <span style="color:var(--text-dim);font-weight:400;">(0)</span></div>
-            <button class="btn-glass"><i class="fa-solid fa-upload"></i> Agregar</button>
-          </div>
-          <div class="upload-zone">
-            <div style="font-size:32px;opacity:0.25;margin-bottom:12px;"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-            <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Arrastra archivos aquí</div>
-            <div style="font-size:11px;opacity:0.5;">PDF, Excel, Word · Máx. 25 MB</div>
-          </div>
+          <div class="docs-hrow"><div class="docs-htitle"><i class="fa-solid fa-paperclip" style="color:var(--indigo);"></i> Archivos <span style="color:var(--text-dim);font-weight:400;">(0)</span></div><button class="btn-neu"><i class="fa-solid fa-upload"></i> Agregar</button></div>
+          <div class="upload-zone"><div style="font-size:32px;opacity:0.2;margin-bottom:12px;"><i class="fa-solid fa-cloud-arrow-up"></i></div><div style="font-size:13px;font-weight:700;margin-bottom:4px;">Arrastra archivos aquí</div><div style="font-size:11px;font-weight:600;">PDF, Excel, Word · Máx. 25 MB</div></div>
         </div>
       </div>
 
-      <!-- TAB: HISTORIAL -->
+      <!-- HISTORIAL -->
       <div id="tab-historial" class="tab-panel">
-        <div class="glass-card">
-          <div class="gc-header"><div class="gc-icon"><i class="fa-solid fa-clock-rotate-left"></i></div><div class="gc-title">Historial de cambios</div></div>
-          <div class="gc-body" style="padding:0 20px;">
-            <div class="timeline-item"><div class="t-avatar navy">AD</div><div><div style="display:flex;gap:8px;margin-bottom:5px;"><span class="t-user">Admin</span><span class="t-date">19/11/2025, 14:05</span></div><div style="font-size:12px;color:var(--text-dim);margin-bottom:5px;">Campo: <span class="t-field">Estado</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="t-from">Datos validados</span><i class="fa-solid fa-arrow-right" style="font-size:10px;color:var(--text-dim)"></i><span class="t-to">Completado</span></div></div></div>
-            <div class="timeline-item"><div class="t-avatar navy">AD</div><div><div style="display:flex;gap:8px;margin-bottom:5px;"><span class="t-user">Admin</span><span class="t-date">19/11/2025, 14:05</span></div><div style="font-size:12px;color:var(--text-dim);margin-bottom:5px;">Campo: <span class="t-field">Aprobado</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="t-from">—</span><i class="fa-solid fa-arrow-right" style="font-size:10px;color:var(--text-dim)"></i><span class="t-to"><i class="fa-solid fa-check"></i> Aprobado</span></div></div></div>
-            <div class="timeline-item"><div class="t-avatar orange">SC</div><div><div style="display:flex;gap:8px;margin-bottom:5px;"><span class="t-user">Samantha Chavez</span><span class="t-date">12/06/2025, 09:52</span></div><div style="font-size:12px;color:var(--text-dim);margin-bottom:5px;">Campo: <span class="t-field">Estado</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="t-from">Planificado</span><i class="fa-solid fa-arrow-right" style="font-size:10px;color:var(--text-dim)"></i><span class="t-to">Datos validados</span></div></div></div>
+        <div class="neu-card">
+          <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-clock-rotate-left"></i></div><div class="nc-title">Historial de cambios</div></div>
+          <div class="nc-body" style="padding:0 20px;">
+            <div class="timeline-item"><div class="t-avatar navy">AD</div><div><div style="display:flex;gap:8px;margin-bottom:5px;align-items:center;"><span class="t-user">Admin</span><span class="t-date">19/11/2025, 14:05</span></div><div style="font-size:12px;color:var(--text-dim);margin-bottom:5px;font-weight:600;">Campo: <span class="t-field">Estado</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="t-from">Datos validados</span><i class="fa-solid fa-arrow-right" style="font-size:10px;color:var(--text-dim)"></i><span class="t-to">Completado</span></div></div></div>
+            <div class="timeline-item"><div class="t-avatar navy">AD</div><div><div style="display:flex;gap:8px;margin-bottom:5px;align-items:center;"><span class="t-user">Admin</span><span class="t-date">19/11/2025, 14:05</span></div><div style="font-size:12px;color:var(--text-dim);margin-bottom:5px;font-weight:600;">Campo: <span class="t-field">Aprobado</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="t-from">—</span><i class="fa-solid fa-arrow-right" style="font-size:10px;color:var(--text-dim)"></i><span class="t-to"><i class="fa-solid fa-check"></i> Aprobado</span></div></div></div>
+            <div class="timeline-item"><div class="t-avatar orange">SC</div><div><div style="display:flex;gap:8px;margin-bottom:5px;align-items:center;"><span class="t-user">Samantha Chavez</span><span class="t-date">12/06/2025, 09:52</span></div><div style="font-size:12px;color:var(--text-dim);margin-bottom:5px;font-weight:600;">Campo: <span class="t-field">Estado</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="t-from">Planificado</span><i class="fa-solid fa-arrow-right" style="font-size:10px;color:var(--text-dim)"></i><span class="t-to">Datos validados</span></div></div></div>
           </div>
         </div>
       </div>
 
-    </div><!-- /content-area -->
-  </div><!-- /main -->
-</div><!-- /app-body -->
+    </div>
+  </div>
+</div>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modal-doc">
-  <div class="glass-modal">
+  <div class="neu-modal">
     <div class="modal-title">Crear documento</div>
     <div class="modal-sub">Selecciona el tipo de acceso para este documento.</div>
     <label class="modal-radio selected" onclick="selRadio(this)">
       <input type="radio" name="doc-type" checked>
-      <div><div class="modal-radio-label"><i class="fa-solid fa-globe" style="color:#8fa4f8;"></i> Público</div><div class="modal-radio-sub">Visible para todos los miembros del equipo</div></div>
+      <div><div class="modal-radio-label"><i class="fa-solid fa-globe" style="color:var(--indigo);"></i> Público</div><div class="modal-radio-sub">Visible para todos los miembros del equipo</div></div>
     </label>
     <label class="modal-radio" onclick="selRadio(this)">
       <input type="radio" name="doc-type">
       <div><div class="modal-radio-label"><i class="fa-solid fa-lock" style="color:var(--text-sub);"></i> Confidencial</div><div class="modal-radio-sub">Solo visible para propietarios y administradores</div></div>
     </label>
     <div class="modal-actions">
-      <button class="btn-glass" onclick="document.getElementById('modal-doc').classList.remove('open')">Cancelar</button>
-      <button class="btn-glass primary">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+      <button class="btn-neu" onclick="document.getElementById('modal-doc').classList.remove('open')">Cancelar</button>
+      <button class="btn-neu primary">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
     </div>
   </div>
 </div>
 
 <script>
-// ── STAGE DATA ─────────────────────────────────────────────────────
+// ── STAGE DATA — acciones nombradas por INTENCIÓN (UX doc) ────────
 const STAGES = [
   { name:'Planificado', short:'Planificado',
+    accion: { label:'Confirmar datos', icon:'fa-check' },
     campos:[
       {icon:'fa-users',label:'Equipo',value:'Equipo 3 - P. Beltrán',cls:'link'},
       {icon:'fa-calendar',label:'Fecha asignación',value:'12/06/2025',cls:''},
       {icon:'fa-circle-check',label:'Asignado',value:'<i class="fa-solid fa-check" style="color:var(--green)"></i> Sí',cls:'ok'},
-      {icon:'fa-user',label:'Propietario',value:'Samantha Chavez',cls:'link'},
-      {icon:'fa-exclamation-circle',label:'Datos incompletos',value:'No',cls:'dim'},
-    ], orientacion:null },
+      {icon:'fa-user',label:'Propietario único',value:'Samantha Chavez',cls:'link'},
+    ],
+    toggle: null, orientacion: null },
   { name:'Datos validados', short:'Datos validados',
+    accion: { label:'Iniciar proceso', icon:'fa-play' },
     campos:[
       {icon:'fa-users',label:'Total trabajadores',value:'50',cls:''},
       {icon:'fa-circle',label:'Semáforo asignación',value:'<span class="sema verde"></span> Verde',cls:''},
       {icon:'fa-paperclip',label:'Archivo adjunto',value:'Sin archivo',cls:'dim'},
-      {icon:'fa-exclamation-circle',label:'Datos incompletos',value:'No',cls:'dim'},
-    ], orientacion:null },
-  { name:'En curso', short:'En curso',
-    campos:[
-      {icon:'fa-paperclip',label:'Archivo adjunto',value:'Sin archivo',cls:'dim'},
-      {icon:'fa-star',label:'Resultado Score',value:'Pendiente',cls:'dim'},
-      {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
     ],
-    orientacion:{tipo:'warn',title:'Orientación hacia el éxito',text:'Se requiere cargar los archivos para revisión de la línea de supervisión de la Venta Efectiva. En esta etapa se obtiene en forma automática el Score — espere un minuto y refresque la ventana para verificar el resultado.'} },
+    toggle: { label:'Datos incompletos', on: false },
+    orientacion: null },
+  { name:'En curso', short:'En curso',
+    accion: { label:'Enviar a revisión', icon:'fa-paper-plane' },
+    campos:[
+      {icon:'fa-paperclip',label:'Archivo adjunto (requerido)',value:'Sin archivo',cls:'warn'},
+      {icon:'fa-star',label:'Score obtenido',value:'Calculando…',cls:'dim'},
+    ],
+    toggle: { label:'Datos incompletos', on: true },
+    orientacion:{tipo:'warn',title:'Orientación hacia el éxito',text:'Carga los archivos del estudio para que el sistema calcule el Score automáticamente. Una vez listo, usa "Enviar a revisión" para notificar a los revisores.'} },
   { name:'Solicita revisión', short:'Solicita revisión',
+    accion: null,
     campos:[
       {icon:'fa-star',label:'Score',value:'70 / 70',cls:'ok'},
       {icon:'fa-circle',label:'Semáforo revisión',value:'<span class="sema verde"></span> Verde',cls:''},
       {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
     ],
-    orientacion:{tipo:'info',title:'Orientación hacia el éxito',text:'Se han enviado las notificaciones correspondientes a los distintos filtros de revisión. Una vez que se apruebe completamente su proceso, se le notificará.'} },
+    toggle: null,
+    orientacion:{tipo:'info',title:'En espera de revisores',text:'Las notificaciones ya fueron enviadas. Cuando los revisores completen su revisión, el proceso avanzará automáticamente. No se requiere acción de tu parte.'} },
   { name:'Revisión coordinación', short:'Rev. Coordinación',
+    accion: { label:'Aprobar coordinación', icon:'fa-check-double' },
     campos:[
       {icon:'fa-triangle-exclamation',label:'No conformidad por',value:'—',cls:'dim'},
       {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
-    ], orientacion:null },
+    ],
+    toggle: null, orientacion: null },
   { name:'Revisión dirección', short:'Rev. Dirección',
+    accion: { label:'Aprobar dirección', icon:'fa-check-double' },
     campos:[
       {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
-    ], orientacion:null },
+    ],
+    toggle: null, orientacion: null },
   { name:'Para entregar', short:'Para entregar',
+    accion: { label:'Marcar entregado', icon:'fa-box-archive' },
     campos:[
       {icon:'fa-check-double',label:'Aprobado',value:'<i class="fa-solid fa-check" style="color:var(--green)"></i> Sí',cls:'ok'},
-    ], orientacion:null },
+    ],
+    toggle: null, orientacion: null },
   { name:'Revisión cliente', short:'Rev. Cliente',
+    accion: { label:'Aplicar cambios del cliente', icon:'fa-rotate-left' },
     campos:[
       {icon:'fa-user-check',label:'Estado cliente',value:'En revisión',cls:''},
-    ], orientacion:null },
+    ],
+    toggle: null, orientacion: null },
   { name:'Completado', short:'Completado',
+    accion: null,
     campos:[
       {icon:'fa-calendar-check',label:'Fecha de entrega',value:'19/11/2025',cls:'ok'},
       {icon:'fa-calendar',label:'Fecha calculada',value:'23/06/2025',cls:''},
       {icon:'fa-clock',label:'Días de entrega real',value:'115 días',cls:'warn'},
-    ], orientacion:null },
+    ],
+    toggle: null, orientacion: null },
 ];
 
 let current = 8;
 
 function buildPipeline() {
   const track = document.getElementById('pipeline-track');
-  // Keep progress bar
   STAGES.forEach((s,i) => {
     const el = document.createElement('div');
-    el.className = 'step';
-    el.dataset.idx = i;
+    el.className = 'step'; el.dataset.idx = i;
     el.onclick = () => setStage(i);
-    el.innerHTML = `
-      <div class="step-circle" id="sc-${i}">
-        <i class="fa-solid ${i < current ? 'fa-check' : i === current && current===8 ? 'fa-circle-check' : i === current ? 'fa-circle-dot' : 'fa-circle'}" style="font-size:12px;"></i>
-      </div>
-      <div class="step-label">${s.short}</div>`;
+    el.innerHTML = `<div class="step-circle" id="sc-${i}"></div><div class="step-label">${s.short}</div>`;
     track.appendChild(el);
   });
-  updatePipelineVisuals(current);
+  updateVisuals(current);
 }
 
-function updatePipelineVisuals(idx) {
+function updateVisuals(idx) {
   document.querySelectorAll('.step').forEach((el,i) => {
     el.className = 'step';
     const circle = el.querySelector('.step-circle');
-    const icon = circle.querySelector('i');
     if (i < idx) {
       el.classList.add('done');
-      icon.className = 'fa-solid fa-check';
+      circle.innerHTML = '<i class="fa-solid fa-check" style="font-size:11px;"></i>';
     } else if (i === idx) {
       el.classList.add(idx === 8 ? 'active-end' : 'active');
-      icon.className = `fa-solid ${idx===8 ? 'fa-circle-check' : 'fa-circle-dot'}`;
+      circle.innerHTML = i === 8
+        ? '<i class="fa-solid fa-circle-check" style="font-size:12px;"></i>'
+        : `<span style="font-size:11px;font-weight:900;">${i+1}</span>`;
     } else {
-      icon.className = 'fa-regular fa-circle';
-      icon.style.fontSize = '10px';
+      circle.innerHTML = `<span style="font-size:11px;font-weight:600;color:var(--text-dim);">${i+1}</span>`;
     }
   });
-  // Progress bar width
   const pct = idx === 0 ? 0 : (idx / (STAGES.length - 1)) * 100;
   document.getElementById('pipeline-progress').style.width = pct + '%';
 }
 
 function renderCampos(idx) {
   const stage = STAGES[idx];
-  const ckHtml = stage.campos.map(c => `
-    <div class="ck-pill">
+  let html = '<div class="ck-row">';
+  stage.campos.forEach(c => {
+    html += `<div class="ck-pill"><div class="ck-label"><i class="fa-solid ${c.icon}" style="margin-right:4px;font-size:9px;"></i>${c.label}</div><div class="ck-value ${c.cls}">${c.value}</div></div>`;
+  });
+  // Toggle datos incompletos
+  if (stage.toggle !== null) {
+    const isOn = stage.toggle.on;
+    html += `<div class="ck-pill toggle-pill" onclick="toggleDatosIncompletos(this)">
+      <label class="neu-toggle ${isOn ? 'on' : ''}" id="toggle-di">
+        <input type="checkbox" ${isOn ? 'checked' : ''}>
+        <div class="toggle-track"></div>
+        <div class="toggle-thumb"></div>
+      </label>
       <div>
-        <div class="ck-pill-label"><i class="fa-solid ${c.icon}" style="margin-right:4px;"></i>${c.label}</div>
-        <div class="ck-pill-value ${c.cls}">${c.value}</div>
+        <div class="ck-label">Datos incompletos</div>
+        <div class="ck-value ${isOn ? 'warn' : 'ok'}" id="toggle-di-val">
+          ${isOn ? '<i class="fa-solid fa-triangle-exclamation"></i> Encendido' : '<i class="fa-solid fa-check-circle"></i> Sin incompletos'}
+        </div>
       </div>
-    </div>`).join('');
-  document.getElementById('campos-clave').innerHTML = `<div class="ck-row">${ckHtml}</div>`;
+    </div>`;
+  }
+  html += '</div>';
+  document.getElementById('campos-clave').innerHTML = html;
 
+  // Orientación
   const wrap = document.getElementById('orientacion-wrap');
   if (stage.orientacion) {
     const o = stage.orientacion;
-    const icon = o.tipo === 'info' ? '💡' : '⚡';
-    wrap.innerHTML = `
-      <div class="orientacion-box ${o.tipo}">
-        <span class="or-icon">${icon}</span>
-        <div><div class="or-title">${o.title}</div><div class="or-text">${o.text}</div></div>
-      </div>`;
-  } else {
-    wrap.innerHTML = '';
-  }
+    wrap.innerHTML = `<div class="orientacion-box ${o.tipo}"><span class="or-icon">${o.tipo==='info'?'💡':'⚡'}</span><div><div class="or-title">${o.title}</div><div class="or-text">${o.text}</div></div></div>`;
+  } else { wrap.innerHTML = ''; }
 }
 
-function renderStatusBadge(idx) {
+function toggleDatosIncompletos(pill) {
+  const toggle = pill.querySelector('.neu-toggle');
+  const val = pill.querySelector('#toggle-di-val');
+  const isOn = toggle.classList.toggle('on');
+  val.className = 'ck-value ' + (isOn ? 'warn' : 'ok');
+  val.innerHTML = isOn
+    ? '<i class="fa-solid fa-triangle-exclamation"></i> Encendido'
+    : '<i class="fa-solid fa-check-circle"></i> Sin incompletos';
+}
+
+function renderAccion(idx) {
+  const stage = STAGES[idx];
   const badge = document.getElementById('status-badge');
-  if (idx === 8) {
-    badge.className = 'gtag green';
-    badge.innerHTML = '<i class="fa-solid fa-circle-check"></i> Completado';
-  } else {
-    badge.className = 'gtag indigo';
-    badge.innerHTML = `<i class="fa-solid fa-circle-dot"></i> ${STAGES[idx].name}`;
-  }
-}
+  const btn = document.getElementById('btn-accion');
 
-function renderAvanzarBtn(idx) {
-  const btn = document.getElementById('btn-avanzar');
-  if (idx < 8) {
-    btn.style.display = 'flex';
-    document.getElementById('btn-avanzar-label').textContent = `Avanzar a "${STAGES[idx+1].name}"`;
-  } else {
+  if (idx === 8) {
+    badge.className = 'tag tag-green';
+    badge.innerHTML = '<i class="fa-solid fa-circle-check"></i> Completado';
     btn.style.display = 'none';
+  } else {
+    badge.className = 'tag tag-niif';
+    badge.innerHTML = `<i class="fa-solid fa-circle-dot"></i> ${stage.name}`;
+    if (stage.accion) {
+      btn.style.display = 'flex';
+      document.getElementById('btn-accion-label').textContent = stage.accion.label;
+      btn.querySelector('i').className = `fa-solid ${stage.accion.icon}`;
+    } else {
+      btn.style.display = 'none';
+    }
   }
 }
 
 function setStage(idx) {
   current = idx;
-  updatePipelineVisuals(idx);
+  updateVisuals(idx);
   renderCampos(idx);
-  renderStatusBadge(idx);
-  renderAvanzarBtn(idx);
+  renderAccion(idx);
 }
-
 function nextStage() { if (current < 8) setStage(current + 1); }
-
-// TABS
-function showTab(name, el) {
+function showTab(n, el) {
   document.querySelectorAll('.tab-panel').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
+  document.getElementById('tab-'+n).classList.add('active');
   el.classList.add('active');
 }
-
 function selRadio(el) {
   document.querySelectorAll('.modal-radio').forEach(r => r.classList.remove('selected'));
   el.classList.add('selected');
   el.querySelector('input').checked = true;
 }
 
-// Init
-buildPipeline();
-setStage(8);
+buildPipeline(); setStage(8);
 </script>
 </body>
 </html>
