@@ -244,6 +244,23 @@ body {
 .rh-title { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; color: var(--navy); }
 .rh-subtitle { font-size: 13px; color: var(--text-sub); margin-top: 5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-weight: 600; }
 
+/* ── STATUS BADGE — más grande que .tag, para estado principal del registro ── */
+.status-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 10px;
+  font-size: 13px; font-weight: 800; letter-spacing: 0.2px;
+  cursor: default; user-select: none;
+  box-shadow: var(--neu-out-sm);
+}
+.status-badge.s-green  { background: var(--green-soft);  color: var(--green); }
+.status-badge.s-blue   { background: var(--indigo-soft); color: var(--indigo); }
+.status-badge.s-yellow { background: var(--yellow-soft); color: var(--yellow); }
+.status-badge.s-red    { background: var(--red-soft);    color: var(--red); }
+
+/* ── FIELD LABEL ICONS — icono antes del texto de la etiqueta ── */
+.fl { font-size: 10px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 5px; }
+.fl i { font-size: 9px; color: var(--text-dim); flex-shrink: 0; }
+
 /* ── TAGS / BADGES — informativos, NO clicables ──────────────
    Regla: cursor:default siempre. Sin hover shadow.
    Si necesitas un tag clicable, agrega la clase .tag-link.
@@ -763,7 +780,7 @@ body {
           <div>
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
               <div class="rh-title">VE-00152954</div>
-              <span id="status-badge" class="tag tag-green"><i class="fa-solid fa-circle-check"></i> Completado</span>
+              <span id="status-badge" class="status-badge s-green"><i class="fa-solid fa-circle-check"></i> Completado</span>
             </div>
             <div class="rh-subtitle">
               <i class="fa-solid fa-building" style="font-size:11px;"></i>
@@ -826,48 +843,48 @@ body {
           <div class="neu-card">
             <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-file-contract"></i></div><div class="nc-title">Información del proceso</div><button class="nc-action"><i class="fa-solid fa-pen"></i></button></div>
             <div class="nc-body"><div class="field-grid">
-              <div class="field"><div class="fl">Nombre VE</div><div class="fv">VE-00152954</div></div>
-              <div class="field"><div class="fl">N° de proceso</div><div class="fv">126517</div></div>
-              <div class="field"><div class="fl">Tipo de tarifa</div><div class="fv">NIIF (US$)</div></div>
-              <div class="field"><div class="fl">Tipo de servicio</div><div class="fv">Tradicional</div></div>
-              <div class="field"><div class="fl">Fecha valoración</div><div class="fv">31/12/2025</div></div>
-              <div class="field"><div class="fl">Forma de pago</div><div class="fv">De contado</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-hashtag"></i>Nombre VE</div><div class="fv">VE-00152954</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-arrow-up-1-9"></i>N° de proceso</div><div class="fv">126517</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-tag"></i>Tipo de tarifa</div><div class="fv">NIIF (US$)</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-wrench"></i>Tipo de servicio</div><div class="fv">Tradicional</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-calendar-check"></i>Fecha valoración</div><div class="fv">31/12/2025</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-credit-card"></i>Forma de pago</div><div class="fv">De contado</div></div>
             </div></div>
           </div>
 
           <div class="neu-card">
             <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-building"></i></div><div class="nc-title">Cliente</div></div>
             <div class="nc-body"><div class="field-grid">
-              <div class="field"><div class="fl">Cuenta</div><div class="fv link">ACCIONA AGUA, S.A.</div></div>
-              <div class="field"><div class="fl">Ciudad</div><div class="fv">Quito</div></div>
-              <div class="field"><div class="fl">Segmento</div><div class="fv">Mediana</div></div>
-              <div class="field"><div class="fl">Cliente VIP</div><div class="fv dim">No</div></div>
-              <div class="field"><div class="fl">Trabajadores</div><div class="fv">50</div></div>
-              <div class="field"><div class="fl">Trab. Jubl. pend.</div><div class="fv">50</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-building"></i>Cuenta</div><div class="fv link">ACCIONA AGUA, S.A.</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-location-dot"></i>Ciudad</div><div class="fv">Quito</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-chart-pie"></i>Segmento</div><div class="fv">Mediana</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-star"></i>Cliente VIP</div><div class="fv dim">No</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-users"></i>Trabajadores</div><div class="fv">50</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-user-clock"></i>Trab. Jubl. pend.</div><div class="fv">50</div></div>
             </div></div>
           </div>
 
           <div class="neu-card">
             <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-user-check"></i></div><div class="nc-title">Asignación y equipo</div></div>
             <div class="nc-body"><div class="field-grid">
-              <div class="field"><div class="fl">Propietario único</div><div class="fv link">Samantha Chavez</div></div>
-              <div class="field"><div class="fl">Analista</div><div class="fv">Samantha Chavez</div></div>
-              <div class="field"><div class="fl">Equipo</div><div class="fv link">Equipo 3 - P. Beltrán</div></div>
-              <div class="field"><div class="fl">Aprobación</div><div class="fv ok"><i class="fa-solid fa-check-circle"></i> Aprobado</div></div>
-              <div class="field"><div class="fl">Vendedor</div><div class="fv link">Samantha Chavez</div></div>
-              <div class="field"><div class="fl">Contacto</div><div class="fv link">Samantha Flores</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-user-shield"></i>Propietario único</div><div class="fv link">Samantha Chavez</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-user-pen"></i>Analista</div><div class="fv">Samantha Chavez</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-people-group"></i>Equipo</div><div class="fv link">Equipo 3 - P. Beltrán</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-check-double"></i>Aprobación</div><div class="fv ok"><i class="fa-solid fa-check-circle"></i> Aprobado</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-handshake"></i>Vendedor</div><div class="fv link">Samantha Chavez</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-address-card"></i>Contacto</div><div class="fv link">Samantha Flores</div></div>
             </div></div>
           </div>
 
           <div class="neu-card">
             <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-calendar-days"></i></div><div class="nc-title">Fechas de gestión</div></div>
             <div class="nc-body"><div class="field-grid">
-              <div class="field"><div class="fl">Fecha solicitud</div><div class="fv">12/06/2025</div></div>
-              <div class="field"><div class="fl">Fecha asignación</div><div class="fv">12/06/2025</div></div>
-              <div class="field"><div class="fl">Entrega calculada</div><div class="fv">23/06/2025</div></div>
-              <div class="field"><div class="fl">Entrega real</div><div class="fv">19/11/2025</div></div>
-              <div class="field"><div class="fl">Días de demora</div><div class="fv warn"><i class="fa-solid fa-clock"></i> 115 días</div></div>
-              <div class="field"><div class="fl">Pedido urgente</div><div class="fv dim">No</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-calendar-plus"></i>Fecha solicitud</div><div class="fv">12/06/2025</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-calendar-arrow-down"></i>Fecha asignación</div><div class="fv">12/06/2025</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-calendar-clock"></i>Entrega calculada</div><div class="fv">23/06/2025</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-calendar-check"></i>Entrega real</div><div class="fv">19/11/2025</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-hourglass-half"></i>Días de demora</div><div class="fv warn"><i class="fa-solid fa-clock"></i> 115 días</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-bolt"></i>Pedido urgente</div><div class="fv dim">No</div></div>
             </div></div>
           </div>
 
@@ -883,9 +900,9 @@ body {
                 <div class="eval-item"><div class="eval-chk no"></div> Bases históricas</div>
               </div>
               <div class="field-grid">
-                <div class="field"><div class="fl">Nivel segmento</div><div class="fv">21.00%</div></div>
-                <div class="field"><div class="fl">% Sc. Requerimiento</div><div class="fv">4%</div></div>
-                <div class="field"><div class="fl">Evaluación</div><div class="fv">25%</div></div>
+                <div class="field"><div class="fl"><i class="fa-solid fa-chart-line"></i>Nivel segmento</div><div class="fv">21.00%</div></div>
+                <div class="field"><div class="fl"><i class="fa-solid fa-percent"></i>Sc. Requerimiento</div><div class="fv">4%</div></div>
+                <div class="field"><div class="fl"><i class="fa-solid fa-gauge-high"></i>Evaluación</div><div class="fv">25%</div></div>
               </div>
             </div>
           </div>
@@ -910,11 +927,11 @@ body {
             <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-dollar-sign"></i></div><div class="nc-title">Resumen financiero</div></div>
             <div class="nc-body">
               <div class="fin-grid">
-                <div class="fin-item"><div class="fin-lbl">Total base</div><div class="fin-val">$315,00</div></div>
-                <div class="fin-item"><div class="fin-lbl">Total neto</div><div class="fin-val">$315,00</div></div>
-                <div class="fin-item"><div class="fin-lbl">IVA</div><div class="fin-val">15%</div></div>
-                <div class="fin-item"><div class="fin-lbl">Total IVA</div><div class="fin-val">$47,25</div></div>
-                <div class="fin-item"><div class="fin-lbl">Total factura</div><div class="fin-val total">$362,25</div></div>
+                <div class="fin-item"><div class="fin-lbl"><i class="fa-solid fa-calculator" style="font-size:9px;margin-right:4px;"></i>Total base</div><div class="fin-val">$315,00</div></div>
+                <div class="fin-item"><div class="fin-lbl"><i class="fa-solid fa-equals" style="font-size:9px;margin-right:4px;"></i>Total neto</div><div class="fin-val">$315,00</div></div>
+                <div class="fin-item"><div class="fin-lbl"><i class="fa-solid fa-percent" style="font-size:9px;margin-right:4px;"></i>IVA</div><div class="fin-val">15%</div></div>
+                <div class="fin-item"><div class="fin-lbl"><i class="fa-solid fa-coins" style="font-size:9px;margin-right:4px;"></i>Total IVA</div><div class="fin-val">$47,25</div></div>
+                <div class="fin-item"><div class="fin-lbl"><i class="fa-solid fa-file-invoice-dollar" style="font-size:9px;margin-right:4px;"></i>Total factura</div><div class="fin-val total">$362,25</div></div>
               </div>
             </div>
           </div>
@@ -1142,11 +1159,11 @@ function renderAccion(idx) {
   const btn = document.getElementById('btn-accion');
 
   if (idx === 8) {
-    badge.className = 'tag tag-green';
+    badge.className = 'status-badge s-green';
     badge.innerHTML = '<i class="fa-solid fa-circle-check"></i> Completado';
     btn.style.display = 'none';
   } else {
-    badge.className = 'tag tag-niif';
+    badge.className = 'status-badge s-blue';
     badge.innerHTML = `<i class="fa-solid fa-circle-dot"></i> ${stage.name}`;
     if (stage.accion) {
       btn.style.display = 'flex';
