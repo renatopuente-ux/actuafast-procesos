@@ -93,7 +93,7 @@ body {
   /* Ancho total del viewport − 12px por lado = full-bleed flotante
      El padding-left deja espacio para que el contenido no quede
      bajo el sidebar glass (z-index 200 > z-index 100 del header) */
-  padding: 0 28px 0 calc(28px + 220px + 24px); /* sidebar_left + sidebar_width + gap */
+  padding: 0 28px 0 calc(28px + 272px + 24px); /* sidebar_left(28) + width(272) + gap(24) */
   gap: 16px;
   position: fixed;
   top: 12px;
@@ -145,9 +145,10 @@ body {
 .sidebar {
   position: fixed;
   /* Flota con margen en todos los lados */
-  top: 36px;  /* 44px − 8px subiendo */
+  top: 32px;  /* −4px más arriba */
   left: 28px;
-  width: 220px; height: calc(100vh - 48px); /* top 36px + bottom 12px */
+  width: 272px; /* +52px más ancha */
+  height: calc(100vh - 44px);
   z-index: 200;
 
   /* Liquid Glass con border-radius — parece desprendida de los bordes */
@@ -157,11 +158,16 @@ body {
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.88);
 
-  /* Sombra flotante neumórfica tintada */
+  /* Sombra en capas:
+     — CIMA (sobre el topbar navy): dark navy como el avatar
+     — RESTO (sobre canvas claro #e8ecf4): sombras suaves
+  */
   box-shadow:
-    8px 8px 36px rgba(15,31,61,0.16),
-    -4px -4px 16px rgba(255,255,255,0.85),
-    inset 0 1px 0 rgba(255,255,255,0.95);
+    0 -8px 20px rgba(5,12,30,0.50),         /* top dark — sobre header navy */
+    -3px -4px 14px rgba(10,20,55,0.38),     /* top-left dark — sobre header navy */
+    8px 8px 36px rgba(15,31,61,0.14),        /* general derecha/abajo sobre canvas claro */
+    4px 0 16px rgba(163,177,198,0.18),       /* borde derecho suave sobre canvas */
+    inset 0 1px 0 rgba(255,255,255,0.95);    /* shine interior superior */
 
   display: flex; flex-direction: column;
   overflow-y: auto; overflow-x: hidden;
@@ -243,7 +249,7 @@ body {
 .main {
   flex: 1;
   display: flex; flex-direction: column; overflow: hidden;
-  margin-left: calc(28px + 220px + 12px);  /* 260px — sidebar_left + sidebar_width + gap */
+  margin-left: calc(28px + 272px + 12px);  /* 312px — sidebar_left(28) + width(272) + gap(12) */
   padding-top: calc(12px + 88px + 16px);   /* 116px — header 88px + márgenes */
 }
 
@@ -517,8 +523,7 @@ body {
   display: flex; align-items: center; gap: 12px;
   cursor: pointer; user-select: none;
 }
-.neu-toggle { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
-.neu-toggle input { opacity: 0; width: 0; height: 0; }
+.neu-toggle { position: relative; width: 40px; height: 22px; flex-shrink: 0; pointer-events: none; }
 .toggle-track {
   position: absolute; inset: 0; border-radius: 99px;
   background: var(--bg);
@@ -1157,11 +1162,10 @@ function renderCampos(idx) {
   if (stage.toggle !== null) {
     const isOn = stage.toggle.on;
     html += `<div class="ck-pill toggle-pill" onclick="toggleDatosIncompletos(this)">
-      <label class="neu-toggle ${isOn ? 'on' : ''}" id="toggle-di">
-        <input type="checkbox" ${isOn ? 'checked' : ''}>
+      <div class="neu-toggle ${isOn ? 'on' : ''}" id="toggle-di">
         <div class="toggle-track"></div>
         <div class="toggle-thumb"></div>
-      </label>
+      </div>
       <div>
         <div class="ck-label">Datos incompletos</div>
         <div class="ck-value ${isOn ? 'warn' : 'ok'}" id="toggle-di-val">
