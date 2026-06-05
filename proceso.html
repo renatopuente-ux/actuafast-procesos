@@ -102,35 +102,87 @@ body {
 /* ══════════════════════════════
    LAYOUT
 ══════════════════════════════ */
-.app-body { display: flex; flex: 1; overflow: hidden; }
+.app-body { display: flex; flex: 1; overflow: hidden; position: relative; }
 
-/* SIDEBAR */
+/* ══════════════════════════════
+   SIDEBAR — LIQUID GLASS
+   Referencia: diseño AF producción (fondo blanco translúcido,
+   accent navy en ítem activo, footer con versión)
+══════════════════════════════ */
 .sidebar {
   width: 220px; flex-shrink: 0;
-  background: var(--bg);
-  box-shadow: 4px 0 12px rgba(163,177,198,0.25);
+  /* Glass: translúcido sobre el fondo neumórfico */
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  /* Borde derecho como separador sutil */
+  border-right: 1px solid rgba(255,255,255,0.85);
+  /* Sombra que separa del contenido sin ser agresiva */
+  box-shadow:
+    4px 0 20px rgba(163,177,198,0.22),
+    inset -1px 0 0 rgba(255,255,255,0.6);
   display: flex; flex-direction: column; overflow-y: auto;
 }
-.nav-section-label { font-size: 9px; font-weight: 800; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; padding: 16px 16px 5px; }
+
+/* Shine superior — efecto "vidrio con borde iluminado" */
+.sidebar::before {
+  content: '';
+  position: absolute; top: 56px; left: 0;
+  width: 220px; height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.3) 100%);
+  pointer-events: none; z-index: 1;
+}
+
+.nav-section-label {
+  font-size: 9px; font-weight: 800; color: var(--text-dim);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 16px 16px 5px;
+}
+
 .nav-item {
   display: flex; align-items: center; gap: 10px;
   padding: 9px 16px; font-size: 13px; color: var(--text-sub);
   cursor: pointer; text-decoration: none; position: relative;
-  transition: all 0.15s; font-weight: 600;
+  transition: background 0.15s, color 0.15s; font-weight: 600;
 }
-.nav-item:hover { color: var(--text); background: rgba(163,177,198,0.15); }
+.nav-item:hover {
+  background: rgba(163,177,198,0.12);
+  color: var(--text);
+}
+.nav-item:focus-visible { outline: 2px solid var(--indigo); outline-offset: -2px; }
+
+/* Ítem activo: accent navy + fondo glass tintado */
 .nav-item.active {
-  color: var(--indigo); font-weight: 700;
-  background: rgba(76,100,217,0.06);
+  color: var(--navy); font-weight: 700;
+  background: rgba(29,78,216,0.07);
+  /* Variante glass para el fondo del ítem activo */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
+/* Barra accent izquierda — igual que el AF de referencia */
 .nav-item.active::before {
-  content: ''; position: absolute; left: 0; top: 6px; bottom: 6px;
-  width: 3px; background: var(--indigo); border-radius: 0 2px 2px 0;
+  content: ''; position: absolute; left: 0; top: 5px; bottom: 5px;
+  width: 3px;
+  background: linear-gradient(180deg, var(--indigo), #1e40af);
+  border-radius: 0 3px 3px 0;
+  box-shadow: 1px 0 6px rgba(29,78,216,0.3);
 }
+
 .nav-icon { width: 16px; text-align: center; font-size: 13px; }
-.sidebar-footer { margin-top: auto; padding: 16px; border-top: 1px solid var(--border); }
+
+/* Footer: glass sutil separado del contenido */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 14px 16px;
+  /* Separador glass en lugar de borde duro */
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255,255,255,0.7);
+}
 .app-version { font-size: 11px; font-weight: 700; color: var(--text-sub); }
-.app-help { font-size: 11px; color: var(--indigo); text-decoration: underline; cursor: pointer; }
+.app-version-num { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+.app-help { font-size: 11px; color: var(--indigo); text-decoration: underline; cursor: pointer; display: inline-block; margin-top: 4px; }
 
 /* MAIN */
 .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
@@ -639,6 +691,7 @@ body {
     </nav>
     <div class="sidebar-footer">
       <div class="app-version">ActuaFast by Actuaria</div>
+      <div class="app-version-num">v2.17.16</div>
       <div class="app-help">Ayuda</div>
     </div>
   </aside>
