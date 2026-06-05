@@ -111,14 +111,14 @@ body {
 
 /* Hamburger — azul brand sobre el glass blanco del sidebar ✅ */
 .hamburger {
-  background: rgba(29,78,216,0.10); border: none; cursor: pointer;
+  background: rgba(255,255,255,0.10); border: none; cursor: pointer;
   width: 32px; height: 32px; border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
-  color: var(--indigo); font-size: 14px;
+  color: rgba(255,255,255,0.88); font-size: 14px;
   transition: all 0.2s; flex-shrink: 0;
 }
-.hamburger:hover { background: rgba(29,78,216,0.18); color: #1e40af; }
-.hamburger:active { background: rgba(29,78,216,0.08); }
+.hamburger:hover { background: rgba(255,255,255,0.20); color: #fff; }
+.hamburger:active { background: rgba(255,255,255,0.06); }
 .user-avatar {
   width: 36px; height: 36px; border-radius: 50%;
   /* Nativo a la superficie navy — glass translúcido sobre azul oscuro */
@@ -753,9 +753,98 @@ body {
 .modal-radio-label { font-size: 14px; font-weight: 700; color: var(--navy); }
 .modal-radio-sub { font-size: 12px; color: var(--text-dim); font-weight: 600; }
 .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; align-items: center; }
+
+/* ══════════════════════════════════════════════════════════════
+   ESFERAS FLOTANTES — refuerzan el glass de la sidebar
+   Zona: costado izquierdo (sidebar + 44px overflow)
+   z-index: 1 → debajo de sidebar (200) y header (100)
+   Colores: azul sutil, gris, blanco, y canvas #e8ecf4 (void)
+══════════════════════════════════════════════════════════════ */
+@keyframes orb-drift-1 {
+  0%   { transform: translate(0px,   0px)   scale(1.00); }
+  20%  { transform: translate(10px, -22px)  scale(1.03); }
+  45%  { transform: translate(-7px, -38px)  scale(0.97); }
+  70%  { transform: translate(16px, -16px)  scale(1.02); }
+  100% { transform: translate(0px,   0px)   scale(1.00); }
+}
+@keyframes orb-drift-2 {
+  0%   { transform: translate(0px,   0px)   scale(1.00); }
+  33%  { transform: translate(-12px,-26px)  scale(1.04); }
+  66%  { transform: translate(8px,  -12px)  scale(0.96); }
+  100% { transform: translate(0px,   0px)   scale(1.00); }
+}
+@keyframes orb-drift-3 {
+  0%   { transform: translate(0px,   0px)   scale(1.00); }
+  30%  { transform: translate(18px, -14px)  scale(1.05); }
+  65%  { transform: translate(-5px, -32px)  scale(0.98); }
+  100% { transform: translate(0px,   0px)   scale(1.00); }
+}
+@keyframes orb-drift-4 {
+  0%   { transform: translate(0px,   0px)   scale(1.00); }
+  40%  { transform: translate(-16px,-20px)  scale(1.06); }
+  80%  { transform: translate(10px, -8px)   scale(0.95); }
+  100% { transform: translate(0px,   0px)   scale(1.00); }
+}
+
+.orbs-bg {
+  position: fixed; top: 0; left: 0;
+  width: calc(28px + 272px + 44px); /* sidebar edge + 44px overflow */
+  height: 100vh;
+  z-index: 1; /* debajo de todo excepto el canvas */
+  pointer-events: none;
+  overflow: visible;
+}
+.orb { position: absolute; border-radius: 50%; pointer-events: none; }
+
+/* ── AZUL sutil — dan color al glass */
+.orb1 { width: 380px; height: 380px; top: -5%; left: -70px;
+  background: radial-gradient(circle at 40% 40%, rgba(76,100,217,0.10), transparent 68%);
+  filter: blur(50px); animation: orb-drift-1 15s ease-in-out infinite; }
+
+.orb2 { width: 190px; height: 190px; top: 32%; left: 55px;
+  background: radial-gradient(circle at 45% 50%, rgba(76,100,217,0.08), transparent 70%);
+  filter: blur(38px); animation: orb-drift-3 11s ease-in-out infinite 1.5s; }
+
+.orb5 { width: 150px; height: 150px; top: 55%; left: 90px;
+  background: radial-gradient(circle at 50% 45%, rgba(100,120,230,0.07), transparent 72%);
+  filter: blur(30px); animation: orb-drift-2 13s ease-in-out infinite 3s; }
+
+/* ── GRIS / BLANCO — textura de luz */
+.orb3 { width: 220px; height: 220px; top: 18%; left: 30px;
+  background: radial-gradient(circle at 55% 40%, rgba(163,177,198,0.13), transparent 68%);
+  filter: blur(42px); animation: orb-drift-2 12s ease-in-out infinite 0.5s; }
+
+.orb6 { width: 100px; height: 100px; top: 70%; left: 20px;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.12), transparent 70%);
+  filter: blur(24px); animation: orb-drift-4 9s ease-in-out infinite 2s; }
+
+.orb8 { width: 155px; height: 155px; top: 85%; left: 65px;
+  background: radial-gradient(circle at 48% 42%, rgba(200,215,245,0.11), transparent 70%);
+  filter: blur(32px); animation: orb-drift-1 10s ease-in-out infinite 4s; }
+
+/* ── CANVAS COLOR #e8ecf4 — efecto de vacío invisible */
+.orb4 { width: 310px; height: 310px; top: 42%; left: -45px;
+  background: radial-gradient(circle at 45% 48%, rgba(232,236,244,0.88), transparent 65%);
+  filter: blur(60px); animation: orb-drift-1 18s ease-in-out infinite reverse; }
+
+.orb7 { width: 260px; height: 260px; top: 72%; left: -30px;
+  background: radial-gradient(circle at 50% 50%, rgba(232,236,244,0.92), transparent 62%);
+  filter: blur(55px); animation: orb-drift-3 14s ease-in-out infinite 2.5s reverse; }
 </style>
 </head>
 <body>
+
+<!-- ESFERAS ANIMADAS — fondo izquierdo, refuerzan el glass de la sidebar -->
+<div class="orbs-bg" aria-hidden="true">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="orb orb4"></div>
+  <div class="orb orb5"></div>
+  <div class="orb orb6"></div>
+  <div class="orb orb7"></div>
+  <div class="orb orb8"></div>
+</div>
 
 <!-- HEADER — sin logo (vive en sidebar-brand) -->
 <div class="top-header">
@@ -800,8 +889,9 @@ body {
       <a class="nav-item" href="#"><span class="nav-icon"><i class="fa-solid fa-users"></i></span> Gestión de estudios</a>
       <a class="nav-item" href="#"><span class="nav-icon"><i class="fa-solid fa-user-tie"></i></span> Cuentas</a>
       <a class="nav-item" href="#"><span class="nav-icon"><i class="fa-solid fa-address-book"></i></span> Contactos</a>
-      <div class="nav-section-label">Operaciones</div>
+      <div class="nav-section-label">Gestión de Procesos</div>
       <a class="nav-item active" href="index.html"><span class="nav-icon"><i class="fa-solid fa-briefcase"></i></span> Procesos</a>
+      <div class="nav-section-label">Operaciones</div>
       <a class="nav-item" href="#"><span class="nav-icon"><i class="fa-solid fa-file-lines"></i></span> Actas de finiquito</a>
       <a class="nav-item" href="#"><span class="nav-icon"><i class="fa-solid fa-clipboard-list"></i></span> Estudios actuariales</a>
       <a class="nav-item" href="#"><span class="nav-icon"><i class="fa-solid fa-chart-bar"></i></span> Impuestos diferidos</a>
