@@ -1,0 +1,6 @@
+[2026-06-05T13:59:41.027Z] GET https://renatopuente-ux.github.io/actuafast-procesos/proceso.html → pending (?ms, ?B)
+[2026-06-05T13:59:41.513Z] GET https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap → 200 (246ms, 3707B)
+[2026-06-05T13:59:41.513Z] GET https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css → 200 (384ms, 103009B)
+[2026-06-05T13:59:41.977Z] GET https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2 → pending (?ms, ?B)
+[2026-06-05T13:59:41.977Z] GET https://fonts.gstatic.com/s/nunito/v32/XRXV3I6Li01BKofINeaB.woff2 → 200 (235ms, 39128B)
+[2026-06-05T13:59:41.977Z] GET https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-regular-400.woff2 → 200 (360ms, 25392B)
