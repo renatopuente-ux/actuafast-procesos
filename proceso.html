@@ -85,22 +85,26 @@ body {
    Gap entre sidebar y header: 12px → left: 244px
 ══════════════════════════════ */
 .top-header {
-  height: 56px;
+  /* 56 + 32 = 88px — más alta, más presencia */
+  height: 88px;
   background: var(--navy);
   border-radius: 32px;
   display: flex; align-items: center;
-  padding: 0 24px; gap: 16px;
-  /* Flota: 12px del borde superior y laterales */
+  /* Ancho total del viewport − 12px por lado = full-bleed flotante
+     El padding-left deja espacio para que el contenido no quede
+     bajo el sidebar glass (z-index 200 > z-index 100 del header) */
+  padding: 0 28px 0 calc(12px + 220px + 24px);
+  gap: 16px;
   position: fixed;
   top: 12px;
-  left: calc(12px + 220px + 12px); /* sidebar_margin + sidebar_width + gap */
-  right: 12px;
-  z-index: 100; flex-shrink: 0;
-  /* Sombra flotante con tinte navy */
+  left: 12px;     /* ← ahora arranca desde el borde izquierdo */
+  right: 12px;    /* ← y llega hasta el borde derecho */
+  z-index: 100;   /* sidebar (z:200) pasa por encima → efecto glass sobre navy */
+  flex-shrink: 0;
   box-shadow:
-    0 8px 32px rgba(15,31,61,0.38),
-    0 2px 8px rgba(15,31,61,0.22),
-    inset 0 1px 0 rgba(255,255,255,0.06);
+    0 10px 40px rgba(15,31,61,0.42),
+    0 3px 10px rgba(15,31,61,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.07);
 }
 .header-spacer { flex: 1; }
 .header-user { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.75); font-size: 13px; font-weight: 600; }
@@ -116,11 +120,16 @@ body {
 .hamburger:hover { background: rgba(29,78,216,0.18); color: #1e40af; }
 .hamburger:active { background: rgba(29,78,216,0.08); }
 .user-avatar {
-  width: 34px; height: 34px; border-radius: 50%;
-  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  width: 36px; height: 36px; border-radius: 50%;
+  /* Nativo a la superficie navy — glass translúcido sobre azul oscuro */
+  background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08));
+  border: 1px solid rgba(255,255,255,0.22);
   display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 800; color: #fff;
-  box-shadow: var(--neu-out-sm);
+  font-size: 12px; font-weight: 800; color: rgba(255,255,255,0.92);
+  /* Sombras tintadas a la superficie navy ≥45% ✅ */
+  box-shadow:
+    3px 3px 8px rgba(5,12,30,0.55),        /* sombra oscura navy */
+    -2px -2px 6px rgba(45,75,140,0.45);    /* luz navy-azulada */
 }
 
 /* ══════════════════════════════
@@ -234,7 +243,7 @@ body {
   flex: 1;
   display: flex; flex-direction: column; overflow: hidden;
   margin-left: calc(12px + 220px + 12px);  /* 244px */
-  padding-top: calc(12px + 56px + 16px);   /* 84px */
+  padding-top: calc(12px + 88px + 16px);   /* 116px — header 88px + márgenes */
 }
 
 /* BREADCRUMB */
