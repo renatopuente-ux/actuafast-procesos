@@ -755,6 +755,17 @@ body {
 .modal-radio-sub { font-size: 12px; color: var(--text-dim); font-weight: 600; }
 .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; align-items: center; }
 
+/* ── CIRCUIT TREE — árbol de microchip sobre la sidebar ── */
+.circuit-tree {
+  position: fixed;
+  bottom: 12px;          /* alineado con el borde inferior del sidebar */
+  left: 28px;            /* alineado con el sidebar */
+  width: 272px;
+  height: 320px;
+  z-index: 300;          /* por encima de todo: sidebar(200), orbs(250) */
+  pointer-events: none;
+}
+
 /* ══════════════════════════════════════════════════════════════
    ESFERAS FLOTANTES — refuerzan el glass de la sidebar
    Zona: costado izquierdo (sidebar + 44px overflow)
@@ -1382,5 +1393,224 @@ function selRadio(el) {
 
 buildPipeline(); setStage(8);
 </script>
+<!-- CIRCUIT TREE — árbol ramificado estilo microchip sobre el sidebar -->
+<div class="circuit-tree" aria-hidden="true">
+<svg viewBox="0 0 272 320" xmlns="http://www.w3.org/2000/svg" width="272" height="320" style="overflow:visible;">
+  <defs>
+    <!-- Glow suave para las partículas viajeras -->
+    <filter id="ct-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="ct-glow-sm" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ══ TRAZOS DEL CIRCUITO ══ -->
+  <!-- Chip central (bottom center) -->
+  <rect x="96" y="290" width="80" height="28" rx="5"
+        fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+  <!-- Pines del chip -->
+  <line x1="108" y1="290" x2="108" y2="278" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+  <line x1="124" y1="290" x2="124" y2="278" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+  <line x1="148" y1="290" x2="148" y2="278" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+  <line x1="164" y1="290" x2="164" y2="278" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+  <line x1="96"  y1="300" x2="82"  y2="300" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+  <line x1="96"  y1="308" x2="82"  y2="308" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+  <line x1="176" y1="300" x2="190" y2="300" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+  <line x1="176" y1="308" x2="190" y2="308" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+
+  <!-- Tronco principal ascendente -->
+  <path id="ct-trunk" d="M136,278 L136,40"
+        stroke="rgba(255,255,255,0.38)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+
+  <!-- Nodos de conexión en el tronco -->
+  <circle cx="136" cy="230" r="3.5" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+  <circle cx="136" cy="175" r="3.5" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+  <circle cx="136" cy="120" r="3.5" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+  <circle cx="136" cy="70"  r="3.5" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+
+  <!-- ── Rama izquierda nivel 1 (y=230) ── -->
+  <path id="ct-bl1" d="M136,230 L55,230 L55,195"
+        stroke="rgba(255,255,255,0.32)" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <circle cx="55" cy="195" r="2.5" fill="rgba(255,255,255,0.5)"/>
+  <path id="ct-bl1a" d="M55,195 L20,195"
+        stroke="rgba(255,255,255,0.22)" stroke-width="1" fill="none"/>
+  <circle cx="20" cy="195" r="2" fill="rgba(255,255,255,0.4)"/>
+  <path d="M55,195 L55,170 L25,170"
+        stroke="rgba(255,255,255,0.18)" stroke-width="1" fill="none"/>
+  <circle cx="25" cy="170" r="2" fill="rgba(255,255,255,0.35)"/>
+
+  <!-- ── Rama derecha nivel 1 (y=230) ── -->
+  <path id="ct-br1" d="M136,230 L217,230 L217,195"
+        stroke="rgba(255,255,255,0.32)" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <circle cx="217" cy="195" r="2.5" fill="rgba(255,255,255,0.5)"/>
+  <path id="ct-br1a" d="M217,195 L252,195"
+        stroke="rgba(255,255,255,0.22)" stroke-width="1" fill="none"/>
+  <circle cx="252" cy="195" r="2" fill="rgba(255,255,255,0.4)"/>
+  <path d="M217,195 L217,170 L247,170"
+        stroke="rgba(255,255,255,0.18)" stroke-width="1" fill="none"/>
+  <circle cx="247" cy="170" r="2" fill="rgba(255,255,255,0.35)"/>
+
+  <!-- ── Rama izquierda nivel 2 (y=175) ── -->
+  <path id="ct-bl2" d="M136,175 L68,175 L68,140 L35,140"
+        stroke="rgba(255,255,255,0.30)" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <circle cx="35" cy="140" r="2.5" fill="rgba(255,255,255,0.45)"/>
+  <path d="M68,140 L68,110 L15,110"
+        stroke="rgba(255,255,255,0.16)" stroke-width="1" fill="none"/>
+  <circle cx="15" cy="110" r="2" fill="rgba(255,255,255,0.35)"/>
+
+  <!-- ── Rama derecha nivel 2 (y=175) ── -->
+  <path id="ct-br2" d="M136,175 L204,175 L204,140 L237,140"
+        stroke="rgba(255,255,255,0.30)" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <circle cx="237" cy="140" r="2.5" fill="rgba(255,255,255,0.45)"/>
+  <path d="M204,140 L204,110 L257,110"
+        stroke="rgba(255,255,255,0.16)" stroke-width="1" fill="none"/>
+  <circle cx="257" cy="110" r="2" fill="rgba(255,255,255,0.35)"/>
+
+  <!-- ── Rama izquierda nivel 3 (y=120) ── -->
+  <path id="ct-bl3" d="M136,120 L85,120 L85,88 L48,88"
+        stroke="rgba(255,255,255,0.28)" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <circle cx="48" cy="88" r="2" fill="rgba(255,255,255,0.4)"/>
+  <path d="M85,88 L85,65 L40,65"
+        stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="none"/>
+  <circle cx="40" cy="65" r="1.8" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- ── Rama derecha nivel 3 (y=120) ── -->
+  <path id="ct-br3" d="M136,120 L187,120 L187,88 L224,88"
+        stroke="rgba(255,255,255,0.28)" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <circle cx="224" cy="88" r="2" fill="rgba(255,255,255,0.4)"/>
+  <path d="M187,88 L187,65 L232,65"
+        stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="none"/>
+  <circle cx="232" cy="65" r="1.8" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- ── Cima (y=70) ── -->
+  <path id="ct-top-l" d="M136,70 L95,50 L60,50"
+        stroke="rgba(255,255,255,0.25)" stroke-width="1" fill="none"/>
+  <circle cx="60" cy="50" r="2" fill="rgba(255,255,255,0.4)"/>
+  <path id="ct-top-r" d="M136,70 L177,50 L212,50"
+        stroke="rgba(255,255,255,0.25)" stroke-width="1" fill="none"/>
+  <circle cx="212" cy="50" r="2" fill="rgba(255,255,255,0.4)"/>
+
+  <!-- ══ PARTÍCULAS VIAJERAS ══
+       Suben por el tronco, bajan por las ramas, se conectan al centro
+       Duraciones cortas = alta velocidad -->
+
+  <!-- Tronco: 3 partículas subiendo -->
+  <circle r="2.8" fill="white" filter="url(#ct-glow)">
+    <animateMotion dur="0.75s" repeatCount="indefinite" begin="0s" calcMode="linear">
+      <mpath href="#ct-trunk"/>
+    </animateMotion>
+  </circle>
+  <circle r="2" fill="rgba(200,225,255,1)" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.75s" repeatCount="indefinite" begin="0.25s" calcMode="linear">
+      <mpath href="#ct-trunk"/>
+    </animateMotion>
+  </circle>
+  <circle r="1.6" fill="white" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.75s" repeatCount="indefinite" begin="0.5s" calcMode="linear">
+      <mpath href="#ct-trunk"/>
+    </animateMotion>
+  </circle>
+
+  <!-- Tronco: 2 partículas bajando (convergen al chip) -->
+  <circle r="2.2" fill="rgba(180,215,255,1)" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.75s" repeatCount="indefinite" begin="0.12s"
+                   keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+      <mpath href="#ct-trunk"/>
+    </animateMotion>
+  </circle>
+  <circle r="1.5" fill="white" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.75s" repeatCount="indefinite" begin="0.62s"
+                   keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+      <mpath href="#ct-trunk"/>
+    </animateMotion>
+  </circle>
+
+  <!-- Rama izquierda 1 — viajando desde trunk hacia extremo -->
+  <circle r="2" fill="white" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.55s" repeatCount="indefinite" begin="0.18s" calcMode="linear">
+      <mpath href="#ct-bl1"/>
+    </animateMotion>
+  </circle>
+  <circle r="1.5" fill="rgba(210,230,255,1)" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.55s" repeatCount="indefinite" begin="0.45s"
+                   keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+      <mpath href="#ct-bl1"/>
+    </animateMotion>
+  </circle>
+
+  <!-- Rama derecha 1 -->
+  <circle r="2" fill="white" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.55s" repeatCount="indefinite" begin="0.08s" calcMode="linear">
+      <mpath href="#ct-br1"/>
+    </animateMotion>
+  </circle>
+  <circle r="1.5" fill="rgba(210,230,255,1)" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.55s" repeatCount="indefinite" begin="0.38s"
+                   keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+      <mpath href="#ct-br1"/>
+    </animateMotion>
+  </circle>
+
+  <!-- Rama izquierda 2 -->
+  <circle r="1.8" fill="white" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.65s" repeatCount="indefinite" begin="0.3s" calcMode="linear">
+      <mpath href="#ct-bl2"/>
+    </animateMotion>
+  </circle>
+  <circle r="1.4" fill="rgba(200,225,255,1)" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.65s" repeatCount="indefinite" begin="0.7s"
+                   keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+      <mpath href="#ct-bl2"/>
+    </animateMotion>
+  </circle>
+
+  <!-- Rama derecha 2 -->
+  <circle r="1.8" fill="white" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.65s" repeatCount="indefinite" begin="0.15s" calcMode="linear">
+      <mpath href="#ct-br2"/>
+    </animateMotion>
+  </circle>
+  <circle r="1.4" fill="rgba(200,225,255,1)" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.65s" repeatCount="indefinite" begin="0.55s"
+                   keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+      <mpath href="#ct-br2"/>
+    </animateMotion>
+  </circle>
+
+  <!-- Rama izquierda 3 -->
+  <circle r="1.5" fill="white" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.50s" repeatCount="indefinite" begin="0.22s" calcMode="linear">
+      <mpath href="#ct-bl3"/>
+    </animateMotion>
+  </circle>
+
+  <!-- Rama derecha 3 -->
+  <circle r="1.5" fill="white" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.50s" repeatCount="indefinite" begin="0.42s" calcMode="linear">
+      <mpath href="#ct-br3"/>
+    </animateMotion>
+  </circle>
+
+  <!-- Cima izquierda -->
+  <circle r="1.4" fill="rgba(220,235,255,1)" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.45s" repeatCount="indefinite" begin="0.35s" calcMode="linear">
+      <mpath href="#ct-top-l"/>
+    </animateMotion>
+  </circle>
+
+  <!-- Cima derecha -->
+  <circle r="1.4" fill="rgba(220,235,255,1)" filter="url(#ct-glow-sm)">
+    <animateMotion dur="0.45s" repeatCount="indefinite" begin="0.6s" calcMode="linear">
+      <mpath href="#ct-top-r"/>
+    </animateMotion>
+  </circle>
+
+</svg>
+</div>
+
 </body>
 </html>
