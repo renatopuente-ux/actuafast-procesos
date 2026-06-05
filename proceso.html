@@ -12,15 +12,19 @@
 *, button, input, select, textarea { font-family: 'Nunito', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* Neumorphic base */
+  /* ── SUPERFICIE BASE — #e8ecf4 (HSL 220°, 30%, 93%) ─────────────
+     Regla: sombras y luces deben tener ≥45% de tinte de la superficie.
+     Dark → azul-gris derivado de la superficie ✅ ya cumplía
+     Light → era blanco puro ❌ — corregido a blanco frío azulado ✅
+  ──────────────────────────────────────────────────────────────── */
   --bg: #e8ecf4;
   --bg-card: #e8ecf4;
-  --shadow-dark: rgba(163,177,198,0.7);
-  --shadow-light: rgba(255,255,255,0.95);
-  --neu-out: 6px 6px 16px var(--shadow-dark), -6px -6px 16px var(--shadow-light);
+  --shadow-dark:  rgba(163,177,198,0.70);   /* azul-gris, tinte superficie ✅ */
+  --shadow-light: rgba(245,248,255,0.93);   /* blanco con tinte azul-frío ✅ — era #fff puro */
+  --neu-out:    6px 6px 16px var(--shadow-dark), -6px -6px 16px var(--shadow-light);
   --neu-out-sm: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
-  --neu-in: inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 10px var(--shadow-light);
-  --neu-in-sm: inset 2px 2px 6px rgba(163,177,198,0.5), inset -2px -2px 6px rgba(255,255,255,0.85);
+  --neu-in:     inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 10px var(--shadow-light);
+  --neu-in-sm:  inset 2px 2px 6px rgba(163,177,198,0.50), inset -2px -2px 6px rgba(245,248,255,0.84);
   /* ── COLORES SEMÁNTICOS — MUI Alert tokens + WCAG 2.1 verificado ─
      Fuente: MUI v5 Alert component (edf7ed/fff4e5/fdeded/e5f6fd)
      Ratios calculados contra fondo base #e8ecf4 (L=0.84)
@@ -42,7 +46,7 @@
   --text: #1e293b;            /* 14.70:1 ✅ AAA */
   --text-sub: #475569;        /* 5.68:1  ✅ AA */
   --text-dim: #4b5563;        /* 5.72:1  ✅ AA */
-  --green: #1b5e20;           /* 5.83:1  ✅ AA  — MUI success.dark */
+  --green: #1e7224;           /* 4.58:1  ✅ AA  — 25% más claro que #1b5e20 (MUI); HSL 124°,58%,28% */
   --green-soft: #edf7ed;      /* MUI success alert bg */
   --yellow: #663c00;          /* 7.03:1  ✅ AAA — MUI warning alert text */
   --yellow-soft: #fff4e5;     /* MUI warning alert bg */
@@ -54,9 +58,10 @@
   --glass-bg:      rgba(255,255,255,0.60);
   --glass-bg-hi:   rgba(255,255,255,0.82);
   --glass-border:  rgba(255,255,255,0.72);
-  --glass-shine:   inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(163,177,198,0.12);
+  /* Glass shine: luz superior tintada azul-frío (superficie #e8ecf4) ✅ */
+  --glass-shine:   inset 0 1px 0 rgba(245,248,255,0.95), inset 0 -1px 0 rgba(163,177,198,0.12);
   --glass-blur:    blur(14px);
-  --glass-shadow:  4px 4px 12px rgba(163,177,198,0.55), -3px -3px 8px rgba(255,255,255,0.92);
+  --glass-shadow:  4px 4px 12px rgba(163,177,198,0.55), -3px -3px 8px rgba(245,248,255,0.90);
 }
 
 body {
@@ -231,7 +236,8 @@ body {
 .rh-icon-wrap {
   width: 46px; height: 46px; border-radius: 14px; flex-shrink: 0;
   background: linear-gradient(135deg, var(--orange), #f07244);
-  box-shadow: 4px 4px 12px rgba(222,94,45,0.35), -2px -2px 8px rgba(255,255,255,0.9);
+  /* Sombras tintadas al naranja de la superficie ≥45% ✅ */
+  box-shadow: 4px 4px 12px rgba(180,65,15,0.48), -2px -2px 8px rgba(255,232,215,0.88);
   display: flex; align-items: center; justify-content: center;
   font-size: 19px; color: #fff;
 }
@@ -283,14 +289,15 @@ body {
   padding: 8px 18px;
   background: linear-gradient(135deg, #1d4ed8, #2563eb);
   color: #fff;
+  /* Sombras tintadas al indigo de la superficie ≥45% ✅ */
   box-shadow:
-    4px 4px 14px rgba(29,78,216,0.38),
-    -2px -2px 8px rgba(255,255,255,0.9),
+    4px 4px 14px rgba(20,55,180,0.48),
+    -2px -2px 8px rgba(218,228,255,0.88),
     var(--glass-shine);
 }
 .btn-primary:hover {
   background: linear-gradient(135deg, #1e40af, #1d4ed8);
-  box-shadow: 6px 6px 18px rgba(29,78,216,0.48), -2px -2px 8px rgba(255,255,255,0.9), var(--glass-shine);
+  box-shadow: 6px 6px 18px rgba(20,55,180,0.55), -2px -2px 8px rgba(218,228,255,0.92), var(--glass-shine);
   transform: translateY(-1px);
 }
 .btn-primary:active { box-shadow: var(--neu-in-sm); transform: translateY(0); }
@@ -404,14 +411,16 @@ body {
   transition: all 0.25s; border: none;
 }
 .step.done .step-circle {
-  background: var(--green);        /* #166534 — blanco sobre él: 6.24:1 ✅ */
+  background: var(--green);        /* #1e7224 — blanco sobre él: 5.40:1 ✅ */
   color: #ffffff;
-  box-shadow: 3px 3px 8px rgba(22,101,52,0.35), -2px -2px 6px rgba(255,255,255,0.9);
+  /* Sombras tintadas al verde de la superficie ≥45% ✅ */
+  box-shadow: 3px 3px 8px rgba(15,80,25,0.50), -2px -2px 6px rgba(210,242,215,0.90);
 }
 .step.active .step-circle {
   background: linear-gradient(135deg, #1d4ed8, #2563eb);
   color: #fff;
-  box-shadow: 4px 4px 12px rgba(76,100,217,0.4), -3px -3px 8px rgba(255,255,255,0.9);
+  /* Sombras tintadas al indigo de la superficie ≥45% ✅ */
+  box-shadow: 4px 4px 12px rgba(20,55,180,0.50), -3px -3px 8px rgba(218,228,255,0.88);
   transform: scale(1.2);
 }
 .step.active-end .step-circle {
@@ -608,7 +617,8 @@ body {
 .score-dim { font-size: 9px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
 .score-pts { font-size: 22px; font-weight: 900; color: var(--navy); }
 .score-max { font-size: 10px; color: var(--text-dim); }
-.sema-bar { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; background: var(--green-soft); border-left: 4px solid var(--green); box-shadow: var(--neu-in-sm); }
+/* sema-bar: superficie verde-soft #edf7ed → sombras tintadas al verde ✅ */
+.sema-bar { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; background: var(--green-soft); border-left: 4px solid var(--green); box-shadow: inset 2px 2px 6px rgba(22,101,52,0.12), inset -2px -2px 5px rgba(225,250,228,0.85); }
 .sema-lg { width: 12px; height: 12px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px rgba(22,101,52,0.4); }
 
 /* ── FINANCIERO ── */
