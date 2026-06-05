@@ -760,107 +760,106 @@ body {
    z-index: 1 → debajo de sidebar (200) y header (100)
    Colores: azul sutil, gris, blanco, y canvas #e8ecf4 (void)
 ══════════════════════════════════════════════════════════════ */
-/* ── MOVIMIENTO INSECTO EXPLORADOR — dash · pausa · giro · escala ──
-   Rango vertical: hasta −820px (cubre toda la sidebar)
-   Escala: 0.72–1.30 · Pausas: valores consecutivos idénticos
+/* ── BURBUJAS EFERVESCENTES ──────────────────────────────────────
+   Nacen pequeñas en el fondo (scale 0.15–0.30, opacity 0)
+   Crecen al subir (scale hasta 1.60)
+   Se disuelven al llegar a la superficie (opacity 0)
+   Wobble horizontal suave = tensión superficial
+   overflow: hidden en container = superficie del agua
 ──────────────────────────────────────────────────────────────── */
-@keyframes orb-drift-1 {
-  0%   { transform: translate(  0px,    0px) scale(1.00); }
-  6%   { transform: translate( 22px, -120px) scale(0.82); }
-  12%  { transform: translate( 22px, -120px) scale(0.82); }
-  20%  { transform: translate(-18px, -300px) scale(1.20); }
-  28%  { transform: translate( 40px, -440px) scale(0.86); }
-  33%  { transform: translate( 40px, -440px) scale(0.86); }
-  42%  { transform: translate(-25px, -600px) scale(1.26); }
-  50%  { transform: translate( 30px, -720px) scale(0.76); }
-  55%  { transform: translate( 30px, -720px) scale(0.76); }
-  64%  { transform: translate(-10px, -500px) scale(1.12); }
-  72%  { transform: translate( 44px, -300px) scale(0.90); }
-  80%  { transform: translate( 14px, -140px) scale(1.10); }
-  88%  { transform: translate( 14px, -140px) scale(1.10); }
-  100% { transform: translate(  0px,    0px) scale(1.00); }
+@keyframes bubble-rise-1 {
+  0%   { transform: translateY(0)      translateX( 0px)  scale(0.18); opacity: 0;    }
+  6%   { opacity: 0.85; }
+  28%  { transform: translateY(-28vh)  translateX(14px)  scale(0.52); opacity: 0.90; }
+  52%  { transform: translateY(-54vh)  translateX(-9px)  scale(0.88); opacity: 0.85; }
+  76%  { transform: translateY(-78vh)  translateX(16px)  scale(1.22); opacity: 0.60; }
+  90%  { opacity: 0.15; }
+  100% { transform: translateY(-106vh) translateX( 5px)  scale(1.60); opacity: 0;    }
 }
-@keyframes orb-drift-2 {
-  0%   { transform: translate(  0px,    0px) scale(1.00); }
-  9%   { transform: translate(-32px, -190px) scale(1.28); }
-  17%  { transform: translate(-32px, -190px) scale(1.28); }
-  26%  { transform: translate( 22px, -380px) scale(0.73); }
-  35%  { transform: translate(-16px, -540px) scale(1.18); }
-  41%  { transform: translate(-16px, -540px) scale(1.18); }
-  51%  { transform: translate( 36px, -700px) scale(0.84); }
-  59%  { transform: translate( 10px, -800px) scale(1.22); }
-  64%  { transform: translate( 10px, -800px) scale(1.22); }
-  74%  { transform: translate(-20px, -580px) scale(0.80); }
-  83%  { transform: translate( 26px, -260px) scale(1.14); }
-  92%  { transform: translate( -8px,  -70px) scale(0.93); }
-  100% { transform: translate(  0px,    0px) scale(1.00); }
+@keyframes bubble-rise-2 {
+  0%   { transform: translateY(0)      translateX( 0px)  scale(0.12); opacity: 0;    }
+  8%   { opacity: 0.80; }
+  25%  { transform: translateY(-24vh)  translateX(-14px) scale(0.44); opacity: 0.88; }
+  48%  { transform: translateY(-50vh)  translateX(20px)  scale(0.78); opacity: 0.80; }
+  72%  { transform: translateY(-74vh)  translateX(-8px)  scale(1.10); opacity: 0.55; }
+  88%  { opacity: 0.12; }
+  100% { transform: translateY(-105vh) translateX(10px)  scale(1.45); opacity: 0;    }
 }
-@keyframes orb-drift-3 {
-  0%   { transform: translate(  0px,    0px) scale(1.00); }
-  5%   { transform: translate( 14px,  -55px) scale(1.18); }
-  14%  { transform: translate( 44px, -250px) scale(0.72); }
-  19%  { transform: translate( 44px, -250px) scale(0.72); }
-  29%  { transform: translate(-24px, -450px) scale(1.30); }
-  38%  { transform: translate( 18px, -640px) scale(0.83); }
-  43%  { transform: translate( 18px, -640px) scale(0.83); }
-  53%  { transform: translate(-36px, -760px) scale(1.20); }
-  61%  { transform: translate( 12px, -620px) scale(0.76); }
-  70%  { transform: translate( -8px, -400px) scale(1.24); }
-  75%  { transform: translate( -8px, -400px) scale(1.24); }
-  86%  { transform: translate( 30px, -170px) scale(0.88); }
-  100% { transform: translate(  0px,    0px) scale(1.00); }
+@keyframes bubble-rise-3 {
+  0%   { transform: translateY(0)      translateX( 0px)  scale(0.25); opacity: 0;    }
+  5%   { opacity: 0.75; }
+  30%  { transform: translateY(-30vh)  translateX(22px)  scale(0.60); opacity: 0.82; }
+  55%  { transform: translateY(-57vh)  translateX(-16px) scale(1.00); opacity: 0.72; }
+  80%  { transform: translateY(-82vh)  translateX(12px)  scale(1.30); opacity: 0.45; }
+  92%  { opacity: 0.08; }
+  100% { transform: translateY(-107vh) translateX(-3px)  scale(1.55); opacity: 0;    }
 }
-@keyframes orb-drift-4 {
-  0%   { transform: translate(  0px,    0px) scale(1.00); }
-  8%   { transform: translate(-42px, -155px) scale(0.77); }
-  15%  { transform: translate( 28px, -370px) scale(1.26); }
-  21%  { transform: translate( 28px, -370px) scale(1.26); }
-  31%  { transform: translate(-19px, -530px) scale(0.80); }
-  40%  { transform: translate( 36px, -710px) scale(1.18); }
-  47%  { transform: translate( 36px, -710px) scale(1.18); }
-  57%  { transform: translate(-26px, -820px) scale(0.74); }
-  65%  { transform: translate( 10px, -660px) scale(1.22); }
-  74%  { transform: translate(-30px, -390px) scale(0.86); }
-  80%  { transform: translate(-30px, -390px) scale(0.86); }
-  90%  { transform: translate( 20px, -150px) scale(1.10); }
-  100% { transform: translate(  0px,    0px) scale(1.00); }
+@keyframes bubble-rise-4 {
+  0%   { transform: translateY(0)      translateX( 0px)  scale(0.10); opacity: 0;    }
+  7%   { opacity: 0.90; }
+  22%  { transform: translateY(-20vh)  translateX(-18px) scale(0.35); opacity: 0.92; }
+  46%  { transform: translateY(-47vh)  translateX(15px)  scale(0.70); opacity: 0.78; }
+  70%  { transform: translateY(-72vh)  translateX(-12px) scale(1.05); opacity: 0.50; }
+  86%  { opacity: 0.10; }
+  100% { transform: translateY(-104vh) translateX( 7px)  scale(1.38); opacity: 0;    }
 }
 
+/* Container = el volumen de agua; overflow:hidden = la superficie */
 .orbs-bg {
   position: fixed; top: 0; left: 0;
   width: calc(28px + 272px + 44px);
   height: 100vh;
-  z-index: 250; /* por encima de sidebar (200) para ser visibles */
+  z-index: 250;
   pointer-events: none;
-  overflow: visible;
+  overflow: hidden; /* burbujas desaparecen al llegar a la superficie */
 }
-.orb { position: absolute; border-radius: 50%; pointer-events: none; }
+/* Base: todos nacen en el fondo */
+.orb {
+  position: absolute;
+  bottom: -60px;    /* nacen ligeramente debajo del borde inferior */
+  border-radius: 50%;
+  pointer-events: none;
+}
 
-/* ── AZUL — visibles sobre el glass */
-.orb1 { width: 420px; height: 420px; top: -5%; left: -80px;
-  background: radial-gradient(circle at 40% 40%, rgba(76,100,217,0.42), transparent 65%);
-  filter: blur(55px); animation: orb-drift-1 11s ease-in-out infinite; }
+/* ── 8 BURBUJAS — tamaños, colores y tiempos escalonados ── */
+/* Burbuja grande azul — ciclo lento, muy visible */
+.orb1 { width: 200px; height: 200px; left: 20px;
+  background: radial-gradient(circle at 38% 35%, rgba(76,100,217,0.42), transparent 65%);
+  filter: blur(38px); animation: bubble-rise-1 12s linear infinite 0s; }
 
-.orb2 { width: 210px; height: 210px; top: 30%; left: 50px;
-  background: radial-gradient(circle at 45% 50%, rgba(76,100,217,0.35), transparent 68%);
-  filter: blur(40px); animation: orb-drift-3 8s ease-in-out infinite 1.5s; }
+/* Burbuja mediana azul */
+.orb2 { width: 120px; height: 120px; left: 155px;
+  background: radial-gradient(circle at 45% 40%, rgba(76,100,217,0.38), transparent 68%);
+  filter: blur(24px); animation: bubble-rise-2 9s linear infinite 2.2s; }
 
-.orb5 { width: 170px; height: 170px; top: 54%; left: 85px;
-  background: radial-gradient(circle at 50% 45%, rgba(100,120,230,0.30), transparent 70%);
-  filter: blur(34px); animation: orb-drift-2 10s ease-in-out infinite 3s; }
+/* Burbuja grande gris — tono neutro */
+.orb3 { width: 240px; height: 240px; left: 45px;
+  background: radial-gradient(circle at 52% 38%, rgba(163,177,198,0.38), transparent 65%);
+  filter: blur(48px); animation: bubble-rise-3 15s linear infinite 1.0s; }
 
-/* ── GRIS / BLANCO */
-.orb3 { width: 250px; height: 250px; top: 17%; left: 25px;
-  background: radial-gradient(circle at 55% 40%, rgba(163,177,198,0.38), transparent 65%);
-  filter: blur(45px); animation: orb-drift-2 9s ease-in-out infinite 0.5s; }
+/* Burbuja canvas (vacío) — casi invisible, crea hueco entre las demás */
+.orb4 { width: 180px; height: 180px; left: -15px;
+  background: radial-gradient(circle at 45% 48%, rgba(232,236,244,0.65), transparent 62%);
+  filter: blur(42px); animation: bubble-rise-4 11s linear infinite 3.8s; }
 
-.orb6 { width: 120px; height: 120px; top: 69%; left: 15px;
-  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.40), transparent 68%);
-  filter: blur(26px); animation: orb-drift-4 7s ease-in-out infinite 2s; }
+/* Burbuja pequeña azul claro — rápida */
+.orb5 { width: 80px; height: 80px; left: 205px;
+  background: radial-gradient(circle at 50% 42%, rgba(100,120,230,0.40), transparent 70%);
+  filter: blur(18px); animation: bubble-rise-1 7s linear infinite 5.0s; }
 
-.orb8 { width: 170px; height: 170px; top: 84%; left: 60px;
-  background: radial-gradient(circle at 48% 42%, rgba(200,215,245,0.38), transparent 68%);
-  filter: blur(35px); animation: orb-drift-1 8s ease-in-out infinite 4s; }
+/* Burbuja micro blanca — pequeña y rápida */
+.orb6 { width: 55px; height: 55px; left: 100px;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.45), transparent 68%);
+  filter: blur(12px); animation: bubble-rise-2 6s linear infinite 1.6s; }
+
+/* Burbuja grande canvas — void */
+.orb7 { width: 280px; height: 280px; left: 25px;
+  background: radial-gradient(circle at 50% 50%, rgba(232,236,244,0.60), transparent 60%);
+  filter: blur(58px); animation: bubble-rise-3 17s linear infinite 6.5s; }
+
+.orb8 { width: 135px; height: 135px; left: 75px;
+  background: radial-gradient(circle at 48% 42%, rgba(200,215,245,0.40), transparent 68%);
+  filter: blur(28px); animation: bubble-rise-4 10s linear infinite 4.2s; }
 
 /* ── CANVAS #e8ecf4 — efecto vacío entre las orbs de color */
 .orb4 { width: 300px; height: 300px; top: 41%; left: -50px;
