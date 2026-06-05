@@ -821,54 +821,51 @@ body {
   pointer-events: none;
 }
 
-/* ── 8 BURBUJAS — tamaños, colores y tiempos escalonados ── */
-/* Burbuja grande azul — ciclo lento, muy visible */
-.orb1 { width: 200px; height: 200px; left: 20px;
-  background: radial-gradient(circle at 38% 35%, rgba(76,100,217,0.42), transparent 65%);
-  filter: blur(38px); animation: bubble-rise-1 12s linear infinite 0s; }
+/* ── 8 BURBUJAS — paleta ampliada + timing lento/esporádico ────
+   Paleta: azul indigo · azul-gris · azul oscuro · gris pizarra
+           acero · gris frío · blanco hielo · void canvas
+   Timing: 14–38s duración · delays 0–28s → ambient, no distrae
+──────────────────────────────────────────────────────────────── */
 
-/* Burbuja mediana azul */
-.orb2 { width: 120px; height: 120px; left: 155px;
-  background: radial-gradient(circle at 45% 40%, rgba(76,100,217,0.38), transparent 68%);
-  filter: blur(24px); animation: bubble-rise-2 9s linear infinite 2.2s; }
+/* Azul-gris acero — grande, muy lenta */
+.orb1 { width: 210px; height: 210px; left: 18px;
+  background: radial-gradient(circle at 38% 35%, rgba(70,100,145,0.32), transparent 65%);
+  filter: blur(42px); animation: bubble-rise-1 28s linear infinite 0s; }
 
-/* Burbuja grande gris — tono neutro */
-.orb3 { width: 240px; height: 240px; left: 45px;
-  background: radial-gradient(circle at 52% 38%, rgba(163,177,198,0.38), transparent 65%);
-  filter: blur(48px); animation: bubble-rise-3 15s linear infinite 1.0s; }
+/* Gris pizarra — mediana */
+.orb2 { width: 130px; height: 130px; left: 160px;
+  background: radial-gradient(circle at 45% 40%, rgba(148,165,188,0.30), transparent 68%);
+  filter: blur(28px); animation: bubble-rise-2 22s linear infinite 8s; }
 
-/* Burbuja canvas (vacío) — casi invisible, crea hueco entre las demás */
-.orb4 { width: 180px; height: 180px; left: -15px;
-  background: radial-gradient(circle at 45% 48%, rgba(232,236,244,0.65), transparent 62%);
-  filter: blur(42px); animation: bubble-rise-4 11s linear infinite 3.8s; }
+/* Gris-azul frío — grande y difusa */
+.orb3 { width: 255px; height: 255px; left: 40px;
+  background: radial-gradient(circle at 52% 38%, rgba(110,135,168,0.28), transparent 65%);
+  filter: blur(52px); animation: bubble-rise-3 34s linear infinite 4s; }
 
-/* Burbuja pequeña azul claro — rápida */
-.orb5 { width: 80px; height: 80px; left: 205px;
-  background: radial-gradient(circle at 50% 42%, rgba(100,120,230,0.40), transparent 70%);
-  filter: blur(18px); animation: bubble-rise-1 7s linear infinite 5.0s; }
+/* Void canvas — hueco entre burbujas */
+.orb4 { width: 190px; height: 190px; left: -10px;
+  background: radial-gradient(circle at 45% 48%, rgba(232,236,244,0.62), transparent 62%);
+  filter: blur(44px); animation: bubble-rise-4 24s linear infinite 15s; }
 
-/* Burbuja micro blanca — pequeña y rápida */
-.orb6 { width: 55px; height: 55px; left: 100px;
-  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.45), transparent 68%);
-  filter: blur(12px); animation: bubble-rise-2 6s linear infinite 1.6s; }
+/* Azul indigo suave — pequeña, discreta */
+.orb5 { width: 85px; height: 85px; left: 200px;
+  background: radial-gradient(circle at 50% 42%, rgba(76,100,217,0.26), transparent 70%);
+  filter: blur(20px); animation: bubble-rise-1 18s linear infinite 20s; }
 
-/* Burbuja grande canvas — void */
-.orb7 { width: 280px; height: 280px; left: 25px;
-  background: radial-gradient(circle at 50% 50%, rgba(232,236,244,0.60), transparent 60%);
-  filter: blur(58px); animation: bubble-rise-3 17s linear infinite 6.5s; }
+/* Blanco hielo — micro burbuja */
+.orb6 { width: 60px; height: 60px; left: 108px;
+  background: radial-gradient(circle at 50% 50%, rgba(225,232,248,0.42), transparent 68%);
+  filter: blur(14px); animation: bubble-rise-2 14s linear infinite 11s; }
 
-.orb8 { width: 135px; height: 135px; left: 75px;
-  background: radial-gradient(circle at 48% 42%, rgba(200,215,245,0.40), transparent 68%);
-  filter: blur(28px); animation: bubble-rise-4 10s linear infinite 4.2s; }
+/* Azul marino oscuro — grande, muy esporádica */
+.orb7 { width: 290px; height: 290px; left: 22px;
+  background: radial-gradient(circle at 42% 45%, rgba(20,45,90,0.28), transparent 62%);
+  filter: blur(60px); animation: bubble-rise-3 38s linear infinite 7s; }
 
-/* ── CANVAS #e8ecf4 — efecto vacío entre las orbs de color */
-.orb4 { width: 300px; height: 300px; top: 41%; left: -50px;
-  background: radial-gradient(circle at 45% 48%, rgba(232,236,244,0.70), transparent 62%);
-  filter: blur(58px); animation: orb-drift-1 14s ease-in-out infinite reverse; }
-
-.orb7 { width: 250px; height: 250px; top: 71%; left: -35px;
-  background: radial-gradient(circle at 50% 50%, rgba(232,236,244,0.72), transparent 60%);
-  filter: blur(52px); animation: orb-drift-3 11s ease-in-out infinite 2.5s reverse; }
+/* Gris perla — mediana */
+.orb8 { width: 145px; height: 145px; left: 72px;
+  background: radial-gradient(circle at 48% 42%, rgba(175,188,212,0.30), transparent 68%);
+  filter: blur(30px); animation: bubble-rise-4 21s linear infinite 24s; }
 </style>
 </head>
 <body>
