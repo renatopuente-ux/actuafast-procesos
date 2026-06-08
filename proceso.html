@@ -1225,15 +1225,14 @@ const STAGES = [
       {icon:'fa-triangle-exclamation',label:'Datos incompletos',value:'Encendido',cls:'warn'},
     ],
     toggle: { label:'Datos incompletos', on: true },
-    orientacion:{tipo:'warn',title:'Orientación hacia el éxito',text:'Verifica que todos los datos del estudio estén completos. Una vez listo, usa "Enviar a revisión" para notificar a los revisores.'} },
+    orientacion: null },
   { name:'En Revisión', short:'En Revisión',
     accion: null,
     campos:[
       {icon:'fa-triangle-exclamation',label:'No conformidad por',value:'—',cls:'dim'},
       {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
     ],
-    toggle: null,
-    orientacion:{tipo:'info',title:'En espera de revisores',text:'Las notificaciones ya fueron enviadas a los revisores. Se te notificará cuando el proceso sea aprobado o requiera cambios.'} },
+    toggle: null, orientacion: null },
   { name:'Para Entregar', short:'Para Entregar',
     accion: { label:'Marcar entregado', icon:'fa-box-archive' },
     campos:[
