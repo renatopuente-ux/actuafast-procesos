@@ -331,8 +331,8 @@ body {
   cursor: default; user-select: none;
   box-shadow: var(--neu-out-sm);
 }
-.status-badge.s-green  { background: var(--green-soft);  color: var(--green); }
-.status-badge.s-blue   { background: var(--indigo-soft); color: var(--indigo); }
+.status-badge.s-green  { background: var(--green);  color: #fff; }
+.status-badge.s-blue   { background: var(--indigo); color: #fff; }
 .status-badge.s-yellow { background: var(--yellow-soft); color: var(--yellow); }
 .status-badge.s-red    { background: var(--red-soft);    color: var(--red); }
 
@@ -1077,7 +1077,7 @@ body {
         <div class="cards-grid">
 
           <div class="neu-card">
-            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-file-contract"></i></div><div class="nc-title">Información del proceso</div><button class="nc-action"><i class="fa-solid fa-pen"></i></button></div>
+            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-file-contract"></i></div><div class="nc-title">Información del proceso</div><button class="nc-action"><i class="fa-solid fa-pen"></i> Editar</button></div>
             <div class="nc-body"><div class="field-grid">
               <div class="field"><div class="fl"><i class="fa-solid fa-hashtag"></i>Nombre VE</div><div class="fv">VE-00152954</div></div>
               <div class="field"><div class="fl"><i class="fa-solid fa-arrow-up-1-9"></i>N° de proceso</div><div class="fv">126517</div></div>
@@ -1445,9 +1445,13 @@ buildPipeline(); setStage(6);
 
 // Sidebar colapsable — hamburger toggle
 document.querySelector('.hamburger').addEventListener('click', () => {
-  document.querySelector('.sidebar').classList.toggle('collapsed');
+  const sidebar = document.querySelector('.sidebar');
+  sidebar.classList.toggle('collapsed');
   document.querySelector('.top-header').classList.toggle('sb-collapsed');
   document.querySelector('.main').classList.toggle('sb-collapsed');
+  // Orbs se apagan cuando el sidebar está contraído
+  const orbs = document.querySelector('.orbs-bg');
+  if (orbs) orbs.style.display = sidebar.classList.contains('collapsed') ? 'none' : '';
 });
 </script>
 <!-- CIRCUIT TREE — árbol ramificado estilo microchip sobre el sidebar -->
