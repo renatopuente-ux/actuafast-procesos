@@ -459,7 +459,8 @@ body {
   z-index: 1; transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 
-.step { display: flex; flex-direction: column; align-items: center; gap: 7px; cursor: default; z-index: 2; position: relative; flex: 1; }
+.step { display: flex; flex-direction: column; align-items: center; gap: 7px; cursor: pointer; z-index: 2; position: relative; flex: 1; }
+/* Sin hover visual — solo es clicable para navegar en el prototipo */
 
 .step-circle {
   width: 30px; height: 30px; border-radius: 50%;
@@ -755,8 +756,9 @@ body {
 .modal-radio-sub { font-size: 12px; color: var(--text-dim); font-weight: 600; }
 .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; align-items: center; }
 
-/* ── CIRCUIT TREE — árbol de microchip sobre la sidebar ── */
+/* ── CIRCUIT TREE — oculto por ahora ── */
 .circuit-tree {
+  display: none;
   position: fixed;
   bottom: 12px;          /* alineado con el borde inferior del sidebar */
   left: 28px;            /* alineado con el sidebar */
@@ -1270,7 +1272,7 @@ function buildPipeline() {
   STAGES.forEach((s,i) => {
     const el = document.createElement('div');
     el.className = 'step'; el.dataset.idx = i;
-    // Sin onclick — pipeline informativo según issue #1
+    el.onclick = () => setStage(i); // prototipo: clic para navegar
     el.innerHTML = `<div class="step-circle" id="sc-${i}"></div><div class="step-label">${s.short}</div>`;
     track.appendChild(el);
   });
