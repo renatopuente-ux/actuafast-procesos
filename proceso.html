@@ -39,19 +39,29 @@
      dim     text #4b5563  5.72:1 AA
   ──────────────────────────────────────────────────────────────── */
   --navy: #0f1f3d;            /* 12.50:1 ✅ AAA */
-  --indigo: #1d4ed8;          /* 5.13:1  ✅ AA  — UI / interactive */
-  --indigo-soft: #e5f6fd;     /* MUI info alert bg */
+  --indigo:      #3C76F1;     /* Primary 500 — info / interactivo */
+  --indigo-text: #366AD9;     /* Primary 600 — variante para texto */
+  --indigo-soft: #ECF1FE;     /* Primary 100 */
   --orange: #DE5E2D;          /* brand only */
   --orange-soft: #fff4e5;
   --text: #1e293b;            /* 14.70:1 ✅ AAA */
   --text-sub: #475569;        /* 5.68:1  ✅ AA */
   --text-dim: #4b5563;        /* 5.72:1  ✅ AA */
-  --green: #1e7224;           /* 4.58:1  ✅ AA  — 25% más claro que #1b5e20 (MUI); HSL 124°,58%,28% */
-  --green-soft: #edf7ed;      /* MUI success alert bg */
-  --yellow: #663c00;          /* 7.03:1  ✅ AAA — MUI warning alert text */
-  --yellow-soft: #fff4e5;     /* MUI warning alert bg */
-  --red: #5f2120;             /* 9.14:1  ✅ AAA — MUI error alert text */
-  --red-soft: #fdeded;        /* MUI error alert bg */
+  /* ── DESIGN SYSTEM — colores semánticos del sistema oficial ────
+     Success  · #00C781 (500) · soft #66DDB3 (100) · text #00B374 (600)
+     Warning  · #FFBB38 (500) · soft #FFD688 (100) · text #E6A832 (300)
+     Danger   · #FF4040 (500) · soft #FF8C8C (100) · text #CC3333 (700)
+     Info/Pri · #3C76F1 (500) · soft #ECF1FE (100) · text #366AD9 (600)
+  ──────────────────────────────────────────────────────────────── */
+  --green:      #00C781;      /* Success 500 */
+  --green-text: #00B374;      /* Success 600 — variante para texto */
+  --green-soft: #66DDB3;      /* Success 100 */
+  --yellow:     #FFBB38;      /* Warning 500 */
+  --yellow-text:#E6A832;      /* Warning 300 — variante para texto */
+  --yellow-soft:#FFD688;      /* Warning 100 */
+  --red:        #FF4040;      /* Danger  500 */
+  --red-text:   #CC3333;      /* Danger  700 — variante para texto */
+  --red-soft:   #FF8C8C;      /* Danger  100 */
   --border: rgba(163,177,198,0.35);
 
   /* ── LIQUID GLASS — flota sobre la superficie neumórfica ─────── */
@@ -547,8 +557,8 @@ body {
 }
 .ck-label { font-size: 9px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
 .ck-value { font-size: 13px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
-.ck-value.ok { color: var(--green); }
-.ck-value.warn { color: var(--yellow); }
+.ck-value.ok { color: var(--green-text); }
+.ck-value.warn { color: var(--yellow-text); }
 .ck-value.dim { color: var(--text-dim); font-weight: 400; }
 .ck-value.link { color: var(--indigo); cursor: pointer; }
 .sema { width: 9px; height: 9px; border-radius: 50%; }
@@ -679,8 +689,8 @@ body {
 .fv { font-size: 13px; font-weight: 700; color: var(--text); }
 .fv.link, .ck-value.link { color: var(--orange); cursor: pointer; }
 .fv.link:hover, .ck-value.link:hover { text-decoration: underline; text-shadow: 0 0 10px rgba(222,94,45,0.28); }
-.fv.ok { color: var(--green); }
-.fv.warn { color: var(--yellow); }
+.fv.ok { color: var(--green-text); }
+.fv.warn { color: var(--yellow-text); }
 .fv.dim { color: var(--text-dim); font-weight: 400; }
 
 /* Neumorphic inset value */
