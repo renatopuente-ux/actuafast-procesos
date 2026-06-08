@@ -462,34 +462,31 @@ body {
 .step { display: flex; flex-direction: column; align-items: center; gap: 7px; cursor: pointer; z-index: 2; position: relative; flex: 1; }
 /* Sin hover visual — solo es clicable para navegar en el prototipo */
 
+/* Círculos inactivos/futuros: HUNDIDOS como los campos clave */
 .step-circle {
   width: 30px; height: 30px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 11px; font-weight: 800;
   background: var(--bg); color: var(--text-dim);
-  box-shadow: var(--neu-out-sm);
-  transition: all 0.25s; border: none;
+  box-shadow: var(--neu-in-sm);   /* inset = hundido */
+  transition: box-shadow 0.2s, transform 0.2s, background 0.2s; border: none;
 }
+/* Completados (verde) y activo (azul): FLOTANTES */
 .step.done .step-circle {
-  background: var(--green);        /* #1e7224 — blanco sobre él: 5.40:1 ✅ */
-  color: #ffffff;
-  /* Sombras tintadas al verde de la superficie ≥45% ✅ */
+  background: var(--green); color: #ffffff;
   box-shadow: 3px 3px 8px rgba(15,80,25,0.50), -2px -2px 6px rgba(210,242,215,0.90);
 }
 .step.active .step-circle {
-  background: linear-gradient(135deg, #1d4ed8, #2563eb);
-  color: #fff;
-  /* Sombras tintadas al indigo de la superficie ≥45% ✅ */
+  background: linear-gradient(135deg, #1d4ed8, #2563eb); color: #fff;
   box-shadow: 4px 4px 12px rgba(20,55,180,0.50), -3px -3px 8px rgba(218,228,255,0.88);
   transform: scale(1.2);
 }
 .step.active-end .step-circle {
-  background: linear-gradient(135deg, #f0f4ff, #e8ecf4);
-  color: var(--navy);
+  background: linear-gradient(135deg, #f0f4ff, #e8ecf4); color: var(--navy);
   box-shadow: 4px 4px 10px rgba(163,177,198,0.5), -3px -3px 8px rgba(255,255,255,0.9);
   transform: scale(1.12);
 }
-.step:hover:not(.active):not(.active-end) .step-circle { box-shadow: 3px 3px 8px rgba(163,177,198,0.6), -3px -3px 8px rgba(255,255,255,0.95); }
+/* Sin sombra en hover */
 
 .step-label { font-size: 10px; font-weight: 700; text-align: center; color: var(--text-dim); line-height: 1.3; max-width: 70px; transition: color 0.2s; }
 .step.done .step-label { color: var(--green); }
@@ -710,7 +707,7 @@ body {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
-  color: var(--indigo); font-size: 11px; font-weight: 700; cursor: pointer;
+  color: var(--indigo); font-size: 13px; font-weight: 700; cursor: pointer;
   box-shadow: 3px 3px 8px rgba(163,177,198,0.45), -2px -2px 6px rgba(255,255,255,0.9), inset 0 1px 0 rgba(255,255,255,0.95);
   display: inline-flex; align-items: center; gap: 5px;
   transition: box-shadow 0.15s, transform 0.12s; font-family: inherit;
