@@ -175,7 +175,7 @@ body {
   transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 /* Sidebar colapsada — 120px icon-only */
-.sidebar.collapsed { width: 120px; }
+.sidebar.collapsed { width: 96px; }
 .sidebar.collapsed .nav-label,
 .sidebar.collapsed .nav-section-label,
 .sidebar.collapsed .app-version,
@@ -184,7 +184,7 @@ body {
 .sidebar.collapsed .nav-item { justify-content: center; padding: 9px 8px; }
 .sidebar.collapsed .nav-item.active::before { top: 8px; bottom: 8px; }
 .sidebar.collapsed .logo-full { display: none; }
-.sidebar.collapsed .af-brand { display: flex; }
+.sidebar.collapsed .af-brand { display: block; }
 
 /* "AF" mini-marca visible solo cuando colapsado */
 .af-brand {
@@ -198,8 +198,8 @@ body {
 /* Transiciones suaves header y main */
 .top-header { transition: padding-left 0.3s cubic-bezier(0.4,0,0.2,1); }
 .main { transition: margin-left 0.3s cubic-bezier(0.4,0,0.2,1); }
-.top-header.sb-collapsed { padding-left: calc(28px + 120px + 24px) !important; }
-.main.sb-collapsed { margin-left: calc(28px + 120px + 12px) !important; }
+.top-header.sb-collapsed { padding-left: calc(28px + 96px + 24px) !important; }
+.main.sb-collapsed { margin-left: calc(28px + 96px + 12px) !important; }
 
 /* Área brand — se sienta sobre la franja navy del header */
 .sidebar-brand {
@@ -951,8 +951,13 @@ body {
     <!-- Brand area — flota sobre el navy del header -->
     <div class="sidebar-brand">
       <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
-      <!-- "AF" mini — visible solo colapsado -->
-      <span class="af-brand"><span class="af-a">A</span><span class="af-f">F</span></span>
+      <!-- "AF" mini SVG — mismas letras del logo completo, visible solo colapsado -->
+      <svg class="af-brand" xmlns="http://www.w3.org/2000/svg" width="42" height="14" viewBox="0 0 62 40" fill="none" style="overflow:visible;">
+        <path d="M0 39.1963L16.4561 0.187256L33.1085 39.1963H27.9292L24.1922 31.0012H11.9323L14.0302 26.3463H22.3565L16.4561 12.644L5.31057 39.1963H0Z" fill="#fff"/>
+        <g transform="translate(-167,0)">
+          <path d="M227.211 8.24744V3.06982H204.917V39.9219H210.826V23.3537H224.165V17.8107H210.826V8.24744H227.211Z" fill="#0f1f3d"/>
+        </g>
+      </svg>
       <!-- Logo completo — oculto cuando colapsado -->
       <svg class="logo-full" xmlns="http://www.w3.org/2000/svg" width="114" height="18" viewBox="0 0 312 40" fill="none" style="overflow:visible;">
         <path d="M0 39.1963L16.4561 0.187256L33.1085 39.1963H27.9292L24.1922 31.0012H11.9323L14.0302 26.3463H22.3565L16.4561 12.644L5.31057 39.1963H0Z" fill="#fff"/>
@@ -1320,11 +1325,16 @@ function updateVisuals(idx) {
   const pct = idx === 0 ? 0 : (idx / (STAGES.length - 1)) * 100;
   // Pista va de left:100%/14 a right:100%/14 → ancho útil = 12/14 del contenedor
   document.getElementById('pipeline-progress').style.width = (pct * 12 / 14).toFixed(2) + '%';
-  // Paso 7 (Completado): barra totalmente verde; resto: degradado verde→indigo
+  // Verde sólido entre pasos completados; degradado solo en el segmento activo
   const prog = document.getElementById('pipeline-progress');
-  prog.style.background = idx === 6
-    ? 'var(--green)'
-    : 'linear-gradient(90deg, var(--green), var(--indigo))';
+  if (idx === 0 || idx === 6) {
+    prog.style.background = 'var(--green)';
+  } else {
+    // Porcentaje ya completado (pasos anteriores) dentro del total de la barra
+    const donePct = ((idx - 1) / idx * 100).toFixed(1);
+    prog.style.background =
+      `linear-gradient(90deg, var(--green) 0%, var(--green) ${donePct}%, var(--indigo) 100%)`;
+  }
 }
 
 function renderCampos(idx) {
