@@ -444,24 +444,23 @@ body {
 .pipeline-spacer { flex: 1; }
 
 .pipeline-track { position: relative; display: flex; align-items: flex-start; justify-content: space-between; }
-/* Track hundido = pendiente · barra elevada = completado */
+/* Track hundido = pendiente · barra elevada = completado
+   left/right = calc(100%/14) — centro del 1er y último paso (7 pasos iguales) */
 .pipeline-track::before {
   content: ''; position: absolute;
-  top: 3px;   /* centra 24px en el eje de los círculos (15px) */
-  left: 15px;
-  right: 15px; /* termina en el centro del paso 7 */
-  height: 24px; border-radius: 12px;
+  top: 9px;                        /* centra 12px en el eje del círculo (15px) */
+  left:  calc(100% / 14);          /* centro del paso 1 */
+  right: calc(100% / 14);          /* centro del paso 7, sin excedente */
+  height: 12px; border-radius: 6px;
   background: var(--bg);
-  /* Neumorfismo inset = canal hundido */
-  box-shadow: inset 3px 3px 8px rgba(163,177,198,0.55), inset -3px -3px 8px rgba(245,248,255,0.85);
+  box-shadow: inset 2px 2px 6px rgba(163,177,198,0.55), inset -2px -2px 5px rgba(245,248,255,0.85);
   z-index: 0;
 }
 .pipeline-progress {
   position: absolute;
-  top: 3px; left: 15px; height: 24px; border-radius: 12px;
+  top: 9px; left: calc(100% / 14); height: 12px; border-radius: 6px;
   background: linear-gradient(90deg, var(--green), var(--indigo));
-  /* Neumorfismo outset = elevado = completado */
-  box-shadow: 3px 3px 8px rgba(76,100,217,0.28), -2px -2px 6px rgba(245,248,255,0.80);
+  box-shadow: 2px 2px 6px rgba(76,100,217,0.28), -1px -1px 4px rgba(245,248,255,0.80);
   z-index: 1; transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 
@@ -495,7 +494,7 @@ body {
 }
 /* Sin sombra en hover */
 
-.step-label { font-size: 10px; font-weight: 700; text-align: center; color: var(--text-dim); line-height: 1.3; max-width: 70px; transition: color 0.2s; }
+.step-label { font-size: 12px; font-weight: 700; text-align: center; color: var(--text-dim); line-height: 1.3; max-width: 80px; transition: color 0.2s; }
 .step.done .step-label { color: var(--green); }
 .step.active .step-label { color: var(--indigo); font-weight: 800; }
 .step.active-end .step-label { color: var(--navy); font-weight: 800; }
@@ -1290,7 +1289,8 @@ function updateVisuals(idx) {
     }
   });
   const pct = idx === 0 ? 0 : (idx / (STAGES.length - 1)) * 100;
-  document.getElementById('pipeline-progress').style.width = pct + '%';
+  // Pista va de left:100%/14 a right:100%/14 → ancho útil = 12/14 del contenedor
+  document.getElementById('pipeline-progress').style.width = (pct * 12 / 14).toFixed(2) + '%';
 }
 
 function renderCampos(idx) {
