@@ -444,18 +444,24 @@ body {
 .pipeline-spacer { flex: 1; }
 
 .pipeline-track { position: relative; display: flex; align-items: flex-start; justify-content: space-between; }
+/* Track hundido = pendiente · barra elevada = completado */
 .pipeline-track::before {
   content: ''; position: absolute;
-  top: 15px; left: 15px; right: 15px; height: 2px;
-  background: rgba(163,177,198,0.35);
-  box-shadow: inset 1px 1px 2px rgba(163,177,198,0.4), inset -1px -1px 2px rgba(255,255,255,0.7);
+  top: 3px;   /* centra 24px en el eje de los círculos (15px) */
+  left: 15px;
+  right: 15px; /* termina en el centro del paso 7 */
+  height: 24px; border-radius: 12px;
+  background: var(--bg);
+  /* Neumorfismo inset = canal hundido */
+  box-shadow: inset 3px 3px 8px rgba(163,177,198,0.55), inset -3px -3px 8px rgba(245,248,255,0.85);
   z-index: 0;
 }
 .pipeline-progress {
   position: absolute;
-  top: 15px; left: 15px; height: 2px;
+  top: 3px; left: 15px; height: 24px; border-radius: 12px;
   background: linear-gradient(90deg, var(--green), var(--indigo));
-  box-shadow: 0 0 6px rgba(76,100,217,0.3);
+  /* Neumorfismo outset = elevado = completado */
+  box-shadow: 3px 3px 8px rgba(76,100,217,0.28), -2px -2px 6px rgba(245,248,255,0.80);
   z-index: 1; transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 
@@ -470,6 +476,7 @@ body {
   background: var(--bg); color: var(--text-dim);
   box-shadow: var(--neu-in-sm);   /* inset = hundido */
   transition: box-shadow 0.2s, transform 0.2s, background 0.2s; border: none;
+  position: relative; z-index: 3; /* encima de la barra de 24px */
 }
 /* Completados (verde) y activo (azul): FLOTANTES */
 .step.done .step-circle {
