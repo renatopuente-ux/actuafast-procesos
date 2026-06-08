@@ -172,7 +172,15 @@ body {
 
   display: flex; flex-direction: column;
   overflow-y: auto; overflow-x: hidden;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
 }
+/* Sidebar colapsada — se desliza fuera de pantalla */
+.sidebar.collapsed {
+  transform: translateX(calc(-272px - 28px - 16px));
+}
+/* Header y main se expanden cuando el sidebar colapsa */
+.top-header.sb-collapsed { padding-left: 28px; }
+.main.sb-collapsed { margin-left: 12px; }
 
 /* Área brand — se sienta sobre la franja navy del header */
 .sidebar-brand {
@@ -459,8 +467,8 @@ body {
 .pipeline-progress {
   position: absolute;
   top: 9px; left: calc(100% / 14); height: 12px; border-radius: 6px;
-  background: linear-gradient(90deg, var(--green), #2a9632);
-  box-shadow: 2px 2px 6px rgba(15,80,25,0.30), -1px -1px 4px rgba(210,242,215,0.80);
+  background: linear-gradient(90deg, var(--green), var(--indigo));
+  box-shadow: 2px 2px 6px rgba(15,80,25,0.28), -1px -1px 4px rgba(210,242,215,0.75);
   z-index: 1; transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 
@@ -636,7 +644,7 @@ body {
 }
 .nc-title { font-size: 13px; font-weight: 800; color: var(--navy); }
 .nc-action {
-  margin-left: auto; font-size: 11px; color: var(--text-dim); font-weight: 700;
+  margin-left: auto; font-size: 13px; color: var(--orange); font-weight: 700;
   cursor: pointer; background: none; border: none; font-family: inherit;
   padding: 4px 8px; border-radius: 7px; transition: all 0.15s;
   display: flex; align-items: center; gap: 5px;
@@ -1387,7 +1395,14 @@ function selRadio(el) {
   el.querySelector('input').checked = true;
 }
 
-buildPipeline(); setStage(8);
+buildPipeline(); setStage(6);
+
+// Sidebar colapsable — hamburger toggle
+document.querySelector('.hamburger').addEventListener('click', () => {
+  document.querySelector('.sidebar').classList.toggle('collapsed');
+  document.querySelector('.top-header').classList.toggle('sb-collapsed');
+  document.querySelector('.main').classList.toggle('sb-collapsed');
+});
 </script>
 <!-- CIRCUIT TREE — árbol ramificado estilo microchip sobre el sidebar -->
 <div class="circuit-tree" aria-hidden="true">
