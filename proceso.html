@@ -459,7 +459,7 @@ body {
   z-index: 1; transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 
-.step { display: flex; flex-direction: column; align-items: center; gap: 7px; cursor: pointer; z-index: 2; position: relative; flex: 1; }
+.step { display: flex; flex-direction: column; align-items: center; gap: 7px; cursor: default; z-index: 2; position: relative; flex: 1; }
 
 .step-circle {
   width: 30px; height: 30px; border-radius: 50%;
@@ -977,16 +977,14 @@ body {
           <div class="rh-icon-wrap"><i class="fa-solid fa-briefcase"></i></div>
           <div>
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-              <div class="rh-title">VE-00152954</div>
+              <!-- N° proceso = identificador primario -->
+              <div class="rh-title">126517</div>
+              <span style="font-size:13px;font-weight:600;color:var(--text-dim);">VE-00152954</span>
               <span id="status-badge" class="status-badge s-green"><i class="fa-solid fa-circle-check"></i> Completado</span>
             </div>
             <div class="rh-subtitle">
               <i class="fa-solid fa-building" style="font-size:11px;"></i>
               ACCIONA AGUA, S.A.
-              <span style="opacity:0.3">·</span> Proceso #126517
-              <span class="tag tag-niif">NIIF (US$)</span>
-              <span class="tag tag-tipo">Pasivos Laborales</span>
-              <span class="tag tag-tipo">50 trabajadores</span>
             </div>
           </div>
         </div>
@@ -1028,7 +1026,7 @@ body {
     <div class="tabs-bar">
       <div class="tab active" onclick="showTab('detalles',this)"><i class="fa-solid fa-list-ul"></i> Detalles</div>
       <div class="tab" onclick="showTab('items',this)"><i class="fa-solid fa-cart-shopping"></i> Items Vendidos <span class="tab-count">2</span></div>
-      <div class="tab" onclick="showTab('documentos',this)"><i class="fa-solid fa-folder-open"></i> Documentos <span class="tab-count">0</span></div>
+      <!-- Documentos eliminado — issue #1 -->
       <div class="tab" onclick="showTab('historial',this)"><i class="fa-solid fa-clock-rotate-left"></i> Historial <span class="tab-count">6</span></div>
     </div>
 
@@ -1086,41 +1084,58 @@ body {
             </div></div>
           </div>
 
-          <div class="neu-card">
-            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-clipboard-check"></i></div><div class="nc-title">Evaluación de requerimiento</div></div>
-            <div class="nc-body">
-              <div class="eval-grid">
-                <div class="eval-item on"><div class="eval-chk yes"><i class="fa-solid fa-check" style="font-size:8px;"></i></div> Req. NIIF</div>
-                <div class="eval-item"><div class="eval-chk no"></div> Req. NEC</div>
-                <div class="eval-item"><div class="eval-chk no"></div> Normas Internac.</div>
-                <div class="eval-item"><div class="eval-chk no"></div> Req. NIC 12</div>
-                <div class="eval-item"><div class="eval-chk no"></div> Req. USGAAP</div>
-                <div class="eval-item"><div class="eval-chk no"></div> Bases históricas</div>
+          <!-- ÍTEMS VENDIDOS — mayor protagonismo en pestaña principal (issue #1) -->
+          <div class="neu-card card-full">
+            <div class="nc-header">
+              <div class="nc-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+              <div class="nc-title">Ítems vendidos <span style="color:var(--text-dim);font-weight:400;">(2)</span></div>
+            </div>
+            <div class="nc-body" style="display:flex;flex-direction:column;gap:10px;">
+              <!-- Item cards con acciones — datos financieros ocultos por defecto -->
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <div class="neu-card" style="flex:1;min-width:200px;box-shadow:var(--neu-out-sm);">
+                  <div style="padding:14px 16px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                      <div>
+                        <div style="font-size:13px;font-weight:800;color:var(--navy);">Desahucio NIIF</div>
+                        <div style="font-size:11px;color:var(--text-dim);margin-top:2px;font-family:monospace;">I-212240 · Actuarial</div>
+                      </div>
+                      <span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span>
+                    </div>
+                    <button class="btn-exec" style="width:100%;justify-content:center;"><i class="fa-solid fa-play"></i> Ejecutar en AF</button>
+                  </div>
+                </div>
+                <div class="neu-card" style="flex:1;min-width:200px;box-shadow:var(--neu-out-sm);">
+                  <div style="padding:14px 16px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                      <div>
+                        <div style="font-size:13px;font-weight:800;color:var(--navy);">Jubilación Patronal</div>
+                        <div style="font-size:11px;color:var(--text-dim);margin-top:2px;font-family:monospace;">I-212241 · Actuarial</div>
+                      </div>
+                      <span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span>
+                    </div>
+                    <button class="btn-exec" style="width:100%;justify-content:center;"><i class="fa-solid fa-play"></i> Ejecutar en AF</button>
+                  </div>
+                </div>
               </div>
-              <div class="field-grid">
-                <div class="field"><div class="fl"><i class="fa-solid fa-chart-line"></i>Nivel segmento</div><div class="fv">21.00%</div></div>
-                <div class="field"><div class="fl"><i class="fa-solid fa-percent"></i>Sc. Requerimiento</div><div class="fv">4%</div></div>
-                <div class="field"><div class="fl"><i class="fa-solid fa-gauge-high"></i>Evaluación</div><div class="fv">25%</div></div>
+              <!-- Toggle financieros — ocultos por defecto (issue #1) -->
+              <button onclick="toggleFinancials()" class="btn-ghost" id="btn-fin-toggle" style="font-size:12px;color:var(--text-dim);align-self:flex-start;">
+                <i class="fa-solid fa-chevron-down" id="fin-chevron"></i> Ver detalle financiero
+              </button>
+              <div id="fin-detail" style="display:none;">
+                <table class="items-table">
+                  <thead><tr><th>Ítem</th><th>Cant.</th><th>P. Unitario</th><th>Total</th><th>Días</th></tr></thead>
+                  <tbody>
+                    <tr><td style="font-weight:700;color:var(--navy)">Desahucio NIIF</td><td>50</td><td>$3,70</td><td style="font-weight:800;color:var(--navy)">$185,00</td><td>4</td></tr>
+                    <tr><td style="font-weight:700;color:var(--navy)">Jubilación Patronal</td><td>50</td><td>$2,60</td><td style="font-weight:800;color:var(--navy)">$130,00</td><td>4</td></tr>
+                    <tr class="total-row"><td colspan="3" style="text-align:right;font-size:12px;">SUBTOTAL</td><td>$315,00</td><td></td></tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
 
-          <div class="neu-card">
-            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-star-half-stroke"></i></div><div class="nc-title">Scoring del informe</div></div>
-            <div class="nc-body">
-              <div class="score-grid">
-                <div class="score-card"><div class="score-dim">Segmento</div><div class="score-pts">20</div><div class="score-max">/ 20</div></div>
-                <div class="score-card"><div class="score-dim">Antigüedad</div><div class="score-pts">20</div><div class="score-max">/ 20</div></div>
-                <div class="score-card"><div class="score-dim">Var. Jub.</div><div class="score-pts">15</div><div class="score-max">/ 15</div></div>
-                <div class="score-card"><div class="score-dim">Var. Des.</div><div class="score-pts">15</div><div class="score-max">/ 15</div></div>
-              </div>
-              <div class="sema-bar">
-                <div class="sema-lg"></div>
-                <div><div style="font-size:13px;font-weight:800;color:var(--green);">Revisión aprobada</div><div style="font-size:11px;color:rgba(5,150,105,0.6);font-weight:600;">Score total: 70/70 puntos</div></div>
-              </div>
-            </div>
-          </div>
-
+          <!-- Financiero resumido -->
           <div class="neu-card card-full">
             <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-dollar-sign"></i></div><div class="nc-title">Resumen financiero</div></div>
             <div class="nc-body">
@@ -1152,17 +1167,7 @@ body {
         </div>
       </div>
 
-      <!-- DOCUMENTOS -->
-      <div id="tab-documentos" class="tab-panel">
-        <div style="margin-bottom:20px;">
-          <div class="docs-hrow"><div class="docs-htitle"><i class="fa-solid fa-file-lines" style="color:var(--indigo);"></i> Documentos Venta Efectiva <span style="color:var(--text-dim);font-weight:400;">(0)</span></div><button class="btn-neu" onclick="document.getElementById('modal-doc').classList.add('open')"><i class="fa-solid fa-plus"></i> Nuevo</button></div>
-          <p style="color:var(--text-dim);font-size:13px;font-weight:600;">No hay documentos registrados.</p>
-        </div>
-        <div>
-          <div class="docs-hrow"><div class="docs-htitle"><i class="fa-solid fa-paperclip" style="color:var(--indigo);"></i> Archivos <span style="color:var(--text-dim);font-weight:400;">(0)</span></div><button class="btn-neu"><i class="fa-solid fa-upload"></i> Agregar</button></div>
-          <div class="upload-zone"><div style="font-size:32px;opacity:0.2;margin-bottom:12px;"><i class="fa-solid fa-cloud-arrow-up"></i></div><div style="font-size:13px;font-weight:700;margin-bottom:4px;">Arrastra archivos aquí</div><div style="font-size:11px;font-weight:600;">PDF, Excel, Word · Máx. 25 MB</div></div>
-        </div>
-      </div>
+      <!-- Documentos eliminado — issue #1 -->
 
       <!-- HISTORIAL -->
       <div id="tab-historial" class="tab-panel">
@@ -1202,62 +1207,47 @@ body {
 
 <script>
 // ── STAGE DATA — acciones nombradas por INTENCIÓN (UX doc) ────────
+// 7 etapas según issue #1: Planificado → Asignado → En Curso → En Revisión → Para Entregar → Revisión Cliente → Completado
+// Campos sin Score, Semáforo ni Archivo adjunto (issue #1)
 const STAGES = [
   { name:'Planificado', short:'Planificado',
-    accion: { label:'Confirmar datos', icon:'fa-check' },
+    accion: null,
     campos:[
       {icon:'fa-users',label:'Equipo',value:'Equipo 3 - P. Beltrán',cls:'link'},
       {icon:'fa-calendar',label:'Fecha asignación',value:'12/06/2025',cls:''},
-      {icon:'fa-circle-check',label:'Asignado',value:'<i class="fa-solid fa-check" style="color:var(--green)"></i> Sí',cls:'ok'},
       {icon:'fa-user',label:'Propietario único',value:'Samantha Chavez',cls:'link'},
     ],
     toggle: null, orientacion: null },
-  { name:'Datos validados', short:'Datos validados',
+  { name:'Asignado', short:'Asignado',
     accion: { label:'Iniciar proceso', icon:'fa-play' },
     campos:[
       {icon:'fa-users',label:'Total trabajadores',value:'50',cls:''},
-      {icon:'fa-circle',label:'Semáforo asignación',value:'<span class="sema verde"></span> Verde',cls:''},
-      {icon:'fa-paperclip',label:'Archivo adjunto',value:'Sin archivo',cls:'dim'},
+      {icon:'fa-circle-check',label:'Asignado',value:'<i class="fa-solid fa-check" style="color:var(--green)"></i> Sí',cls:'ok'},
     ],
     toggle: { label:'Datos incompletos', on: false },
     orientacion: null },
-  { name:'En curso', short:'En curso',
+  { name:'En Curso', short:'En Curso',
     accion: { label:'Enviar a revisión', icon:'fa-paper-plane' },
     campos:[
-      {icon:'fa-paperclip',label:'Archivo adjunto (requerido)',value:'Sin archivo',cls:'warn'},
-      {icon:'fa-star',label:'Score obtenido',value:'Calculando…',cls:'dim'},
+      {icon:'fa-triangle-exclamation',label:'Datos incompletos',value:'Encendido',cls:'warn'},
     ],
     toggle: { label:'Datos incompletos', on: true },
-    orientacion:{tipo:'warn',title:'Orientación hacia el éxito',text:'Carga los archivos del estudio para que el sistema calcule el Score automáticamente. Una vez listo, usa "Enviar a revisión" para notificar a los revisores.'} },
-  { name:'Solicita revisión', short:'Solicita revisión',
+    orientacion:{tipo:'warn',title:'Orientación hacia el éxito',text:'Verifica que todos los datos del estudio estén completos. Una vez listo, usa "Enviar a revisión" para notificar a los revisores.'} },
+  { name:'En Revisión', short:'En Revisión',
     accion: null,
-    campos:[
-      {icon:'fa-star',label:'Score',value:'70 / 70',cls:'ok'},
-      {icon:'fa-circle',label:'Semáforo revisión',value:'<span class="sema verde"></span> Verde',cls:''},
-      {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
-    ],
-    toggle: null,
-    orientacion:{tipo:'info',title:'En espera de revisores',text:'Las notificaciones ya fueron enviadas. Cuando los revisores completen su revisión, el proceso avanzará automáticamente. No se requiere acción de tu parte.'} },
-  { name:'Revisión coordinación', short:'Rev. Coordinación',
-    accion: { label:'Aprobar coordinación', icon:'fa-check-double' },
     campos:[
       {icon:'fa-triangle-exclamation',label:'No conformidad por',value:'—',cls:'dim'},
       {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
     ],
-    toggle: null, orientacion: null },
-  { name:'Revisión dirección', short:'Rev. Dirección',
-    accion: { label:'Aprobar dirección', icon:'fa-check-double' },
-    campos:[
-      {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
-    ],
-    toggle: null, orientacion: null },
-  { name:'Para entregar', short:'Para entregar',
+    toggle: null,
+    orientacion:{tipo:'info',title:'En espera de revisores',text:'Las notificaciones ya fueron enviadas a los revisores. Se te notificará cuando el proceso sea aprobado o requiera cambios.'} },
+  { name:'Para Entregar', short:'Para Entregar',
     accion: { label:'Marcar entregado', icon:'fa-box-archive' },
     campos:[
       {icon:'fa-check-double',label:'Aprobado',value:'<i class="fa-solid fa-check" style="color:var(--green)"></i> Sí',cls:'ok'},
     ],
     toggle: null, orientacion: null },
-  { name:'Revisión cliente', short:'Rev. Cliente',
+  { name:'Revisión Cliente', short:'Rev. Cliente',
     accion: { label:'Aplicar cambios del cliente', icon:'fa-rotate-left' },
     campos:[
       {icon:'fa-user-check',label:'Estado cliente',value:'En revisión',cls:''},
@@ -1273,14 +1263,14 @@ const STAGES = [
     toggle: null, orientacion: null },
 ];
 
-let current = 8;
+let current = 6; // índice del último stage (Completado)
 
 function buildPipeline() {
   const track = document.getElementById('pipeline-track');
   STAGES.forEach((s,i) => {
     const el = document.createElement('div');
     el.className = 'step'; el.dataset.idx = i;
-    el.onclick = () => setStage(i);
+    // Sin onclick — pipeline informativo según issue #1
     el.innerHTML = `<div class="step-circle" id="sc-${i}"></div><div class="step-label">${s.short}</div>`;
     track.appendChild(el);
   });
@@ -1295,8 +1285,8 @@ function updateVisuals(idx) {
       el.classList.add('done');
       circle.innerHTML = '<i class="fa-solid fa-check" style="font-size:11px;"></i>';
     } else if (i === idx) {
-      el.classList.add(idx === 8 ? 'active-end' : 'active');
-      circle.innerHTML = i === 8
+      el.classList.add(idx === 6 ? 'active-end' : 'active');
+      circle.innerHTML = i === 6
         ? '<i class="fa-solid fa-circle-check" style="font-size:12px;"></i>'
         : `<span style="font-size:11px;font-weight:900;">${i+1}</span>`;
     } else {
@@ -1355,7 +1345,7 @@ function renderAccion(idx) {
   const badge = document.getElementById('status-badge');
   const btn = document.getElementById('btn-accion');
 
-  if (idx === 8) {
+  if (idx === 6) {
     badge.className = 'status-badge s-green';
     badge.innerHTML = '<i class="fa-solid fa-circle-check"></i> Completado';
     btn.style.display = 'none';
@@ -1378,13 +1368,23 @@ function setStage(idx) {
   renderCampos(idx);
   renderAccion(idx);
 }
-function nextStage() { if (current < 8) setStage(current + 1); }
+function nextStage() { if (current < 6) setStage(current + 1); }
 function showTab(n, el) {
   document.querySelectorAll('.tab-panel').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-'+n).classList.add('active');
   el.classList.add('active');
 }
+function toggleFinancials() {
+  const el = document.getElementById('fin-detail');
+  const chevron = document.getElementById('fin-chevron');
+  const btn = document.getElementById('btn-fin-toggle');
+  const open = el.style.display === 'none';
+  el.style.display = open ? 'block' : 'none';
+  chevron.className = open ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down';
+  btn.style.color = open ? 'var(--indigo)' : 'var(--text-dim)';
+}
+
 function selRadio(el) {
   document.querySelectorAll('.modal-radio').forEach(r => r.classList.remove('selected'));
   el.classList.add('selected');
