@@ -1008,6 +1008,67 @@ body {
 
   /* Ocultar decorativos en mobile */
   .orbs-bg, .circuit-tree { display: none !important; }
+
+  /* ── Items Vendidos: tabla → tarjetas verticales ── */
+  #tab-items .items-table { display: block; }
+  #tab-items .items-table thead { display: none; }
+  #tab-items .items-table tbody { display: block; }
+
+  #tab-items .items-table tbody tr {
+    display: block;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  #tab-items .items-table tbody tr:last-child { border-bottom: none; }
+
+  #tab-items .items-table tbody tr td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: none;
+    font-size: 12px;
+  }
+  #tab-items .items-table tbody tr td::before {
+    content: attr(data-label);
+    font-size: 10px; font-weight: 800;
+    color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-right: 8px; flex-shrink: 0;
+  }
+
+  /* Ocultar columna # (no en total-row) */
+  #tab-items .items-table tbody tr:not(.total-row) td:nth-child(1) { display: none; }
+
+  /* Producto: línea de encabezado destacada */
+  #tab-items .items-table tbody tr:not(.total-row) td:nth-child(3) {
+    font-size: 14px; font-weight: 700;
+    padding: 0 0 8px 0;
+    border-bottom: 1px solid rgba(163,177,198,0.18);
+    margin-bottom: 2px;
+  }
+
+  /* Última celda (botón Ejecutar): ancho completo */
+  #tab-items .items-table tbody tr td:last-child { padding-top: 8px; }
+  #tab-items .items-table tbody tr td:last-child .btn-exec {
+    width: 100%; justify-content: center; flex: none;
+  }
+
+  /* Fila SUBTOTAL */
+  #tab-items .items-table tbody tr.total-row {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: rgba(15,31,61,0.03);
+    border-bottom: none;
+  }
+  #tab-items .items-table tbody tr.total-row td {
+    border: none; padding: 0;
+    font-size: 13px; font-weight: 800; color: var(--navy);
+  }
+  #tab-items .items-table tbody tr.total-row td::before { content: none; }
+  #tab-items .items-table tbody tr.total-row td:empty { display: none; }
 }
 </style>
 </head>
@@ -1292,8 +1353,8 @@ body {
           <table class="items-table">
             <thead><tr><th>#</th><th>Código</th><th>Producto</th><th>Familia</th><th>Cant.</th><th>P. Unitario</th><th>Total</th><th>Días</th><th>Ejecutable</th><th></th></tr></thead>
             <tbody>
-              <tr><td style="color:var(--text-dim)">1</td><td><span class="item-code">I-212240</span></td><td style="font-weight:700;color:var(--navy)">Desahucio NIIF</td><td>Actuarial</td><td>50</td><td>$3,70</td><td style="font-weight:800;color:var(--navy)">$185,00</td><td>4</td><td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td><td><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td></tr>
-              <tr><td style="color:var(--text-dim)">2</td><td><span class="item-code">I-212241</span></td><td style="font-weight:700;color:var(--navy)">Jubilación Patronal</td><td>Actuarial</td><td>50</td><td>$2,60</td><td style="font-weight:800;color:var(--navy)">$130,00</td><td>4</td><td><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td><td><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td></tr>
+              <tr><td data-label="#" style="color:var(--text-dim)">1</td><td data-label="Código"><span class="item-code">I-212240</span></td><td data-label="Producto" style="font-weight:700;color:var(--navy)">Desahucio NIIF</td><td data-label="Familia">Actuarial</td><td data-label="Cant.">50</td><td data-label="P. Unit.">$3,70</td><td data-label="Total" style="font-weight:800;color:var(--navy)">$185,00</td><td data-label="Días">4</td><td data-label="Estado"><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td><td data-label=""><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td></tr>
+              <tr><td data-label="#" style="color:var(--text-dim)">2</td><td data-label="Código"><span class="item-code">I-212241</span></td><td data-label="Producto" style="font-weight:700;color:var(--navy)">Jubilación Patronal</td><td data-label="Familia">Actuarial</td><td data-label="Cant.">50</td><td data-label="P. Unit.">$2,60</td><td data-label="Total" style="font-weight:800;color:var(--navy)">$130,00</td><td data-label="Días">4</td><td data-label="Estado"><span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span></td><td data-label=""><button class="btn-exec"><i class="fa-solid fa-play"></i> Ejecutar</button></td></tr>
               <tr class="total-row"><td colspan="6" style="text-align:right;font-size:12px;">SUBTOTAL</td><td>$315,00</td><td colspan="3"></td></tr>
             </tbody>
           </table>
