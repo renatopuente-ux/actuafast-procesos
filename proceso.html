@@ -322,18 +322,24 @@ body {
 .rh-title { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; color: var(--navy); }
 .rh-subtitle { font-size: 13px; color: var(--text-sub); margin-top: 5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-weight: 600; }
 
-/* ── STATUS BADGE — más grande que .tag, para estado principal del registro ── */
-.status-badge {
+/* ═══════════════════════════════════════════════════════════
+   CHIP — Fuente única de verdad para todos los chips/badges.
+   Nuevos proyectos: .chip + .chip-{color}
+   Back-compat:      .status-badge + .s-{color}
+   ═══════════════════════════════════════════════════════════ */
+.chip, .status-badge {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 5px 10px; border-radius: 99px;
   font-size: 10px; font-weight: 700;
   cursor: default; user-select: none;
   box-shadow: var(--neu-in-sm);
 }
-.status-badge.s-green  { background: var(--green); color: #fff; box-shadow: none; }
-.status-badge.s-blue   { background: var(--indigo-soft); color: var(--indigo); }
-.status-badge.s-yellow { background: var(--yellow-soft); color: var(--yellow); }
-.status-badge.s-red    { background: var(--red-soft);    color: var(--red); }
+.chip-gray,        .s-gray    { background: var(--bg);                color: var(--text-sub); }
+.chip-blue,        .s-blue    { background: var(--indigo-soft);       color: var(--indigo); }
+.chip-green,       .s-green-soft { background: rgba(0,199,129,0.12); color: var(--green-text); }
+.chip-green-solid, .s-green   { background: var(--green); color: #fff; box-shadow: none; }
+.chip-yellow,      .s-yellow  { background: rgba(255,187,56,0.15);    color: var(--yellow-text); }
+.chip-red,         .s-red     { background: rgba(255,64,64,0.12);     color: var(--red-text); }
 
 /* ── FIELD LABEL ICONS — icono antes del texto de la etiqueta ── */
 .fl { font-size: 10px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 5px; }
@@ -775,9 +781,9 @@ body {
 .t-avatar.orange { background: linear-gradient(135deg, var(--orange), #f07244); }
 .t-user { font-size: 13px; font-weight: 700; color: var(--navy); }
 .t-date { font-size: 11px; color: var(--text-dim); font-weight: 600; }
-.t-field { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; background: var(--bg); box-shadow: var(--neu-in-sm); color: var(--text-sub); }
-.t-from { color: var(--text-dim); text-decoration: line-through; font-size: 12px; font-weight: 600; }
-.t-to { color: var(--green); font-weight: 800; font-size: 12px; }
+.t-field { display: inline-flex; align-items: center; padding: 4px 9px; border-radius: 99px; font-size: 10px; font-weight: 700; background: var(--bg); box-shadow: var(--neu-in-sm); color: var(--text-sub); }
+.t-from  { display: inline-flex; align-items: center; padding: 4px 9px; border-radius: 99px; font-size: 10px; font-weight: 600; background: var(--bg); box-shadow: var(--neu-in-sm); color: var(--text-dim); text-decoration: line-through; }
+.t-to    { display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 99px; font-size: 10px; font-weight: 700; background: var(--indigo-soft); color: var(--indigo); box-shadow: var(--neu-in-sm); }
 
 /* ══════════════════════════════
    MODAL — NEU
