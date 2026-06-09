@@ -103,28 +103,59 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; }
 .sidebar.collapsed .logo-full { display: none; }
 .sidebar.collapsed .af-brand { display: block; margin-left: -8px; }
 
-.sidebar-top {
+.sidebar-brand {
+  height: 56px;
   display: flex; align-items: center; gap: 10px;
-  padding: 18px 18px 10px; border-bottom: 1px solid rgba(163,177,198,0.15);
-  margin-bottom: 6px; flex-shrink: 0;
+  padding: 0 16px; flex-shrink: 0;
+  background: rgba(15,31,61,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.45);
+  border-radius: 20px 20px 0 0;
 }
-.logo-full { font-size: 11px; font-weight: 800; color: var(--navy); opacity: 0.5; letter-spacing: 1px; }
-.af-brand { display: none; }
+.sidebar-brand svg { flex-shrink: 0; }
+.af-brand { display: none; font-size: 17px; font-weight: 900; letter-spacing: -0.5px; align-items: center; gap: 0; }
+.sidebar::before {
+  content: '';
+  position: absolute; top: 56px; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.2));
+  pointer-events: none; z-index: 1;
+}
 
-.nav-section-label { font-size: 10px; font-weight: 800; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; padding: 12px 18px 4px; }
+.nav-section-label { font-size: 9px; font-weight: 800; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; padding: 16px 16px 5px; }
 .nav-item {
   display: flex; align-items: center; gap: 10px;
-  padding: 9px 18px; font-size: 13px; color: var(--text-sub);
-  cursor: pointer; text-decoration: none; position: relative; transition: all 0.15s;
+  padding: 9px 12px; font-size: 13px; color: var(--text-sub);
+  cursor: pointer; text-decoration: none; position: relative;
+  margin: 2px 10px; border-radius: 10px;
+  transition: all 0.18s; font-weight: 600; box-shadow: none;
 }
-.nav-icon { width: 18px; text-align: center; font-size: 15px; color: var(--navy); flex-shrink: 0; }
-.nav-item:hover { background: rgba(255,255,255,0.5); color: var(--text); }
-.nav-item.active { background: rgba(60,118,241,0.07); color: var(--navy); font-weight: 700; }
-.nav-item.active::before { content:''; position:absolute; left:0; top:6px; bottom:6px; width:3px; background:var(--navy); border-radius:0 3px 3px 0; }
+.nav-item:hover {
+  color: var(--text);
+  background: rgba(255,255,255,0.45);
+  box-shadow: 3px 3px 8px rgba(163,177,198,0.42), -2px -2px 6px rgba(255,255,255,0.88);
+}
+.nav-item:focus-visible { outline: 2px solid var(--indigo); outline-offset: -2px; border-radius: 10px; }
+.nav-item.active {
+  color: var(--indigo); font-weight: 800;
+  background: rgba(29,78,216,0.05);
+  box-shadow: inset 2px 2px 6px rgba(163,177,198,0.50), inset -2px -2px 5px rgba(255,255,255,0.88);
+}
+.nav-item.active::before {
+  content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 3px;
+  background: linear-gradient(180deg, var(--indigo), #1e40af);
+  border-radius: 0 3px 3px 0;
+  box-shadow: 1px 0 6px rgba(29,78,216,0.28);
+}
+.nav-icon { width: 16px; text-align: center; font-size: 13px; }
 
-.sidebar-footer { margin-top: auto; padding: 16px 18px; border-top: 1px solid rgba(163,177,198,0.15); flex-shrink: 0; }
-.app-version     { font-size: 11px; font-weight: 800; color: var(--text-sub); }
-.app-version-num { font-size: 10px; color: var(--text-dim); margin-top: 1px; }
+.sidebar-footer {
+  margin-top: auto; padding: 14px 16px;
+  background: #ffffff;
+  border-top: 1px solid rgba(163,177,198,0.2);
+  border-radius: 0 0 20px 20px;
+  position: relative; z-index: 301;
+}
+.app-version     { font-size: 11px; font-weight: 700; color: var(--text-sub); }
+.app-version-num { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
 .app-help { font-size: 11px; color: var(--orange); text-decoration: none; cursor: pointer; display: inline-block; margin-top: 4px; }
 .app-help:hover { text-decoration: underline; }
 
@@ -252,14 +283,24 @@ td { padding: 12px 16px; font-size: 13px; color: var(--text-sub); }
 
 <!-- ── SIDEBAR ── -->
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-top">
+  <div class="sidebar-brand">
     <button class="hamburger" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
-    <span class="logo-full">ACTUAFAST</span>
-    <svg class="af-brand" width="32" height="22" viewBox="0 0 62 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 39.1963L16.4561 0.187256L33.1085 39.1963H27.9292L24.1922 31.0012H11.9323L14.0302 26.3463H22.3565L16.4561 12.644L5.31057 39.1963H0Z" fill="#0f1f3d"/>
-      <g transform="translate(-167, 0)">
-        <path d="M227.211 8.24744V3.06982H204.917V39.9219H210.826V23.3537H224.165V17.8107H210.826V8.24744H227.211Z" fill="#DE5E2D"/>
+    <svg class="af-brand" xmlns="http://www.w3.org/2000/svg" width="42" height="14" viewBox="0 0 62 40" fill="none" style="overflow:visible;">
+      <path d="M0 39.1963L16.4561 0.187256L33.1085 39.1963H27.9292L24.1922 31.0012H11.9323L14.0302 26.3463H22.3565L16.4561 12.644L5.31057 39.1963H0Z" fill="#fff"/>
+      <g transform="translate(-167,0)">
+        <path d="M227.211 8.24744V3.06982H204.917V39.9219H210.826V23.3537H224.165V17.8107H210.826V8.24744H227.211Z" fill="#0f1f3d"/>
       </g>
+    </svg>
+    <svg class="logo-full" xmlns="http://www.w3.org/2000/svg" width="114" height="18" viewBox="0 0 312 40" fill="none" style="overflow:visible;">
+      <path d="M0 39.1963L16.4561 0.187256L33.1085 39.1963H27.9292L24.1922 31.0012H11.9323L14.0302 26.3463H22.3565L16.4561 12.644L5.31057 39.1963H0Z" fill="#fff"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M242.333 1.5437L226.283 39.673H232.871L235.815 31.963H248.712L251.796 39.673H258.454L242.333 1.5437ZM242.263 15.7721L237.918 26.6361H246.819L242.263 15.7721Z" fill="#0f1f3d"/>
+      <path d="M276.281 10.5288L280.493 6.97067C272.286 -3.56318 258.655 6.15508 263.719 15.6119L276.281 28.6099C276.879 29.7011 277.249 30.1948 276.281 31.3692C273.47 35.06 270.948 34.7253 265.752 30.9336L261.116 34.3005C266.796 41.3053 275.504 42.1671 281.219 34.7095C283.723 29.8459 283.118 27.2501 279.258 22.8007L268.947 12.6347C267.238 9.3105 272.343 6.1589 276.281 10.5288Z" fill="#0f1f3d"/>
+      <path d="M75.2023 30.2859C72.9793 33.9379 69.5875 36.3059 65.6049 37.8608C61.6222 39.4156 57.2391 39.6188 53.1297 38.4391C49.0203 37.2594 45.4123 34.7621 42.8609 31.3315C40.3095 27.9008 38.956 23.7269 39.0086 19.4519C39.0611 15.1768 40.5169 11.0375 43.152 7.67063C45.787 4.30381 49.4553 1.89604 53.5925 0.817771C57.7296 -0.260502 62.1065 0.050452 66.0497 1.70279C69.9928 3.35514 73.3601 5.5266 75.4927 9.23214L71.8551 12.545C70.2588 9.77118 67.1844 7.09618 64.2327 5.85932C61.2811 4.62246 57.8298 4.45844 54.733 5.26558C51.6361 6.07272 48.7687 8.13138 46.7963 10.6516C44.8238 13.1718 43.7882 16.2518 43.7489 19.4519C43.7095 22.652 44.638 25.9805 46.5479 28.5485C48.4578 31.1165 51.6569 33.0939 54.733 33.9769C57.809 34.86 61.2515 34.6319 64.2327 33.468C67.2139 32.3041 69.8987 29.8963 71.5628 27.1626L75.2023 30.2859Z" fill="#fff"/>
+      <path d="M83.7849 6.46582L85.4902 1.5437H114.559L112.854 6.46582H101.614V39.3717H96.4977V6.46582H83.7849Z" fill="#fff"/>
+      <path d="M125.3 1.51587L130.354 0C129.964 26.5753 130.354 34.5783 140.532 34.5783C149.42 34.5783 150.026 28.278 149.412 1.51587L154.681 0C156.096 34.5783 154.032 39.3428 140.532 39.3428C123.524 39.3428 124.393 27.0497 125.3 1.51587Z" fill="#fff"/>
+      <path d="M163.569 39.2405L180.022 0.275635L196.625 39.2405H191.24L187.8 31.1633H175.385L177.704 26.2273H185.93L180.022 12.915L168.953 39.2405H163.569Z" fill="#fff"/>
+      <path d="M227.211 8.24744V3.06982H204.917V39.9219H210.826V23.3537H224.165V17.8107H210.826V8.24744H227.211Z" fill="#0f1f3d"/>
+      <path d="M285.357 8.2251V2.90112H311.36V8.2251H301.217V39.8885H295.388V8.2251H285.357Z" fill="#0f1f3d"/>
     </svg>
   </div>
   <nav>
