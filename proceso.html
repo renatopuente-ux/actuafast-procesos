@@ -81,9 +81,9 @@ body {
   display: flex; flex-direction: column;
 }
 
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: rgba(163,177,198,0.5); border-radius: 99px; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); box-shadow: inset 2px 2px 5px rgba(163,177,198,0.55), inset -2px -2px 5px rgba(245,248,255,0.80); border-radius: 99px; }
+::-webkit-scrollbar-thumb { background: rgba(163,177,198,0.65); border-radius: 99px; box-shadow: 2px 2px 4px rgba(163,177,198,0.5), -1px -1px 3px rgba(245,248,255,0.85); }
 
 /* ══════════════════════════════
    HEADER
@@ -286,7 +286,8 @@ body {
 }
 .app-version { font-size: 11px; font-weight: 700; color: var(--text-sub); }
 .app-version-num { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
-.app-help { font-size: 11px; color: var(--orange); text-decoration: underline; cursor: pointer; display: inline-block; margin-top: 4px; }
+.app-help { font-size: 11px; color: var(--orange); text-decoration: none; cursor: pointer; display: inline-block; margin-top: 4px; }
+.app-help:hover { text-decoration: underline; }
 
 /* MAIN — desplazado por sidebar flotante (12+220+12=244px) + header flotante (12+56+16=84px) */
 .main {
@@ -329,7 +330,7 @@ body {
   cursor: default; user-select: none;
   box-shadow: var(--neu-in-sm);
 }
-.status-badge.s-green  { background: var(--green);      color: #fff; }
+.status-badge.s-green  { background: var(--green); color: #fff; box-shadow: none; }
 .status-badge.s-blue   { background: var(--indigo-soft); color: var(--indigo); }
 .status-badge.s-yellow { background: var(--yellow-soft); color: var(--yellow); }
 .status-badge.s-red    { background: var(--red-soft);    color: var(--red); }
@@ -745,7 +746,7 @@ body {
 .items-table tr:hover td { background: rgba(163,177,198,0.06); }
 .items-table tr:last-child td { border-bottom: none; }
 .item-code { font-family: monospace; font-size: 11px; background: var(--bg); padding: 3px 8px; border-radius: 6px; color: var(--text-dim); box-shadow: var(--neu-in-sm); }
-.ejecutable-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 700; background: var(--indigo-soft); color: var(--indigo); }
+.ejecutable-badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 99px; font-size: 10px; font-weight: 700; background: var(--indigo-soft); color: var(--indigo); box-shadow: var(--neu-in-sm); }
 .btn-exec {
   padding: 0 20px; border-radius: 99px; height: 50px;
   background: var(--indigo);
