@@ -421,7 +421,7 @@ body {
   background: transparent; border: none;
   color: var(--text-sub); box-shadow: none;
 }
-.btn-ghost:hover { background: rgba(163,177,198,0.14); color: var(--text); border-radius: 10px; }
+.btn-ghost:hover { background: rgba(163,177,198,0.14); color: var(--text); border-radius: 99px; }
 .btn-ghost:active { background: rgba(163,177,198,0.25); }
 
 /* ── DANGER — glass tintado rojo ── */
@@ -448,7 +448,7 @@ body {
 }
 
 /* ── SM — tamaño pequeño ── */
-.btn-sm { padding: 5px 12px; font-size: 11px; border-radius: 8px; gap: 5px; }
+.btn-sm { padding: 5px 12px; font-size: 11px; border-radius: 99px; gap: 5px; }
 
 /* ── BUTTON GROUP — botones conectados como unidad ── */
 .btn-group { display: inline-flex; border-radius: 10px; overflow: hidden; box-shadow: var(--glass-shadow); }
@@ -459,7 +459,7 @@ body {
 
 /* ── BACKWARD COMPAT: btn-neu como alias de btn-secondary ── */
 .btn-neu { }
-.btn-neu { display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: 10px; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer; user-select: none; border: 1px solid var(--glass-border); background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); color: var(--navy); box-shadow: var(--glass-shadow), var(--glass-shine); transition: all 0.18s; white-space: nowrap; }
+.btn-neu { display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: 99px; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer; user-select: none; border: 1px solid var(--glass-border); background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); color: var(--navy); box-shadow: var(--glass-shadow), var(--glass-shine); transition: all 0.18s; white-space: nowrap; }
 .btn-neu:hover { background: var(--glass-bg-hi); transform: translateY(-1px); box-shadow: 5px 5px 14px rgba(163,177,198,0.6), -3px -3px 9px rgba(255,255,255,0.95), var(--glass-shine); }
 .btn-neu:active { box-shadow: var(--neu-in-sm); transform: translateY(0); }
 .btn-neu:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
@@ -618,7 +618,7 @@ body {
   gap: 2px; flex-shrink: 0; align-items: center;
 }
 .tab {
-  padding: 8px 16px; border-radius: 9px;
+  padding: 8px 16px; border-radius: 99px;
   font-size: 12px; font-weight: 700;
   color: var(--text-dim); cursor: pointer;
   display: inline-flex; align-items: center; gap: 6px;
@@ -627,7 +627,7 @@ body {
   user-select: none;
 }
 .tab:hover { color: var(--text-sub); background: rgba(255,255,255,0.4); }
-.tab:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; border-radius: 9px; }
+.tab:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; border-radius: 99px; }
 .tab.active {
   color: var(--navy);
   background: var(--glass-bg-hi);
@@ -674,7 +674,7 @@ body {
 .nc-action {
   margin-left: auto; font-size: 13px; color: var(--orange); font-weight: 700;
   cursor: pointer; background: none; border: none; font-family: inherit;
-  padding: 4px 8px; border-radius: 7px; transition: all 0.15s;
+  padding: 4px 8px; border-radius: 99px; transition: all 0.15s;
   display: flex; align-items: center; gap: 5px;
 }
 .nc-action:hover { background: rgba(163,177,198,0.15); color: var(--indigo); }
@@ -745,7 +745,7 @@ body {
 .item-code { font-family: monospace; font-size: 11px; background: var(--bg); padding: 3px 8px; border-radius: 6px; color: var(--text-dim); box-shadow: var(--neu-in-sm); }
 .ejecutable-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 700; background: var(--indigo-soft); color: var(--indigo); }
 .btn-exec {
-  padding: 5px 14px; border-radius: 8px; height: 60px;
+  padding: 5px 20px; border-radius: 99px; height: 60px;
   background: var(--indigo);
   border: none;
   color: #fff; font-size: 13px; font-weight: 700; cursor: pointer;
@@ -1157,9 +1157,7 @@ body {
                 </div>
               </div>
               <!-- Toggle financieros — ocultos por defecto (issue #1) -->
-              <button onclick="toggleFinancials()" class="btn-ghost" id="btn-fin-toggle" style="font-size:12px;color:var(--text-dim);align-self:flex-start;">
-                <i class="fa-solid fa-chevron-down" id="fin-chevron"></i> Ver detalle financiero
-              </button>
+              <button class="btn-neu" style="align-self:flex-start;font-size:12px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ir al módulo</button>
               <div id="fin-detail" style="display:none;">
                 <table class="items-table">
                   <thead><tr><th>Ítem</th><th>Cant.</th><th>P. Unitario</th><th>Total</th><th>Días</th></tr></thead>
@@ -1439,7 +1437,7 @@ function selRadio(el) {
   el.querySelector('input').checked = true;
 }
 
-buildPipeline(); setStage(6);
+buildPipeline(); setStage(0);
 
 // Sidebar colapsable — hamburger toggle
 document.querySelector('.hamburger').addEventListener('click', () => {
