@@ -175,8 +175,8 @@ body {
   /* Sombras: −16% opacidad, −24% canal B */
   box-shadow:
     6px 6px 22px rgba(15,31,61,0.32),
-    -4px -4px 12px rgba(245,248,255,0.90),
-    0 -6px 18px rgba(15,31,61,0.18),
+    -3px -4px 14px rgba(15,31,61,0.28),
+    0 -8px 22px rgba(15,31,61,0.24),
     inset 0 1px 0 rgba(255,255,255,0.95);
 
   display: flex; flex-direction: column;
@@ -286,7 +286,7 @@ body {
 }
 .app-version { font-size: 11px; font-weight: 700; color: var(--text-sub); }
 .app-version-num { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
-.app-help { font-size: 11px; color: var(--indigo); text-decoration: underline; cursor: pointer; display: inline-block; margin-top: 4px; }
+.app-help { font-size: 11px; color: var(--orange); text-decoration: underline; cursor: pointer; display: inline-block; margin-top: 4px; }
 
 /* MAIN — desplazado por sidebar flotante (12+220+12=244px) + header flotante (12+56+16=84px) */
 .main {
@@ -324,7 +324,7 @@ body {
 /* ── STATUS BADGE — más grande que .tag, para estado principal del registro ── */
 .status-badge {
   display: inline-flex; align-items: center; gap: 5px;
-  padding: 3px 10px; border-radius: 99px;
+  padding: 5px 10px; border-radius: 99px;
   font-size: 10px; font-weight: 700;
   cursor: default; user-select: none;
   box-shadow: var(--neu-in-sm);
