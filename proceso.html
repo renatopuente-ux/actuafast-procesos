@@ -174,9 +174,9 @@ body {
   */
   /* Sombras: −16% opacidad, −24% canal B */
   box-shadow:
-    6px 6px 20px rgba(80,100,150,0.38),
-    -4px -4px 12px rgba(245,248,255,0.92),
-    0 -6px 16px rgba(60,80,130,0.22),
+    6px 6px 22px rgba(15,31,61,0.32),
+    -4px -4px 12px rgba(245,248,255,0.90),
+    0 -6px 18px rgba(15,31,61,0.18),
     inset 0 1px 0 rgba(255,255,255,0.95);
 
   display: flex; flex-direction: column;
@@ -323,14 +323,14 @@ body {
 
 /* ── STATUS BADGE — más grande que .tag, para estado principal del registro ── */
 .status-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 16px; border-radius: 99px;
-  font-size: 13px; font-weight: 800; letter-spacing: 0.2px;
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 99px;
+  font-size: 10px; font-weight: 700;
   cursor: default; user-select: none;
   box-shadow: var(--neu-in-sm);
 }
-.status-badge.s-green  { background: var(--green);  color: #fff; }
-.status-badge.s-blue   { background: var(--indigo); color: #fff; }
+.status-badge.s-green  { background: var(--green);      color: #fff; }
+.status-badge.s-blue   { background: var(--indigo-soft); color: var(--indigo); }
 .status-badge.s-yellow { background: var(--yellow-soft); color: var(--yellow); }
 .status-badge.s-red    { background: var(--red-soft);    color: var(--red); }
 
@@ -747,7 +747,7 @@ body {
 .item-code { font-family: monospace; font-size: 11px; background: var(--bg); padding: 3px 8px; border-radius: 6px; color: var(--text-dim); box-shadow: var(--neu-in-sm); }
 .ejecutable-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 99px; font-size: 10px; font-weight: 700; background: var(--indigo-soft); color: var(--indigo); }
 .btn-exec {
-  padding: 5px 20px; border-radius: 99px; height: 60px;
+  padding: 0 20px; border-radius: 99px; height: 50px;
   background: var(--indigo);
   border: none;
   color: #fff; font-size: 13px; font-weight: 700; cursor: pointer;
