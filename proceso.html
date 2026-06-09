@@ -927,6 +927,77 @@ body {
 .orb8 { width: 145px; height: 145px; left: 72px;
   background: radial-gradient(circle at 48% 42%, rgba(175,188,212,0.30), transparent 68%);
   filter: blur(30px); animation: bubble-rise-4 21s linear infinite 24s; }
+
+/* ════════════════════════════════════════════════════
+   SIDEBAR OVERLAY — fondo oscuro al abrir en mobile
+   ════════════════════════════════════════════════════ */
+.sidebar-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(15,31,61,0.48);
+  z-index: 399;
+  backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+}
+.sidebar-overlay.active { display: block; }
+.mob-hamburger { display: none; }
+
+/* ════════════════════════════════════════════════════
+   RESPONSIVE — Mobile (≤768px)
+   ════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  body { overflow-x: hidden; }
+
+  /* Sidebar oculta off-screen, overlay al abrirse */
+  .sidebar {
+    left: -300px !important; top: 0 !important;
+    height: 100vh !important;
+    border-radius: 0 20px 20px 0 !important;
+    z-index: 400;
+    transition: left 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .sidebar.mobile-open { left: 0 !important; }
+
+  /* Header full-width */
+  .top-header {
+    left: 12px !important; right: 12px !important;
+    padding: 0 16px !important;
+  }
+  .mob-hamburger { display: flex; }
+
+  /* Main: sin margen del sidebar */
+  .main {
+    margin-left: 0 !important;
+    margin-top: 116px;
+    padding: 14px 14px 60px !important;
+  }
+
+  /* Record header apilado */
+  .rh-top { flex-direction: column; gap: 12px; padding: 16px !important; }
+  .rh-actions { width: 100%; }
+  .btn-exec, .btn-neu { flex: 1; justify-content: center; font-size: 12px; }
+
+  /* Tabs scrollables */
+  .tabs-bar {
+    overflow-x: auto; flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 12px !important; gap: 8px !important;
+    scrollbar-width: none;
+  }
+  .tabs-bar::-webkit-scrollbar { display: none; }
+  .tab { white-space: nowrap; flex-shrink: 0; }
+
+  /* Grids a 1 columna */
+  .cards-grid  { grid-template-columns: 1fr !important; }
+  .field-grid  { grid-template-columns: 1fr !important; }
+  .eval-grid   { grid-template-columns: 1fr 1fr !important; }
+  .score-grid  { grid-template-columns: 1fr 1fr !important; }
+  .fin-grid    { grid-template-columns: 1fr 1fr !important; }
+
+  /* Botón de etapa ancho completo */
+  #btn-accion { width: 100%; }
+
+  /* Ocultar decorativos en mobile */
+  .orbs-bg, .circuit-tree { display: none !important; }
+}
 </style>
 </head>
 <body>
@@ -945,6 +1016,7 @@ body {
 
 <!-- HEADER — sin logo (vive en sidebar-brand) -->
 <div class="top-header">
+  <button class="hamburger mob-hamburger" id="mob-hamburger"><i class="fa-solid fa-bars"></i></button>
   <div class="header-spacer"></div><!-- empuja user info a la derecha -->
   <div style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="140" height="18" viewBox="0 0 312 40" fill="none" style="flex-shrink:0;">
     <path d="M0 39.1963L16.4561 0.187256L33.1085 39.1963H27.9292L24.1922 31.0012H11.9323L14.0302 26.3463H22.3565L16.4561 12.644L5.31057 39.1963H0Z" fill="#fff"/>
@@ -963,6 +1035,7 @@ body {
   </div>
 </div>
 
+<div id="sidebar-overlay" class="sidebar-overlay"></div>
 <div class="app-body">
   <aside class="sidebar">
     <!-- Brand area — flota sobre el navy del header -->
@@ -1452,15 +1525,25 @@ function selRadio(el) {
 
 buildPipeline(); setStage(0);
 
-// Sidebar colapsable — hamburger toggle
-document.querySelector('.hamburger').addEventListener('click', () => {
+// Sidebar toggle — desktop: colapsa a icon-mode | mobile: overlay slide-in
+function toggleSidebar() {
   const sidebar = document.querySelector('.sidebar');
-  sidebar.classList.toggle('collapsed');
-  document.querySelector('.top-header').classList.toggle('sb-collapsed');
-  document.querySelector('.main').classList.toggle('sb-collapsed');
-  // Orbs se apagan cuando el sidebar está contraído
-  const orbs = document.querySelector('.orbs-bg');
-  if (orbs) orbs.style.display = sidebar.classList.contains('collapsed') ? 'none' : '';
+  const overlay = document.getElementById('sidebar-overlay');
+  if (window.innerWidth <= 768) {
+    sidebar.classList.toggle('mobile-open');
+    if (overlay) overlay.classList.toggle('active');
+  } else {
+    sidebar.classList.toggle('collapsed');
+    document.querySelector('.top-header').classList.toggle('sb-collapsed');
+    document.querySelector('.main').classList.toggle('sb-collapsed');
+    const orbs = document.querySelector('.orbs-bg');
+    if (orbs) orbs.style.display = sidebar.classList.contains('collapsed') ? 'none' : '';
+  }
+}
+document.querySelectorAll('.hamburger').forEach(btn => btn.addEventListener('click', toggleSidebar));
+document.getElementById('sidebar-overlay')?.addEventListener('click', () => {
+  document.querySelector('.sidebar').classList.remove('mobile-open');
+  document.getElementById('sidebar-overlay').classList.remove('active');
 });
 </script>
 <!-- CIRCUIT TREE — árbol ramificado estilo microchip sobre el sidebar -->
