@@ -174,11 +174,9 @@ body {
   */
   /* Sombras: −16% opacidad, −24% canal B */
   box-shadow:
-    0 -8px 20px rgba(5,12,23,0.42),          /* top — B: 30→23, α: .50→.42 */
-    -3px -4px 14px rgba(10,20,42,0.32),      /* top-left — B: 55→42, α: .38→.32 */
-    8px 8px 36px rgba(15,31,46,0.12),        /* general — B: 61→46, α: .14→.12 */
-    4px 0 16px rgba(163,177,198,0.15),       /* borde derecho */
-    inset 0 1px 0 rgba(255,255,255,0.95);    /* shine */
+    6px 6px 18px rgba(163,177,198,0.55),
+    -4px -4px 12px rgba(245,248,255,0.90),
+    inset 0 1px 0 rgba(255,255,255,0.95);
 
   display: flex; flex-direction: column;
   overflow-y: auto; overflow-x: hidden;
@@ -569,6 +567,8 @@ body {
 .ck-pill.toggle-pill {
   display: flex; align-items: center; gap: 12px;
   cursor: pointer; user-select: none;
+  background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
 }
 .neu-toggle { position: relative; width: 40px; height: 22px; flex-shrink: 0; pointer-events: none; }
 .toggle-track {
@@ -611,7 +611,7 @@ body {
    Activo: pill glass que "flota" sobre la barra (sí es una selección)
 ══════════════════════════════ */
 .tabs-bar {
-  display: flex; padding: 6px 28px;
+  display: flex; padding: 14px 28px;
   background: rgba(232,236,244,0.8);
   backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid var(--border);
@@ -622,8 +622,9 @@ body {
   font-size: 12px; font-weight: 700;
   color: var(--text-dim); cursor: pointer;
   display: inline-flex; align-items: center; gap: 6px;
-  transition: color 0.15s, background 0.15s;
-  border: none; background: transparent;
+  transition: color 0.15s, background 0.15s, box-shadow 0.15s;
+  border: 1px solid transparent; background: var(--bg);
+  box-shadow: var(--neu-out-sm);
   user-select: none;
 }
 .tab:hover { color: var(--text-sub); background: rgba(255,255,255,0.4); }
@@ -731,7 +732,7 @@ body {
 
 /* ── FINANCIERO ── */
 .fin-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; }
-.fin-item { text-align: center; padding: 14px 12px; border-radius: 12px; background: var(--bg); box-shadow: var(--neu-out-sm); }
+.fin-item { text-align: center; padding: 14px 12px; border-radius: 12px; background: var(--bg); box-shadow: var(--neu-in); }
 .fin-lbl { font-size: 10px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 6px; }
 .fin-val { font-size: 14px; font-weight: 800; color: var(--text); }
 .fin-val.total { font-size: 20px; color: var(--navy); }
@@ -1140,7 +1141,10 @@ body {
                       </div>
                       <span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span>
                     </div>
-                    <button class="btn-exec" style="width:100%;justify-content:center;"><i class="fa-solid fa-play"></i> Ejecutar en AF</button>
+                    <div style="display:flex;gap:8px;margin-top:4px;">
+                      <button class="btn-exec" style="flex:1;justify-content:center;"><i class="fa-solid fa-play"></i> Ejecutar en AF</button>
+                      <button class="btn-neu" style="flex:1;justify-content:center;font-size:12px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ir al módulo</button>
+                    </div>
                   </div>
                 </div>
                 <div class="neu-card" style="flex:1;min-width:200px;box-shadow:var(--neu-out-sm);">
@@ -1152,12 +1156,13 @@ body {
                       </div>
                       <span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span>
                     </div>
-                    <button class="btn-exec" style="width:100%;justify-content:center;"><i class="fa-solid fa-play"></i> Ejecutar en AF</button>
+                    <div style="display:flex;gap:8px;margin-top:4px;">
+                      <button class="btn-exec" style="flex:1;justify-content:center;"><i class="fa-solid fa-play"></i> Ejecutar en AF</button>
+                      <button class="btn-neu" style="flex:1;justify-content:center;font-size:12px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ir al módulo</button>
+                    </div>
                   </div>
                 </div>
               </div>
-              <!-- Toggle financieros — ocultos por defecto (issue #1) -->
-              <button class="btn-neu" style="align-self:flex-start;font-size:12px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ir al módulo</button>
               <div id="fin-detail" style="display:none;">
                 <table class="items-table">
                   <thead><tr><th>Ítem</th><th>Cant.</th><th>P. Unitario</th><th>Total</th><th>Días</th></tr></thead>
