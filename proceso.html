@@ -663,6 +663,8 @@ body {
 ══════════════════════════════ */
 .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .card-full { grid-column: 1 / -1; }
+.items-fin-bento { display:grid; grid-template-columns:3fr 2fr; gap:18px; grid-column:1/-1; }
+@media(max-width:768px){ .items-fin-bento { grid-template-columns:1fr; } }
 
 .neu-card {
   background: var(--bg); border-radius: 16px;
@@ -1279,16 +1281,18 @@ body {
             </div></div>
           </div>
 
-          <!-- ÍTEMS VENDIDOS — mayor protagonismo en pestaña principal (issue #1) -->
-          <div class="neu-card card-full">
+          <!-- BENTO: Items + Resumen Financiero -->
+          <div class="items-fin-bento">
+          <!-- Col 1: Items vendidos (3fr) -->
+          <div class="neu-card">
             <div class="nc-header">
               <div class="nc-icon"><i class="fa-solid fa-cart-shopping"></i></div>
               <div class="nc-title">Ítems vendidos <span style="color:var(--text-dim);font-weight:400;">(2)</span></div>
             </div>
             <div class="nc-body" style="display:flex;flex-direction:column;gap:10px;">
               <!-- Item cards con acciones — datos financieros ocultos por defecto -->
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <div class="neu-card" style="flex:1;min-width:200px;box-shadow:var(--neu-out-sm);">
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div class="neu-card" style="box-shadow:var(--neu-out-sm);">
                   <div style="padding:14px 16px;">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
                       <div>
@@ -1303,7 +1307,7 @@ body {
                     </div>
                   </div>
                 </div>
-                <div class="neu-card" style="flex:1;min-width:200px;box-shadow:var(--neu-out-sm);">
+                <div class="neu-card" style="box-shadow:var(--neu-out-sm);">
                   <div style="padding:14px 16px;">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
                       <div>
@@ -1332,19 +1336,20 @@ body {
             </div>
           </div>
 
-          <!-- Financiero resumido -->
-          <div class="neu-card card-full">
+          <!-- Col 2: Resumen Financiero (2fr) -->
+          <div class="neu-card">
             <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-dollar-sign"></i></div><div class="nc-title">Resumen financiero</div></div>
             <div class="nc-body">
-              <div class="fin-grid">
+              <div class="fin-grid" style="grid-template-columns:1fr 1fr;">
                 <div class="fin-item"><div class="fin-lbl"><i class="fa-solid fa-calculator" style="font-size:9px;margin-right:4px;"></i>Total base</div><div class="fin-val">$315,00</div></div>
                 <div class="fin-item"><div class="fin-lbl"><i class="fa-solid fa-equals" style="font-size:9px;margin-right:4px;"></i>Total neto</div><div class="fin-val">$315,00</div></div>
                 <div class="fin-item"><div class="fin-lbl"><i class="fa-solid fa-percent" style="font-size:9px;margin-right:4px;"></i>IVA</div><div class="fin-val">15%</div></div>
                 <div class="fin-item"><div class="fin-lbl"><i class="fa-solid fa-coins" style="font-size:9px;margin-right:4px;"></i>Total IVA</div><div class="fin-val">$47,25</div></div>
-                <div class="fin-item"><div class="fin-lbl"><i class="fa-solid fa-file-invoice-dollar" style="font-size:9px;margin-right:4px;"></i>Total factura</div><div class="fin-val total">$362,25</div></div>
+                <div class="fin-item" style="grid-column:1/-1"><div class="fin-lbl"><i class="fa-solid fa-file-invoice-dollar" style="font-size:9px;margin-right:4px;"></i>Total factura</div><div class="fin-val total">$362,25</div></div>
               </div>
             </div>
           </div>
+          </div><!-- /items-fin-bento -->
 
         </div>
       </div>
