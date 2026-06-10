@@ -239,38 +239,31 @@ body {
 
 .nav-item {
   display: flex; align-items: center; gap: 10px;
-  padding: 9px 12px; font-size: 13px; color: var(--text-sub);
+  padding: 9px 14px; font-size: 13px; color: rgba(15,31,61,0.40);
   cursor: pointer; text-decoration: none; position: relative;
-  margin: 2px 10px; border-radius: 10px;
+  margin: 2px 10px; border-radius: 99px;
   transition: all 0.18s; font-weight: 600;
   box-shadow: none;
 }
-/* HOVER — elevado (outset neumórfico): se levanta de la superficie */
+/* HOVER — elevado neumórfico pill */
 .nav-item:hover {
-  color: var(--text);
-  background: rgba(255,255,255,0.45);
+  color: var(--text-sub);
+  background: rgba(255,255,255,0.50);
   box-shadow:
     3px 3px 8px rgba(163,177,198,0.42),
     -2px -2px 6px rgba(255,255,255,0.88);
 }
-.nav-item:focus-visible { outline: 2px solid var(--indigo); outline-offset: -2px; border-radius: 10px; }
+.nav-item:focus-visible { outline: 2px solid var(--indigo); outline-offset: -2px; border-radius: 99px; }
 
-/* ACTIVE — hundido (inset neumórfico): presionado sobre la superficie */
+/* ACTIVE — hundido neumórfico pill, fondo blanco brillante */
 .nav-item.active {
-  color: var(--indigo); font-weight: 800;
-  background: rgba(29,78,216,0.05);
+  color: var(--navy); font-weight: 800;
+  background: rgba(255,255,255,0.80);
   box-shadow:
-    inset 2px 2px 6px rgba(163,177,198,0.50),
-    inset -2px -2px 5px rgba(255,255,255,0.88);
+    inset 2px 2px 6px rgba(163,177,198,0.45),
+    inset -2px -2px 5px rgba(255,255,255,0.90);
 }
-/* Barra accent izquierda sobre el efecto hundido */
-.nav-item.active::before {
-  content: ''; position: absolute; left: 0; top: 6px; bottom: 6px;
-  width: 3px;
-  background: linear-gradient(180deg, var(--indigo), #1e40af);
-  border-radius: 0 3px 3px 0;
-  box-shadow: 1px 0 6px rgba(29,78,216,0.28);
-}
+.nav-item.active::before { display: none; }
 
 .nav-icon { width: 16px; text-align: center; font-size: 13px; }
 
@@ -663,7 +656,11 @@ body {
 ══════════════════════════════ */
 .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .card-full { grid-column: 1 / -1; }
-.items-fin-bento { display:grid; grid-template-columns:3fr 2fr; gap:18px; grid-column:1/-1; }
+.items-fin-bento { display:grid; grid-template-columns:3fr 2fr; gap:18px; grid-column:1/-1; align-items:stretch; }
+.items-fin-bento > .neu-card { display:flex; flex-direction:column; }
+.items-fin-bento > .neu-card > .nc-body { flex:1; display:flex; flex-direction:column; }
+.items-fin-bento > .neu-card > .nc-body > .fin-grid { flex:1; align-content:stretch; }
+.items-fin-bento > .neu-card > .nc-body > .fin-grid .fin-item { display:flex; flex-direction:column; justify-content:center; }
 @media(max-width:768px){ .items-fin-bento { grid-template-columns:1fr; } }
 
 .neu-card {
