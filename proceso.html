@@ -1006,6 +1006,9 @@ body {
   /* Botón de etapa ancho completo */
   #btn-accion { width: 100%; }
 
+  /* CTAs de item (Ejecutar en AF + Ir al módulo) en columna */
+  .item-cta-wrap { flex-direction: column !important; }
+
   /* Ocultar decorativos en mobile */
   .orbs-bg, .circuit-tree { display: none !important; }
 
@@ -1294,7 +1297,7 @@ body {
                       </div>
                       <span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span>
                     </div>
-                    <div style="display:flex;gap:8px;margin-top:4px;">
+                    <div class="item-cta-wrap" style="display:flex;gap:8px;margin-top:4px;">
                       <button class="btn-exec" style="flex:1;justify-content:center;"><i class="fa-solid fa-play"></i> Ejecutar en AF</button>
                       <button class="btn-neu" style="flex:1;justify-content:center;font-size:12px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ir al módulo</button>
                     </div>
@@ -1309,7 +1312,7 @@ body {
                       </div>
                       <span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span>
                     </div>
-                    <div style="display:flex;gap:8px;margin-top:4px;">
+                    <div class="item-cta-wrap" style="display:flex;gap:8px;margin-top:4px;">
                       <button class="btn-exec" style="flex:1;justify-content:center;"><i class="fa-solid fa-play"></i> Ejecutar en AF</button>
                       <button class="btn-neu" style="flex:1;justify-content:center;font-size:12px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ir al módulo</button>
                     </div>
