@@ -1293,25 +1293,9 @@ body {
 
     <!-- RECORD HEADER -->
     <div class="record-header">
-      <div class="rh-top">
-        <div style="display:flex;align-items:center;gap:14px;">
-          <div style="display:flex;flex-direction:column;align-items:center;gap:7px;">
-            <!-- Estado del proceso: apilado sobre el ícono para liberar la fila de acciones -->
-            <span id="status-badge" class="status-badge s-green"><i class="fa-solid fa-circle-check"></i> Completado</span>
-            <div class="rh-icon-wrap"><i class="fa-solid fa-briefcase"></i></div>
-          </div>
-          <div>
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-              <!-- N° proceso = identificador primario -->
-              <div class="rh-title">126517</div>
-              <span style="font-size:13px;font-weight:600;color:var(--text-dim);">VE-00152954</span>
-            </div>
-            <div class="rh-subtitle">
-              <i class="fa-solid fa-building" style="font-size:11px;"></i>
-              ACCIONA AGUA, S.A.
-            </div>
-          </div>
-        </div>
+      <!-- Fila 1: estado del proceso (izq) ←→ acciones (der) -->
+      <div class="rh-top" style="align-items:center;">
+        <span id="status-badge" class="status-badge s-green"><i class="fa-solid fa-circle-check"></i> Completado</span>
         <div class="rh-actions">
           <!-- Selector de rol — gobierna permisos de No conformidad (issue #3.9) -->
           <div class="role-switch" id="role-switch" title="Cambiar rol activo (prototipo)">
@@ -1341,6 +1325,21 @@ body {
             <i class="fa-solid fa-arrow-right"></i>
             <span id="btn-accion-label">Acción</span>
           </button>
+        </div>
+      </div>
+      <!-- Fila 2: ícono del proceso + identificación -->
+      <div class="rh-ident" style="display:flex;align-items:center;gap:14px;padding:0 28px 18px;">
+        <div class="rh-icon-wrap"><i class="fa-solid fa-briefcase"></i></div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <!-- N° proceso = identificador primario -->
+            <div class="rh-title">126517</div>
+            <span style="font-size:13px;font-weight:600;color:var(--text-dim);">VE-00152954</span>
+          </div>
+          <div class="rh-subtitle">
+            <i class="fa-solid fa-building" style="font-size:11px;"></i>
+            ACCIONA AGUA, S.A.
+          </div>
         </div>
       </div>
 
