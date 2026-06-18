@@ -1295,13 +1295,16 @@ body {
     <div class="record-header">
       <div class="rh-top">
         <div style="display:flex;align-items:center;gap:14px;">
-          <div class="rh-icon-wrap"><i class="fa-solid fa-briefcase"></i></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:7px;">
+            <!-- Estado del proceso: apilado sobre el ícono para liberar la fila de acciones -->
+            <span id="status-badge" class="status-badge s-green"><i class="fa-solid fa-circle-check"></i> Completado</span>
+            <div class="rh-icon-wrap"><i class="fa-solid fa-briefcase"></i></div>
+          </div>
           <div>
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
               <!-- N° proceso = identificador primario -->
               <div class="rh-title">126517</div>
               <span style="font-size:13px;font-weight:600;color:var(--text-dim);">VE-00152954</span>
-              <span id="status-badge" class="status-badge s-green"><i class="fa-solid fa-circle-check"></i> Completado</span>
             </div>
             <div class="rh-subtitle">
               <i class="fa-solid fa-building" style="font-size:11px;"></i>
