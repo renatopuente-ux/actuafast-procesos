@@ -1074,6 +1074,135 @@ body {
   #tab-items .items-table tbody tr.total-row td::before { content: none; }
   #tab-items .items-table tbody tr.total-row td:empty { display: none; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   ISSUE #3 — Detalle de proceso ActuaFast
+══════════════════════════════════════════════════════════════ */
+
+/* ── fv.danger — valor rojo de alta atención (días, no conformidad) ── */
+.fv.danger { color: var(--red-text); display: flex; align-items: center; gap: 6px; }
+.dias-ref { font-size: 10px; font-weight: 600; color: var(--text-dim); }
+
+/* ── NO CONFORMIDAD — banner rojo destacado (issue #3.1) ── */
+.nc-alert {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 10px 14px; border-radius: 10px;
+  background: var(--red-soft);
+  border-left: 4px solid var(--red);
+  color: var(--red-text); font-size: 12px; font-weight: 700; line-height: 1.5;
+  box-shadow: inset 2px 2px 6px rgba(95,33,32,0.10), inset -2px -2px 5px rgba(255,245,245,0.85);
+}
+.nc-alert i { margin-top: 2px; flex-shrink: 0; }
+/* La fila completa se resalta cuando hay no conformidad activa */
+.record-header.has-no-conf { box-shadow: 0 4px 16px rgba(255,64,64,0.22); }
+
+/* ── TIPO DE PLAN — badge ── */
+.plan-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 99px;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.2px;
+  background: var(--indigo-soft); color: var(--indigo-text);
+  box-shadow: var(--neu-in-sm);
+}
+
+/* ── ROLE SWITCH — selector de rol en el header ── */
+.role-switch {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px 4px 12px; border-radius: 99px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+}
+.role-switch select {
+  border: none; background: transparent; outline: none; cursor: pointer;
+  font-size: 12px; font-weight: 700; color: var(--navy);
+}
+
+/* ── No conformidad bloqueada (Consultor) — candado + tooltip ── */
+.btn-neu.locked {
+  cursor: not-allowed; opacity: 0.85;
+  color: var(--text-dim); background: var(--glass-bg);
+  border-color: var(--glass-border);
+}
+.btn-neu.locked:hover { transform: none; background: var(--glass-bg); }
+.btn-neu.locked:hover::after {
+  content: 'Solo coordinación/head'; position: absolute;
+  bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+  background: var(--navy); color: #fff; font-size: 11px; font-weight: 600;
+  padding: 6px 10px; border-radius: 8px; white-space: nowrap; z-index: 50;
+  box-shadow: 0 6px 18px rgba(15,31,61,0.4);
+}
+.btn-neu.locked:hover::before {
+  content: ''; position: absolute; bottom: calc(100% + 2px); left: 50%;
+  transform: translateX(-50%); border: 5px solid transparent;
+  border-top-color: var(--navy); z-index: 50;
+}
+/* No conformidad activa = botón resaltado en rojo sólido */
+.btn-neu.danger.active-state {
+  background: var(--red); color: #fff; border-color: rgba(95,33,32,0.3);
+}
+
+/* ── ACORDEÓN "Estudio actuarial" (issue #3.6) ── */
+.acc-item { overflow: hidden; }
+.acc-head {
+  width: 100%; display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; background: transparent; border: none; cursor: pointer;
+  font-family: inherit; text-align: left; transition: background 0.15s;
+}
+.acc-head:hover { background: rgba(163,177,198,0.10); }
+.acc-head:focus-visible { outline: 2px solid var(--indigo); outline-offset: -2px; }
+.acc-chevron { font-size: 12px; color: var(--indigo); transition: transform 0.25s; flex-shrink: 0; }
+.acc-item.open .acc-chevron { transform: rotate(90deg); }
+.acc-total { margin-left: auto; font-size: 15px; font-weight: 900; color: var(--navy); }
+.acc-body { padding: 0 16px 6px 40px; }
+.acc-sub {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px; margin-bottom: 8px; border-radius: 10px;
+  background: var(--bg); box-shadow: var(--neu-in-sm);
+}
+.acc-sub-cost { font-size: 13px; font-weight: 800; color: var(--navy); }
+.acc-cta { display: grid; grid-template-rows: 1fr 1fr; gap: 8px; padding: 4px 16px 14px; }
+
+/* ── TEMAS TÉCNICOS ── */
+.tech-subtitle {
+  font-size: 11px; font-weight: 800; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: 1px;
+  margin: 18px 0 10px; display: flex; align-items: center; gap: 6px;
+}
+.tech-subtitle i { color: var(--indigo); }
+.nic12-table { width: 100%; border-collapse: collapse; }
+.nic12-table th {
+  padding: 8px 12px; font-size: 10px; font-weight: 800; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: 0.4px; text-align: left;
+  background: rgba(163,177,198,0.06); border-bottom: 1px solid var(--border);
+}
+.nic12-table td {
+  padding: 10px 12px; font-size: 12px; font-weight: 600; color: var(--text-sub);
+  border-bottom: 1px solid var(--border);
+}
+.nic12-table tr:last-child td { border-bottom: none; }
+.nic12-table td:first-child { font-weight: 700; color: var(--navy); }
+
+/* ── CARGA DE ARCHIVOS ── */
+.file-list { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+.file-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; border-radius: 10px;
+  background: var(--bg); box-shadow: var(--neu-out-sm);
+}
+.file-ico { font-size: 18px; flex-shrink: 0; }
+.file-meta { flex: 1; min-width: 0; }
+.file-name { font-size: 12px; font-weight: 700; color: var(--navy); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-sub { font-size: 10px; color: var(--text-dim); font-weight: 600; margin-top: 1px; }
+.file-rm {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 8px;
+  border: none; background: transparent; color: var(--text-dim); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.15s;
+}
+.file-rm:hover { background: var(--red-soft); color: var(--red-text); }
+
+/* ── Semáforo de días con texto en CAMPOS CLAVE ── */
+.ck-value.danger { color: var(--red-text); }
 </style>
 </head>
 <body>
@@ -1185,8 +1314,27 @@ body {
           </div>
         </div>
         <div class="rh-actions">
+          <!-- Selector de rol — gobierna permisos de No conformidad (issue #3.9) -->
+          <div class="role-switch" id="role-switch" title="Cambiar rol activo (prototipo)">
+            <i class="fa-solid fa-user-gear" style="font-size:11px;color:var(--text-dim);"></i>
+            <select id="role-select" onchange="setRole(this.value)" aria-label="Rol activo">
+              <option value="consultor">Consultor</option>
+              <option value="coordinacion">Coordinación</option>
+              <option value="head">Head</option>
+            </select>
+          </div>
+          <!-- Ver en AF — enlace externo a ActuaFast (issue #3.9) -->
+          <a class="btn-neu" id="btn-ver-af" href="#" target="_blank" rel="noopener"
+             title="Abrir este proceso en ActuaFast"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ver en AF</a>
           <button class="btn-neu"><i class="fa-regular fa-star"></i> Seguir</button>
-          <button class="btn-neu danger"><i class="fa-solid fa-triangle-exclamation"></i> No conformidad</button>
+          <!-- No conformidad — editable solo Coordinación/Head; bloqueado para Consultor -->
+          <button class="btn-neu danger" id="btn-no-conf" onclick="toggleNoConformidad()">
+            <i class="fa-solid fa-triangle-exclamation"></i> No conformidad
+          </button>
+          <!-- Rechazar — devuelve el proceso a "En Curso" (issue #3.9) -->
+          <button class="btn-neu danger" id="btn-rechazar" onclick="rechazarProceso()">
+            <i class="fa-solid fa-rotate-left"></i> Rechazar
+          </button>
           <button class="btn-neu"><i class="fa-solid fa-pen"></i> Modificar</button>
           <button class="btn-neu icon-only"><i class="fa-solid fa-print"></i></button>
           <!-- Acción nombrada por intención — cambia por etapa -->
@@ -1239,8 +1387,15 @@ body {
               <div class="field"><div class="fl"><i class="fa-solid fa-arrow-up-1-9"></i>N° de proceso</div><div class="fv">126517</div></div>
               <div class="field"><div class="fl"><i class="fa-solid fa-tag"></i>Tipo de tarifa</div><div class="fv">NIIF (US$)</div></div>
               <div class="field"><div class="fl"><i class="fa-solid fa-wrench"></i>Tipo de servicio</div><div class="fv">Tradicional</div></div>
-              <div class="field"><div class="fl"><i class="fa-solid fa-calendar-check"></i>Fecha valoración</div><div class="fv">31/12/2025</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-calendar-check"></i>Fecha de valoración</div><div class="fv">31/12/2025</div></div>
               <div class="field"><div class="fl"><i class="fa-solid fa-credit-card"></i>Forma de pago</div><div class="fv">De contado</div></div>
+              <div class="field" style="grid-column:1/-1;"><div class="fl"><i class="fa-solid fa-list-check"></i>Instrucciones del pedido</div><div class="fv" style="font-weight:600;line-height:1.5;">Estudio actuarial NIIF al cierre 31/12/2025. Incluir jubilación patronal y desahucio bajo NIC 19. Entregar con conciliación NIC 12 comparativa.</div></div>
+              <div class="field" style="grid-column:1/-1;"><div class="fl"><i class="fa-solid fa-file-lines"></i>Detalle del pedido</div><div class="fv" style="font-weight:600;line-height:1.5;">Valoración de 50 trabajadores activos. Tasa de descuento referenciada a bonos corporativos AA. Reporte ejecutivo + anexos de hipótesis actuariales.</div></div>
+              <!-- No conformidad por: VISIBLE solo cuando hay no conformidad (issue #3.1) -->
+              <div class="field nc-alert-field" id="info-no-conf" style="grid-column:1/-1; display:none;">
+                <div class="fl" style="color:var(--red-text);"><i class="fa-solid fa-triangle-exclamation"></i>No conformidad por</div>
+                <div class="nc-alert" id="info-no-conf-text"><i class="fa-solid fa-circle-exclamation"></i> Datos de salida de trabajadores inconsistentes con el rol de pagos del cliente.</div>
+              </div>
             </div></div>
           </div>
 
@@ -1248,35 +1403,39 @@ body {
             <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-building"></i></div><div class="nc-title">Cliente</div></div>
             <div class="nc-body"><div class="field-grid">
               <div class="field"><div class="fl"><i class="fa-solid fa-building"></i>Cuenta</div><div class="fv link">ACCIONA AGUA, S.A.</div></div>
-              <div class="field"><div class="fl"><i class="fa-solid fa-location-dot"></i>Ciudad</div><div class="fv">Quito</div></div>
-              <div class="field"><div class="fl"><i class="fa-solid fa-chart-pie"></i>Segmento</div><div class="fv">Mediana</div></div>
-              <div class="field"><div class="fl"><i class="fa-solid fa-star"></i>Cliente VIP</div><div class="fv dim">No</div></div>
-              <div class="field"><div class="fl"><i class="fa-solid fa-users"></i>Trabajadores</div><div class="fv">50</div></div>
-              <div class="field"><div class="fl"><i class="fa-solid fa-user-clock"></i>Trab. Jubl. pend.</div><div class="fv">50</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-handshake-angle"></i>KAM</div><div class="fv ok"><i class="fa-solid fa-check-circle"></i> Sí</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-users"></i>N.º trabajadores activos</div><div class="fv">50</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-user-clock"></i>Trab. jubilados / pend.</div><div class="fv">50</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-sitemap"></i>Grupo empresarial</div><div class="fv">Grupo ACCIONA</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-layer-group"></i>Tipo de Plan</div><div class="fv"><span class="plan-badge">NIC12+SB-Plus</span></div></div>
+              <div class="field" style="grid-column:1/-1;"><div class="fl"><i class="fa-solid fa-file-signature"></i>Requiere orden de compra</div><div class="fv warn"><i class="fa-solid fa-circle-exclamation"></i> Sí</div></div>
             </div></div>
           </div>
 
           <div class="neu-card">
             <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-user-check"></i></div><div class="nc-title">Asignación y equipo</div></div>
             <div class="nc-body"><div class="field-grid">
-              <div class="field"><div class="fl"><i class="fa-solid fa-user-shield"></i>Propietario único</div><div class="fv link">Samantha Chavez</div></div>
-              <div class="field"><div class="fl"><i class="fa-solid fa-user-pen"></i>Analista</div><div class="fv">Samantha Chavez</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-user-pen"></i>Consultor asignado</div><div class="fv link">Samantha Chavez</div></div>
               <div class="field"><div class="fl"><i class="fa-solid fa-people-group"></i>Equipo</div><div class="fv link">Equipo 3 - P. Beltrán</div></div>
+              <!-- Ejecución automática: dato a confirmar -->
+              <div class="field"><div class="fl"><i class="fa-solid fa-robot"></i>Ejecución automática</div><div class="fv dim"><i class="fa-solid fa-circle-xmark"></i> No <!-- TODO: fuente del dato, revisar con Lenin --></div></div>
               <div class="field"><div class="fl"><i class="fa-solid fa-check-double"></i>Aprobación</div><div class="fv ok"><i class="fa-solid fa-check-circle"></i> Aprobado</div></div>
-              <div class="field"><div class="fl"><i class="fa-solid fa-handshake"></i>Vendedor</div><div class="fv link">Samantha Chavez</div></div>
-              <div class="field"><div class="fl"><i class="fa-solid fa-address-card"></i>Contacto</div><div class="fv link">Samantha Flores</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-address-card"></i>Contacto solicitante</div><div class="fv link">Samantha Flores</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-envelope"></i>Email de contacto</div><div class="fv link" style="word-break:break-all;">s.flores@acciona.com</div></div>
             </div></div>
           </div>
 
           <div class="neu-card">
             <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-calendar-days"></i></div><div class="nc-title">Fechas de gestión</div></div>
             <div class="nc-body"><div class="field-grid">
-              <div class="field"><div class="fl"><i class="fa-solid fa-calendar-plus"></i>Fecha solicitud</div><div class="fv">12/06/2025</div></div>
-              <div class="field"><div class="fl"><i class="fa-solid fa-calendar-arrow-down"></i>Fecha asignación</div><div class="fv">12/06/2025</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-calendar-plus"></i>Fecha de solicitud</div><div class="fv">12/06/2025</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-calendar-arrow-down"></i>Fecha de asignación</div><div class="fv">12/06/2025</div></div>
               <div class="field"><div class="fl"><i class="fa-solid fa-calendar-clock"></i>Entrega calculada</div><div class="fv">23/06/2025</div></div>
               <div class="field"><div class="fl"><i class="fa-solid fa-calendar-check"></i>Entrega real</div><div class="fv">19/11/2025</div></div>
-              <div class="field"><div class="fl"><i class="fa-solid fa-hourglass-half"></i>Días de demora</div><div class="fv warn"><i class="fa-solid fa-clock"></i> 115 días</div></div>
-              <div class="field"><div class="fl"><i class="fa-solid fa-bolt"></i>Pedido urgente</div><div class="fv dim">No</div></div>
+              <!-- Días de entrega real: verde si <= plazo normal (11d), rojo si lo supera -->
+              <div class="field"><div class="fl"><i class="fa-solid fa-clock"></i>Días de entrega real</div><div class="fv danger"><i class="fa-solid fa-circle-exclamation"></i> 160 días <span class="dias-ref">(plazo 11)</span></div></div>
+              <!-- Días de demora: SIEMPRE rojo -->
+              <div class="field"><div class="fl"><i class="fa-solid fa-hourglass-half"></i>Días de demora</div><div class="fv danger"><i class="fa-solid fa-triangle-exclamation"></i> 149 días</div></div>
             </div></div>
           </div>
 
@@ -1303,51 +1462,111 @@ body {
               <div class="nc-title">Ítems vendidos <span style="color:var(--text-dim);font-weight:400;">(2)</span></div>
             </div>
             <div class="nc-body" style="display:flex;flex-direction:column;gap:10px;">
-              <div style="display:flex;flex-direction:column;gap:10px;">
-                <div class="neu-card" style="box-shadow:var(--neu-out-sm);">
-                  <div style="padding:14px 16px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                      <div>
-                        <div style="font-size:13px;font-weight:800;color:var(--navy);">Desahucio NIIF</div>
-                        <div style="font-size:11px;color:var(--text-dim);margin-top:2px;font-family:monospace;">I-212240 · Actuarial</div>
-                      </div>
-                      <span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span>
+              <!-- Ítem unificado "Estudio actuarial" — acordeón con costo por valoración (issue #3.6).
+                   El detalle granular de ítems vive en la pestaña "Items Vendidos". -->
+              <div class="neu-card acc-item" style="box-shadow:var(--neu-out-sm);">
+                <button class="acc-head" id="acc-head-estudio" onclick="toggleEstudio()" aria-expanded="false" aria-controls="acc-body-estudio">
+                  <i class="fa-solid fa-chevron-right acc-chevron" id="acc-chevron"></i>
+                  <div style="text-align:left;">
+                    <div style="font-size:13px;font-weight:800;color:var(--navy);">Estudio actuarial</div>
+                    <div style="font-size:11px;color:var(--text-dim);margin-top:2px;">2 valoraciones · Familia Actuarial</div>
+                  </div>
+                  <span class="acc-total">$315,00</span>
+                </button>
+                <!-- Desglose por valoración -->
+                <div class="acc-body" id="acc-body-estudio" hidden>
+                  <div class="acc-sub">
+                    <div>
+                      <div style="font-size:12px;font-weight:700;color:var(--navy);">Desahucio NIIF</div>
+                      <div style="font-size:10px;color:var(--text-dim);font-family:monospace;">I-212240 · 50 × $3,70</div>
                     </div>
-                    <div class="item-cta-wrap" style="display:grid;grid-template-rows:1fr 1fr;gap:8px;margin-top:4px;">
-                      <button class="btn-exec" style="flex:1;justify-content:center;"><i class="fa-solid fa-play"></i> Ejecutar en AF</button>
-                      <button class="btn-neu" style="flex:1;justify-content:center;font-size:12px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ir al módulo</button>
+                    <span class="acc-sub-cost">$185,00</span>
+                  </div>
+                  <div class="acc-sub">
+                    <div>
+                      <div style="font-size:12px;font-weight:700;color:var(--navy);">Jubilación Patronal</div>
+                      <div style="font-size:10px;color:var(--text-dim);font-family:monospace;">I-212241 · 50 × $2,60</div>
                     </div>
+                    <span class="acc-sub-cost">$130,00</span>
                   </div>
                 </div>
-                <div class="neu-card" style="box-shadow:var(--neu-out-sm);">
-                  <div style="padding:14px 16px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                      <div>
-                        <div style="font-size:13px;font-weight:800;color:var(--navy);">Jubilación Patronal</div>
-                        <div style="font-size:11px;color:var(--text-dim);margin-top:2px;font-family:monospace;">I-212241 · Actuarial</div>
-                      </div>
-                      <span class="ejecutable-badge"><i class="fa-solid fa-bolt"></i> Ejecutable</span>
-                    </div>
-                    <div class="item-cta-wrap" style="display:grid;grid-template-rows:1fr 1fr;gap:8px;margin-top:4px;">
-                      <button class="btn-exec" style="flex:1;justify-content:center;"><i class="fa-solid fa-play"></i> Ejecutar en AF</button>
-                      <button class="btn-neu" style="flex:1;justify-content:center;font-size:12px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ir al módulo</button>
-                    </div>
-                  </div>
+                <div class="acc-cta">
+                  <button class="btn-exec" style="flex:1;justify-content:center;"><i class="fa-solid fa-play"></i> Ejecutar en AF</button>
+                  <button class="btn-neu" style="flex:1;justify-content:center;font-size:12px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ir al módulo</button>
                 </div>
-              </div>
-              <div id="fin-detail" style="display:none;">
-                <table class="items-table">
-                  <thead><tr><th>Ítem</th><th>Cant.</th><th>P. Unitario</th><th>Total</th><th>Días</th></tr></thead>
-                  <tbody>
-                    <tr><td style="font-weight:700;color:var(--navy)">Desahucio NIIF</td><td>50</td><td>$3,70</td><td style="font-weight:800;color:var(--navy)">$185,00</td><td>4</td></tr>
-                    <tr><td style="font-weight:700;color:var(--navy)">Jubilación Patronal</td><td>50</td><td>$2,60</td><td style="font-weight:800;color:var(--navy)">$130,00</td><td>4</td></tr>
-                    <tr class="total-row"><td colspan="3" style="text-align:right;font-size:12px;">SUBTOTAL</td><td>$315,00</td><td></td></tr>
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>
           </div><!-- /items-fin-bento -->
+
+          <!-- TEMAS TÉCNICOS — info operativa especial de la cuenta (issue #3.7) -->
+          <div class="neu-card card-full">
+            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-flask-vial"></i></div><div class="nc-title">Temas técnicos</div></div>
+            <div class="nc-body"><div class="field-grid">
+              <div class="field"><div class="fl"><i class="fa-solid fa-table-cells-large"></i>¿Se realizó en macro el año pasado?</div><div class="fv ok"><i class="fa-solid fa-check-circle"></i> Sí</div></div>
+              <div class="field"><div class="fl"><i class="fa-solid fa-industry"></i>Tipo de empresa</div><div class="fv">Antigua</div></div>
+              <div class="field" style="grid-column:1/-1;">
+                <div class="fl"><i class="fa-solid fa-sliders"></i>¿Aplicó criterios especiales el año anterior?</div>
+                <div class="fv warn" style="margin-bottom:6px;"><i class="fa-solid fa-circle-exclamation"></i> Sí</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                  <span class="tag tag-tipo">Rotación diferenciada</span>
+                  <span class="tag tag-tipo">Reconocimiento de salida distinto a ORI</span>
+                  <span class="tag tag-tipo">Traspasos</span>
+                </div>
+              </div>
+              <div class="field" style="grid-column:1/-1;"><div class="fl"><i class="fa-solid fa-file-signature"></i>Actas de jubilación patronal → Política de pago</div><div class="fv">Pago diferido en cuotas según acuerdo individual de finiquito.</div></div>
+            </div>
+
+            <!-- NIC12 comparativo: año anterior vs este año -->
+            <div class="tech-subtitle"><i class="fa-solid fa-scale-balanced"></i> NIC 12 comparativo</div>
+            <table class="nic12-table">
+              <thead><tr><th>Criterio</th><th>Año anterior</th><th>Este año</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Uso de provisión</td>
+                  <td>Solo provisión</td>
+                  <td><span class="tag tag-niif">Provisión + gasto</span></td>
+                </tr>
+                <tr>
+                  <td>Tasa de impuesto a la renta</td>
+                  <td>25%</td>
+                  <td><span class="tag tag-niif">22%</span></td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <!-- CARGA DE ARCHIVOS — issue #3.8 -->
+          <div class="neu-card card-full">
+            <div class="nc-header"><div class="nc-icon"><i class="fa-solid fa-paperclip"></i></div><div class="nc-title">Carga de archivos</div></div>
+            <div class="nc-body">
+              <!-- TODO: confirmar con Cris Mejía si aplica -->
+              <label class="upload-zone" for="file-input" style="display:block;">
+                <i class="fa-solid fa-cloud-arrow-up" style="font-size:26px;margin-bottom:8px;display:block;"></i>
+                <div style="font-size:13px;font-weight:700;">Arrastra archivos o haz clic para subir</div>
+                <div style="font-size:11px;margin-top:4px;">PDF, XLSX, DOCX · máx. 25 MB</div>
+                <input type="file" id="file-input" multiple onchange="onFilePicked(this)" style="display:none;">
+              </label>
+              <div class="file-list" id="file-list">
+                <div class="file-row">
+                  <i class="fa-solid fa-file-pdf file-ico" style="color:var(--red-text);"></i>
+                  <div class="file-meta"><div class="file-name">Rol_de_pagos_ACCIONA_2025.pdf</div><div class="file-sub">PDF · 1.8 MB</div></div>
+                  <button class="file-rm" onclick="removeFile(this)" aria-label="Quitar archivo"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="file-row">
+                  <i class="fa-solid fa-file-excel file-ico" style="color:var(--green-text);"></i>
+                  <div class="file-meta"><div class="file-name">Base_trabajadores_activos.xlsx</div><div class="file-sub">XLSX · 642 KB</div></div>
+                  <button class="file-rm" onclick="removeFile(this)" aria-label="Quitar archivo"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="file-row">
+                  <i class="fa-solid fa-file-word file-ico" style="color:var(--indigo-text);"></i>
+                  <div class="file-meta"><div class="file-name">Actas_jubilacion_patronal.docx</div><div class="file-sub">DOCX · 310 KB</div></div>
+                  <button class="file-rm" onclick="removeFile(this)" aria-label="Quitar archivo"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>
@@ -1409,34 +1628,62 @@ body {
 // ── STAGE DATA — acciones nombradas por INTENCIÓN (UX doc) ────────
 // 7 etapas según issue #1: Planificado → Asignado → En Curso → En Revisión → Para Entregar → Revisión Cliente → Completado
 // Campos sin Score, Semáforo ni Archivo adjunto (issue #1)
+// Semáforo de días para entregar (issue #3.5):
+//   ROJO    = vencido (días < 0)
+//   AMARILLO= por vencer (0 <= días <= 2)
+//   VERDE   = recién asignado / con holgura (días > 2)
+function semaForDias(dias) {
+  if (dias < 0)  return { color:'rojo',     cls:'danger', txt: Math.abs(dias)+' días vencido' };
+  if (dias <= 2) return { color:'amarillo', cls:'warn',   txt: dias+' días para entregar' };
+  return                 { color:'verde',    cls:'ok',     txt: dias+' días para entregar' };
+}
+// Construye el HTML de un campo clave de conteo con semáforo
+function campoConteo(dias) {
+  const s = semaForDias(dias);
+  return {
+    icon:'fa-hourglass-half', label:'Días para entregar',
+    value:`<span class="sema ${s.color}"></span> ${s.txt}`, cls:s.cls
+  };
+}
+
 const STAGES = [
   { name:'Planificado', short:'Planificado',
     accion: null,
     campos:[
       {icon:'fa-users',label:'Equipo',value:'Equipo 3 - P. Beltrán',cls:'link'},
-      {icon:'fa-calendar',label:'Fecha asignación',value:'12/06/2025',cls:''},
-      {icon:'fa-user',label:'Propietario único',value:'Samantha Chavez',cls:'link'},
+      {icon:'fa-calendar',label:'Fecha de entrega',value:'23/06/2025',cls:''},
+      {icon:'fa-user',label:'Consultor asignado',value:'Samantha Chavez',cls:'link'},
     ],
     toggle: null, orientacion: null },
   { name:'Asignado', short:'Asignado',
     accion: { label:'Iniciar proceso', icon:'fa-play' },
+    // Estado "Asignado": Total trabajadores · Fecha de entrega · Proceso urgente · conteo con color
+    // + revisión aplicada (issue #3.5)
     campos:[
       {icon:'fa-users',label:'Total trabajadores',value:'50',cls:''},
-      {icon:'fa-circle-check',label:'Asignado',value:'<i class="fa-solid fa-check" style="color:var(--green)"></i> Sí',cls:'ok'},
+      {icon:'fa-calendar-check',label:'Fecha de entrega',value:'23/06/2025',cls:''},
+      {icon:'fa-bolt',label:'Proceso urgente',value:'No',cls:'dim'},
+      campoConteo(8),  // recién asignado, holgura → VERDE
+      {icon:'fa-clipboard-check',label:'Revisión aplicada',value:'<i class="fa-solid fa-robot"></i> Revisión automática',cls:'ok'},
     ],
     toggle: { label:'Datos incompletos', on: false },
     orientacion: null },
   { name:'En Curso', short:'En Curso',
     accion: { label:'Enviar a revisión', icon:'fa-paper-plane' },
     campos:[
-      {icon:'fa-triangle-exclamation',label:'Datos incompletos',value:'Encendido',cls:'warn'},
+      {icon:'fa-calendar-check',label:'Fecha de entrega',value:'23/06/2025',cls:''},
+      {icon:'fa-bolt',label:'Proceso urgente',value:'No',cls:'dim'},
+      campoConteo(2),  // por vencer → AMARILLO
+      {icon:'fa-clipboard-check',label:'Revisión aplicada',value:'<i class="fa-solid fa-people-arrows"></i> Revisión coordinación',cls:'warn'},
     ],
     toggle: { label:'Datos incompletos', on: true },
     orientacion: null },
   { name:'En Revisión', short:'En Revisión',
     accion: null,
     campos:[
-      {icon:'fa-triangle-exclamation',label:'No conformidad por',value:'—',cls:'dim'},
+      {icon:'fa-bolt',label:'Proceso urgente',value:'No',cls:'dim'},
+      campoConteo(-3),  // vencido → ROJO
+      {icon:'fa-clipboard-check',label:'Revisión aplicada',value:'<i class="fa-solid fa-user-tie"></i> Revisión head',cls:'danger'},
       {icon:'fa-link',label:'URL de revisión',value:'Sin URL',cls:'dim'},
     ],
     toggle: null, orientacion: null },
@@ -1444,6 +1691,7 @@ const STAGES = [
     accion: { label:'Marcar entregado', icon:'fa-box-archive' },
     campos:[
       {icon:'fa-check-double',label:'Aprobado',value:'<i class="fa-solid fa-check" style="color:var(--green)"></i> Sí',cls:'ok'},
+      {icon:'fa-clipboard-check',label:'Revisión aplicada',value:'<i class="fa-solid fa-user-tie"></i> Revisión head',cls:'ok'},
     ],
     toggle: null, orientacion: null },
   { name:'Revisión Cliente', short:'Rev. Cliente',
@@ -1456,8 +1704,9 @@ const STAGES = [
     accion: null,
     campos:[
       {icon:'fa-calendar-check',label:'Fecha de entrega',value:'19/11/2025',cls:'ok'},
-      {icon:'fa-calendar',label:'Fecha calculada',value:'23/06/2025',cls:''},
-      {icon:'fa-clock',label:'Días de entrega real',value:'115 días',cls:'warn'},
+      {icon:'fa-bolt',label:'Proceso urgente',value:'No',cls:'dim'},
+      {icon:'fa-clock',label:'Días de entrega real',value:'160 días',cls:'danger'},
+      {icon:'fa-clipboard-check',label:'Revisión aplicada',value:'<i class="fa-solid fa-user-tie"></i> Revisión head',cls:'ok'},
     ],
     toggle: null, orientacion: null },
 ];
@@ -1585,23 +1834,104 @@ function showTab(n, el) {
   document.getElementById('tab-'+n).classList.add('active');
   el.classList.add('active');
 }
-function toggleFinancials() {
-  const el = document.getElementById('fin-detail');
-  const chevron = document.getElementById('fin-chevron');
-  const btn = document.getElementById('btn-fin-toggle');
-  const open = el.style.display === 'none';
-  el.style.display = open ? 'block' : 'none';
-  chevron.className = open ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down';
-  btn.style.color = open ? 'var(--indigo)' : 'var(--text-dim)';
-}
-
 function selRadio(el) {
   document.querySelectorAll('.modal-radio').forEach(r => r.classList.remove('selected'));
   el.classList.add('selected');
   el.querySelector('input').checked = true;
 }
 
+// ════════════════════════════════════════════════════════════════
+// ISSUE #3.9 — Rol + No conformidad + Rechazo
+// ════════════════════════════════════════════════════════════════
+let currentRole = 'consultor';            // consultor | coordinacion | head
+let noConformidad = false;                // ¿hay no conformidad activa?
+
+// Solo Coordinación/Head pueden editar la no conformidad
+function canEditNoConf() { return currentRole === 'coordinacion' || currentRole === 'head'; }
+
+function setRole(role) {
+  currentRole = role;
+  applyNoConfState();
+}
+
+// Refleja el estado de no conformidad en: botón header, candado y banner de la tarjeta
+function applyNoConfState() {
+  const btn = document.getElementById('btn-no-conf');
+  const icon = btn.querySelector('i');
+  if (canEditNoConf()) {
+    btn.classList.remove('locked');
+    btn.title = noConformidad ? 'Quitar marca de no conformidad' : 'Marcar no conformidad';
+    icon.className = 'fa-solid fa-triangle-exclamation';
+  } else {
+    // Consultor → candado + tooltip "Solo coordinación/head"
+    btn.classList.add('locked');
+    btn.title = '';
+    icon.className = 'fa-solid fa-lock';
+  }
+  // Botón resaltado cuando hay no conformidad
+  btn.classList.toggle('active-state', noConformidad && canEditNoConf());
+
+  // Banner "No conformidad por" — visible SOLO cuando hay no conformidad (issue #3.1)
+  const field = document.getElementById('info-no-conf');
+  if (field) field.style.display = noConformidad ? 'flex' : 'none';
+  document.querySelector('.record-header')?.classList.toggle('has-no-conf', noConformidad);
+}
+
+function toggleNoConformidad() {
+  if (!canEditNoConf()) return;   // gate: consultor no puede
+  noConformidad = !noConformidad;
+  applyNoConfState();
+}
+
+// Rechazar → devuelve el estado/stepper a "En Curso" (índice 2) (issue #3.9)
+function rechazarProceso() {
+  setStage(2);
+}
+
+// ════════════════════════════════════════════════════════════════
+// ISSUE #3.6 — Acordeón "Estudio actuarial"
+// ════════════════════════════════════════════════════════════════
+function toggleEstudio() {
+  const item = document.getElementById('acc-head-estudio').closest('.acc-item');
+  const body = document.getElementById('acc-body-estudio');
+  const head = document.getElementById('acc-head-estudio');
+  const open = item.classList.toggle('open');
+  body.hidden = !open;
+  head.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
+// ════════════════════════════════════════════════════════════════
+// ISSUE #3.8 — Carga de archivos
+// ════════════════════════════════════════════════════════════════
+function iconForFile(name) {
+  const ext = (name.split('.').pop() || '').toLowerCase();
+  if (ext === 'pdf')                 return ['fa-file-pdf',  'var(--red-text)'];
+  if (['xls','xlsx','csv'].includes(ext)) return ['fa-file-excel','var(--green-text)'];
+  if (['doc','docx'].includes(ext))  return ['fa-file-word', 'var(--indigo-text)'];
+  return ['fa-file', 'var(--text-dim)'];
+}
+function fmtSize(bytes) {
+  if (bytes >= 1048576) return (bytes/1048576).toFixed(1) + ' MB';
+  if (bytes >= 1024)    return Math.round(bytes/1024) + ' KB';
+  return bytes + ' B';
+}
+function onFilePicked(input) {
+  const list = document.getElementById('file-list');
+  Array.from(input.files).forEach(f => {
+    const [ico, color] = iconForFile(f.name);
+    const row = document.createElement('div');
+    row.className = 'file-row';
+    row.innerHTML = `<i class="fa-solid ${ico} file-ico" style="color:${color};"></i>
+      <div class="file-meta"><div class="file-name">${f.name}</div><div class="file-sub">${(f.name.split('.').pop()||'').toUpperCase()} · ${fmtSize(f.size)}</div></div>
+      <button class="file-rm" onclick="removeFile(this)" aria-label="Quitar archivo"><i class="fa-solid fa-xmark"></i></button>`;
+    list.appendChild(row);
+  });
+  input.value = ''; // permite re-subir el mismo archivo
+}
+function removeFile(btn) { btn.closest('.file-row').remove(); }
+
 buildPipeline(); setStage(0);
+applyNoConfState();
 
 // Sidebar toggle — desktop: colapsa a icon-mode | mobile: overlay slide-in
 function toggleSidebar() {
