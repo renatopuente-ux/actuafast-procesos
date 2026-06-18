@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe ejecutivo — Vista de Procesos · ActuaFast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1E2245; --navy-2:#0f1f3d; --ink:#1e293b; --sub:#475569; --dim:#64748b;
+    --orange:#DE5E2D; --orange-soft:#fff1ea; --blue:#385CAD;
+    --green:#00925e; --green-soft:#e3f7ef; --amber:#E6A832; --amber-soft:#fff6e3; --red:#CC3333;
+    --bg:#eef1f7; --card:#ffffff; --line:#e2e7f0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Nunito',sans-serif;}
+  body{background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;padding:32px 16px;}
+  .page{max-width:980px;margin:0 auto;background:var(--card);border-radius:20px;overflow:hidden;
+    box-shadow:0 18px 60px rgba(15,31,61,0.16);}
+
+  /* header */
+  .hd{background:linear-gradient(135deg,var(--navy-2),var(--navy) 70%);color:#fff;padding:34px 44px 30px;}
+  .hd-top{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .hd-eyebrow{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#9fb3e6;}
+  .hd h1{font-size:30px;font-weight:900;letter-spacing:-.5px;margin-top:8px;}
+  .hd .sub{font-size:15px;color:rgba(255,255,255,.72);margin-top:6px;}
+  .hd-meta{display:flex;gap:26px;margin-top:22px;flex-wrap:wrap;}
+  .hd-meta div .k{font-size:11px;color:rgba(255,255,255,.55);font-weight:700;text-transform:uppercase;letter-spacing:.08em;}
+  .hd-meta div .v{font-size:14px;font-weight:800;margin-top:2px;}
+  .logo-chip{background:#fff;border-radius:12px;padding:10px 16px;box-shadow:0 6px 18px rgba(0,0,0,.18);}
+
+  .body{padding:34px 44px 40px;}
+  .sec{margin-top:30px;}
+  .sec:first-child{margin-top:0;}
+  .sec-h{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:900;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--navy);margin-bottom:14px;}
+  .sec-h::before{content:"";width:22px;height:3px;border-radius:3px;background:var(--orange);}
+  .lead{font-size:15.5px;color:var(--sub);}
+  .lead strong{color:var(--navy);font-weight:800;}
+
+  /* metrics */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px;}
+  .kpi{background:var(--bg);border-radius:14px;padding:16px;text-align:center;}
+  .kpi .n{font-size:26px;font-weight:900;color:var(--navy);line-height:1;}
+  .kpi .l{font-size:12px;color:var(--dim);margin-top:6px;font-weight:600;}
+
+  /* table */
+  table{width:100%;border-collapse:collapse;margin-top:6px;font-size:13.5px;}
+  th{text-align:left;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);
+    padding:9px 12px;border-bottom:2px solid var(--line);}
+  td{padding:11px 12px;border-bottom:1px solid var(--line);color:var(--sub);vertical-align:top;}
+  td .area{font-weight:800;color:var(--navy);}
+  tr:last-child td{border-bottom:none;}
+  .ok{display:inline-flex;align-items:center;gap:5px;background:var(--green-soft);color:var(--green);
+    font-size:11px;font-weight:800;padding:3px 9px;border-radius:99px;white-space:nowrap;}
+
+  /* before/after */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px;}
+  .ba-col{border-radius:14px;padding:18px 20px;}
+  .ba-before{background:#f6f7fa;border:1px solid var(--line);}
+  .ba-after{background:var(--orange-soft);border:1px solid #f6d9c8;}
+  .ba-col .t{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+  .ba-before .t{color:var(--dim);}
+  .ba-after .t{color:var(--orange);}
+  .ba-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .ba-col li{font-size:13px;color:var(--sub);padding-left:18px;position:relative;}
+  .ba-before li::before{content:"–";position:absolute;left:0;color:var(--dim);font-weight:800;}
+  .ba-after li::before{content:"+";position:absolute;left:0;color:var(--orange);font-weight:900;}
+
+  /* color legend */
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+  .lg{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--sub);
+    background:var(--bg);border-radius:99px;padding:6px 13px;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+
+  .note{display:flex;gap:11px;background:var(--amber-soft);border:1px solid #f3e2bd;border-radius:13px;
+    padding:14px 16px;font-size:13.5px;color:#6b5320;margin-top:8px;}
+  .note b{color:#8a6a1e;}
+  .note::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-top:7px;}
+
+  .ft{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;display:flex;justify-content:space-between;
+    align-items:center;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);}
+  .ft a{color:var(--orange);font-weight:800;text-decoration:none;}
+  .ft a:hover{text-decoration:underline;}
+
+  @media (max-width:720px){
+    .body,.hd{padding-left:22px;padding-right:22px;}
+    .kpis{grid-template-columns:repeat(2,1fr);} .ba{grid-template-columns:1fr;}
+  }
+  @media print{
+    body{background:#fff;padding:0;} .page{box-shadow:none;border-radius:0;max-width:none;}
+    .kpi,.ba-before,.ba-after,.lg,.note{ -webkit-print-color-adjust:exact;print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="hd">
+    <div class="hd-top">
+      <div>
+        <div class="hd-eyebrow">Informe ejecutivo</div>
+        <h1>Vista de Procesos — ActuaFast</h1>
+        <div class="sub">Resolución del Issue #3 «Observaciones vista procesos en AF» · de la versión anterior a la nueva</div>
+      </div>
+      <div class="logo-chip">
+        <svg width="150" height="24" viewBox="0 0 280 45" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
+          <path d="M88.1552 16.4963C88.8921 16.046 89.6699 15.6366 90.5296 15.3501C91.3484 15.0635 92.1671 14.8179 93.0268 14.6132C93.8455 14.4085 94.6643 14.2857 95.483 14.2038C96.2608 14.1629 97.0386 14.1219 97.7346 14.1219C100.641 14.1219 102.852 14.8179 104.366 16.2097C105.881 17.6426 106.618 19.5666 106.618 22.0638V35H100.068V33.3625C99.1674 34.0584 98.144 34.5906 96.9977 34.9181C95.8105 35.2456 94.5824 35.4094 93.3133 35.4094C91.3893 35.4094 89.8746 34.8772 88.6874 33.8538C87.5002 32.8303 86.9271 31.4794 86.9271 29.76C86.9271 28.4091 87.2546 27.3447 87.8687 26.5669C88.4827 25.7891 89.3015 25.1341 90.243 24.6838C91.1846 24.2335 92.208 23.906 93.3133 23.7013C94.4187 23.4966 95.483 23.2919 96.4655 23.1282C97.4071 22.9644 98.2258 22.7597 98.9218 22.555C99.6177 22.3504 99.9861 21.9819 100.027 21.4907C100.068 21.1222 99.8224 20.7538 99.2083 20.3854C98.5943 20.0579 97.6936 19.8941 96.4246 19.8941C95.483 19.8941 94.4187 20.0169 93.2724 20.3035C92.0852 20.59 90.7343 21.2041 89.2196 22.0638L88.1552 16.4963ZM93.6818 29.4735C93.6818 30.2513 94.214 30.6197 95.3193 30.6197C95.8515 30.6197 96.4246 30.5378 96.9568 30.415C97.489 30.2922 97.9393 30.0875 98.3896 29.8419C98.8399 29.6372 99.2083 29.3916 99.4949 29.105C99.7815 28.8185 99.9861 28.5728 100.068 28.2863V26.1985C99.3311 26.4441 98.5943 26.6488 97.8165 26.8125C97.0386 27.0172 96.3837 27.181 95.7696 27.3856C95.1555 27.5903 94.6233 27.8769 94.2549 28.1635C93.8865 28.491 93.6818 28.9413 93.6818 29.4735ZM117.461 24.7657C117.461 26.3622 117.87 27.5903 118.689 28.491C119.467 29.3916 120.49 29.8419 121.718 29.8419C122.66 29.8419 123.52 29.6372 124.379 29.2688C125.198 28.9003 125.853 28.3681 126.303 27.7131L130.274 31.8478C129.251 32.9941 128.023 33.8538 126.549 34.4678C125.075 35.0819 123.438 35.4094 121.596 35.4094C119.958 35.4094 118.484 35.1637 117.133 34.6316C115.783 34.0994 114.636 33.4034 113.695 32.4619C112.753 31.5203 112.016 30.415 111.484 29.105C110.952 27.795 110.706 26.3622 110.706 24.7657C110.706 23.1691 110.952 21.7363 111.484 20.4263C112.016 19.1163 112.753 18.011 113.695 17.0694C114.636 16.1279 115.783 15.4319 117.133 14.8998C118.484 14.3676 119.958 14.1219 121.596 14.1219C123.438 14.1219 125.075 14.4085 126.549 15.0226C128.023 15.6366 129.251 16.5372 130.274 17.6835L126.303 21.8182C125.853 21.1632 125.198 20.631 124.379 20.2625C123.52 19.8941 122.66 19.6894 121.718 19.6894C120.49 19.6894 119.467 20.1397 118.689 21.0404C117.87 21.941 117.461 23.1691 117.461 24.7657ZM147.8 35C147.186 35.1228 146.531 35.2456 145.835 35.2866C145.139 35.3684 144.443 35.4094 143.747 35.4094C141.25 35.4094 139.326 34.7134 137.934 33.3216C136.542 31.9297 135.846 29.76 135.846 26.7716V19.6894H132.612V14.5313H135.846V8.39071H142.396V14.5313H146.858V19.6894H142.396V26.2394C142.396 26.6488 142.437 27.0581 142.478 27.4266C142.519 27.836 142.642 28.2044 142.806 28.491C142.969 28.8185 143.215 29.0641 143.502 29.2688C143.788 29.4735 144.198 29.5553 144.689 29.5553C145.016 29.5553 145.385 29.5553 145.835 29.5144C146.244 29.4735 146.695 29.4325 147.145 29.3506L147.8 35ZM165.4 35V32.6666C164.622 33.5263 163.681 34.2222 162.657 34.6725C161.593 35.1637 160.446 35.4094 159.218 35.4094C156.639 35.4094 154.674 34.6316 153.405 33.0759C152.095 31.5203 151.44 29.2278 151.44 26.2394V14.5313H158.072V25.7072C158.072 27.0172 158.359 27.9997 158.891 28.6547C159.423 29.3506 160.16 29.6781 161.142 29.6781C162.248 29.6781 163.189 29.3097 163.926 28.5319C164.663 27.795 165.154 26.8125 165.4 25.6253V14.5313H172.032V35H165.4ZM177.984 16.4963C178.721 16.046 179.499 15.6366 180.358 15.3501C181.177 15.0635 181.996 14.8179 182.856 14.6132C183.674 14.4085 184.493 14.2857 185.312 14.2038C186.09 14.1629 186.867 14.1219 187.563 14.1219C190.47 14.1219 192.68 14.8179 194.195 16.2097C195.71 17.6426 196.447 19.5666 196.447 22.0638V35H189.897V33.3625C188.996 34.0584 187.973 34.5906 186.826 34.9181C185.639 35.2456 184.411 35.4094 183.142 35.4094C181.218 35.4094 179.703 34.8772 178.516 33.8538C177.329 32.8303 176.756 31.4794 176.756 29.76C176.756 28.4091 177.083 27.3447 177.697 26.5669C178.311 25.7891 179.13 25.1341 180.072 24.6838C181.013 24.2335 182.037 23.906 183.142 23.7013C184.247 23.4966 185.312 23.2919 186.294 23.1282C187.236 22.9644 188.055 22.7597 188.751 22.555C189.446 22.3504 189.815 21.9819 189.856 21.4907C189.897 21.1222 189.651 20.7538 189.037 20.3854C188.423 20.0579 187.522 19.8941 186.253 19.8941C185.312 19.8941 184.247 20.0169 183.101 20.3035C181.914 20.59 180.563 21.2041 179.048 22.0638L177.984 16.4963ZM183.511 29.4735C183.511 30.2513 184.043 30.6197 185.148 30.6197C185.68 30.6197 186.253 30.5378 186.786 30.415C187.318 30.2922 187.768 30.0875 188.218 29.8419C188.669 29.6372 189.037 29.3916 189.324 29.105C189.61 28.8185 189.815 28.5728 189.897 28.2863V26.1985C189.16 26.4441 188.423 26.6488 187.645 26.8125C186.867 27.0172 186.212 27.181 185.598 27.3856C184.984 27.5903 184.452 27.8769 184.084 28.1635C183.715 28.491 183.511 28.9413 183.511 29.4735Z" fill="#1E2245"/>
+          <path d="M216.304 10.3966C215.526 10.192 214.83 10.0282 214.257 9.98727C213.684 9.94633 213.11 9.90539 212.578 9.90539C212.046 9.90539 211.596 9.98727 211.268 10.192C210.941 10.3966 210.695 10.6832 210.49 11.0516C210.286 11.4201 210.163 11.7885 210.122 12.2388C210.081 12.6891 210.04 13.1394 210.04 13.5898V14.6541H215.649V20.1807H210.04V35H203.49V20.1807H200.133V14.6541H203.49V14.2038C203.49 11.0926 204.227 8.67727 205.701 6.91696C207.134 5.15666 209.14 4.29697 211.719 4.29697C212.701 4.29697 213.684 4.33791 214.666 4.46072C215.608 4.58353 216.508 4.78822 217.286 4.99291L216.304 10.3966ZM219.98 16.4963C220.717 16.046 221.495 15.6366 222.354 15.3501C223.173 15.0635 223.992 14.8179 224.852 14.6132C225.67 14.4085 226.489 14.2857 227.308 14.2038C228.086 14.1629 228.863 14.1219 229.559 14.1219C232.466 14.1219 234.676 14.8179 236.191 16.2097C237.706 17.6426 238.443 19.5666 238.443 22.0638V35H231.893V33.3625C230.992 34.0584 229.969 34.5906 228.822 34.9181C227.635 35.2456 226.407 35.4094 225.138 35.4094C223.214 35.4094 221.699 34.8772 220.512 33.8538C219.325 32.8303 218.752 31.4794 218.752 29.76C218.752 28.4091 219.079 27.3447 219.693 26.5669C220.307 25.7891 221.126 25.1341 222.068 24.6838C223.009 24.2335 224.033 23.906 225.138 23.7013C226.243 23.4966 227.308 23.2919 228.29 23.1282C229.232 22.9644 230.051 22.7597 230.746 22.555C231.442 22.3504 231.811 21.9819 231.852 21.4907C231.893 21.1222 231.647 20.7538 231.033 20.3854C230.419 20.0579 229.518 19.8941 228.249 19.8941C227.308 19.8941 226.243 20.0169 225.097 20.3035C223.91 20.59 222.559 21.2041 221.044 22.0638L219.98 16.4963ZM225.507 29.4735C225.507 30.2513 226.039 30.6197 227.144 30.6197C227.676 30.6197 228.249 30.5378 228.781 30.415C229.314 30.2922 229.764 30.0875 230.214 29.8419C230.665 29.6372 231.033 29.3916 231.32 29.105C231.606 28.8185 231.811 28.5728 231.893 28.2863V26.1985C231.156 26.4441 230.419 26.6488 229.641 26.8125C228.863 27.0172 228.208 27.181 227.594 27.3856C226.98 27.5903 226.448 27.8769 226.08 28.1635C225.711 28.491 225.507 28.9413 225.507 29.4735ZM258.791 21.5725C258.013 20.9994 257.071 20.5491 255.966 20.2216C254.861 19.8941 253.674 19.7304 252.486 19.7304C251.545 19.7304 250.849 19.8532 250.317 20.0579C249.785 20.2625 249.539 20.631 249.539 21.1222C249.539 21.6135 249.785 21.9819 250.317 22.1866C250.849 22.4322 251.504 22.6369 252.282 22.7597C253.06 22.9235 253.878 23.0872 254.82 23.2919C255.721 23.4966 256.58 23.7832 257.358 24.1925C258.136 24.6428 258.75 25.216 259.282 25.9528C259.814 26.7307 260.06 27.7541 260.06 29.0231C260.06 31.1519 259.282 32.7484 257.767 33.8128C256.253 34.8772 254.001 35.4094 251.013 35.4094C250.194 35.4094 249.375 35.3684 248.556 35.2866C247.738 35.2047 246.96 35.0819 246.223 34.9591C245.445 34.8363 244.749 34.6725 244.094 34.4678C243.398 34.2631 242.825 34.0584 242.334 33.8128L243.439 27.9997C244.995 28.6956 246.305 29.146 247.41 29.4325C248.516 29.7191 249.58 29.8419 250.603 29.8419C252.405 29.8419 253.305 29.4325 253.305 28.5728C253.305 28.0406 253.06 27.6722 252.527 27.4675C251.995 27.2628 251.381 27.14 250.603 27.0172C249.826 26.8944 249.007 26.7716 248.106 26.6488C247.206 26.526 246.387 26.3213 245.609 25.9528C244.831 25.5844 244.217 25.0522 243.685 24.3563C243.153 23.6603 242.907 22.6369 242.907 21.3679C242.907 20.2216 243.153 19.1982 243.603 18.2976C244.053 17.3969 244.667 16.6191 245.486 16.0051C246.305 15.391 247.287 14.9407 248.434 14.6132C249.58 14.2857 250.849 14.1219 252.241 14.1219C253.756 14.1219 255.147 14.2857 256.416 14.6541C257.686 15.0226 258.791 15.5138 259.773 16.1688L258.791 21.5725ZM278.266 35C277.651 35.1228 276.996 35.2456 276.301 35.2866C275.605 35.3684 274.909 35.4094 274.213 35.4094C271.716 35.4094 269.791 34.7134 268.4 33.3216C267.008 31.9297 266.312 29.76 266.312 26.7716V19.6894H263.078V14.5313H266.312V8.39071H272.862V14.5313H277.324V19.6894H272.862V26.2394C272.862 26.6488 272.903 27.0581 272.944 27.4266C272.985 27.836 273.107 28.2044 273.271 28.491C273.435 28.8185 273.681 29.0641 273.967 29.2688C274.254 29.4735 274.663 29.5553 275.154 29.5553C275.482 29.5553 275.85 29.5553 276.301 29.5144C276.71 29.4735 277.16 29.4325 277.611 29.3506L278.266 35Z" fill="#DE5E2D"/>
+          <path d="M44.5195 12.7188C50.4288 12.7188 56.096 15.0667 60.2744 19.2451C60.523 19.4937 60.7645 19.748 61 20.0068L55.4756 22.4121C52.4478 19.7765 48.5595 18.3106 44.5195 18.3105C40.0934 18.3105 35.8485 20.0695 32.7188 23.1992C29.5891 26.3289 27.8311 30.574 27.8311 35H0C13.1489 33.3253 18.5483 32.2314 22.8252 29.9229V29.9258C22.8834 29.6768 22.946 29.4291 23.0127 29.1826H4.35449C13.6717 27.9807 16.4337 28.3983 24.6123 24.9902C24.8048 24.6073 25.011 24.2311 25.2256 23.8594H16.8047C24.1649 22.232 25.0337 22.0525 27.9131 20.1455C28.1878 19.8384 28.4717 19.5381 28.7646 19.2451C32.9431 15.0666 38.6103 12.7187 44.5195 12.7188ZM64.8975 25.9902C65.6492 27.6906 66.186 29.4841 66.4941 31.3291L73.3896 35H61.208C61.208 33.0619 60.8703 31.1584 60.2285 29.3682L64.8975 25.9902ZM62.3271 21.6104L57.0049 23.9277L57.0039 23.9268L62.3262 21.6104H62.3271Z" fill="url(#rptGrad)"/>
+          <path d="M43.6333 29.7347L75.3897 15.9075L47.3258 36.2071C45.7737 37.3298 43.6248 37.1013 42.3435 35.6773C40.6323 33.7754 41.2877 30.756 43.6333 29.7347Z" fill="#DE5E2D"/>
+          <defs><linearGradient id="rptGrad" x1="1.30169e-08" y1="23.8593" x2="73.39" y2="34.9998" gradientUnits="userSpaceOnUse"><stop offset="0.292086" stop-color="#385CAD"/><stop offset="0.471154" stop-color="#111C4E"/></linearGradient></defs>
+        </svg>
+      </div>
+    </div>
+    <div class="hd-meta">
+      <div><div class="k">Proyecto</div><div class="v">actuafast-procesos</div></div>
+      <div><div class="k">Issue</div><div class="v">#3 · 9 grupos de observaciones</div></div>
+      <div><div class="k">Estado</div><div class="v">Resuelto y desplegado</div></div>
+      <div><div class="k">Fecha</div><div class="v">18 jun 2026</div></div>
+    </div>
+  </header>
+
+  <div class="body">
+
+    <!-- RESUMEN -->
+    <section class="sec">
+      <div class="sec-h">Resumen ejecutivo</div>
+      <p class="lead">Se atendieron <strong>todas las observaciones del Issue #3</strong> sobre la vista de Procesos. La <strong>lista</strong> ahora prioriza las 9 columnas operativas pedidas y la <strong>vista de detalle</strong> se reorganizó con campos completos por sección, <strong>semáforos de color</strong> para plazos, <strong>unificación del estudio actuarial</strong>, y dos secciones nuevas (Temas técnicos y Carga de archivos). Se añadieron comportamientos clave —control por rol de la <em>No conformidad</em>, rechazo que regresa a <em>En curso</em> y enlace directo a AF— y se aplicó la <strong>nueva identidad de marca de ActuaFast</strong>.</p>
+      <div class="kpis">
+        <div class="kpi"><div class="n">9/9</div><div class="l">Observaciones resueltas</div></div>
+        <div class="kpi"><div class="n">9</div><div class="l">Columnas en la lista</div></div>
+        <div class="kpi"><div class="n">+2</div><div class="l">Secciones nuevas</div></div>
+        <div class="kpi"><div class="n">3</div><div class="l">Comportamientos nuevos</div></div>
+      </div>
+    </section>
+
+    <!-- QUÉ SE RESOLVIÓ -->
+    <section class="sec">
+      <div class="sec-h">Qué se resolvió · Issue #3</div>
+      <table>
+        <thead><tr><th style="width:24%">Área</th><th>Solución aplicada</th><th style="width:14%">Estado</th></tr></thead>
+        <tbody>
+          <tr><td><span class="area">Lista de procesos</span></td><td>Columnas redefinidas: Grupo empresarial · N.º de proceso · Empresa · Estado · <b>Datos incompletos</b> · Normativa · <b>Instrucciones pedido</b> · Fecha de entrega · Total facturación.</td><td><span class="ok">✓ Listo</span></td></tr>
+          <tr><td><span class="area">Información del proceso</span></td><td>Instrucciones y detalle del pedido; banner <b>«No conformidad por»</b> en rojo, visible solo cuando aplica.</td><td><span class="ok">✓ Listo</span></td></tr>
+          <tr><td><span class="area">Cliente</span></td><td>Cuenta, KAM, trabajadores activos y jubilados/pendientes, grupo empresarial, <b>Tipo de Plan</b> y orden de compra.</td><td><span class="ok">✓ Listo</span></td></tr>
+          <tr><td><span class="area">Asignación</span></td><td>Consultor, ejecución automática, contacto y email del solicitante.</td><td><span class="ok">✓ Listo</span></td></tr>
+          <tr><td><span class="area">Fechas de gestión</span></td><td>Solicitud, asignación, entrega calculada y real; <b>Días de entrega real</b> (verde/rojo) y <b>Días de demora</b> (rojo).</td><td><span class="ok">✓ Listo</span></td></tr>
+          <tr><td><span class="area">Campos clave</span></td><td>Por estado (p. ej. «Asignado»): total trabajadores, fecha de entrega, urgente y <b>conteo de días con semáforo</b>; indica la revisión aplicada.</td><td><span class="ok">✓ Listo</span></td></tr>
+          <tr><td><span class="area">Estudio actuarial</span></td><td>Jubilación y desahucio <b>unificados y expandibles</b> para ver el costo de cada valoración; el detalle vive en «Ítems vendidos».</td><td><span class="ok">✓ Listo</span></td></tr>
+          <tr><td><span class="area">Temas técnicos</span></td><td>Sección nueva: macro previo, tipo de empresa, criterios especiales, política de pago y comparativo <b>NIC12</b>.</td><td><span class="ok">✓ Listo</span></td></tr>
+          <tr><td><span class="area">Carga de archivos</span></td><td>Sección nueva para adjuntar y listar documentos del proceso.</td><td><span class="ok">✓ Listo</span></td></tr>
+          <tr><td><span class="area">Comportamientos</span></td><td>Enlace <b>«Ver en AF»</b>; No conformidad editable solo para Coordinación/Head; rechazo → regresa a <b>«En curso»</b>.</td><td><span class="ok">✓ Listo</span></td></tr>
+        </tbody>
+      </table>
+      <div class="legend">
+        <span class="lg"><span class="dot" style="background:#FF4040"></span>Vencido</span>
+        <span class="lg"><span class="dot" style="background:#FFBB38"></span>Por vencer (≤ 2 días)</span>
+        <span class="lg"><span class="dot" style="background:#00C781"></span>Con holgura</span>
+        <span class="lg" style="background:var(--orange-soft);color:var(--orange)"><span class="dot" style="background:var(--orange)"></span>No conformidad destacada</span>
+      </div>
+    </section>
+
+    <!-- ANTES / AHORA -->
+    <section class="sec">
+      <div class="sec-h">De la versión anterior a la nueva</div>
+      <div class="ba">
+        <div class="ba-col ba-before">
+          <div class="t">Versión anterior</div>
+          <ul>
+            <li>Tabla con columnas genéricas (segmento, propietario).</li>
+            <li>Detalle con campos básicos por tarjeta.</li>
+            <li>Jubilación y desahucio como ítems separados.</li>
+            <li>Sin semáforos de plazos ni indicador de datos incompletos.</li>
+            <li>Sin temas técnicos ni carga de archivos.</li>
+            <li>No conformidad sin control de rol.</li>
+            <li>Logo de marca anterior.</li>
+          </ul>
+        </div>
+        <div class="ba-col ba-after">
+          <div class="t">Versión nueva</div>
+          <ul>
+            <li>9 columnas operativas (grupo, datos incompletos, instrucciones).</li>
+            <li>Detalle completo y ordenado por sección.</li>
+            <li>«Estudio actuarial» unificado y expandible por valoración.</li>
+            <li>Semáforos de color en plazos y demoras.</li>
+            <li>Secciones de Temas técnicos y Carga de archivos.</li>
+            <li>No conformidad por rol + rechazo → En curso + Ver en AF.</li>
+            <li>Nueva identidad ActuaFast (logo color + iso contraído).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- IDENTIDAD -->
+    <section class="sec">
+      <div class="sec-h">Nueva identidad visual</div>
+      <p class="lead">Se incorporó el <strong>nuevo logotipo de ActuaFast</strong> (iso con degradado azul→navy y acento naranja + wordmark «actua/fast») en el menú lateral. Al contraer el menú se muestra el <strong>iso en negativo</strong> sobre un chip navy, que también funciona como botón para expandir.</p>
+    </section>
+
+    <!-- PENDIENTES -->
+    <section class="sec">
+      <div class="sec-h">Pendientes (dependen de terceros)</div>
+      <div class="note"><span><b>Por confirmar:</b> fuente del dato de «Ejecución automática» (con Lenin) · alcance de «Carga de archivos» (con Cris Mejía) · URL real del enlace «Ver en AF». Quedaron implementados con datos de ejemplo y marcados como TODO en el código.</span></div>
+    </section>
+
+    <div class="ft">
+      <div>ActuaFast by Actuaria · Informe ejecutivo v1 · 18 jun 2026</div>
+      <div>Preview en vivo: <a href="https://renatopuente-ux.github.io/actuafast-procesos/">renatopuente-ux.github.io/actuafast-procesos</a></div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
