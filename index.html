@@ -230,6 +230,14 @@ td { padding: 12px 16px; font-size: 13px; color: var(--text-sub); }
 .td-num { color: var(--indigo-text); font-weight: 700; text-decoration: none; }
 .td-num:hover { text-decoration: underline; color: var(--indigo); }
 .td-total { font-weight: 700; color: var(--text); }
+.td-grupo { color: var(--text-dim); font-weight: 600; font-size: 12px; white-space: nowrap; }
+.td-grupo.none { color: rgba(75,85,99,0.45); font-weight: 600; }
+.td-instr { max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-sub); font-size: 12px; }
+.di-pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 99px; font-size: 10px; font-weight: 700; box-shadow: var(--neu-in-sm); }
+.di-si { background: var(--yellow-soft); color: var(--yellow-text); }
+.di-no { background: rgba(163,177,198,0.18); color: var(--text-dim); box-shadow: none; }
+.table-scroll { overflow-x: auto; border-radius: 20px; }
+.table-scroll table { min-width: 1100px; }
 
 /* ── BADGES ── */
 .badge {
@@ -341,120 +349,131 @@ td { padding: 12px 16px; font-size: 13px; color: var(--text-sub); }
   </div>
 
   <div class="table-card">
+    <div class="table-scroll">
     <table>
       <thead>
         <tr>
           <th><input type="checkbox"></th>
-          <th>Proceso <span class="sort"><i class="fa-solid fa-sort"></i></span></th>
-          <th>Cliente</th>
+          <th>Grupo empresarial</th>
+          <th>N.º de proceso <span class="sort"><i class="fa-solid fa-sort"></i></span></th>
+          <th>Nombre de la empresa</th>
           <th>Estado</th>
+          <th>Datos incompletos</th>
           <th>Normativa</th>
-          <th>Segmento</th>
-          <th>Total</th>
-          <th>Propietario</th>
-          <th>Fecha entrega</th>
+          <th>Instrucciones pedido</th>
+          <th>Fecha de entrega</th>
+          <th>Total facturación</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr onclick="location.href='proceso.html'">
           <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+          <td><span class="td-grupo">Grupo Acciona</span></td>
           <td><a class="td-num" href="proceso.html">VE-00152954</a></td>
           <td>ACCIONA AGUA, S.A.</td>
           <td><span class="badge badge-completado"><i class="fa-solid fa-circle-check"></i> Completado</span></td>
+          <td><span class="di-pill di-no"><i class="fa-solid fa-check"></i> No</span></td>
           <td><span class="niif-tag">NIIF</span></td>
-          <td><span class="badge segmento-mediana">Mediana</span></td>
-          <td class="td-total">$362,25</td>
-          <td><span class="avatar-sm">SC</span> SChav</td>
+          <td><span class="td-instr" title="Estudio actuarial anual (jubilación + desahucio)">Estudio actuarial anual (jubilación + desahucio)</span></td>
           <td>19/11/2025</td>
+          <td class="td-total">$362,25</td>
           <td><button style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;" onclick="event.stopPropagation()"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
         </tr>
-        <tr>
+        <tr onclick="location.href='proceso.html'">
           <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+          <td><span class="td-grupo">Grupo Graiman</span></td>
           <td><a class="td-num" href="proceso.html">VE-00153002</a></td>
           <td>GRAIMAN CIA. LTDA.</td>
           <td><span class="badge badge-en-curso"><i class="fa-solid fa-spinner"></i> En curso</span></td>
+          <td><span class="di-pill di-si"><i class="fa-solid fa-triangle-exclamation"></i> Sí</span></td>
           <td><span class="niif-tag">NIIF</span> <span class="nic12-tag">NIC12</span></td>
-          <td><span class="badge segmento-mediana">Mediana</span></td>
-          <td class="td-total">$518,65</td>
-          <td><span class="avatar-sm avatar-orange">JN</span> JNarv</td>
+          <td><span class="td-instr" title="Incluir comparativo NIC12 del año anterior">Incluir comparativo NIC12 del año anterior</span></td>
           <td>16/01/2026</td>
+          <td class="td-total">$518,65</td>
           <td><button style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;" onclick="event.stopPropagation()"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
         </tr>
-        <tr>
+        <tr onclick="location.href='proceso.html'">
           <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+          <td><span class="td-grupo none">— Sin grupo</span></td>
           <td><a class="td-num" href="proceso.html">VE-00153029</a></td>
           <td>ALCAMOTOR S.A.</td>
           <td><span class="badge badge-en-curso"><i class="fa-solid fa-spinner"></i> En curso</span></td>
+          <td><span class="di-pill di-no"><i class="fa-solid fa-check"></i> No</span></td>
           <td><span class="niif-tag">NIIF</span></td>
-          <td><span class="badge segmento-mediana">Mediana</span></td>
-          <td class="td-total">$500,25</td>
-          <td><span class="avatar-sm">SC</span> SChav</td>
+          <td><span class="td-instr" title="Solo jubilación patronal">Solo jubilación patronal</span></td>
           <td>25/03/2026</td>
+          <td class="td-total">$500,25</td>
           <td><button style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;" onclick="event.stopPropagation()"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
         </tr>
-        <tr>
+        <tr onclick="location.href='proceso.html'">
           <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+          <td><span class="td-grupo">Grupo Tomebamba</span></td>
           <td><a class="td-num" href="proceso.html">VE-00153053</a> <span class="badge badge-urgente"><i class="fa-solid fa-bolt"></i> Urgente</span></td>
           <td>IMPORTADORA TOMEBAMBA</td>
           <td><span class="badge badge-revision"><i class="fa-solid fa-magnifying-glass"></i> Revisión</span></td>
+          <td><span class="di-pill di-si"><i class="fa-solid fa-triangle-exclamation"></i> Sí</span></td>
           <td><span class="niif-tag">NIIF</span></td>
-          <td><span class="badge segmento-grande">Grande</span></td>
-          <td class="td-total">$500,25</td>
-          <td><span class="avatar-sm">SC</span> SChav</td>
+          <td><span class="td-instr" title="Urgente — cierre fiscal anticipado">Urgente — cierre fiscal anticipado</span></td>
           <td>21/11/2025</td>
+          <td class="td-total">$500,25</td>
           <td><button style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;" onclick="event.stopPropagation()"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
         </tr>
-        <tr>
+        <tr onclick="location.href='proceso.html'">
           <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+          <td><span class="td-grupo">Grupo Tomebamba</span></td>
           <td><a class="td-num" href="proceso.html">VE-00153057</a></td>
           <td>IMPORTADORA TOMEBAMBA</td>
           <td><span class="badge badge-aprobado"><i class="fa-solid fa-check-double"></i> Aprobado</span></td>
+          <td><span class="di-pill di-no"><i class="fa-solid fa-check"></i> No</span></td>
           <td><span class="niif-tag">NIIF</span></td>
-          <td><span class="badge segmento-grande">Grande</span></td>
-          <td class="td-total">$500,25</td>
-          <td><span class="avatar-sm">SC</span> SChav</td>
+          <td><span class="td-instr" title="Reproceso con nómina corregida">Reproceso con nómina corregida</span></td>
           <td>21/11/2025</td>
+          <td class="td-total">$500,25</td>
           <td><button style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;" onclick="event.stopPropagation()"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
         </tr>
-        <tr>
+        <tr onclick="location.href='proceso.html'">
           <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+          <td><span class="td-grupo none">— Sin grupo</span></td>
           <td><a class="td-num" href="proceso.html">VE-00153078</a></td>
           <td>ACERO COMERCIAL DEL ECUADOR</td>
           <td><span class="badge badge-en-curso"><i class="fa-solid fa-spinner"></i> En curso</span></td>
+          <td><span class="di-pill di-no"><i class="fa-solid fa-check"></i> No</span></td>
           <td><span class="nec-tag">NEC</span></td>
-          <td><span class="badge segmento-pequena">Pequeña</span></td>
-          <td class="td-total">$362,25</td>
-          <td><span class="avatar-sm avatar-green">PB</span> PBelt</td>
+          <td><span class="td-instr" title="Acta de finiquito bajo NEC">Acta de finiquito bajo NEC</span></td>
           <td>21/11/2025</td>
+          <td class="td-total">$362,25</td>
           <td><button style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;" onclick="event.stopPropagation()"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
         </tr>
-        <tr>
+        <tr onclick="location.href='proceso.html'">
           <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+          <td><span class="td-grupo none">— Sin grupo</span></td>
           <td><a class="td-num" href="proceso.html">VE-00153142</a> <span class="badge badge-urgente"><i class="fa-solid fa-bolt"></i> Urgente</span></td>
           <td>ATIMASA S.A.</td>
           <td><span class="badge badge-revision"><i class="fa-solid fa-magnifying-glass"></i> Revisión</span></td>
+          <td><span class="di-pill di-si"><i class="fa-solid fa-triangle-exclamation"></i> Sí</span></td>
           <td><span class="niif-tag">NIIF</span></td>
-          <td><span class="badge segmento-mediana">Mediana</span></td>
-          <td class="td-total">$5.800,08</td>
-          <td><span class="avatar-sm avatar-green">PB</span> PBelt</td>
+          <td><span class="td-instr" title="Proyección a 5 años + análisis de sensibilidad">Proyección a 5 años + análisis de sensibilidad</span></td>
           <td>18/03/2026</td>
+          <td class="td-total">$5.800,08</td>
           <td><button style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;" onclick="event.stopPropagation()"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
         </tr>
-        <tr>
+        <tr onclick="location.href='proceso.html'">
           <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+          <td><span class="td-grupo">Grupo Demografix</span></td>
           <td><a class="td-num" href="proceso.html">VE-00153145</a></td>
           <td>DEMOGRAFIX S.A.</td>
           <td><span class="badge badge-en-curso"><i class="fa-solid fa-spinner"></i> En curso</span></td>
+          <td><span class="di-pill di-no"><i class="fa-solid fa-check"></i> No</span></td>
           <td><span class="niif-tag">NIIF</span></td>
-          <td><span class="badge segmento-mediana">Mediana</span></td>
-          <td class="td-total">$4.947,51</td>
-          <td><span class="avatar-sm avatar-green">PB</span> PBelt</td>
+          <td><span class="td-instr" title="Estudio estándar de jubilación patronal">Estudio estándar de jubilación patronal</span></td>
           <td>22/11/2025</td>
+          <td class="td-total">$4.947,51</td>
           <td><button style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;" onclick="event.stopPropagation()"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </div>
 
