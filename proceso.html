@@ -1087,10 +1087,11 @@ body {
 .nc-alert {
   display: flex; align-items: flex-start; gap: 8px;
   padding: 10px 14px; border-radius: 10px;
-  background: var(--red-soft);
+  background: #FDECEC;                 /* rojo muy claro */
   border-left: 4px solid var(--red);
-  color: var(--red-text); font-size: 12px; font-weight: 700; line-height: 1.5;
-  box-shadow: inset 2px 2px 6px rgba(95,33,32,0.10), inset -2px -2px 5px rgba(255,245,245,0.85);
+  color: #B42318;                      /* rojo oscuro · contraste AA ≈ 6.5:1 sobre #FDECEC */
+  font-size: 12px; font-weight: 700; line-height: 1.5;
+  box-shadow: inset 1px 1px 3px rgba(180,35,24,0.08);
 }
 .nc-alert i { margin-top: 2px; flex-shrink: 0; }
 /* La fila completa se resalta cuando hay no conformidad activa */
@@ -1387,7 +1388,7 @@ body {
               <div class="field" style="grid-column:1/-1;"><div class="fl"><i class="fa-solid fa-file-lines"></i>Detalle del pedido</div><div class="fv" style="font-weight:600;line-height:1.5;">Valoración de 50 trabajadores activos. Tasa de descuento referenciada a bonos corporativos AA. Reporte ejecutivo + anexos de hipótesis actuariales.</div></div>
               <!-- No conformidad por: VISIBLE solo cuando hay no conformidad (issue #3.1) -->
               <div class="field nc-alert-field" id="info-no-conf" style="grid-column:1/-1; display:none;">
-                <div class="fl" style="color:var(--red-text);"><i class="fa-solid fa-triangle-exclamation"></i>No conformidad por</div>
+                <div class="fl" style="color:#B42318;"><i class="fa-solid fa-triangle-exclamation"></i>No conformidad por</div>
                 <div class="nc-alert" id="info-no-conf-text"><i class="fa-solid fa-circle-exclamation"></i> Datos de salida de trabajadores inconsistentes con el rol de pagos del cliente.</div>
               </div>
             </div></div>
