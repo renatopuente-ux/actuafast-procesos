@@ -1838,7 +1838,7 @@ function selRadio(el) {
 // ISSUE #3.9 — Rol + No conformidad + Rechazo
 // ════════════════════════════════════════════════════════════════
 let currentRole = 'consultor';            // consultor | coordinacion | head
-let noConformidad = false;                // ¿hay no conformidad activa?
+let noConformidad = true;                 // ¿hay no conformidad activa? (demo: aplicada para mostrar el banner con color)
 
 // Solo Coordinación/Head pueden editar la no conformidad
 function canEditNoConf() { return currentRole === 'coordinacion' || currentRole === 'head'; }
