@@ -1646,7 +1646,9 @@ const STAGES = [
     accion: null,
     campos:[
       {icon:'fa-users',label:'Equipo',value:'Equipo 3 - P. Beltrán',cls:'link'},
-      {icon:'fa-calendar',label:'Fecha de entrega',value:'23/06/2025',cls:''},
+      {icon:'fa-calendar-check',label:'Fecha de entrega',value:'23/06/2025',cls:''},
+      {icon:'fa-bolt',label:'Proceso urgente',value:'No',cls:'dim'},
+      campoConteo(8),  // recién planificado, con holgura → VERDE
       {icon:'fa-user',label:'Consultor asignado',value:'Samantha Chavez',cls:'link'},
     ],
     toggle: null, orientacion: null },
